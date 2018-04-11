@@ -1,0 +1,72 @@
+Debugger DONE
+-> Automatic logging system with a LogData class DONE
+-> LogLevel enum DONE
+-> Different levels of logging (LogLevel) DONE
+--> Info, Notice, Warning, Error DONE
+--> On Error show an error window and shut down game... DONE
+
+GameObject DONE
+-> Child and parent system DONE BOIIIIIIIIIIII
+
+Math
+-> Matrix3x3 struct (needed for child transformations) DONE
+--> Has overloaded operator* that works with another Matrix3x3 or a Vector3 DONE
+--> Creation functions like CreateIdentity(), CreateTranslationMatrix(), CreateRotationMatrix(), CreateScalingMatrix(), CreateScaleRotationTranslationMatrix() DONE
+
+SoundManager DONE
+
+BinairyContainmer
+- Opening for reading/writing DONE
+- Reading normal data DONE
+- Reading strings DONE
+- Writing normal data DONE
+- Writing strings DONE
+
+Renderer
+-> SpriteSheet rendering DONE
+
+SpriteSheet class DONE
+-> Uses TextureData class DONE
+
+Framework Components
+-> Transform component has to take parent into account DONE AW YEAH WORKS LIKE A FRIKKIN CHARM BOIIIII
+-> CameraComponent DONE
+-> UIRenderComponent (Excludes the object from the main renderer and adds it to the UIRenderer) DONE
+-> AudioSourceComponent (uses SoundManager) (Adjusts volume depending on distance from camera) DONE
+
+-> RigidBodyComponent (Box2D physics)
+-> ColliderComponent (Box2D physics)
+-> AIComponent
+
+BitMapData class DONE
+-> Update to TextureData class DONE
+-> Add support for other image extensions (SDL_image) DONE
+-> Optimisations
+
+Box2D Implementation
+
+Make a tool that allows to easily make spritesheets
+
+ContentManager
+-> Update BitmapLoader to TextureLoader using TextureData DONE
+-> AudioFileLoader DONE
+-> SpriteSheetLoader DONE
+-> SVGFileLoader (for Box2D)
+-> ...
+
+AI Module
+-> Via AIComponent
+
+Documentation
+-> Manual to explain how to use the framework
+
+Input Manager
+-> Add mouse input ples
+--> World coordinates of mouse
+--> Screen coordinates of mouse
+
+Networking
+
+BUGS:
+-> InputManager: - Pressed state reacts as down state but with delay between
+->				 - Mod keys are not being detected

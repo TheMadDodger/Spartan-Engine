@@ -1,0 +1,113 @@
+#pragma once
+
+namespace Math
+{
+	struct Vector2
+	{
+		float x;
+		float y;
+
+		// Constructors
+		Vector2() { x = 0; y = 0; }
+		Vector2(float _x, float _y) { x = _x; y = _y; }
+
+		// Math operations
+		float Length();
+		float Magnitude() { return Length(); }
+		float Normalize();
+
+		Vector2 operator+(const Vector2 &other);
+		Vector2 operator-(const Vector2 &other);
+		Vector2 operator*(const Vector2 &other);
+		Vector2 operator*(float factor);
+		Vector2 operator/(float factor);
+		Vector2 Normalized();
+
+		// Static methods
+		static Vector2 Zero() { return Vector2(); }
+		static Vector2 Forward() { return Vector2(1, 0); }
+		static Vector2 Back() { return Vector2(-1, 0); }
+		static Vector2 Right() { return Vector2(0, 1); }
+		static Vector2 Left() { return Vector2(0, -1); }
+	};
+
+	struct Vector3
+	{
+		float x;
+		float y;
+		float z;
+
+		// Constructors
+		Vector3() { x = 0; y = 0; z = 0; }
+		Vector3(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
+
+		// Math operations
+		float Length();
+		float Magnitude() { return Length(); }
+		float Normalize();
+
+		Vector3 operator+(const Vector3 &other);
+		Vector3 operator-(const Vector3 &other);
+		Vector3 operator*(const Vector3 &other);
+		Vector3 operator*(float factor);
+		Vector3 Normalized();
+
+		// Static methods
+		static Vector3 Zero() { return Vector3(); }
+		static Vector3 Forward() { return Vector3(1, 0, 0); }
+		static Vector3 Back() { return Vector3(-1, 0, 0); }
+		static Vector3 Right() { return Vector3(0, 1, 0); }
+		static Vector3 Left() { return Vector3(0, -1, 0); }
+		static Vector3 Up() { return Vector3(0, 0, 1); }
+		static Vector3 Down() { return Vector3(0, 0, -1); }
+	};
+
+	struct Float4
+	{
+		Float4() : x(0), y(0), w(0), h(0) {}
+		Float4(float _x, float _y, float _w, float _h) : x(_x), y(_y), w(_w), h(_h) {}
+
+		float x;
+		float y;
+		float w;
+		float h;
+	};
+
+	struct Matrix3X3
+	{
+		float m[3][3];
+
+		Matrix3X3(float m11, float m12, float m13,
+				  float m21, float m22, float m23,
+				  float m31, float m32, float m33)
+		{
+			m[0][0] = m11; m[1][0] = m12; m[2][0] = m13;
+			
+			m[0][1] = m21; m[1][1] = m22; m[2][1] = m23;
+			
+			m[0][2] = m31; m[1][2] = m32; m[2][2] = m33;
+		}
+
+		Matrix3X3 operator*(const Matrix3X3 & other);
+		Vector3 operator*(const Vector3 & other);
+
+		const Vector2 ExtraxtTranslation();
+		const Vector3 ExtraxtRotation();
+		const Vector2 ExtraxtScale();
+
+		static Matrix3X3 CreateIdentityMatrix();
+		static Matrix3X3 CreateTranslationMatrix(const Vector2 &translation);
+		static Matrix3X3 CreateRotationMatrix(const Vector3 &rotation);
+		static Matrix3X3 CreateScalingMatrix(const Vector2 &scale);
+		static Matrix3X3 CreateScaleRotationTranslationMatrix(const Vector2 &translation, const Vector3 &rotation, const Vector2 &scale);
+	};
+
+	inline float Distance(Vector2 &pos1, Vector2 &pos2)
+	{
+		// Calculate Vector2 from end point to begin point
+		auto p12 = pos2 - pos1;
+
+		// Return the length of this Vector2
+		return p12.Length();
+	}
+}
