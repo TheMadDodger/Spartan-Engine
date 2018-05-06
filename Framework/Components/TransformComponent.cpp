@@ -21,6 +21,14 @@ void TransformComponent::Update(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 
+	// Check if a rigid body is applied to this object
+	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+	if (pRigid)
+	{
+		Position = ToVector2(pRigid->Getb2Body()->GetPosition());
+		Rotation = Vector3(0, 0, pRigid->Getb2Body()->GetAngle());
+	}
+
 	// Build own transform
 	BuildTransform();
 
@@ -84,6 +92,13 @@ const Vector2 & TransformComponent::GetWorldPosition()
 void TransformComponent::Translate(const Vector2 &position)
 {
 	Position = Position + position;
+
+	// Update rigid body if there is one
+	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+	if (pRigid)
+	{
+		pRigid->Getb2Body()->SetTransform(Tob2Vec2(Position), pRigid->Getb2Body()->GetAngle());
+	}
 }
 
 void TransformComponent::Translate(float x, float y)
@@ -94,6 +109,12 @@ void TransformComponent::Translate(float x, float y)
 void TransformComponent::Rotate(const Vector3 &rotation)
 {
 	Rotation = Rotation + rotation;
+	// Update rigid body if there is one
+	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+	if (pRigid)
+	{
+		pRigid->Getb2Body()->SetTransform(pRigid->Getb2Body()->GetPosition(), Rotation.z);
+	}
 }
 
 void TransformComponent::SetScale(const Vector2 &scale)

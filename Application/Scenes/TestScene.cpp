@@ -17,11 +17,11 @@ void TestScene::Initialize(const GameContext &gameContext)
 	m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
 	//m_pObject->AddComponent(new UIComponent());
 
-	auto pSound = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/airplane-fly-over.wav");
-	auto pSound1 = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/other_user_joined.wav");
+	//auto pSound = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/airplane-fly-over.wav");
+	//auto pSound1 = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/other_user_joined.wav");
 	auto pSound2 = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/br_crossing_bell_dop.r.wav");
-	auto pSound3 = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/other_user_leaves.wav");
-	auto pMusic = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/Ali Gosun ft. Kurt Cobain - Smells like teen spirit.mp3");
+	//auto pSound3 = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/other_user_leaves.wav");
+	//auto pMusic = ContentManager::GetInstance()->Load<AudioData>("./Resources/Audio/Ali Gosun ft. Kurt Cobain - Smells like teen spirit.mp3");
 
 	m_pImage = new GameObject();
 	m_pImage->GetTransform()->Translate(100.0f, 0.0f);
@@ -123,12 +123,19 @@ void TestScene::Initialize(const GameContext &gameContext)
 	Utilities::BinaryContainer::Close();
 
 	string path = "./Resources/Spritesheets/mario.bin";
-	m_pSpriteSheetTest = new GameObject();
-	m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
-	m_pSpriteSheetTest->GetTransform()->SetScale(Vector2(10.0f, 10.0f));
-	AddChild(m_pSpriteSheetTest);
+	//m_pSpriteSheetTest = new GameObject();
+	//m_pSpriteSheetTest->GetTransform()->SetScale(Vector2(10.0f, 10.0f));
+	//AddChild(m_pSpriteSheetTest);
 
 	Utilities::Debug::LogAutomaticData(gameContext.pTime->GetDeltaTime(), 1.0f);
+
+
+	m_pSpriteSheetTest = new GameObject();
+	m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
+	m_pSpriteSheetTest->AddComponent(new RigidBodyComponent());
+	m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Box(10.0f, 10.0f)));
+
+	AddChild(m_pSpriteSheetTest);
 }
 
 void TestScene::Update(const GameContext &gameContext)

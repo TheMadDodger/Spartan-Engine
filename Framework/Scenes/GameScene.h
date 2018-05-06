@@ -13,6 +13,8 @@ public:
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
+	b2World *GetPhysicsWorld() { return m_pPhysicsWorld; }
+
 protected:
 	friend class BaseGame;
 	friend class SceneManager;
@@ -34,5 +36,7 @@ private:
 	std::string m_SceneName = "";
 	BasicCamera *m_pDefaultCamera = nullptr;
 	CameraComponent *m_pActiveCamera = nullptr;
+	b2World *m_pPhysicsWorld = nullptr;
+	b2Vec2 m_Gravity;
 };
 

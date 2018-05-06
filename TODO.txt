@@ -44,6 +44,8 @@ BitMapData class DONE
 -> Optimisations
 
 Box2D Implementation
+-> Installation DONE
+-> Core Implementation
 
 Make a tool that allows to easily make spritesheets
 

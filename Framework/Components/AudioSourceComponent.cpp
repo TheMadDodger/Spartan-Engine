@@ -103,6 +103,7 @@ float AudioSourceComponent::ExpInterpolate(float value)
 
 float AudioSourceComponent::LogInterpolate(float value)
 {
+	UNREFERENCED_PARAMETER(value);
 	return 0.0f;
 }
 

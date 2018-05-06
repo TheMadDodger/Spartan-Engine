@@ -73,15 +73,19 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,13 +95,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x86;D:\cpplibraries\Box2D-master\Box2D\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -108,13 +112,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64;D:\cpplibraries\Box2D-master\Box2D\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,15 +131,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x86;D:\cpplibraries\Box2D-master\Box2D\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,18 +152,21 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64;D:\cpplibraries\Box2D-master\Box2D\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Application\Application.h" />
+    <ClInclude Include="Framework\Components\ColliderComponent.h" />
+    <ClInclude Include="Framework\Components\Colliders.h" />
     <ClInclude Include="Framework\Helpers\BinaryContainer.h" />
     <ClInclude Include="Framework\Components\AudioSourceComponent.h" />
     <ClInclude Include="Framework\Content\AudioFileLoader.h" />
@@ -185,6 +192,7 @@
     <ClInclude Include="Framework\SoundManager.h" />
     <ClInclude Include="Framework\Content\SpriteSheetLoader.h" />
     <ClInclude Include="Framework\Components\SpriteSheetComponent.h" />
+    <ClInclude Include="Framework\Components\RigidBodyComponent.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Framework\Components\TransformComponent.h" />
@@ -193,6 +201,7 @@
     <ClInclude Include="Framework\Components\UIComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Components\ColliderComponent.cpp" />
     <ClCompile Include="Framework\Helpers\BinaryContainer.cpp" />
     <ClCompile Include="Framework\Components\AudioSourceComponent.cpp" />
     <ClCompile Include="Framework\Content\AudioFileLoader.cpp" />
@@ -212,6 +221,7 @@
     <ClCompile Include="Framework\Rendering\Renderer.cpp" />
     <ClCompile Include="Framework\InputManager.cpp" />
     <ClCompile Include="Framework\SoundManager.cpp" />
+    <ClCompile Include="Framework\Components\RigidBodyComponent.cpp" />
     <ClCompile Include="Spartan Framework.cpp" />
     <ClCompile Include="Framework\Content\SpriteSheetLoader.cpp" />
     <ClCompile Include="Framework\Components\SpriteSheetComponent.cpp" />

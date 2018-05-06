@@ -78,7 +78,7 @@ void CameraComponent::Update(const GameContext &gameContext)
 
 	auto window = BaseGame::GetGame()->GetGameSettings().Window;
 
-	Vector2 screenMiddle = Vector2(window.Width, window.Height) / 2.0f;
+	Vector2 screenMiddle = Vector2((float)window.Width, (float)window.Height) / 2.0f;
 
 	auto screenTransform = Matrix3X3::CreateTranslationMatrix(screenMiddle);
 

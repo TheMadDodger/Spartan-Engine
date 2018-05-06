@@ -6,3 +6,5 @@
 #include "UIComponent.h"
 #include "AudioSourceComponent.h"
 #include "SpriteSheetComponent.h"
+#include "RigidBodyComponent.h"
+#include "ColliderComponent.h"

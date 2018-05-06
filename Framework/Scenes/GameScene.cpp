@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "BasicCamera.h"
 #include "../Components/CameraComponent.h"
+#include "../../Application/Application.h"
 
 GameScene::GameScene(const std::string &name) : m_SceneName(name)
 {
@@ -17,6 +18,9 @@ GameScene::~GameScene()
 	}
 
 	m_pChildren.clear();
+
+	delete m_pPhysicsWorld;
+	m_pPhysicsWorld = nullptr;
 }
 
 void GameScene::AddChild(GameObject *pObject)
@@ -49,6 +53,10 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 	AddChild(m_pDefaultCamera);
 	pCam->SetAsActive();
 
+	// Create the physics world for this scene
+	m_Gravity = b2Vec2(0.0f, -9.81f);
+	m_pPhysicsWorld = new b2World(m_Gravity);
+
 	// User defined Initialize()
 	Initialize(gameContext);
 
@@ -60,6 +68,10 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 
 void GameScene::RootUpdate(const GameContext &gameContext)
 {
+	// Update physics world
+	float32 timeStep = 1.0f / FixedUpdateSpeed;
+	m_pPhysicsWorld->Step(timeStep, Box2DVelocityIterations, Box2DPositionIterations);
+
 	for (auto pChild : m_pChildren)
 	{
 		pChild->RootUpdate(gameContext);
