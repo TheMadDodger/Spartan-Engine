@@ -102,6 +102,36 @@ namespace Math
 		static Matrix3X3 CreateScaleRotationTranslationMatrix(const Vector2 &translation, const Vector3 &rotation, const Vector2 &scale);
 	};
 
+	struct Color
+	{
+	public: // Constructors
+		Color() : r(0), g(0), b(0), a(0) {}
+		Color(float _r, float _g, float _b, float _a) : r(_r), g(_g), b(_b), a(_a) {}
+
+	public: // Static methods color library
+		static Color Red() { return Color(1, 0, 0, 1); }
+		static Color Green() { return Color(0, 1, 0, 1); }
+		static Color Blue() { return Color(0, 0, 1, 1); }
+		static Color Black() { return Color(0, 0, 0, 1); }
+		static Color White() { return Color(1, 1, 1, 1); }
+		static Color Magenta() { return Color(1, 0, 1, 1); }
+		static Color Purple() { return Color(0.5f, 0, 0.5f, 1); }
+		static Color Cyan() { return Color(0, 1, 1, 1); }
+		static Color Yellow() { return Color(1, 1, 0, 1); }
+		static Color Gold() { return Color(1, 0.84f, 0, 1); }
+		static Color Pink() { return Color(1, 0.41f, 0.7f, 1); }
+		static Color LightGray() { return Color(0.82f, 0.82f, 0.82f, 1); }
+		static Color Gray() { return Color(0.5f, 0.5f, 0.5f, 1); }
+		static Color DarkGray() { return Color(0.66f, 0.66f, 0.66f, 1); }
+		static Color Silver() { return Color(0.75f, 0.75f, 0.75f, 1); }
+
+	public: // Color values
+		float r;
+		float g;
+		float b;
+		float a;
+	};
+
 	inline float Distance(Vector2 &pos1, Vector2 &pos2)
 	{
 		// Calculate Vector2 from end point to begin point
@@ -109,5 +139,22 @@ namespace Math
 
 		// Return the length of this Vector2
 		return p12.Length();
+	}
+
+	inline Vector2 LengthDir(float length, float dir)
+	{
+		Vector2 result = Vector2::Zero();
+		float radians = dir / 180.0f * M_PI;
+		result.x = cos(radians) * length;
+		result.y = sin(radians) * length;
+		return result;
+	}
+
+	inline Vector2 LengthDirRad(float length, float dir)
+	{
+		Vector2 result = Vector2::Zero();
+		result.x = cos(dir) * length;
+		result.y = sin(dir) * length;
+		return result;
 	}
 }

@@ -2,6 +2,7 @@
 #include "../Helpers/MathHelpers.h"
 #include "../../stdafx.h"
 #include "TransformComponent.h"
+#include "../../Application/Application.h"
 
 class Collider
 {
@@ -47,7 +48,7 @@ public:
 		rightBottom.x = Dimensions.x / 2.0f;
 		rightBottom.y = -Dimensions.y / 2.0f;
 
-		gameContext.pRenderer->DrawSolidRect(topLeft, rightBottom, {0, 255, 0, 255});
+		gameContext.pRenderer->DrawSolidRect(topLeft, rightBottom, PhysicsBoxDebugColor);
 	}
 
 private:
@@ -69,10 +70,10 @@ public:
 
 	const float Radius;
 
-	//void DrawDebugShape(const GameContext &gameContext) override
-	//{
-		//transform->ApplyTransform();
-	//}
+	void DrawDebugShape(const GameContext &gameContext) override
+	{
+		gameContext.pRenderer->DrawSolidCircle(Vector2::Zero(), Radius, PhysicsCircleDebugColor);
+	}
 
 private:
 	friend class ColliderComponent;

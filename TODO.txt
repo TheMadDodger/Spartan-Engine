@@ -4,7 +4,7 @@ Debugger DONE
 -> Different levels of logging (LogLevel) DONE
 --> Info, Notice, Warning, Error DONE
 --> On Error show an error window and shut down game... DONE
--> PhysicsDebugRendering for each shape
+-> PhysicsDebugRendering for each shape DONE
 
 GameObject DONE
 -> Child and parent system DONE BOIIIIIIIIIIII
@@ -26,9 +26,13 @@ BinairyContainmer
 Renderer
 -> SpriteSheet rendering DONE
 -> Primitive rendering
---> Circle, Rectangle, Polygon(s) + Solid versions
+--> Circle, Rectangle, Polygon(s) + Solid versions DONE
 --> SolidRect DONE
---> Color bug
+--> SolidCircle DONE
+--> Circle DONE
+--> Rect DONE
+--> Color bug DONE
+--> DrawLine DONE
 
 SpriteSheet class DONE
 -> Uses TextureData class DONE
@@ -81,4 +85,3 @@ Networking
 BUGS:
 -> InputManager: - Pressed state reacts as down state but with delay between
 ->				 - Mod keys are not being detected
--> Renderer:	 - Color not working replace with own color struct (4 floats)

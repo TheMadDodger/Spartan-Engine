@@ -148,37 +148,124 @@ void Renderer::ClearBackground()
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const SDL_Color &color)
+void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color)
 {
-	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
 	{
-		glBegin(GL_QUADS);
-		{
-			//glTexCoord2f(0.0f, 1.0f);
-			//glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)bottomRight.y);
 
-			glColor4f(color.r, color.g, color.b, color.a);
-			glVertex2f((GLfloat)topLeft.x, bottomRight.y);
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)topLeft.y);
 
-			//glTexCoord2f(texCoords.x, texCoords.y);
-			//glVertex2f(vertexLeft - origin.x, vertexTop - origin.y);
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)topLeft.y);
 
-			glColor4f(color.r, color.g, color.b, color.a);
-			glVertex2f((GLfloat)topLeft.x, topLeft.y);
-
-			//glTexCoord2f(texCoords.x + texCoords.w, texCoords.y);
-			//glVertex2f(vertexRight - origin.x, vertexTop - origin.y);
-
-			glColor4f(color.r, color.g, color.b, color.a);
-			glVertex2f((GLfloat)bottomRight.x, topLeft.y);
-
-			//glTexCoord2f(texCoords.x + texCoords.w, texCoords.y + texCoords.h);
-			//glVertex2f(vertexRight - origin.x, vertexBottom - origin.y);
-
-			glColor4f(color.r, color.g, color.b, color.a);
-			glVertex2f((GLfloat)bottomRight.x, bottomRight.y);
-		}
-		glEnd();
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)bottomRight.y);
 	}
-	glDisable(GL_TEXTURE_2D);
+	glEnd();
+}
+
+void Renderer::DrawSolidCircle(const Vector2 &center, float radius, const Math::Color &color)
+{
+	float degreeStep = 360.0f / (float)CIRCLEPOLYGONS;
+
+	glBegin(GL_TRIANGLES);
+	{
+		for (int step = 0; step < CIRCLEPOLYGONS; ++step)
+		{
+			float angle1 = degreeStep * step;
+			float angle2 = degreeStep * (step + 1);
+
+			// Start with center vertex
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)center.x, (GLfloat)center.y);
+
+			// Calculate the other 2 vertices
+			auto v1 = Math::LengthDir(radius, angle1) + center;
+			auto v2 = Math::LengthDir(radius, angle2) + center;
+
+			// Add the 2 vertices to the triangle
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)v1.x, (GLfloat)v1.y);
+
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)v2.x, (GLfloat)v2.y);
+		}
+	}
+	glEnd();
+}
+
+void Renderer::DrawRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color)
+{
+	glBegin(GL_LINES);
+	{
+		// TopLeft to TopRight
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)topLeft.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)topLeft.y);
+
+		// TopRight to BottomRight
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)topLeft.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)bottomRight.y);
+
+		// BottomRight to BottomLeft
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)bottomRight.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)bottomRight.y);
+
+		// BottomLeft to TopLeft
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)bottomRight.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)topLeft.y);
+	}
+	glEnd();
+}
+
+void Renderer::DrawCircle(const Vector2 &center, float radius, const Math::Color &color)
+{
+	float degreeStep = 360.0f / (float)CIRCLEPOLYGONS;
+
+	glBegin(GL_LINES);
+	{
+		for (int step = 0; step < CIRCLEPOLYGONS; ++step)
+		{
+			float angle1 = degreeStep * step;
+			float angle2 = degreeStep * (step + 1);
+
+			// Calculate the 2 vertices of the line segment
+			auto v1 = Math::LengthDir(radius, angle1) + center;
+			auto v2 = Math::LengthDir(radius, angle2) + center;
+
+			// Add the 2 vertices to the triangle
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)v1.x, (GLfloat)v1.y);
+
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)v2.x, (GLfloat)v2.y);
+		}
+	}
+	glEnd();
+}
+
+void Renderer::DrawLine(const Vector2 & start, const Vector2 & end, const Math::Color & color)
+{
+	glBegin(GL_LINES);
+	{
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)start.x, (GLfloat)start.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glVertex2f((GLfloat)end.x, (GLfloat)end.y);
+	}
 }
