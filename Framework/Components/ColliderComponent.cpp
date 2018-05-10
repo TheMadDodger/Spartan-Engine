@@ -24,13 +24,21 @@ void ColliderComponent::Initialize(const GameContext &gameContext)
 		Utilities::Debug::LogError("ColliderComponent::Initialize > ColliderComponent needs a RigidBodyComponent in order to function!");
 		return;
 	}
-	
-	b2PolygonShape shape;
-	m_pCollider->ApplyShape(&shape);
-	//ZeroMemory(&m_FixtureDef, sizeof(b2FixtureDef));
-	m_FixtureDef.shape = &shape;
+
+	m_FixtureDef.shape = m_pCollider->ApplyShape();
 	m_FixtureDef.density = 1.0f;
 	m_FixtureDef.friction = 0.3f;
 
 	m_pFixture = pRigid->Getb2Body()->CreateFixture(&m_FixtureDef);
+}
+
+void ColliderComponent::Draw(const GameContext &gameContext)
+{
+	if (Utilities::Debug::CanRenderDebug())
+	{
+		glPushMatrix();
+		GetGameObject()->GetTransform()->ApplyTransform();
+		m_pCollider->DrawDebugShape(gameContext);
+		glPopMatrix();
+	}
 }

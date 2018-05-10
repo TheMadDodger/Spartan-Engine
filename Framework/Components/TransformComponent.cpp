@@ -84,7 +84,7 @@ const Matrix3X3 &TransformComponent::GetTransformMatrix()
 	return m_TansformMatrix;
 }
 
-const Vector2 & TransformComponent::GetWorldPosition()
+const Vector2 &TransformComponent::GetWorldPosition()
 {
 	return m_WorldPosition;
 }

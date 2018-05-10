@@ -129,13 +129,28 @@ void TestScene::Initialize(const GameContext &gameContext)
 
 	Utilities::Debug::LogAutomaticData(gameContext.pTime->GetDeltaTime(), 1.0f);
 
+	m_pGroundBox = new GameObject();
+	m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));
+	m_pGroundBox->AddComponent(new ColliderComponent(new Box(500.0f, 50.0f)));
+	//pGroundBox->GetTransform()->Translate(0.0f, 50.0f); // We cant apply a translation because the rigidbodycomponent is NOT initialized yet
+	AddChild(m_pGroundBox);
 
 	m_pSpriteSheetTest = new GameObject();
 	m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
 	m_pSpriteSheetTest->AddComponent(new RigidBodyComponent());
-	m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Box(10.0f, 10.0f)));
+	m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Box(16.0f, 16.0f)));
 
 	AddChild(m_pSpriteSheetTest);
+
+	Utilities::Debug::EnablePhysicsDebugRendering(true);
+}
+
+void TestScene::PostInitialize(const GameContext & gameContext)
+{
+	// Since its rigidbody isnt initialized during scene Initialize yet, we translate it in the PostInitialize
+	// Of the scene, when we are here, all objects will have initialized
+	// NEVER create a new object in PostInitialize!
+	m_pGroundBox->GetTransform()->Translate(0.0f, -100.0f);
 }
 
 void TestScene::Update(const GameContext &gameContext)

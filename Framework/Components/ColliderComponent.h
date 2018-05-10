@@ -10,6 +10,7 @@ public:
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
+	void Draw(const GameContext &gameContext) override;
 
 private:
 	Collider *m_pCollider = nullptr;

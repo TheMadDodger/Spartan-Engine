@@ -24,9 +24,18 @@ protected:
 	void RootOnActive(const GameContext &gameContext);
 	void RootOnDeActive(const GameContext &gameContext);
 
+	virtual void PreInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+
+	virtual void PreUpdate(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void PostUpdate(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+
+	virtual void PreDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	
 	virtual void OnActive(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void OnDeActive(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 

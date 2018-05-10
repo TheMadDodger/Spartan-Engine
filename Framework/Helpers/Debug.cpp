@@ -6,6 +6,7 @@ using namespace Utilities;
 
 std::string AutomaticLogger::m_NextMessagePrefix = "";
 vector<LoggingData> AutomaticLogger::m_DataToLog = vector<LoggingData>();
+bool Debug::m_PhysicsDebugRendering = false;
 
 void Debug::Log(const std::string &message, const LogLevel &logLevel, bool bIncludeTimeStamp)
 {
@@ -99,6 +100,16 @@ void Utilities::Debug::LogError(const std::string &message, bool bIncludeTimeSta
 	}
 
 	BaseGame::GetGame()->QuitGame();
+}
+
+void Utilities::Debug::EnablePhysicsDebugRendering(bool enable)
+{
+	m_PhysicsDebugRendering = enable;
+}
+
+bool Utilities::Debug::CanRenderDebug()
+{
+	return m_PhysicsDebugRendering;
 }
 
 void Utilities::Debug::TimeStamp()

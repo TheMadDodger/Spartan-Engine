@@ -114,6 +114,9 @@ namespace Utilities
 		static void LogError(const std::string &message, bool bIncludeTimeStamp = true);
 		static void UpdateAutoLogger(Time *pTime) { AutomaticLogger::Update(pTime); }  //{ m_pAutomaticLogger->Update(pTime); }
 
+		static void EnablePhysicsDebugRendering(bool enable);
+		static bool CanRenderDebug();
+
 		static void LogAutomaticData(const float *pDataToLog, float interval)
 		{
 			auto loggingData = LoggingData(pDataToLog, interval);
@@ -127,6 +130,7 @@ namespace Utilities
 
 	private:
 		static void TimeStamp();
+		static bool m_PhysicsDebugRendering;
 	};
 
 	inline void SetConsoleColor(WORD color)

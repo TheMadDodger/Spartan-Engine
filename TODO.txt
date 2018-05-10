@@ -4,6 +4,7 @@ Debugger DONE
 -> Different levels of logging (LogLevel) DONE
 --> Info, Notice, Warning, Error DONE
 --> On Error show an error window and shut down game... DONE
+-> PhysicsDebugRendering for each shape
 
 GameObject DONE
 -> Child and parent system DONE BOIIIIIIIIIIII
@@ -24,6 +25,10 @@ BinairyContainmer
 
 Renderer
 -> SpriteSheet rendering DONE
+-> Primitive rendering
+--> Circle, Rectangle, Polygon(s) + Solid versions
+--> SolidRect DONE
+--> Color bug
 
 SpriteSheet class DONE
 -> Uses TextureData class DONE
@@ -33,9 +38,10 @@ Framework Components
 -> CameraComponent DONE
 -> UIRenderComponent (Excludes the object from the main renderer and adds it to the UIRenderer) DONE
 -> AudioSourceComponent (uses SoundManager) (Adjusts volume depending on distance from camera) DONE
+-> RigidBodyComponent (Box2D physics) DONE
+-> ColliderComponent (Box2D physics) DONE
+--> Add debugging mode DONE
 
--> RigidBodyComponent (Box2D physics)
--> ColliderComponent (Box2D physics)
 -> AIComponent
 
 BitMapData class DONE
@@ -45,7 +51,10 @@ BitMapData class DONE
 
 Box2D Implementation
 -> Installation DONE
--> Core Implementation
+-> Core Implementation DONE
+-> Extra functionality (Static and kynamatic actors + different shapes) DONE
+-> Can always add more shapes later
+--> SVG Shape (With SVGLoader)
 
 Make a tool that allows to easily make spritesheets
 
@@ -72,3 +81,4 @@ Networking
 BUGS:
 -> InputManager: - Pressed state reacts as down state but with delay between
 ->				 - Mod keys are not being detected
+-> Renderer:	 - Color not working replace with own color struct (4 floats)

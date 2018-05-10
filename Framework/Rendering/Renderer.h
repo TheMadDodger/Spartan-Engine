@@ -22,8 +22,13 @@ public:
 	SDL_Renderer *GetSDLRenderer() { return m_pSDLRenderer; }
 	SDL_Window *GetWindow() { return m_pWindow; }
 	SDL_Surface *GetWindowSurface() { return m_pWindowSurface; }
-	// Spritesheet rendering
-	//void DrawSprite();
+
+public:
+	// Primitive Rendering
+	void DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const SDL_Color &color);
+	void DrawSolidCircle(const Vector2 &center, float radius, const SDL_Color &color);
+	void DrawRect(const Vector2 &topLeft, const Vector2 &bottomRight, const SDL_Color &color);
+	void DrawCircle(const Vector2 &center, float radius, const SDL_Color &color);
 
 private:
 	friend class BaseGame;

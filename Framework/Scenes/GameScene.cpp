@@ -36,7 +36,7 @@ void GameScene::AddChild(GameObject *pObject)
 	}
 }
 
-void GameScene::SetActiveCamera(CameraComponent * pCamera)
+void GameScene::SetActiveCamera(CameraComponent *pCamera)
 {
 	if(m_pActiveCamera)
 		m_pActiveCamera->m_bActive = false;
@@ -46,6 +46,9 @@ void GameScene::SetActiveCamera(CameraComponent * pCamera)
 
 void GameScene::RootInitialize(const GameContext &gameContext)
 {
+	// User Pre-Initialize
+	PreInitialize(gameContext);
+
 	// Create default camera
 	m_pDefaultCamera = new BasicCamera();
 	auto pCam = new CameraComponent();
@@ -64,10 +67,16 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 	{
 		pChild->RootInitialize(gameContext);
 	}
+
+	// User Post-Initialize
+	PostInitialize(gameContext);
 }
 
 void GameScene::RootUpdate(const GameContext &gameContext)
 {
+	// User Pre-Update
+	PreUpdate(gameContext);
+
 	// Update physics world
 	float32 timeStep = 1.0f / FixedUpdateSpeed;
 	m_pPhysicsWorld->Step(timeStep, Box2DVelocityIterations, Box2DPositionIterations);
@@ -79,10 +88,16 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 	// User defined Update()
 	Update(gameContext);
+
+	// User Post-Update
+	PostUpdate(gameContext);
 }
 
 void GameScene::RootDraw(const GameContext &gameContext)
 {
+	// User Pre-Draw
+	PreDraw(gameContext);
+
 	for (auto pChild : m_pChildren)
 	{
 		pChild->RootDraw(gameContext);
@@ -90,6 +105,9 @@ void GameScene::RootDraw(const GameContext &gameContext)
 
 	// User defined Draw()
 	Draw(gameContext);
+
+	// User Post-Draw
+	PostDraw(gameContext);
 }
 
 void GameScene::RootOnActive(const GameContext &gameContext)

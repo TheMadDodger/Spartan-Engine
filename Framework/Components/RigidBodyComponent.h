@@ -3,7 +3,7 @@
 class RigidBodyComponent : public BaseComponent
 {
 public:
-	RigidBodyComponent(const Vector2 &bodyPivot = Vector2(0.0f, 0.0f));
+	RigidBodyComponent(const b2BodyType &type = b2BodyType::b2_dynamicBody, const Vector2 &bodyPivot = Vector2(0.0f, 0.0f));
 	virtual ~RigidBodyComponent();
 
 	b2Body *Getb2Body() { return m_Body; };
@@ -16,5 +16,7 @@ protected:
 private:
 	b2Body *m_Body = nullptr;
 	Vector2 m_BodyPivot;
+
+	b2BodyType m_BodyType;
 };
 

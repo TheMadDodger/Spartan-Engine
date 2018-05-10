@@ -147,3 +147,38 @@ void Renderer::ClearBackground()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
+
+void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const SDL_Color &color)
+{
+	glEnable(GL_TEXTURE_2D);
+	{
+		glBegin(GL_QUADS);
+		{
+			//glTexCoord2f(0.0f, 1.0f);
+			//glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
+
+			glColor4f(color.r, color.g, color.b, color.a);
+			glVertex2f((GLfloat)topLeft.x, bottomRight.y);
+
+			//glTexCoord2f(texCoords.x, texCoords.y);
+			//glVertex2f(vertexLeft - origin.x, vertexTop - origin.y);
+
+			glColor4f(color.r, color.g, color.b, color.a);
+			glVertex2f((GLfloat)topLeft.x, topLeft.y);
+
+			//glTexCoord2f(texCoords.x + texCoords.w, texCoords.y);
+			//glVertex2f(vertexRight - origin.x, vertexTop - origin.y);
+
+			glColor4f(color.r, color.g, color.b, color.a);
+			glVertex2f((GLfloat)bottomRight.x, topLeft.y);
+
+			//glTexCoord2f(texCoords.x + texCoords.w, texCoords.y + texCoords.h);
+			//glVertex2f(vertexRight - origin.x, vertexBottom - origin.y);
+
+			glColor4f(color.r, color.g, color.b, color.a);
+			glVertex2f((GLfloat)bottomRight.x, bottomRight.y);
+		}
+		glEnd();
+	}
+	glDisable(GL_TEXTURE_2D);
+}
