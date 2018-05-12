@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "../../stdafx.h"
-#include "TestScene.h"
+#include "TestScene2.h"
 #include "../../Framework/Scenes/GameObject.h"
 #include "../../Framework/Components/Components.h"
 #include "../../Framework/InputManager.h"
@@ -8,11 +8,11 @@
 #include "../../Framework/Helpers/BinaryContainer.h"
 #include "../../Framework/Scenes/SceneManager.h"
 
-TestScene::~TestScene()
+TestScene2::~TestScene2()
 {
 }
 
-void TestScene::Initialize(const GameContext &gameContext)
+void TestScene2::Initialize(const GameContext &gameContext)
 {
 	//m_pObject = new GameObject();
 	//m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
@@ -55,29 +55,6 @@ void TestScene::Initialize(const GameContext &gameContext)
 	//pAudio->GetSettings().Exponent = 2;
 	//m_pAudioSource->AddComponent(pAudio);
 	//AddChild(m_pAudioSource);
-
-	gameContext.pInput->AddInputAction(InputAction("Forward", Down , 'w', KMOD_LCTRL));
-	gameContext.pInput->AddInputAction(InputAction("Backward", Down, 's'));
-	gameContext.pInput->AddInputAction(InputAction("Left", Down, 'a'));
-	gameContext.pInput->AddInputAction(InputAction("Right", Down, 'd'));
-
-	gameContext.pInput->AddInputAction(InputAction("ZoomOut", Down, 'o'));
-	gameContext.pInput->AddInputAction(InputAction("ZoomIn", Down, 'i'));
-
-	gameContext.pInput->AddInputAction(InputAction("Shoot", Pressed, 'f'));
-
-	gameContext.pInput->AddInputAction(InputAction("ChangeScene", Pressed, 'p'));
-
-	//pMusic->SetVolume(10);
-	//gameContext.pSound->PlaySound(pMusic);
-	//pSound->SetVolume(50);
-	//gameContext.pSound->PlaySound(pSound);
-	//pSound1->SetVolume(50);
-	//gameContext.pSound->PlaySound(pSound1);
-	//pSound2->SetVolume(50);
-	//gameContext.pSound->PlaySound(pSound2);
-	//pSound3->SetVolume(50);
-	//gameContext.pSound->PlaySound(pSound3);
 
 	Utilities::BinaryContainer::OpenWrite("./Resources/Spritesheets/mario.bin");
 	Utilities::BinaryContainer::Write<int>(0);
@@ -126,38 +103,34 @@ void TestScene::Initialize(const GameContext &gameContext)
 	Utilities::BinaryContainer::Close();
 
 	string path = "./Resources/Spritesheets/mario.bin";
-	//m_pSpriteSheetTest = new GameObject();
-	//m_pSpriteSheetTest->GetTransform()->SetScale(Vector2(10.0f, 10.0f));
-	//AddChild(m_pSpriteSheetTest);
 
 	Utilities::Debug::LogAutomaticData(gameContext.pTime->GetDeltaTime(), 1.0f);
 
-	//m_pGroundBox = new GameObject();
-	//m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));
-	//m_pGroundBox->AddComponent(new ColliderComponent(new Box(500.0f, 50.0f)));
-	//pGroundBox->GetTransform()->Translate(0.0f, 50.0f); // We cant apply a translation because the rigidbodycomponent is NOT initialized yet
-	//AddChild(m_pGroundBox);
+	m_pGroundBox = new GameObject();
+	m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));
+	m_pGroundBox->AddComponent(new ColliderComponent(new Box(500.0f, 50.0f)));
+	AddChild(m_pGroundBox);
 
-	//m_pSpriteSheetTest = new GameObject();
-	//m_pSpriteSheetTest->AddComponent(new RigidBodyComponent());
-	//m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Circle(8.0f)));
-	//m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
+	m_pSpriteSheetTest = new GameObject();
+	m_pSpriteSheetTest->AddComponent(new RigidBodyComponent());
+	m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Circle(8.0f)));
+	m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
 
-	//AddChild(m_pSpriteSheetTest);
+	AddChild(m_pSpriteSheetTest);
 
-	//Utilities::Debug::EnablePhysicsDebugRendering(true);
+	Utilities::Debug::EnablePhysicsDebugRendering(true);
 }
 
-void TestScene::PostInitialize(const GameContext &gameContext)
+void TestScene2::PostInitialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 	// Since its rigidbody isnt initialized during scene Initialize yet, we translate it in the PostInitialize
 	// Of the scene, when we are here, all objects will have initialized
 	// NEVER create a new object in PostInitialize!
-	//m_pGroundBox->GetTransform()->Translate(0.0f, -100.0f);
+	m_pGroundBox->GetTransform()->Translate(0.0f, -100.0f);
 }
 
-void TestScene::Update(const GameContext &gameContext)
+void TestScene2::Update(const GameContext &gameContext)
 {
 	/*m_pObject->GetTransform()->Rotate(Vector3(0, 0, 0.001f) * *gameContext.pTime->GetDeltaTime());
 	m_pImage->GetTransform()->Rotate(Vector3(0, 0, 0.001f) * *gameContext.pTime->GetDeltaTime());*/
@@ -190,7 +163,7 @@ void TestScene::Update(const GameContext &gameContext)
 	}
 	if (gameContext.pInput->IsActionTriggered("ChangeScene"))
 	{
-		SceneManager::GetInstance()->LoadScene("Test Scene 2");
+		SceneManager::GetInstance()->LoadScene(0);
 	}
 	/*if (gameContext.pInput->IsActionTriggered("Shoot"))
 	{
@@ -200,10 +173,7 @@ void TestScene::Update(const GameContext &gameContext)
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
 }
 
-void TestScene::Draw(const GameContext &gameContext)
+void TestScene2::Draw(const GameContext &gameContext)
 {
-	//UNREFERENCED_PARAMETER(gameContext);
-	gameContext.pRenderer->DrawCircle(Vector2(500.0f, 500.0f), 50.0f, Math::Color::Cyan());
-	gameContext.pRenderer->DrawRect(Vector2(40.0f, 40.0f), Vector2(500.0f, 500.0f), Math::Color::Red());
-	gameContext.pRenderer->DrawLine(Vector2(20.0f, 60.0f), Vector2(50.0f, 10.0f), Math::Color::Gold());
+	UNREFERENCED_PARAMETER(gameContext);
 }

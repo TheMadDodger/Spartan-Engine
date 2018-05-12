@@ -165,6 +165,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application\Application.h" />
+    <ClInclude Include="Application\Scenes\TestScene2.h" />
     <ClInclude Include="Framework\Components\ColliderComponent.h" />
     <ClInclude Include="Framework\Components\Colliders.h" />
     <ClInclude Include="Framework\Helpers\BinaryContainer.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Framework\Components\UIComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\Scenes\TestScene2.cpp" />
     <ClCompile Include="Framework\Components\ColliderComponent.cpp" />
     <ClCompile Include="Framework\Helpers\BinaryContainer.cpp" />
     <ClCompile Include="Framework\Components\AudioSourceComponent.cpp" />

@@ -120,6 +120,9 @@
     <ClInclude Include="Application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Application\Scenes\TestScene2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -207,6 +210,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Components\ColliderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Scenes\TestScene2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -19,8 +19,12 @@ GameScene::~GameScene()
 
 	m_pChildren.clear();
 
-	delete m_pPhysicsWorld;
-	m_pPhysicsWorld = nullptr;
+	// Delete the physics world (if it exists)
+	if (m_pPhysicsWorld)
+	{
+		delete m_pPhysicsWorld;
+		m_pPhysicsWorld = nullptr;
+	}
 }
 
 void GameScene::AddChild(GameObject *pObject)
@@ -110,12 +114,33 @@ void GameScene::RootDraw(const GameContext &gameContext)
 	PostDraw(gameContext);
 }
 
-void GameScene::RootOnActive(const GameContext &gameContext)
+void GameScene::RootOnActive()
 {
-	OnActive(gameContext);
+	OnActive();
 }
 
-void GameScene::RootOnDeActive(const GameContext &gameContext)
+void GameScene::RootOnDeActive()
 {
-	OnDeActive(gameContext);
+	OnDeActive();
+}
+
+void GameScene::RootCleanup()
+{
+	// Clear the objects list
+	for (auto pChild : m_pChildren)
+	{
+		delete pChild;
+	}
+
+	m_pChildren.clear();
+
+	// Delete the physics world (if it exists)
+	if (m_pPhysicsWorld)
+	{
+		delete m_pPhysicsWorld;
+		m_pPhysicsWorld = nullptr;
+	}
+
+	// User defined cleanup method
+	Cleanup();
 }

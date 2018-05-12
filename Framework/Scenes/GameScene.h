@@ -13,16 +13,13 @@ public:
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
-	b2World *GetPhysicsWorld() { return m_pPhysicsWorld; }
+	b2World *GetPhysicsWorld() const { return m_pPhysicsWorld; }
+
+	const std::string &GetName() const { return m_SceneName; }
 
 protected:
 	friend class BaseGame;
 	friend class SceneManager;
-	void RootInitialize(const GameContext &gameContext);
-	void RootUpdate(const GameContext &gameContext);
-	void RootDraw(const GameContext &gameContext);
-	void RootOnActive(const GameContext &gameContext);
-	void RootOnDeActive(const GameContext &gameContext);
 
 	virtual void PreInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
@@ -36,8 +33,20 @@ protected:
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	
-	virtual void OnActive(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void OnDeActive(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void OnActive() { };
+	virtual void OnDeActive() { };
+
+	virtual void Cleanup() {};
+
+private:
+	void RootInitialize(const GameContext &gameContext);
+	void RootUpdate(const GameContext &gameContext);
+	void RootDraw(const GameContext &gameContext);
+
+	void RootOnActive();
+	void RootOnDeActive();
+
+	void RootCleanup();
 
 private:
 	friend class SceneManager;

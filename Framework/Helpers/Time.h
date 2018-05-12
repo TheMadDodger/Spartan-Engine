@@ -13,6 +13,8 @@ public:
 
 	const float *GetDeltaTime() { return &m_DeltaTime; }
 	const float *GetTime() { return &m_Time; }
+	const float *GetUnscaledDeltaTime() { return &m_UnscaledDeltaTime; }
+	const float *GetUnscaledTime() { return &m_UnscaledTime; }
 	const float *GetTimeScale() { return &m_TimeScale; }
 	const float *GetFrameRate() { return &m_FrameRate; }
 	const int *GetTotalFrames() { return &m_TotalFrames; }
@@ -28,6 +30,10 @@ private:
 private:
 	float m_DeltaTime = 0.0f;
 	float m_Time = 0.0f;
+
+	float m_UnscaledDeltaTime = 0.0f;
+	float m_UnscaledTime = 0.0f;
+
 	float m_TimeScale = 1.0f;
 	float m_FrameRate = 0.0f;
 	int m_TotalFrames = 0;

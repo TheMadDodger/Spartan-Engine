@@ -14,6 +14,8 @@ Math
 --> Has overloaded operator* that works with another Matrix3x3 or a Vector3 DONE
 --> Creation functions like CreateIdentity(), CreateTranslationMatrix(), CreateRotationMatrix(), CreateScalingMatrix(), CreateScaleRotationTranslationMatrix() DONE
 
+Optimize SceneManager DONE
+
 SoundManager DONE
 
 BinairyContainmer
@@ -33,6 +35,7 @@ Renderer
 --> Rect DONE
 --> Color bug DONE
 --> DrawLine DONE
+->Rendering text? SDL_ttf?
 
 SpriteSheet class DONE
 -> Uses TextureData class DONE
@@ -59,6 +62,7 @@ Box2D Implementation
 -> Extra functionality (Static and kynamatic actors + different shapes) DONE
 -> Can always add more shapes later
 --> SVG Shape (With SVGLoader)
+-> Support for RUBE?
 
 Make a tool that allows to easily make spritesheets
 
@@ -79,6 +83,8 @@ Input Manager
 -> Add mouse input ples
 --> World coordinates of mouse
 --> Screen coordinates of mouse
+--> Controller support
+--> Support for changeing inputactions at runtime (for options menu's) maybe look into XInputDotNet for c++?
 
 Networking
 
