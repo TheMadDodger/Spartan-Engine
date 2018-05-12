@@ -103,7 +103,18 @@ bool BaseGame::RootGameUpdate()
 		case SDL_KEYDOWN:
 			m_GameContext.pInput->KeyDown(&windowEvent.key);
 			break;
-
+		case SDL_MOUSEMOTION:
+			m_GameContext.pInput->HandleMouseMotionEvent(&windowEvent.motion, m_GameSettings.Window.Height);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			m_GameContext.pInput->MouseDown(&windowEvent.button);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			m_GameContext.pInput->MouseUp(&windowEvent.button);
+			break;
+		case SDL_MOUSEWHEEL:
+			m_GameContext.pInput->HandleMouseScrollEvent(&windowEvent.wheel);
+			break;
 		default:
 			break;
 		}

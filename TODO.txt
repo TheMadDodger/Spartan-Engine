@@ -28,6 +28,7 @@ BinairyContainmer
 Renderer
 -> SpriteSheet rendering DONE
 -> Primitive rendering
+-> Rendering text? SDL_ttf?
 --> Circle, Rectangle, Polygon(s) + Solid versions DONE
 --> SolidRect DONE
 --> SolidCircle DONE
@@ -35,7 +36,6 @@ Renderer
 --> Rect DONE
 --> Color bug DONE
 --> DrawLine DONE
-->Rendering text? SDL_ttf?
 
 SpriteSheet class DONE
 -> Uses TextureData class DONE
@@ -48,6 +48,7 @@ Framework Components
 -> RigidBodyComponent (Box2D physics) DONE
 -> ColliderComponent (Box2D physics) DONE
 --> Add debugging mode DONE
+-> TextRenderComponent (SDL_ttf)
 
 -> AIComponent
 
@@ -73,6 +74,8 @@ ContentManager
 -> SVGFileLoader (for Box2D)
 -> ...
 
+PARTICLE SYSTEM!
+
 AI Module
 -> Via AIComponent
 
@@ -80,14 +83,11 @@ Documentation
 -> Manual to explain how to use the framework
 
 Input Manager
--> Add mouse input ples
---> World coordinates of mouse
---> Screen coordinates of mouse
---> Controller support
---> Support for changeing inputactions at runtime (for options menu's) maybe look into XInputDotNet for c++?
+-> Add mouse input ples DONE
+--> World coordinates of mouse DONE
+--> Screen coordinates of mouse DONE
+--> Mouse Wheel DONE
+--> Controller support maybe look into XInputDotNet for c++?
+--> Support for changeing inputactions at runtime (for options menu's)
 
 Networking
-
-BUGS:
--> InputManager: - Pressed state reacts as down state but with delay between
-->				 - Mod keys are not being detected

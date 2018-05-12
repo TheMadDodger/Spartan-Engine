@@ -14,6 +14,7 @@ TestScene2::~TestScene2()
 
 void TestScene2::Initialize(const GameContext &gameContext)
 {
+	UNREFERENCED_PARAMETER(gameContext);
 	//m_pObject = new GameObject();
 	//m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
 	//m_pObject->AddComponent(new UIComponent());
@@ -103,8 +104,6 @@ void TestScene2::Initialize(const GameContext &gameContext)
 	Utilities::BinaryContainer::Close();
 
 	string path = "./Resources/Spritesheets/mario.bin";
-
-	Utilities::Debug::LogAutomaticData(gameContext.pTime->GetDeltaTime(), 1.0f);
 
 	m_pGroundBox = new GameObject();
 	m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));

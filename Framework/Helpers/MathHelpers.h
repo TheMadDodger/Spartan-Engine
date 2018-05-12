@@ -88,8 +88,8 @@ namespace Math
 			m[0][2] = m31; m[1][2] = m32; m[2][2] = m33;
 		}
 
-		Matrix3X3 operator*(const Matrix3X3 & other);
-		Vector3 operator*(const Vector3 & other);
+		Matrix3X3 operator*(const Matrix3X3 &other);
+		Vector3 operator*(const Vector3 &other);
 
 		const Vector2 ExtraxtTranslation();
 		const Vector3 ExtraxtRotation();

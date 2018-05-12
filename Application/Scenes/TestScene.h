@@ -21,5 +21,7 @@ private:
 	GameObject *m_pSpriteSheetTest = nullptr;
 
 	GameObject *m_pGroundBox = nullptr;
+
+	vector<Vector2> m_Points;
 };
 

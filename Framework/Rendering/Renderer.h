@@ -30,6 +30,7 @@ public:
 	void DrawRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color);
 	void DrawCircle(const Vector2 &center, float radius, const Math::Color &color);
 	void DrawLine(const Vector2 &start, const Vector2 &end, const Math::Color &color);
+	void DrawPolygon(const std::vector<Vector2> &points, const Math::Color &color);
 
 private:
 	friend class BaseGame;

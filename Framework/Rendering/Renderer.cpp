@@ -269,3 +269,20 @@ void Renderer::DrawLine(const Vector2 & start, const Vector2 & end, const Math::
 		glVertex2f((GLfloat)end.x, (GLfloat)end.y);
 	}
 }
+
+void Renderer::DrawPolygon(const std::vector<Vector2> &points, const Math::Color &color)
+{
+	glBegin(GL_LINES);
+	{
+		for (size_t i = 0; i < points.size() - 1; ++i)
+		{
+			auto point1 = points[i];
+			auto point2 = points[i + 1];
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)point1.x, (GLfloat)point1.y);
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+			glVertex2f((GLfloat)point2.x, (GLfloat)point2.y);
+		}
+	}
+	glEnd();
+}

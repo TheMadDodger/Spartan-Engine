@@ -56,17 +56,20 @@ void TestScene::Initialize(const GameContext &gameContext)
 	//m_pAudioSource->AddComponent(pAudio);
 	//AddChild(m_pAudioSource);
 
-	gameContext.pInput->AddInputAction(InputAction("Forward", Down , 'w', KMOD_LCTRL));
+	gameContext.pInput->AddInputAction(InputAction("Forward", Down , 'w', 0, SDL_SCANCODE_LEFT));
 	gameContext.pInput->AddInputAction(InputAction("Backward", Down, 's'));
 	gameContext.pInput->AddInputAction(InputAction("Left", Down, 'a'));
 	gameContext.pInput->AddInputAction(InputAction("Right", Down, 'd'));
 
-	gameContext.pInput->AddInputAction(InputAction("ZoomOut", Down, 'o'));
-	gameContext.pInput->AddInputAction(InputAction("ZoomIn", Down, 'i'));
+	gameContext.pInput->AddInputAction(InputAction("ZoomOut", Pressed, 'o'));
+	gameContext.pInput->AddInputAction(InputAction("ZoomIn", Pressed, 'i'));
 
 	gameContext.pInput->AddInputAction(InputAction("Shoot", Pressed, 'f'));
 
 	gameContext.pInput->AddInputAction(InputAction("ChangeScene", Pressed, 'p'));
+
+	gameContext.pInput->AddInputAction(InputAction("AddPoint", Pressed, -1, SDL_BUTTON_LEFT));
+	gameContext.pInput->AddInputAction(InputAction("RemovePoint", Pressed, -1, SDL_BUTTON_RIGHT));
 
 	//pMusic->SetVolume(10);
 	//gameContext.pSound->PlaySound(pMusic);
@@ -130,8 +133,6 @@ void TestScene::Initialize(const GameContext &gameContext)
 	//m_pSpriteSheetTest->GetTransform()->SetScale(Vector2(10.0f, 10.0f));
 	//AddChild(m_pSpriteSheetTest);
 
-	Utilities::Debug::LogAutomaticData(gameContext.pTime->GetDeltaTime(), 1.0f);
-
 	//m_pGroundBox = new GameObject();
 	//m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));
 	//m_pGroundBox->AddComponent(new ColliderComponent(new Box(500.0f, 50.0f)));
@@ -192,6 +193,15 @@ void TestScene::Update(const GameContext &gameContext)
 	{
 		SceneManager::GetInstance()->LoadScene("Test Scene 2");
 	}
+	if (gameContext.pInput->IsActionTriggered("AddPoint"))
+	{
+		m_Points.push_back(gameContext.pInput->GetMouseScreenPosition());
+	}
+	if (gameContext.pInput->IsActionTriggered("RemovePoint"))
+	{
+		if(!m_Points.empty())
+			m_Points.pop_back();
+	}
 	/*if (gameContext.pInput->IsActionTriggered("Shoot"))
 	{
 		m_pAudioSource->GetComponent<AudioSourceComponent>()->Play(gameContext);
@@ -203,7 +213,16 @@ void TestScene::Update(const GameContext &gameContext)
 void TestScene::Draw(const GameContext &gameContext)
 {
 	//UNREFERENCED_PARAMETER(gameContext);
-	gameContext.pRenderer->DrawCircle(Vector2(500.0f, 500.0f), 50.0f, Math::Color::Cyan());
-	gameContext.pRenderer->DrawRect(Vector2(40.0f, 40.0f), Vector2(500.0f, 500.0f), Math::Color::Red());
-	gameContext.pRenderer->DrawLine(Vector2(20.0f, 60.0f), Vector2(50.0f, 10.0f), Math::Color::Gold());
+	//gameContext.pRenderer->DrawCircle(Vector2(500.0f, 500.0f), 50.0f, Math::Color::Cyan());
+	//gameContext.pRenderer->DrawRect(Vector2(40.0f, 40.0f), Vector2(500.0f, 500.0f), Math::Color::Red());
+	//gameContext.pRenderer->DrawLine(Vector2(100.0f, 700.0f), Vector2(50.0f, 10.0f), Math::Color::Gold());
+	if (m_Points.size() >= 2)
+	{
+		gameContext.pRenderer->DrawPolygon(m_Points, Color::Cyan());
+	}
+
+	for (auto point : m_Points)
+	{
+		gameContext.pRenderer->DrawCircle(point, 5.0f,Color::Red());
+	}
 }
