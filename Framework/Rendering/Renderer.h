@@ -4,6 +4,7 @@
 
 class TextureData;
 class SpriteSheetData;
+class FontData;
 
 using namespace Math;
 
@@ -17,6 +18,7 @@ public:
 	void DrawImage(TextureData *pImage, const GameContext &gameContext);
 	void RenderTexture(TextureData *pBitmap);
 	void RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vector2 &origin);
+	void RenderText(FontData *pFont, const std::string &text, const SDL_Color &clr, const Origin &origin = Origin::Center);
 	void ClearBackground();
 
 	SDL_Renderer *GetSDLRenderer() { return m_pSDLRenderer; }
@@ -40,5 +42,8 @@ private:
 	SDL_GLContext m_pSDLContext;
 
 	const int CIRCLEPOLYGONS = 20;
+
+private: // Internal private functions
+	const Vector2 CalculateOrigin(const Math::Origin &origin, SDL_Surface *pImage);
 };
 

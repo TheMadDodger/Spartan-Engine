@@ -28,7 +28,7 @@ BinairyContainmer
 Renderer
 -> SpriteSheet rendering DONE
 -> Primitive rendering
--> Rendering text? SDL_ttf?
+-> Rendering text? SDL_ttf? DONE
 --> Circle, Rectangle, Polygon(s) + Solid versions DONE
 --> SolidRect DONE
 --> SolidCircle DONE
@@ -48,7 +48,9 @@ Framework Components
 -> RigidBodyComponent (Box2D physics) DONE
 -> ColliderComponent (Box2D physics) DONE
 --> Add debugging mode DONE
--> TextRenderComponent (SDL_ttf)
+-> TextRenderComponent (SDL_ttf) DONE
+--> Allignment options DONE
+--> Support for changeing font at runtime DONE
 
 -> AIComponent
 
@@ -65,14 +67,20 @@ Box2D Implementation
 --> SVG Shape (With SVGLoader)
 -> Support for RUBE?
 
-Make a tool that allows to easily make spritesheets
-
 ContentManager
 -> Update BitmapLoader to TextureLoader using TextureData DONE
 -> AudioFileLoader DONE
 -> SpriteSheetLoader DONE
 -> SVGFileLoader (for Box2D)
 -> ...
+
+Input Manager
+-> Add mouse input ples DONE
+--> World coordinates of mouse DONE
+--> Screen coordinates of mouse DONE
+--> Mouse Wheel DONE
+--> Controller support maybe look into XInputDotNet for c++?
+--> Support for changeing inputactions at runtime (for options menu's)
 
 PARTICLE SYSTEM!
 
@@ -82,12 +90,6 @@ AI Module
 Documentation
 -> Manual to explain how to use the framework
 
-Input Manager
--> Add mouse input ples DONE
---> World coordinates of mouse DONE
---> Screen coordinates of mouse DONE
---> Mouse Wheel DONE
---> Controller support maybe look into XInputDotNet for c++?
---> Support for changeing inputactions at runtime (for options menu's)
+Make a tool that allows to easily make spritesheets
 
 Networking

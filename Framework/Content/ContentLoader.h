@@ -32,13 +32,21 @@ public:
 
 	T* GetContent(const std::string &file)
 	{
+		// Remove properties at end
+		auto index = file.find(':');
+		auto noProp = file;
+		if (index != string::npos)
+		{
+			noProp = noProp.substr(0, index);
+		}
+
 		//Does File Exists?
 		struct _stat buff;
 		int result = -1;
-		result = _stat(file.c_str(), &buff);
+		result = _stat(noProp.c_str(), &buff);
 		if (result != 0)
 		{
-			std::cout << "ContentManager> File not found!\nPath: " << file << std::endl;
+			std::cout << "ContentManager > File not found!\nPath: " << file << std::endl;
 		}
 
 		T* pContent = LoadContent(file);

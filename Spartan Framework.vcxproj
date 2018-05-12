@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Application\Scenes\TestScene2.h" />
+    <ClInclude Include="Framework\Content\FontLoader.h" />
     <ClInclude Include="Framework\Components\ColliderComponent.h" />
     <ClInclude Include="Framework\Components\Colliders.h" />
     <ClInclude Include="Framework\Helpers\BinaryContainer.h" />
@@ -200,9 +201,11 @@
     <ClInclude Include="Application\Scenes\TestScene.h" />
     <ClInclude Include="Framework\Helpers\Time.h" />
     <ClInclude Include="Framework\Components\UIComponent.h" />
+    <ClInclude Include="Framework\Components\TextRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application\Scenes\TestScene2.cpp" />
+    <ClCompile Include="Framework\Content\FontLoader.cpp" />
     <ClCompile Include="Framework\Components\ColliderComponent.cpp" />
     <ClCompile Include="Framework\Helpers\BinaryContainer.cpp" />
     <ClCompile Include="Framework\Components\AudioSourceComponent.cpp" />
@@ -237,6 +240,7 @@
     <ClCompile Include="Application\Scenes\TestScene.cpp" />
     <ClCompile Include="Framework\Helpers\Time.cpp" />
     <ClCompile Include="Framework\Components\UIComponent.cpp" />
+    <ClCompile Include="Framework\Components\TextRenderComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

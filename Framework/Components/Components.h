@@ -8,3 +8,4 @@
 #include "SpriteSheetComponent.h"
 #include "RigidBodyComponent.h"
 #include "ColliderComponent.h"
+#include "TextRenderComponent.h"

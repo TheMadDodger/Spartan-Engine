@@ -14,6 +14,7 @@ public:
 
 	const Vector2 GetPosition();
 
+protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;

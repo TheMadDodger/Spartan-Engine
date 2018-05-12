@@ -6,21 +6,6 @@ class SpriteSheetData;
 
 using namespace Math;
 
-enum Origin
-{
-	TopLeft,
-	TopMiddle,
-	TopRight,
-
-	LeftCenter,
-	Center,
-	RightCenter,
-
-	BottomLeft,
-	BottomMiddle,
-	BottomRight,
-};
-
 enum AnimationPlayerStatus
 {
 	SReverse,
@@ -31,10 +16,11 @@ enum AnimationPlayerStatus
 class SpriteSheetComponent : public BaseComponent
 {
 public:
-	SpriteSheetComponent(const std::string &file, const Origin &origin = Origin::Center);
+	SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
 	SpriteSheetComponent(const std::string &file, const Vector2 &origin);
 	~SpriteSheetComponent();
 
+protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
@@ -46,12 +32,12 @@ public: // Animation Calls
 	void Pause();
 
 private:
-	void CalculateOrigin(const Origin &origin, const FrameData &frame);
+	void CalculateOrigin(const Math::Origin &origin, const FrameData &frame);
 
 private:
 	SpriteSheetData *m_pSpriteSheet;
 	Vector2 m_Origin;
-	Origin m_OriginType;
+	Math::Origin m_OriginType;
 	bool m_CalculateOrigin = false;
 	const std::string m_File;
 

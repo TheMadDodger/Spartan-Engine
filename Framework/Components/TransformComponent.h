@@ -6,8 +6,6 @@ public:
 	TransformComponent();
 	~TransformComponent();
 
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
 	void ApplyTransform();
 	void BuildTransform();
 	const Matrix3X3 &GetTransformMatrix();
@@ -23,6 +21,10 @@ public:
 	Vector2 Position = Vector2(0, 0);
 	Vector3 Rotation = Vector3(0, 0, 0);
 	Vector2 Scale = Vector2(1, 1);
+
+protected:
+	void Initialize(const GameContext &gameContext) override;
+	void Update(const GameContext &gameContext) override;
 
 private:
 	Matrix3X3 m_TansformMatrix;

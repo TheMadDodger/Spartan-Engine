@@ -147,6 +147,21 @@ void TestScene::Initialize(const GameContext &gameContext)
 	//AddChild(m_pSpriteSheetTest);
 
 	//Utilities::Debug::EnablePhysicsDebugRendering(true);
+
+	auto pText = new GameObject();
+	pText->AddComponent(new TextRenderComponent("./Resources/Fonts/game_over.ttf:64"));
+	pText->AddComponent(new UIComponent());
+
+	pText->GetTransform()->Translate(16.0f, 16.0f);
+
+	pText->GetComponent<TextRenderComponent>()->SetText("Hello World!");
+	pText->GetComponent<TextRenderComponent>()->SetAllignment(Math::Origin::TopLeft);
+	pText->GetComponent<TextRenderComponent>()->SetColor(Color(1.0f, 0.0f, 0.0f, 1.0f));
+
+	auto pFont = ContentManager::GetInstance()->Load<FontData>("./Resources/Fonts/Broken Heart.ttf:120");
+	pText->GetComponent<TextRenderComponent>()->SetFont(pFont);
+
+	AddChild(pText);
 }
 
 void TestScene::PostInitialize(const GameContext &gameContext)

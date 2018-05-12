@@ -42,7 +42,7 @@ bool BaseGame::RootInitialize()
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
-		std::cout << "SDL Could not initialise! SDL Error: " << SDL_GetError() << std::endl;
+		Utilities::Debug::LogError("SDL Could not initialize! SDL_Error: " + string(SDL_GetError()));
 
 		return false;
 	}
@@ -62,6 +62,13 @@ bool BaseGame::RootInitialize()
 
 	// Initialize Content Manager
 	ContentManager::GetInstance()->Initialize();
+
+	// Initialize SDL_ttf
+	if (TTF_Init() < 0)
+	{
+		Utilities::Debug::LogError("SDL_ttf Could not initialize! TTF_Error: " + string(TTF_GetError()));
+		return false;
+	}
 
 	// Run user defined Initialize()
 	Initialize(m_GameContext);

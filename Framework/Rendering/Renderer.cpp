@@ -111,6 +111,25 @@ void Renderer::RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vec
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Renderer::RenderText(FontData * pFont, const std::string & text, const SDL_Color & clr, const Origin &origin)
+{
+	if (text.size() <= 0) return; // If there is no text, no need to waste resources to render it
+
+	SDL_Surface *pTextSurface = TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr);
+	if (!pTextSurface)
+	{
+		Utilities::Debug::LogWarning("Renderer::RenderText > Could not render text surface! TTF_Error: " + string(TTF_GetError()));
+		return;
+	}
+	TextureData *pTextTexture = new TextureData("", CalculateOrigin(origin, pTextSurface));
+	pTextTexture->m_pImage = pTextSurface;
+	pTextTexture->BuildTexture();
+	RenderTexture(pTextTexture);
+
+	delete pTextTexture;
+	pTextTexture = nullptr;
+}
+
 void Renderer::RenderTexture(TextureData *pBitmap)
 {
 	float vertexLeft = 0;
@@ -285,4 +304,67 @@ void Renderer::DrawPolygon(const std::vector<Vector2> &points, const Math::Color
 		}
 	}
 	glEnd();
+}
+
+const Vector2 Renderer::CalculateOrigin(const Math::Origin &origin, SDL_Surface *pImage)
+{
+	Vector2 calculatedOrigin;
+
+	switch (origin)
+	{
+	case TopLeft:
+		calculatedOrigin = Vector2::Zero();
+		break;
+
+	case TopMiddle:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w / 2.0f;
+		break;
+
+	case TopRight:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w;
+		break;
+
+	case LeftCenter:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = 0;
+		calculatedOrigin.y = (float)pImage->h / 2.0f;
+		break;
+
+	case Center:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w / 2.0f;
+		calculatedOrigin.y = (float)pImage->h / 2.0f;
+		break;
+
+	case RightCenter:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w;
+		calculatedOrigin.y = (float)pImage->h / 2.0f;
+		break;
+
+	case BottomLeft:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = 0;
+		calculatedOrigin.y = (float)pImage->h;
+		break;
+
+	case BottomMiddle:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w / 2.0f;
+		calculatedOrigin.y = (float)pImage->h;
+		break;
+
+	case BottomRight:
+		calculatedOrigin = Vector2::Zero();
+		calculatedOrigin.x = (float)pImage->w;
+		calculatedOrigin.y = (float)pImage->h;
+		break;
+
+	default:
+		break;
+	}
+
+	return calculatedOrigin;
 }

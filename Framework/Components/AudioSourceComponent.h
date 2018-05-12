@@ -45,6 +45,7 @@ public:
 
 	void Play(const GameContext &gameContext);
 
+protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 

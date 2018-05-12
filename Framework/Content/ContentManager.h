@@ -30,8 +30,9 @@ public:
 	const GLuint &GetID() { return m_TextureID; }
 	const Vector2 &GetOrigin() { return m_Origin; }
 
-	~TextureData()
+	virtual ~TextureData()
 	{
+		glDeleteTextures(1, &m_TextureID);
 		SDL_FreeSurface(m_pImage);
 		m_pImage = NULL;
 	}
@@ -99,6 +100,7 @@ private:
 
 private:
 	friend class TextureLoader;
+	friend class Renderer;
 	SDL_Surface *m_pImage;
 	SDL_Texture *m_pTexture;
 	GLuint m_TextureID;
@@ -111,7 +113,7 @@ class AudioData : public Content
 {
 public:
 	AudioData(const std::string &file) : Content(file) {}
-	~AudioData()
+	virtual ~AudioData()
 	{
 		if (m_pChunck)
 			Mix_FreeChunk(m_pChunck);
@@ -176,8 +178,8 @@ struct AnimationClip
 class SpriteSheetData : public Content
 {
 public:
-	SpriteSheetData(const std::string &file) : Content(file) {};
-	~SpriteSheetData() {};
+	SpriteSheetData(const std::string &file) : Content(file) {}
+	virtual ~SpriteSheetData() {}
 
 private:
 	friend class SpriteSheetLoader;
@@ -187,6 +189,23 @@ private:
 	std::string m_ImageFile;
 
 	TextureData *m_pImageData;
+};
+
+class FontData : public Content
+{
+public:
+	FontData(const std::string &file) : Content(file) {}
+	virtual ~FontData()
+	{
+		TTF_CloseFont(m_pTTFFont);
+		m_pTTFFont = nullptr;
+	}
+
+	TTF_Font *GetFontData() { return m_pTTFFont; }
+
+private:
+	friend class FontLoader;
+	TTF_Font *m_pTTFFont = nullptr;
 };
 
 class ContentManager

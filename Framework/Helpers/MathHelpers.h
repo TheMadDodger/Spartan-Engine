@@ -157,4 +157,19 @@ namespace Math
 		result.y = sin(dir) * length;
 		return result;
 	}
+
+	enum Origin
+	{
+		TopLeft,
+		TopMiddle,
+		TopRight,
+
+		LeftCenter,
+		Center,
+		RightCenter,
+
+		BottomLeft,
+		BottomMiddle,
+		BottomRight,
+	};
 }
