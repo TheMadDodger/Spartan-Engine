@@ -31,6 +31,8 @@ BaseGame::~BaseGame()
 	m_GameContext.pInput = nullptr;
 	delete m_GameContext.pSound;
 	m_GameContext.pSound = nullptr;
+	delete m_GameContext.pParticleManager;
+	m_GameContext.pParticleManager = nullptr;
 
 	// SDL Cleanup
 	SDL_Quit();
@@ -59,6 +61,7 @@ bool BaseGame::RootInitialize()
 	m_GameContext.pInput = new InputManager();
 	m_GameContext.pSound = new SoundManager();
 	m_GameContext.pSound->Initialize();
+	m_GameContext.pParticleManager = new ParticleManager();
 
 	// Initialize Content Manager
 	ContentManager::GetInstance()->Initialize();
@@ -93,6 +96,9 @@ bool BaseGame::RootGameUpdate()
 
 	// Update audio
 	m_GameContext.pSound->Update();
+
+	// Tick ParticleManager
+	m_GameContext.pParticleManager->Tick(m_GameContext);
 
 	// Inside SDL events
 	SDL_Event windowEvent;
@@ -149,6 +155,9 @@ void BaseGame::RootGamePaint()
 
 	// Draw scenes
 	SceneManager::GetInstance()->Draw(m_GameContext);
+
+	// Paint Particles
+	m_GameContext.pParticleManager->Paint(m_GameContext);
 
 	// Run user defined GamePaint()
 	GamePaint(m_GameContext);

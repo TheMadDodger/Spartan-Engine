@@ -223,6 +223,8 @@ void TestScene::Update(const GameContext &gameContext)
 	}*/
 
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
+
+	m_pPartSystem->Tick();
 }
 
 void TestScene::Draw(const GameContext &gameContext)

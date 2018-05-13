@@ -5,6 +5,7 @@
 #include "ApplicationStructs.h"
 #include "Content/ContentManager.h"
 #include "Helpers/MathHelpers.h"
+#include "Rendering/ParticleSystem.h"
 
 inline Vector2 ToVector2(const b2Vec2 &vec)
 {

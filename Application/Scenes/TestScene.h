@@ -23,5 +23,7 @@ private:
 	GameObject *m_pGroundBox = nullptr;
 
 	vector<Vector2> m_Points;
+
+	ParticleSystem *m_pPartSystem;
 };
 
