@@ -36,7 +36,7 @@ void SpriteSheetComponent::Update(const GameContext &gameContext)
 			break;
 
 		case SPlay:
-			m_Timer += *gameContext.pTime->GetDeltaTime() / 1000.0f;
+			m_Timer += gameContext.pTime->GetDeltaTime() / 1000.0f;
 			if (m_Timer >= 1.0f / m_FramesPerSecond)
 			{
 				++m_CurrentFrame;
@@ -52,7 +52,7 @@ void SpriteSheetComponent::Update(const GameContext &gameContext)
 			break;
 
 		case SReverse:
-			m_Timer += *gameContext.pTime->GetDeltaTime();
+			m_Timer += gameContext.pTime->GetDeltaTime();
 			if (m_Timer >= 1.0f / m_FramesPerSecond)
 			{
 				--m_CurrentFrame;

@@ -148,7 +148,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 
 	//Utilities::Debug::EnablePhysicsDebugRendering(true);
 
-	auto pText = new GameObject();
+	/*auto pText = new GameObject();
 	pText->AddComponent(new TextRenderComponent("./Resources/Fonts/game_over.ttf:64"));
 	pText->AddComponent(new UIComponent());
 
@@ -161,7 +161,20 @@ void TestScene::Initialize(const GameContext &gameContext)
 	auto pFont = ContentManager::GetInstance()->Load<FontData>("./Resources/Fonts/Broken Heart.ttf:120");
 	pText->GetComponent<TextRenderComponent>()->SetFont(pFont);
 
-	AddChild(pText);
+	AddChild(pText);*/
+
+	EmitterSettings settings;
+	settings.MaxParticles = 100;
+	settings.Position = Vector2(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
+	settings.SpawnIntervals = 0.1f;
+	settings.PartSettings.RandomSpeedBetween2Constants(50.f, 100.f);
+	settings.PartSettings.RandomDirectionBetween2Constants(0.f, 359.f);
+	settings.PartSettings.ConstantLifeTime(1.0f);
+	settings.PartSettings.ColorOverLifeTime(Color(1.0f, 0.0f, 0.0f, 1.0f));
+	settings.PartSettings.AlphaOverLifeTime2(1.0f, 0.0f);
+	settings.PartSettings.RandomRotationBetween2Constants(0.0f, 359.0f);
+
+	gameContext.pParticleManager->CreateParticleSystem()->CreateEmitter(settings);
 }
 
 void TestScene::PostInitialize(const GameContext &gameContext)
@@ -182,19 +195,19 @@ void TestScene::Update(const GameContext &gameContext)
 
 	if (gameContext.pInput->IsActionTriggered("Forward"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * *gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Backward"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * *gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Left"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * *gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Right"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * *gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("ZoomOut"))
 	{
@@ -223,8 +236,6 @@ void TestScene::Update(const GameContext &gameContext)
 	}*/
 
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
-
-	m_pPartSystem->Tick();
 }
 
 void TestScene::Draw(const GameContext &gameContext)

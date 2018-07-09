@@ -18,7 +18,7 @@ void GameApp::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 	SceneManager::GetInstance()->AddScene(new TestScene());
-	SceneManager::GetInstance()->AddScene(new TestScene2());
+	//SceneManager::GetInstance()->AddScene(new TestScene2());
 }
 
 void GameApp::GameUpdate(const GameContext &gameContext)

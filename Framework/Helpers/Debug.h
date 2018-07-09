@@ -60,7 +60,7 @@ namespace Utilities
 			for (auto &pData : m_DataToLog)
 			{
 				//if (pData.m_PersonalTimer = 0.0f) pData.m_PersonalTimer = pTime->GetTime();
-				if (pData.m_PersonalTimer <= *pTime->GetTime() - pData.m_LogInterval)
+				if (pData.m_PersonalTimer <= pTime->GetTime() - pData.m_LogInterval)
 				{
 					std::string msg;
 					switch (pData.m_Type)
@@ -88,7 +88,7 @@ namespace Utilities
 						break;
 					}
 
-					pData.m_PersonalTimer = *pTime->GetTime();
+					pData.m_PersonalTimer = pTime->GetTime();
 				}
 			}
 		}

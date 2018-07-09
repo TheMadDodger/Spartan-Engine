@@ -17,6 +17,7 @@ namespace Math
 		float Normalize();
 
 		Vector2 operator+(const Vector2 &other);
+		void operator+=(const Vector2 &other);
 		Vector2 operator-(const Vector2 &other);
 		Vector2 operator*(const Vector2 &other);
 		Vector2 operator*(float factor);
@@ -25,10 +26,10 @@ namespace Math
 
 		// Static methods
 		static Vector2 Zero() { return Vector2(); }
-		static Vector2 Forward() { return Vector2(1, 0); }
-		static Vector2 Back() { return Vector2(-1, 0); }
-		static Vector2 Right() { return Vector2(0, 1); }
-		static Vector2 Left() { return Vector2(0, -1); }
+		static Vector2 Forward() { return Vector2(0, 1); }
+		static Vector2 Back() { return Vector2(0, -1); }
+		static Vector2 Right() { return Vector2(1, 0); }
+		static Vector2 Left() { return Vector2(-1, 0); }
 	};
 
 	struct Vector3
@@ -125,6 +126,14 @@ namespace Math
 		static Color DarkGray() { return Color(0.66f, 0.66f, 0.66f, 1); }
 		static Color Silver() { return Color(0.75f, 0.75f, 0.75f, 1); }
 
+		static Color Lerp(const Color &a, const Color &b, float t);
+
+	public: // Operators
+		void operator*=(float factor);
+		Color operator*(float f);
+		Color operator-(const Color &other);
+		Color operator+(const Color &other);
+
 	public: // Color values
 		float r;
 		float g;
@@ -156,6 +165,34 @@ namespace Math
 		result.x = cos(dir) * length;
 		result.y = sin(dir) * length;
 		return result;
+	}
+
+	template<typename T>
+	inline T RandomRange(T a, T b)
+	{
+		/*if (typeid(T) == typeid(Color))
+		{
+			float diff = (Color)b - (Color)a;
+			float randomFactor = (float)rand() / (float)RAND_MAX;
+			return (randomFactor * diff) + (Color)a);
+		}*/
+
+		T diff = b - a;
+		float randomFactor = (float)rand() / (float)RAND_MAX;
+		return (diff * randomFactor) + a;
+	}
+
+	template<typename T>
+	inline int Absolute(T &value)
+	{
+		int sine = value / abs(value);
+		value = abs(value);
+		return sine;
+	}
+
+	inline float Lerp(float a, float b, float t)
+	{
+		return (1 - t) * a + t * b;
 	}
 
 	enum Origin

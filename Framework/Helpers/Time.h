@@ -11,13 +11,13 @@ class Time
 public:
 	Time() {}
 
-	const float *GetDeltaTime() { return &m_DeltaTime; }
-	const float *GetTime() { return &m_Time; }
-	const float *GetUnscaledDeltaTime() { return &m_UnscaledDeltaTime; }
-	const float *GetUnscaledTime() { return &m_UnscaledTime; }
-	const float *GetTimeScale() { return &m_TimeScale; }
-	const float *GetFrameRate() { return &m_FrameRate; }
-	const int *GetTotalFrames() { return &m_TotalFrames; }
+	const float GetDeltaTime() { return m_DeltaTime; }
+	const float GetTime() { return m_Time; }
+	const float GetUnscaledDeltaTime() { return m_UnscaledDeltaTime; }
+	const float GetUnscaledTime() { return m_UnscaledTime; }
+	const float GetTimeScale() { return m_TimeScale; }
+	const float GetFrameRate() { return m_FrameRate; }
+	const int GetTotalFrames() { return m_TotalFrames; }
 	void SetTimeScale(float scale) { m_TimeScale = scale; }
 
 private:

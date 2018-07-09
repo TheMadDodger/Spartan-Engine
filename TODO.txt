@@ -27,8 +27,8 @@ BinairyContainmer
 
 Renderer
 -> SpriteSheet rendering DONE
--> Primitive rendering
 -> Rendering text? SDL_ttf? DONE
+-> Primitive rendering DONE
 --> Circle, Rectangle, Polygon(s) + Solid versions DONE
 --> SolidRect DONE
 --> SolidCircle DONE
@@ -83,6 +83,10 @@ Input Manager
 --> Support for changeing inputactions at runtime (for options menu's)
 
 PARTICLE SYSTEM!
+
+Make Application and Framework 2 spererate solutions
+-> Application makes use of the Framework solution
+-> This way, the Framework can be updated without changeing the app
 
 AI Module
 -> Via AIComponent

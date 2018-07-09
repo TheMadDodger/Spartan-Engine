@@ -18,6 +18,12 @@ Vector2 Vector2::operator+(const Vector2 &other)
 	return result;
 }
 
+void Math::Vector2::operator+=(const Vector2 &other)
+{
+	x += other.x;
+	y += other.y;
+}
+
 Vector2 Vector2::operator-(const Vector2 &other)
 {
 	Vector2 result;
@@ -230,4 +236,49 @@ Matrix3X3 Matrix3X3::CreateScaleRotationTranslationMatrix(const Vector2 &transla
 	Matrix3X3 matScaleRotTrans = matTrans * matScaleRot;
 
 	return matScaleRotTrans;
+}
+
+Color Color::Lerp(const Color &a, const Color &b, float t)
+{
+	Color result;
+	result.r = Math::Lerp(a.r, b.r, t);
+	result.g = Math::Lerp(a.g, b.g, t);
+	result.b = Math::Lerp(a.b, b.b, t);
+	result.a = Math::Lerp(a.a, b.a, t);
+	return result;
+}
+
+void Color::operator*=(float f)
+{
+	r *= f;
+	g *= f;
+	b *= f;
+	a *= f;
+}
+
+Color Color::operator*(float f)
+{
+	Color result(r, g, b, a);
+	result *= f;
+	return result;
+}
+
+Color Color::operator-(const Color &other)
+{
+	Color result;
+	result.r = r - other.r;
+	result.g = g - other.g;
+	result.b = b - other.b;
+	result.a = a - other.a;
+	return result;
+}
+
+Color Math::Color::operator+(const Color & other)
+{
+	Color result;
+	result.r = r + other.r;
+	result.g = g + other.g;
+	result.b = b + other.b;
+	result.a = a + other.a;
+	return result;
 }

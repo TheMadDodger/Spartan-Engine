@@ -111,7 +111,7 @@ void Renderer::RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vec
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Renderer::RenderText(FontData * pFont, const std::string & text, const SDL_Color & clr, const Origin &origin)
+void Renderer::RenderText(FontData *pFont, const std::string & text, const SDL_Color & clr, const Origin &origin)
 {
 	if (text.size() <= 0) return; // If there is no text, no need to waste resources to render it
 
@@ -251,6 +251,41 @@ void Renderer::DrawRect(const Vector2 &topLeft, const Vector2 &bottomRight, cons
 	glEnd();
 }
 
+void Renderer::DrawQuadColorTexture(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color, TextureData *pImage)
+{
+	if (pImage)
+	{
+		glBindTexture(GL_TEXTURE_2D, pImage->GetID());
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glEnable(GL_TEXTURE_2D);
+	}
+
+	glBegin(GL_QUADS);
+	{
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)bottomRight.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex2f((GLfloat)topLeft.x, (GLfloat)topLeft.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)topLeft.y);
+
+		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex2f((GLfloat)bottomRight.x, (GLfloat)bottomRight.y);
+	}
+	glEnd();
+
+	if (pImage)
+	{
+		glDisable(GL_TEXTURE_2D);
+	}
+}
+
 void Renderer::DrawCircle(const Vector2 &center, float radius, const Math::Color &color)
 {
 	float degreeStep = 360.0f / (float)CIRCLEPOLYGONS;
@@ -287,6 +322,7 @@ void Renderer::DrawLine(const Vector2 & start, const Vector2 & end, const Math::
 		glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
 		glVertex2f((GLfloat)end.x, (GLfloat)end.y);
 	}
+	glEnd();
 }
 
 void Renderer::DrawPolygon(const std::vector<Vector2> &points, const Math::Color &color)
