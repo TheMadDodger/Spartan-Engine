@@ -25,5 +25,7 @@ private:
 	vector<Vector2> m_Points;
 
 	ParticleSystem *m_pPartSystem;
+
+	GameObject *m_pPartObject;
 };
 

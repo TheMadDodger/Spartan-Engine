@@ -12,10 +12,11 @@ InputManager::~InputManager()
 	m_InputActions.clear();
 }
 
-void InputManager::AddInputAction(const InputAction &inputAction)
+InputAction &InputManager::AddInputAction(const InputAction &inputAction)
 {
 	// Add this new InputAction to the vector
 	m_InputActions.push_back(inputAction);
+	return m_InputActions[m_InputActions.size() - 1];
 }
 
 bool InputManager::IsActionTriggered(const string &actionName)
@@ -38,11 +39,69 @@ bool InputManager::IsActionTriggered(const string &actionName)
 	return action.m_bIsTriggered;
 }
 
+void InputManager::ReplaceInputAction(const string & actionName, const InputAction &inputAction)
+{
+	// First find if the provided action exists
+	auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [actionName](const InputAction &action)
+	{
+		return(action.ActionName == actionName);
+	});
+
+	if (it == m_InputActions.end())
+	{
+		// Action doesn't exist
+		Utilities::Debug::Log("InputManager::ReplaceInputAction > InputAction " + actionName + " does not exist!", Utilities::LogLevel::Warning);
+		return;
+	}
+
+	*it = inputAction;
+}
+
 const Vector2 InputManager::GetMouseWorldPosition(Matrix3X3 &cameraMatrix)
 {
 	Vector3 transVec = Vector3(m_MousePosition.x, m_MousePosition.y, 1.0f);
 	auto transPos = cameraMatrix * transVec;
 	return Vector2(transPos.x, transPos.y);
+}
+
+Vector2 InputManager::GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick)
+{
+	if (controllerID > XUSER_MAX_COUNT || controllerID < 0)
+	{
+		Utilities::Debug::Log("InputManager::GetControllerJoystickPosition > Controller " + to_string(controllerID) + " out of range.", Utilities::LogLevel::Warning);
+		return Vector2::Zero();
+	}
+
+	XINPUT_STATE state;
+
+	if (XInputGetState(controllerID, &state) == ERROR_SUCCESS)
+	{
+		Vector2 result = Vector2::Zero();
+		switch (stick)
+		{
+		case JoystickType::LeftThumbStick:
+			result.x = state.Gamepad.sThumbLX;
+			result.y = state.Gamepad.sThumbLY;
+			break;
+
+		case JoystickType::RightThumbStick:
+			result.x = state.Gamepad.sThumbRX;
+			result.y = state.Gamepad.sThumbRY;
+			break;
+
+		case JoystickType::Trigger:
+			result.x = state.Gamepad.bLeftTrigger;
+			result.y = state.Gamepad.bRightTrigger;
+			break;
+		}
+
+		return result;
+	}
+	else
+	{
+		Utilities::Debug::Log("InputManager::GetControllerJoystickPosition > Controller " + to_string(controllerID) + " is not connected.", Utilities::LogLevel::Warning);
+		return Vector2::Zero();
+	}
 }
 
 void InputManager::Update()
@@ -69,6 +128,71 @@ void InputManager::Update()
 	});
 
 	m_LastFrameWheelData = Vector2::Zero();
+
+	ControllerUpdate();
+}
+
+void InputManager::ControllerUpdate()
+{
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i)
+	{
+		XINPUT_STATE state = {};
+		
+		DWORD result = XInputGetState(i, &state);
+
+		if (result == ERROR_SUCCESS)
+		{
+			for_each(m_InputActions.begin(), m_InputActions.end(), [&state, i](InputAction &inputAction)
+			{
+				if (inputAction.ControllerID == i)
+				{
+					if (inputAction.ControllerButton != 0)
+					{
+						if (state.Gamepad.wButtons & inputAction.ControllerButton)
+						{
+							switch (inputAction.Type)
+							{
+							case Down:
+								inputAction.m_bIsTriggered = true;
+								break;
+							case Pressed:
+								// Reset
+								//inputAction.m_bIsTriggered = false;
+								break;
+
+							case Released:
+								// Reset
+								//inputAction.m_bIsTriggered = false;
+								break;
+							default:
+								break;
+							}
+						}
+						else
+						{
+							switch (inputAction.Type)
+							{
+							case Down:
+								inputAction.m_bIsTriggered = false;
+								break;
+							case Pressed:
+								// Reset
+								//inputAction.m_bIsTriggered = false;
+								break;
+
+							case Released:
+								// Reset
+								//inputAction.m_bIsTriggered = false;
+								break;
+							default:
+								break;
+							}
+						}
+					}
+				}
+			});
+		}
+	}
 }
 
 void InputManager::KeyDown(SDL_KeyboardEvent *keyboardEvent)

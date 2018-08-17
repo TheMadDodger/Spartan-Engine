@@ -51,6 +51,7 @@ Framework Components
 -> TextRenderComponent (SDL_ttf) DONE
 --> Allignment options DONE
 --> Support for changeing font at runtime DONE
+-> ParticleComponent DONE
 
 -> AIComponent
 
@@ -80,9 +81,9 @@ Input Manager
 --> Screen coordinates of mouse DONE
 --> Mouse Wheel DONE
 --> Controller support maybe look into XInputDotNet for c++?
---> Support for changeing inputactions at runtime (for options menu's)
+--> Support for changeing inputactions at runtime (for options menu's) DONE
 
-PARTICLE SYSTEM!
+PARTICLE SYSTEM! DONE
 
 Make Application and Framework 2 spererate solutions
 -> Application makes use of the Framework solution

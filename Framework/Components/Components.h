@@ -9,3 +9,4 @@
 #include "RigidBodyComponent.h"
 #include "ColliderComponent.h"
 #include "TextRenderComponent.h"
+#include "ParticleComponent.h"

@@ -164,17 +164,26 @@ void TestScene::Initialize(const GameContext &gameContext)
 	AddChild(pText);*/
 
 	EmitterSettings settings;
-	settings.MaxParticles = 100;
+	settings.MaxParticles = 1000;
 	settings.Position = Vector2(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
-	settings.SpawnIntervals = 0.1f;
-	settings.PartSettings.RandomSpeedBetween2Constants(50.f, 100.f);
+	settings.SpawnIntervals = 1000.0f;
+	settings.PartSettings.RandomSpeedBetween2Constants(100.f, 200.f);
 	settings.PartSettings.RandomDirectionBetween2Constants(0.f, 359.f);
 	settings.PartSettings.ConstantLifeTime(1.0f);
-	settings.PartSettings.ColorOverLifeTime(Color(1.0f, 0.0f, 0.0f, 1.0f));
+	settings.PartSettings.ColorOverLifeTime(Color::Magenta());
 	settings.PartSettings.AlphaOverLifeTime2(1.0f, 0.0f);
 	settings.PartSettings.RandomRotationBetween2Constants(0.0f, 359.0f);
+	//settings.PartSettings.SpeedOverLifeTimeBetween2Constants(50.0f, 1000.0f);
+	//settings.PartSettings.RandomScaleBetweenTwoConstants(Vector2(5.0, 5.0f), Vector2(10.0f, 10.0f));
+	settings.PartSettings.RandomUniformScaleBetweenTwoConstants(5.0f, 10.0f);
+	//settings.PartSettings.ScaleOverLifeTime(Vector2(1.0f, 1.0f));
+	settings.PartSettings.RandomAngularSpeedBetween2Constants(-100.0f, 100.0f);
+	settings.PartSettings.SetEndAngularSpeed(0.0f);
 
-	gameContext.pParticleManager->CreateParticleSystem()->CreateEmitter(settings);
+	m_pPartObject = new GameObject();
+	m_pPartObject->AddComponent(new ParticleComponent(settings));
+
+	AddChild(m_pPartObject);
 }
 
 void TestScene::PostInitialize(const GameContext &gameContext)
@@ -195,19 +204,23 @@ void TestScene::Update(const GameContext &gameContext)
 
 	if (gameContext.pInput->IsActionTriggered("Forward"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
+		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
+		m_pPartObject->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Backward"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
+		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
+		m_pPartObject->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Left"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		m_pPartObject->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Right"))
 	{
-		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		m_pPartObject->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("ZoomOut"))
 	{
@@ -236,6 +249,10 @@ void TestScene::Update(const GameContext &gameContext)
 	}*/
 
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
+
+	//auto leftThumbStick = gameContext.pInput->GetControllerJoystickPosition(0, JoystickType::LeftThumbStick);
+
+	//m_pPartObject->GetTransform()->Translate(leftThumbStick * gameContext.pTime->GetDeltaTime());
 }
 
 void TestScene::Draw(const GameContext &gameContext)

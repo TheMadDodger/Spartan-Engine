@@ -89,6 +89,21 @@ public:
 	}
 
 	// Speed Change
+	void SpeedOverLifeTime(float endSpeed)
+	{
+		SpeedChange = OverLifeTime;
+		DeadSpeedType = Constant;
+		DeadSpeedA = endSpeed;
+	}
+	void SpeedOverLifeTimeBetween2Constants(float a, float b)
+	{
+		SpeedChange = OverLifeTime;
+		DeadSpeedType = RandomBetweenTwoConstants;
+		DeadSpeedA = a;
+		DeadSpeedB = b;
+	}
+
+	// Color Change
 	void ColorOverLifeTime(float endSpeed)
 	{
 		SpeedChange = OverLifeTime;
@@ -133,6 +148,75 @@ public:
 		m_RotationA = rotA;
 		m_RotationB = rotB;
 		RotationType = RandomBetweenTwoConstants;
+	}
+
+	// Scale
+	void SetStartScale(const Vector2 &scale)
+	{
+		ScaleA = scale;
+		ScaleType = Constant;
+		DeadScaleChangeType = ConstantValue;
+	}
+	void RandomScaleBetweenTwoConstants(const Vector2 &a, const Vector2 &b)
+	{
+		ScaleA = a;
+		ScaleB = b;
+		UniformStartScale = false;
+		ScaleType = RandomBetweenTwoConstants;
+		DeadScaleChangeType = ConstantValue;
+	}
+	void RandomUniformScaleBetweenTwoConstants(float a, float b)
+	{
+		ScaleA = Vector2(a, a);
+		ScaleB = Vector2(b, b);
+		UniformStartScale = true;
+		ScaleType = RandomBetweenTwoConstants;
+		DeadScaleChangeType = ConstantValue;
+	}
+
+	// Scale change
+	void ScaleOverLifeTime(const Vector2 &scale)
+	{
+		DeadScaleA = scale;
+		DeadScaleType = Constant;
+		DeadScaleChangeType = OverLifeTime;
+	}
+	void RandomEndScaleBetweenTwoConstants(const Vector2 &a, const Vector2 &b)
+	{
+		DeadScaleA = a;
+		DeadScaleB = b;
+		DeadScaleType = RandomBetweenTwoConstants;
+		DeadScaleChangeType = OverLifeTime;
+	}
+
+	// Angular speed
+	void SetAngularSpeed(float spd)
+	{
+		AngularSpeedA = spd;
+		AngularSpeedType = Constant;
+		AngularSpeedChangeType = ConstantValue;
+	}
+	void RandomAngularSpeedBetween2Constants(float a, float b)
+	{
+		AngularSpeedA = a;
+		AngularSpeedB = b;
+		AngularSpeedType = RandomBetweenTwoConstants;
+		AngularSpeedChangeType = ConstantValue;
+	}
+
+	// Angular speed change
+	void SetEndAngularSpeed(float spd)
+	{
+		DeadAngularSpeedA = spd;
+		DeadAngularSpeedType = Constant;
+		AngularSpeedChangeType = OverLifeTime;
+	}
+	void RandomEndAngularSpeedBetween2Constants(float a, float b)
+	{
+		DeadAngularSpeedA = a;
+		DeadAngularSpeedB = b;
+		DeadAngularSpeedType = RandomBetweenTwoConstants;
+		AngularSpeedChangeType = OverLifeTime;
 	}
 
 private: // Defined settings
@@ -180,10 +264,30 @@ private: // Defined settings
 	ValueType RotationType = Constant;
 
 	// Scale
+	Vector2 ScaleA = { 1.0f, 1.0f };
+	Vector2 ScaleB = { 1.0f, 1.0f };
+	ValueType ScaleType = Constant;
+	bool UniformStartScale = false;
+
+	// Scale change
+	Vector2 DeadScaleA = { 1.0f, 1.0f };
+	Vector2 DeadScaleB = { 1.0f, 1.0f };
+	ValueType DeadScaleType = Constant;
+	ChangeType DeadScaleChangeType = ConstantValue;
+	bool UniformEndScale = false;
 
 	// Size
 
 	// AngularSpeed
+	float AngularSpeedA = 0.0f;
+	float AngularSpeedB = 0.0f;
+	ValueType AngularSpeedType = Constant;
+
+	// AngularSpeed change
+	float DeadAngularSpeedA = 0.0f;
+	float DeadAngularSpeedB = 0.0f;
+	ValueType DeadAngularSpeedType = Constant;
+	ChangeType AngularSpeedChangeType = ConstantValue;
 
 	//...
 
@@ -196,7 +300,7 @@ class ParticleTransform
 {
 public:
 	ParticleTransform() : m_Position(Vector2::Zero()), m_Rotation(Vector3::Zero()), m_Scale(1, 1), m_TransformMatrix(Matrix3X3::CreateIdentityMatrix()) {}
-	void BuildTransform();
+	void BuildTransform(CameraComponent *pCamera);
 	void ApplyMatrix();
 
 private:
@@ -249,6 +353,14 @@ private:
 	float m_CurrentAlpha = 1.0f;
 	// Rotation
 	float m_CurrentRotation = 0.0f;
+	// Scale
+	Vector2 m_StartScale = {1.0f, 1.0f};
+	Vector2 m_CurrentScale = {1.0f, 1.0f};
+	Vector2 m_EndScale = {1.0f, 1.0f};
+	// Angular speed
+	float m_StartAngularSpeed = 0.0f;
+	float m_CurrentAngularSpeed = 0.0f;
+	float m_EndAngularSpeed = 0.0f;
 
 	ParticleSystem *m_pSystem;
 };
@@ -263,6 +375,9 @@ struct EmitterSettings
 
 class ParticleEmitter
 {
+public:
+	void UpdateSettings(const EmitterSettings &settings);
+
 private:
 	ParticleEmitter(const EmitterSettings &emitterSettings) : m_Settings(emitterSettings), m_pParticles(std::vector<Particle*>()) {}
 	~ParticleEmitter();
@@ -293,6 +408,9 @@ public:
 	void EnableDebugRender(bool enable);
 	bool IsDebugRenderingEnabled();
 
+	void SetCamera(CameraComponent *pCamera);
+	CameraComponent *GetCamera();
+
 	ParticleEmitter *CreateEmitter(const EmitterSettings &emitterSettings);
 
 private:
@@ -303,6 +421,8 @@ private:
 	friend class ParticleManager;
 	std::vector<ParticleEmitter*> m_pEmitters;
 	bool m_bDebugRendering = false;
+
+	CameraComponent *m_pCamera;
 };
 
 class ParticleManager

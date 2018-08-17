@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../../stdafx.h"
 #include "ParticleSystem.h"
+#include "../Components/CameraComponent.h"
 
 ParticleSystem::ParticleSystem()
 {
@@ -42,6 +43,16 @@ void ParticleSystem::EnableDebugRender(bool enable)
 bool ParticleSystem::IsDebugRenderingEnabled()
 {
 	return m_bDebugRendering;
+}
+
+void ParticleSystem::SetCamera(CameraComponent *pCamera)
+{
+	m_pCamera = pCamera;
+}
+
+CameraComponent *ParticleSystem::GetCamera()
+{
+	return m_pCamera;
 }
 
 ParticleEmitter *ParticleSystem::CreateEmitter(const EmitterSettings &emitterSettings)
@@ -103,6 +114,11 @@ void ParticleEmitter::Render(const GameContext &gameContext)
 		if(!pPart->IsDead())
 			pPart->Render(gameContext);
 	}
+}
+
+void ParticleEmitter::UpdateSettings(const EmitterSettings &settings)
+{
+	m_Settings = settings;
 }
 
 void ParticleEmitter::SpawnParticle()
@@ -260,6 +276,60 @@ void Particle::Initialize(const Vector2 &pos)
 		break;
 	}
 
+	// Scale
+	switch (m_Settings.ScaleType)
+	{
+	case Constant:
+		m_StartScale = m_Settings.ScaleA;
+		break;
+	case RandomBetweenTwoConstants:
+		if (m_Settings.UniformStartScale)
+		{
+			float scale = RandomRange<float>(m_Settings.ScaleA.x, m_Settings.ScaleB.x);
+			m_StartScale = Vector2(scale, scale);
+		}
+		else
+			m_StartScale = RandomRangeVector2(m_Settings.ScaleA, m_Settings.ScaleB);
+		break;
+	}
+	m_CurrentScale = m_StartScale;
+	m_Transform.m_Scale = m_CurrentScale;
+
+	// Scale change
+	switch (m_Settings.DeadScaleType)
+	{
+	case Constant:
+		m_EndScale = m_Settings.DeadScaleA;
+		break;
+
+	case RandomBetweenTwoConstants:
+		m_EndScale = RandomRangeVector2(m_Settings.DeadScaleA, m_Settings.DeadScaleB);
+		break;
+	}
+
+	// Angular speed
+	switch (m_Settings.AngularSpeedType)
+	{
+	case Constant:
+		m_StartAngularSpeed = m_Settings.AngularSpeedA;
+		break;
+	case RandomBetweenTwoConstants:
+		m_StartAngularSpeed = RandomRange<float>(m_Settings.AngularSpeedA, m_Settings.AngularSpeedB);
+		break;
+	}
+	m_CurrentAngularSpeed = m_StartAngularSpeed;
+
+	// Angular speed change
+	switch (m_Settings.DeadAngularSpeedType)
+	{
+	case Constant:
+		m_EndAngularSpeed = m_Settings.DeadAngularSpeedA;
+		break;
+	case RandomBetweenTwoConstants:
+		m_EndAngularSpeed = RandomRange<float>(m_Settings.DeadAngularSpeedA, m_Settings.DeadAngularSpeedB);
+		break;
+	}
+
 	// Set alive
 	m_IsDead = false;
 }
@@ -269,12 +339,13 @@ void Particle::Update(const GameContext &gameContext)
 	/// Update values
 	// Update position
 	m_Transform.m_Position += LengthDir(m_CurrentSpeed, m_CurrentDirection) * gameContext.pTime->GetDeltaTime() / 1000.0f;
-	
+
 	// Update Rotation
+	m_CurrentRotation += m_CurrentAngularSpeed * gameContext.pTime->GetDeltaTime() / 1000.0f;
 	m_Transform.m_Rotation = Vector3(0.f, 0.f, m_CurrentRotation);
 
 	// Update Scale
-	m_Transform.m_Scale = Vector2(5.0f, 5.0f);
+	m_Transform.m_Scale = m_CurrentScale;
 
 	// Update Life
 	m_CurrentLife -= gameContext.pTime->GetDeltaTime() / 1000.0f;
@@ -345,6 +416,30 @@ void Particle::Update(const GameContext &gameContext)
 		// Do nothing
 		break;
 	}
+
+	// Scale
+	switch (m_Settings.DeadScaleChangeType)
+	{
+	case OverLifeTime:
+	{
+		m_CurrentScale = Vector2::Lerp(m_StartScale, m_EndScale, lifeFactor);
+	}
+	default:
+		// Do nothing
+		break;
+	}
+
+	// AngularSpeed
+	switch (m_Settings.AngularSpeedChangeType)
+	{
+	case OverLifeTime:
+	{
+		m_CurrentAngularSpeed = Lerp(m_StartAngularSpeed, m_EndAngularSpeed, lifeFactor);
+	}
+	default:
+		// Do nothing
+		break;
+	}
 }
 
 void Particle::Render(const GameContext &gameContext)
@@ -352,7 +447,7 @@ void Particle::Render(const GameContext &gameContext)
 	//gameContext.pRenderer->DrawLine(m_Transform.m_Position, m_Transform.m_Position + Vector2::Forward() * 20.f, Color::Green());
 	//gameContext.pRenderer->DrawLine(m_Transform.m_Position, m_Transform.m_Position + Vector2::Right() * 20.f, Color::Red());
 
-	m_Transform.BuildTransform();
+	m_Transform.BuildTransform(m_pSystem->GetCamera());
 	glPushMatrix();
 	m_Transform.ApplyMatrix();
 	gameContext.pRenderer->DrawQuadColorTexture(Vector2(-1.0f, -1.0f), Vector2(1.0f, 1.0f), m_CurrentColor, nullptr);
@@ -364,9 +459,12 @@ void Particle::Render(const GameContext &gameContext)
 	glPopMatrix();
 }
 
-void ParticleTransform::BuildTransform()
+void ParticleTransform::BuildTransform(CameraComponent *pCamera)
 {
 	m_TransformMatrix = Matrix3X3::CreateScaleRotationTranslationMatrix(m_Position, m_Rotation, m_Scale);
+
+	auto camInverse = pCamera->GetCameraMatrixInverse();
+	m_TransformMatrix = camInverse * m_TransformMatrix;
 }
 
 void ParticleTransform::ApplyMatrix()

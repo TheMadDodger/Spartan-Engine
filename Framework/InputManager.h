@@ -17,11 +17,20 @@ public:
 	InputType Type;
 	string ActionName;
 	Uint8 MouseButton;
+	DWORD ControllerID = 0;
+	WORD ControllerButton = 0;
 
 private:
 	friend class InputManager;
 	bool m_bIsTriggered = false;
 	bool m_bTriggeredLastFrame = false;
+};
+
+enum JoystickType
+{
+	LeftThumbStick,
+	RightThumbStick,
+	Trigger,
 };
 
 class InputManager
@@ -30,14 +39,17 @@ public:
 	InputManager();
 	~InputManager();
 
-	void AddInputAction(const InputAction &inputAction);
+	InputAction &AddInputAction(const InputAction &inputAction);
 	bool IsActionTriggered(const string &actionName);
+	void ReplaceInputAction(const string &actionName, const InputAction &inputAction);
 
 	const Vector2 &GetMouseScreenPosition() { return m_MousePosition; };
 	// This returns the mouse position relative to the world
 	// It needs a camera matrix to transform the mouse coordiantes
 	const Vector2 GetMouseWorldPosition(Matrix3X3 &cameraMatrix);
 	const Vector2 &GetMouseWheelMovement() { return m_LastFrameWheelData; }
+
+	Vector2 GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick);
 
 private:
 	friend class BaseGame;
@@ -48,6 +60,7 @@ private:
 	void HandleMouseMotionEvent(SDL_MouseMotionEvent *mouseMotionEvent, int windowHieght);
 	void HandleMouseScrollEvent(SDL_MouseWheelEvent *mouseWheelEvent);
 	void Update();
+	void ControllerUpdate();
 
 private:
 	vector<InputAction> m_InputActions;

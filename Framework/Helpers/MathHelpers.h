@@ -30,6 +30,7 @@ namespace Math
 		static Vector2 Back() { return Vector2(0, -1); }
 		static Vector2 Right() { return Vector2(1, 0); }
 		static Vector2 Left() { return Vector2(-1, 0); }
+		static Vector2 Lerp(const Vector2 &a, const Vector2 &b, float t);
 	};
 
 	struct Vector3
@@ -180,6 +181,15 @@ namespace Math
 		T diff = b - a;
 		float randomFactor = (float)rand() / (float)RAND_MAX;
 		return (diff * randomFactor) + a;
+	}
+
+	inline Vector2 RandomRangeVector2(const Vector2 &a, const Vector2 &b)
+	{
+		float x, y;
+		x = RandomRange<float>(a.x, b.x);
+		y = RandomRange<float>(a.y, b.y);
+
+		return Vector2(x, y);
 	}
 
 	template<typename T>

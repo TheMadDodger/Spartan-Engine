@@ -73,6 +73,14 @@ Vector2 Vector2::Normalized()
 	return result;
 }
 
+Vector2 Math::Vector2::Lerp(const Vector2 &a, const Vector2 &b, float t)
+{
+	Vector2 result;
+	result.x = Math::Lerp(a.x, b.x, t);
+	result.y = Math::Lerp(a.y, b.y, t);
+	return result;
+}
+
 float Vector3::Length()
 {
 	return sqrt((x * x) + (y * y) + (z * z));
