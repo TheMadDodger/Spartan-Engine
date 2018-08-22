@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "../../stdafx.h"
 #include "TestScene2.h"
-#include "../../Framework/Scenes/GameObject.h"
-#include "../../Framework/Components/Components.h"
-#include "../../Framework/InputManager.h"
-#include "../../Framework/SoundManager.h"
-#include "../../Framework/Helpers/BinaryContainer.h"
-#include "../../Framework/Scenes/SceneManager.h"
+#include <Framework/Scenes/GameObject.h>
+#include <Framework/Components/Components.h>
+#include <Framework/InputManager.h>
+#include <Framework/SoundManager.h>
+#include <Framework/Helpers/BinaryContainer.h>
+#include <Framework/Scenes/SceneManager.h>
 
 TestScene2::~TestScene2()
 {

@@ -95,7 +95,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +131,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,7 +152,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\include;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\include;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\include;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\include;D:\cpplibraries\Box2D-master\Box2D</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

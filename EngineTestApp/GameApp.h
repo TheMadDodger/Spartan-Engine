@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Framework/BaseGame.h"
+#include <Framework/BaseGame.h>
 
 class GameApp : public BaseGame
 {
