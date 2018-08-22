@@ -24,9 +24,6 @@
     <ClInclude Include="Framework\BaseGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,9 +49,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Scenes\GameScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Scenes\TestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Framework\Components\ImageRenderComponent.h">
@@ -117,12 +111,6 @@
     <ClInclude Include="Framework\Components\Colliders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Application\Application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Scenes\TestScene2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Components\TextRenderComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -146,9 +134,6 @@
     <ClCompile Include="Framework\BaseGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameApp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Content\ContentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -165,9 +150,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Scenes\GameScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Scenes\TestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Components\ImageRenderComponent.cpp">
@@ -222,9 +204,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Components\ColliderComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Scenes\TestScene2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Framework\Components\TextRenderComponent.cpp">

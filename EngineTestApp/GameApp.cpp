@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "../stdafx.h"
 #include "GameApp.h"
-#include "../Framework/Content/ContentManager.h"
-#include "../Framework/Scenes/SceneManager.h"
+#include <Framework/Content/ContentManager.h>
+#include <Framework/Scenes/SceneManager.h>
 #include "Scenes/TestScene.h"
 #include "Scenes/TestScene2.h"
 

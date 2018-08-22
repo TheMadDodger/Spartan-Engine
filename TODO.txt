@@ -6,8 +6,12 @@ Debugger DONE
 --> On Error show an error window and shut down game... DONE
 -> PhysicsDebugRendering for each shape DONE
 
+Make Application and Framework 2 spererate solutions DONE
+-> Application makes use of the Framework solution
+-> This way, the Framework can be updated without changeing the app
+
 GameObject DONE
--> Child and parent system DONE BOIIIIIIIIIIII
+-> Child and parent system DONE
 
 Math
 -> Matrix3x3 struct (needed for child transformations) DONE
@@ -41,7 +45,7 @@ SpriteSheet class DONE
 -> Uses TextureData class DONE
 
 Framework Components
--> Transform component has to take parent into account DONE AW YEAH WORKS LIKE A FRIKKIN CHARM BOIIIII
+-> Transform component has to take parent into account DONE
 -> CameraComponent DONE
 -> UIRenderComponent (Excludes the object from the main renderer and adds it to the UIRenderer) DONE
 -> AudioSourceComponent (uses SoundManager) (Adjusts volume depending on distance from camera) DONE
@@ -84,10 +88,6 @@ Input Manager
 --> Support for changeing inputactions at runtime (for options menu's) DONE
 
 PARTICLE SYSTEM! DONE
-
-Make Application and Framework 2 spererate solutions
--> Application makes use of the Framework solution
--> This way, the Framework can be updated without changeing the app
 
 AI Module
 -> Via AIComponent

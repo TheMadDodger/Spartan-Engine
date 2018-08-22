@@ -5,7 +5,6 @@
 #include "../Scenes/GameObject.h"
 #include "../Scenes/GameScene.h"
 
-
 ParticleComponent::ParticleComponent(const EmitterSettings &settings) : m_Settings(settings)
 {
 }
@@ -25,6 +24,8 @@ void ParticleComponent::Initialize(const GameContext &gameContext)
 
 void ParticleComponent::Update(const GameContext &gameContext)
 {
+	UNREFERENCED_PARAMETER(gameContext);
+
 	m_pSystem->SetCamera(GetGameObject()->GetGameScene()->GetActiveCamera());
 
 	m_Settings.Position = GetGameObject()->GetTransform()->GetWorldPosition();

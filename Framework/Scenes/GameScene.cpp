@@ -4,7 +4,6 @@
 #include "GameObject.h"
 #include "BasicCamera.h"
 #include "../Components/CameraComponent.h"
-#include "../../Application/Application.h"
 
 GameScene::GameScene(const std::string &name) : m_SceneName(name)
 {
