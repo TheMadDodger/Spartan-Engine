@@ -76,6 +76,7 @@ Vector2 InputManager::GetControllerJoystickPosition(DWORD controllerID, const Jo
 
 	if (XInputGetState(controllerID, &state) == ERROR_SUCCESS)
 	{
+		// Raw Input Data
 		Vector2 result = Vector2::Zero();
 		switch (stick)
 		{
@@ -94,6 +95,21 @@ Vector2 InputManager::GetControllerJoystickPosition(DWORD controllerID, const Jo
 			result.y = state.Gamepad.bRightTrigger;
 			break;
 		}
+
+		// Apply Dead Zone
+		float magnitude = result.Normalize();
+		if (magnitude > INPUT_DEADZONE)
+		{
+			// Clip to maximum
+			if (magnitude > MAX_STICK_MAGNITUDE) magnitude = MAX_STICK_MAGNITUDE;
+
+			magnitude -= INPUT_DEADZONE;
+		}
+		else
+		{
+			magnitude = 0.0f;
+		}
+		result = result * magnitude;
 
 		return result;
 	}

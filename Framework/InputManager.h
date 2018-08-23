@@ -1,5 +1,8 @@
 #pragma once
 
+#define INPUT_DEADZONE 3500
+#define MAX_STICK_MAGNITUDE 32767
+
 enum InputType
 {
 	Down,
