@@ -120,6 +120,20 @@ Vector2 InputManager::GetControllerJoystickPosition(DWORD controllerID, const Jo
 	}
 }
 
+bool InputManager::IsControllerConnected(DWORD controllerID)
+{
+	if (controllerID > XUSER_MAX_COUNT || controllerID < 0)
+	{
+		Utilities::Debug::Log("InputManager::IsControllerConnected > Controller " + to_string(controllerID) + " out of range.", Utilities::LogLevel::Warning);
+		return false;
+	}
+
+	if (XInputGetState(controllerID, NULL) == ERROR_SUCCESS)
+		return true;
+
+	return false;
+}
+
 void InputManager::Update()
 {
 	for_each(m_InputActions.begin(), m_InputActions.end(), [](InputAction &inputAction)

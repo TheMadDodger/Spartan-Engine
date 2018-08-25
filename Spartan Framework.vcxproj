@@ -23,7 +23,7 @@
     <ProjectGuid>{519A2200-27E5-4AB9-A32B-50C86B5D2AEC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SpartanFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

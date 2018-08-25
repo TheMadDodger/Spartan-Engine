@@ -250,9 +250,12 @@ void TestScene::Update(const GameContext &gameContext)
 
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
 
-	auto leftThumbStick = gameContext.pInput->GetControllerJoystickPosition(0, JoystickType::LeftThumbStick);
+	if (gameContext.pInput->IsControllerConnected(0))
+	{
+		auto leftThumbStick = gameContext.pInput->GetControllerJoystickPosition(0, JoystickType::LeftThumbStick);
 
-	m_pPartObject->GetTransform()->Translate(leftThumbStick * gameContext.pTime->GetDeltaTime() / 1000.0f * 0.01f);
+		m_pPartObject->GetTransform()->Translate(leftThumbStick * gameContext.pTime->GetDeltaTime() / 1000.0f * 0.01f);
+	}
 }
 
 void TestScene::Draw(const GameContext &gameContext)

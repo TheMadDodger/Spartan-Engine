@@ -53,6 +53,7 @@ public:
 	const Vector2 &GetMouseWheelMovement() { return m_LastFrameWheelData; }
 
 	Vector2 GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick);
+	bool IsControllerConnected(DWORD controllerID);
 
 private:
 	friend class BaseGame;
