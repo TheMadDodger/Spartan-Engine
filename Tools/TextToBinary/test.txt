@@ -1,0 +1,27 @@
+k:jrdkhg8328138dk81hgmgjkhgm83183drhgnirjgchk381358rpjgejcr318531lk81351gh5313rti5831853ghc381538me3or
+b:1
+i:0
+s:Reach
+s:Allows you to travel further distances each time
+f:500
+i:1
+s:Bigger Blast
+s:10% more damage with explosives
+f:1000
+i:2
+s:Hide Plating
+s:Adds a metal plating on top of your hide, allowing you to absorb more damage
+f:5000
+i:3
+s:Health 1
+s:Gives you 10% more health
+f:100
+i:4
+s:Health 2
+s:Gives you an additional 10% health
+f:200
+i:5
+s:Health 3
+s:Gives you an additional 50% health
+f:2500
+b:0

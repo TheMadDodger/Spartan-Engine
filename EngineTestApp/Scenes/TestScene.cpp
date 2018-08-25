@@ -82,7 +82,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 	//pSound3->SetVolume(50);
 	//gameContext.pSound->PlaySound(pSound3);
 
-	/*Utilities::BinaryContainer::OpenWrite("./Resources/Spritesheets/mario.bin");
+	Utilities::BinaryContainer::OpenWrite("./Resources/Spritesheets/mario.bin");
 	Utilities::BinaryContainer::Write<int>(0);
 	Utilities::BinaryContainer::Write<int>(1);
 
