@@ -42,22 +42,6 @@ namespace Utilities
 
 		template <typename T> static T Read(const char *buffer)
 		{
-			// Safety checks
-			if (m_piFileStream == nullptr)
-			{
-				//std::cout << "BinaryContainer::Read<T>() > No file was opened for reading!" << std::end;
-			}
-			if (!m_piFileStream->is_open())
-			{
-				//std::cout << "BinaryContainer::Read<T>() > No file was opened for reading!" << std::end;
-			}
-
-			// Check if the file was opened for reading
-			if (m_ReadWrite)
-			{
-				//std::cout << "BinaryContainer::Read<T>() > File was not opened for reading!" << std::end;
-			}
-
 			// Make sure the user is not trying to read a string
 			if (typeid(T) == typeid(std::string))
 			{
@@ -66,13 +50,17 @@ namespace Utilities
 
 			// Read the data
 			T data;
-			
-			data = static_cast<T>(buffer[m_BufferReadPos]);
+
+			//data = static_cast<T>(&buffer[m_BufferReadPos]);
+
+			memcpy(&data, &buffer[m_BufferReadPos], sizeof(T));
+
 			m_BufferReadPos += sizeof(T);
 			return data;
 		}
 
 		static const string ReadString();
+		static const string ReadString(const char *buffer);
 		static const string ReadStringWidthLength(int length);
 		static bool ReachedEndOfFile();
 
@@ -116,7 +104,7 @@ namespace Utilities
 		static std::ofstream *m_poFileStream;
 		static bool m_ReadWrite;
 
-		int m_BufferReadPos = 0;
+		static int m_BufferReadPos;
 
 	private:
 		BinaryContainer() {};
