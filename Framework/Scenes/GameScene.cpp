@@ -45,6 +45,7 @@ void GameScene::SetActiveCamera(CameraComponent *pCamera)
 		m_pActiveCamera->m_bActive = false;
 
 	m_pActiveCamera = pCamera;
+	pCamera->m_bActive = true;
 }
 
 void GameScene::RootInitialize(const GameContext &gameContext)

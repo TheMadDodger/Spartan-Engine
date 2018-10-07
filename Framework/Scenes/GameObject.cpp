@@ -26,11 +26,30 @@ GameObject::~GameObject()
 	m_pComponents.clear();
 }
 
-void GameObject::AddChild(GameObject *pChild)
+void GameObject::AddChild(GameObject *pChild, bool initialize)
 {
 	m_pChildren.push_back(pChild);
 	pChild->SetParent(this);
 	pChild->m_pScene = m_pScene;
+
+	if (initialize)
+	{
+		pChild->RootInitialize(BaseGame::GetGame()->GetGameContext());
+	}
+}
+
+void GameObject::RemoveChild(GameObject *pChild, bool deleteObject)
+{
+	auto it = find(m_pChildren.begin(), m_pChildren.end(), pChild);
+	if (it == m_pChildren.end()) return;
+
+	m_pChildren.erase(it);
+
+	if (deleteObject)
+	{
+		delete pChild;
+		pChild = nullptr;
+	}
 }
 
 BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)

@@ -59,7 +59,7 @@ void InputManager::ReplaceInputAction(const string & actionName, const InputActi
 
 const Vector2 InputManager::GetMouseWorldPosition(Matrix3X3 &cameraMatrix)
 {
-	Vector3 transVec = Vector3(m_MousePosition.x, m_MousePosition.y, 1.0f);
+	Vector3 transVec = Vector3(m_MousePosition.x - BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, m_MousePosition.y - BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f, 1.0f);
 	auto transPos = cameraMatrix * transVec;
 	return Vector2(transPos.x, transPos.y);
 }
@@ -230,7 +230,7 @@ void InputManager::KeyDown(SDL_KeyboardEvent *keyboardEvent)
 	SDL_Keysym *key = &keyboardEvent->keysym;
 
 	// Find the key
-	auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [key](InputAction &inputAction)
+	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [key](InputAction &inputAction)
 	{
 		if (key->sym == inputAction.Key || key->scancode == inputAction.KeyMod)
 		{
@@ -243,27 +243,38 @@ void InputManager::KeyDown(SDL_KeyboardEvent *keyboardEvent)
 	});
 
 	if (it == m_InputActions.end())
-		return;
+		return;*/
 
-	auto action = &*it;
-
-	switch (action->Type)
+	vector<InputAction*> foundActions;
+	for (size_t i = 0; i < m_InputActions.size(); ++i)
 	{
-	case Pressed:
-		if (!action->m_bTriggeredLastFrame)
+		InputAction* input = &m_InputActions[i];
+		if (key->sym == input->Key || key->scancode == input->KeyMod)
+			foundActions.push_back(input);
+	}
+
+	if (foundActions.empty()) return;
+
+	for (auto action : foundActions)
+	{
+		switch (action->Type)
 		{
+		case Pressed:
+			if (!action->m_bTriggeredLastFrame)
+			{
+				action->m_bIsTriggered = true;
+				action->m_bTriggeredLastFrame = true;
+			}
+			break;
+
+		case Down:
 			action->m_bIsTriggered = true;
-			action->m_bTriggeredLastFrame = true;
+			break;
+
+		case Released:
+			action->m_bIsTriggered = false;
+			break;
 		}
-		break;
-
-	case Down:
-		action->m_bIsTriggered = true;
-		break;
-
-	case Released:
-		action->m_bIsTriggered = false;
-		break;
 	}
 }
 
@@ -272,27 +283,38 @@ void InputManager::KeyUp(SDL_KeyboardEvent *keyboardEvent)
 	SDL_Keysym *key = &keyboardEvent->keysym;
 
 	// Find the key
-	auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [key](InputAction &inputAction)
+	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [key](InputAction &inputAction)
 	{
 		return (key->sym == inputAction.Key || key->scancode == inputAction.KeyMod);
 	});
 
 	if (it == m_InputActions.end())
-		return;
+		return;*/
 
-	auto action = &*it;
-
-	switch (action->Type)
+	vector<InputAction*> foundActions;
+	for (size_t i = 0; i < m_InputActions.size(); ++i)
 	{
-	case Pressed:
-	case Down:
-		action->m_bIsTriggered = false;
-		action->m_bTriggeredLastFrame = false;
-		break;
+		InputAction* input = &m_InputActions[i];
+		if (key->sym == input->Key || key->scancode == input->KeyMod)
+			foundActions.push_back(input);
+	}
 
-	case Released:
-		action->m_bIsTriggered = true;
-		break;
+	if (foundActions.empty()) return;
+
+	for (auto &action : foundActions)
+	{
+		switch (action->Type)
+		{
+		case Pressed:
+		case Down:
+			action->m_bIsTriggered = false;
+			action->m_bTriggeredLastFrame = false;
+			break;
+
+		case Released:
+			action->m_bIsTriggered = true;
+			break;
+		}
 	}
 }
 
@@ -301,27 +323,38 @@ void InputManager::MouseUp(SDL_MouseButtonEvent *mouseButtonEvent)
 	auto button = mouseButtonEvent->button;
 
 	// Find the button
-	auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
+	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
 	{
 		return (button == inputAction.MouseButton);
 	});
 
 	if (it == m_InputActions.end())
-		return;
+		return;*/
 
-	auto action = &*it;
-
-	switch (action->Type)
+	vector<InputAction*> foundActions;
+	for (size_t i = 0; i < m_InputActions.size(); ++i)
 	{
-	case Pressed:
-	case Down:
-		action->m_bIsTriggered = false;
-		action->m_bTriggeredLastFrame = false;
-		break;
+		InputAction* input = &m_InputActions[i];
+		if (button == input->MouseButton)
+			foundActions.push_back(input);
+	}
 
-	case Released:
-		action->m_bIsTriggered = true;
-		break;
+	if (foundActions.empty()) return;
+
+	for (auto &action : foundActions)
+	{
+		switch (action->Type)
+		{
+		case Pressed:
+		case Down:
+			action->m_bIsTriggered = false;
+			action->m_bTriggeredLastFrame = false;
+			break;
+
+		case Released:
+			action->m_bIsTriggered = true;
+			break;
+		}
 	}
 }
 
@@ -330,33 +363,44 @@ void InputManager::MouseDown(SDL_MouseButtonEvent *mouseButtonEvent)
 	auto button = mouseButtonEvent->button;
 
 	// Find the button
-	auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
+	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
 	{
 		return (button == inputAction.MouseButton);
 	});
 
 	if (it == m_InputActions.end())
-		return;
+		return;*/
 
-	auto action = &*it;
-
-	switch (action->Type)
+	vector<InputAction*> foundActions;
+	for (size_t i = 0; i < m_InputActions.size(); ++i)
 	{
-	case Pressed:
-		if (!action->m_bTriggeredLastFrame)
+		InputAction* input = &m_InputActions[i];
+		if (button == input->MouseButton)
+			foundActions.push_back(input);
+	}
+
+	if (foundActions.empty()) return;
+
+	for (auto &action : foundActions)
+	{
+		switch (action->Type)
 		{
+		case Pressed:
+			if (!action->m_bTriggeredLastFrame)
+			{
+				action->m_bIsTriggered = true;
+				action->m_bTriggeredLastFrame = true;
+			}
+			break;
+
+		case Down:
 			action->m_bIsTriggered = true;
-			action->m_bTriggeredLastFrame = true;
+			break;
+
+		case Released:
+			action->m_bIsTriggered = false;
+			break;
 		}
-		break;
-
-	case Down:
-		action->m_bIsTriggered = true;
-		break;
-
-	case Released:
-		action->m_bIsTriggered = false;
-		break;
 	}
 }
 

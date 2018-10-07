@@ -11,7 +11,8 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	void AddChild(GameObject *pChild);
+	void AddChild(GameObject *pChild, bool initialize = false);
+	void RemoveChild(GameObject *pChild, bool deleteObject = false);
 
 	const vector<BaseComponent*> GetAllComponents() { return m_pComponents; }
 
