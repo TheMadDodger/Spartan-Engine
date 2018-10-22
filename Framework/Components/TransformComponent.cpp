@@ -34,7 +34,8 @@ void TransformComponent::Update(const GameContext &gameContext)
 
 	// Apply parent transform if object has a parent
 	auto pParent = GetGameObject()->GetParent();
-	if (pParent)
+	auto pUI = GetGameObject()->GetComponent<UIComponent>();
+	if (pParent && pUI == nullptr)
 	{
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 		m_TansformMatrix = parentTransformMatrix * m_TansformMatrix;
@@ -50,7 +51,7 @@ void TransformComponent::Update(const GameContext &gameContext)
 	m_WorldPosition = m_TansformMatrix.ExtraxtTranslation();
 
 	// Don't apply camera transform if it's a UI Component
-	if (GetGameObject()->GetComponent<UIComponent>() == nullptr)
+	if (pUI == nullptr)
 	{
 		auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
 		m_TansformMatrix = camInverse * m_TansformMatrix;
@@ -91,7 +92,7 @@ const Vector2 &TransformComponent::GetWorldPosition()
 
 void TransformComponent::Translate(const Vector2 &position)
 {
-	Position = Position + position;
+	Position = position;
 
 	// Update rigid body if there is one
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
@@ -108,7 +109,7 @@ void TransformComponent::Translate(float x, float y)
 
 void TransformComponent::Rotate(const Vector3 &rotation)
 {
-	Rotation = Rotation + rotation;
+	Rotation = rotation;
 	// Update rigid body if there is one
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (pRigid)

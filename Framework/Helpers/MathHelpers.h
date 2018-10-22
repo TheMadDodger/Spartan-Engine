@@ -31,6 +31,11 @@ namespace Math
 		static Vector2 Right() { return Vector2(1, 0); }
 		static Vector2 Left() { return Vector2(-1, 0); }
 		static Vector2 Lerp(const Vector2 &a, const Vector2 &b, float t);
+
+		std::string ToString()
+		{
+			return std::string(std::to_string(x) + std::to_string(y));
+		}
 	};
 
 	struct Vector3

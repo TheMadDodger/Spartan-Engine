@@ -7,6 +7,7 @@ using namespace Utilities;
 std::ifstream *BinaryContainer::m_piFileStream = nullptr;
 std::ofstream *BinaryContainer::m_poFileStream = nullptr;
 bool BinaryContainer::m_ReadWrite = false;
+int BinaryContainer::m_BufferReadPos = 0;
 
 void BinaryContainer::Close()
 {
@@ -134,6 +135,21 @@ bool BinaryContainer::ReachedEndOfFile()
 	return false;
 }
 
+const string Utilities::BinaryContainer::ReadString(const char *buffer)
+{
+	// Continue to read chars untill the string nullifier '\0' is found
+	string data = "";
+	char c = ' ';
+	while (c != '\0')
+	{
+		c = Read<char>(buffer);
+		data += c;
+	}
+
+	data.erase(data.end() - 1);
+
+	return data;
+}
 #pragma endregion
 
 #pragma region BinaryContainer::Writing
@@ -158,6 +174,11 @@ void Utilities::BinaryContainer::WriteString(const string &data)
 		Write<char>(c);
 	}
 	Write<char>('\0');
+}
+
+void Utilities::BinaryContainer::CreateDir(LPCSTR path)
+{
+	CreateDirectoryA(path, NULL);
 }
 
 #pragma endregion

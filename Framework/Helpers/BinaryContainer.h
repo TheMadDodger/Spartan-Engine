@@ -43,7 +43,29 @@ namespace Utilities
 		static const string ReadStringWidthLength(int length);
 		static bool ReachedEndOfFile();
 
-		// Writing TODO
+		template <typename T> static T Read(const char *buffer)
+		{
+			// Make sure the user is not trying to read a string
+			if (typeid(T) == typeid(std::string))
+			{
+				//std::cout << "BinaryContainer::Read<T>() > Please use BinaryContainer::ReadString() instead for reading strings!" << std::end;
+			}
+
+			// Read the data
+			T data;
+
+			//data = static_cast<T>(&buffer[m_BufferReadPos]);
+
+			memcpy(&data, &buffer[m_BufferReadPos], sizeof(T));
+
+			m_BufferReadPos += sizeof(T);
+			return data;
+		}
+
+		static const string ReadString(const char *buffer);
+		static void ResetReadPosition() { m_BufferReadPos = 0; }
+
+		// Writing
 		static bool OpenWrite(const char* file);
 		template <typename T> static void Write(T data)
 		{
@@ -78,10 +100,14 @@ namespace Utilities
 		}
 		static void WriteString(const string &data);
 
+		static void CreateDir(LPCSTR path);
+
 	private:
 		static std::ifstream *m_piFileStream;
 		static std::ofstream *m_poFileStream;
 		static bool m_ReadWrite;
+
+		static int m_BufferReadPos;
 
 	private:
 		BinaryContainer() {};
