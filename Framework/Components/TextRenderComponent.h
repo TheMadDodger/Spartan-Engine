@@ -11,6 +11,8 @@ public:
 	void SetColor(const Color &col);
 	void SetFont(FontData *pFont);
 
+	void SetMaxWidth(Uint32 maxWidth);
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
@@ -22,5 +24,6 @@ private:
 	Origin m_Origin;
 	Color m_Color;
 	bool m_FontSet = false;
+	Uint32 m_MaxWidth = 0;
 };
 

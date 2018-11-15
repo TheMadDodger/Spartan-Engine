@@ -87,7 +87,8 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 	for (auto pChild : m_pChildren)
 	{
-		pChild->RootUpdate(gameContext);
+		if(pChild->IsEnabled())
+			pChild->RootUpdate(gameContext);
 	}
 
 	// User defined Update()
@@ -104,7 +105,8 @@ void GameScene::RootDraw(const GameContext &gameContext)
 
 	for (auto pChild : m_pChildren)
 	{
-		pChild->RootDraw(gameContext);
+		if (pChild->IsEnabled())
+			pChild->RootDraw(gameContext);
 	}
 
 	// User defined Draw()

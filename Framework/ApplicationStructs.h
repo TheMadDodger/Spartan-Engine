@@ -18,6 +18,7 @@ struct GameSettings
 	WindowSettings Window;
 	std::string AppName;
 	bool EnableVSync = false;
+	bool Fullscreen = false;
 };
 
 struct GameContext

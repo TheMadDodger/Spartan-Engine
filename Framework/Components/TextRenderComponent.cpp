@@ -34,6 +34,11 @@ void TextRenderComponent::SetFont(FontData *pFont)
 	m_FontSet = true;
 }
 
+void TextRenderComponent::SetMaxWidth(Uint32 maxWidth)
+{
+	m_MaxWidth = maxWidth;
+}
+
 void TextRenderComponent::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
@@ -51,6 +56,6 @@ void TextRenderComponent::Draw(const GameContext &gameContext)
 	color.g = Uint8(m_Color.g * 255);
 	color.b = Uint8(m_Color.b * 255);
 	color.a = Uint8(m_Color.a * 255);
-	gameContext.pRenderer->RenderText(m_pFont, m_Text, color, m_Origin);
+	gameContext.pRenderer->RenderText(m_pFont, m_Text, color, m_Origin, m_MaxWidth);
 	glPopMatrix();
 }

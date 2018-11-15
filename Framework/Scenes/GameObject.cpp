@@ -5,7 +5,7 @@
 #include "../Components/TransformComponent.h"
 #include "GameScene.h"
 
-GameObject::GameObject() : m_pTransform(new TransformComponent())
+GameObject::GameObject() : m_pTransform(new TransformComponent()), m_Tag("")
 {
 	AddComponent(m_pTransform);
 }
@@ -80,8 +80,31 @@ const vector<GameObject*>& GameObject::GetChildren()
 	return m_pChildren;
 }
 
+const std::string & GameObject::GetTag()
+{
+	return m_Tag;
+}
+
+void GameObject::SetTag(const std::string &tag)
+{
+	m_Tag = tag;
+}
+
+bool GameObject::IsEnabled()
+{
+	return m_Enabled;
+}
+
+void GameObject::SetEnabled(bool enabled)
+{
+	m_Enabled = enabled;
+}
+
 void GameObject::RootInitialize(const GameContext &gameContext)
 {
+	// User defined Initialize()
+	Initialize(gameContext);
+
 	for (auto pComponent : m_pComponents)
 	{
 		pComponent->RootInitialize(gameContext);
@@ -91,9 +114,6 @@ void GameObject::RootInitialize(const GameContext &gameContext)
 	{
 		pChild->RootInitialize(gameContext);
 	}
-
-	// User defined Initialize()
-	Initialize(gameContext);
 
 	m_bInitialized = true;
 }
@@ -113,7 +133,8 @@ void GameObject::RootUpdate(const GameContext &gameContext)
 
 	for (auto pChild : m_pChildren)
 	{
-		pChild->RootUpdate(gameContext);
+		if (pChild->IsEnabled())
+			pChild->RootUpdate(gameContext);
 	}
 
 	// User defined Update()
@@ -129,7 +150,8 @@ void GameObject::RootDraw(const GameContext & gameContext)
 
 	for (auto pChild : m_pChildren)
 	{
-		pChild->RootDraw(gameContext);
+		if (pChild->IsEnabled())
+			pChild->RootDraw(gameContext);
 	}
 
 	// User defined Draw()

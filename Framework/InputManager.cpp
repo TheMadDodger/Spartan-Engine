@@ -134,6 +134,11 @@ bool InputManager::IsControllerConnected(DWORD controllerID)
 	return false;
 }
 
+bool InputManager::IsMouseButtonDown(uint8 button)
+{
+	return (m_MouseButton == button);
+}
+
 void InputManager::Update()
 {
 	for_each(m_InputActions.begin(), m_InputActions.end(), [](InputAction &inputAction)
@@ -322,6 +327,8 @@ void InputManager::MouseUp(SDL_MouseButtonEvent *mouseButtonEvent)
 {
 	auto button = mouseButtonEvent->button;
 
+	m_MouseButton = 0;
+
 	// Find the button
 	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
 	{
@@ -361,7 +368,7 @@ void InputManager::MouseUp(SDL_MouseButtonEvent *mouseButtonEvent)
 void InputManager::MouseDown(SDL_MouseButtonEvent *mouseButtonEvent)
 {
 	auto button = mouseButtonEvent->button;
-
+	m_MouseButton = button;
 	// Find the button
 	/*auto it = find_if(m_InputActions.begin(), m_InputActions.end(), [button](InputAction &inputAction)
 	{

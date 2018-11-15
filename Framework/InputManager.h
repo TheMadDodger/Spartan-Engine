@@ -55,6 +55,8 @@ public:
 	Vector2 GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick);
 	bool IsControllerConnected(DWORD controllerID);
 
+	bool IsMouseButtonDown(uint8 button);
+
 private:
 	friend class BaseGame;
 	void KeyDown(SDL_KeyboardEvent *keyboardEvent);
@@ -70,5 +72,7 @@ private:
 	vector<InputAction> m_InputActions;
 	Vector2 m_MousePosition;
 	Vector2 m_LastFrameWheelData;
+
+	uint8 m_MouseButton = 0;
 };
 

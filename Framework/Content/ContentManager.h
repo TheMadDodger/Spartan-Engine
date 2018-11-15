@@ -30,6 +30,11 @@ public:
 	const GLuint &GetID() { return m_TextureID; }
 	const Vector2 &GetOrigin() { return m_Origin; }
 
+	void SetOrigin(const Vector2 &origin)
+	{
+		m_Origin = origin;
+	}
+
 	virtual ~TextureData()
 	{
 		glDeleteTextures(1, &m_TextureID);

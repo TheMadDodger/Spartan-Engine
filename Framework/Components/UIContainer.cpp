@@ -9,6 +9,7 @@ UIContainer::UIContainer(const Vector2 &dimensions) : m_Dimensions(dimensions), 
 
 UIContainer::~UIContainer()
 {
+	m_pUIPages.clear();
 }
 
 void UIContainer::SetPadding(const Vector2 &padding)
@@ -21,11 +22,27 @@ void UIContainer::SetColor(const Color &color)
 	m_Color = color;
 }
 
-void UIContainer::Initialize(const GameContext &gameContext)
+void UIContainer::AddPage(GameObject *pPage)
+{
+	m_pUIPages.push_back(pPage);
+}
+
+void UIContainer::SetPage(size_t pageID)
+{
+	if (pageID < m_pUIPages.size())
+		m_CurrentPage = pageID;
+
+	for (auto pPage : m_pUIPages)
+		pPage->SetEnabled(false);
+
+	m_pUIPages[m_CurrentPage]->SetEnabled(true);
+}
+
+void UIContainer::Initialize(const GameContext &)
 {
 }
 
-void UIContainer::Update(const GameContext &gameContext)
+void UIContainer::Update(const GameContext &)
 {
 }
 

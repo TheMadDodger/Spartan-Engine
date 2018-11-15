@@ -20,6 +20,15 @@ public:
 	const int GetTotalFrames() { return m_TotalFrames; }
 	void SetTimeScale(float scale) { m_TimeScale = scale; }
 
+public: // Reference returns
+	const float *GetDeltaTimeRef() { return &m_DeltaTime; }
+	const float *GetTimeRef() { return &m_Time; }
+	const float *GetUnscaledDeltaTimeRef() { return &m_UnscaledDeltaTime; }
+	const float *GetUnscaledTimeRef() { return &m_UnscaledTime; }
+	const float *GetTimeScaleRef() { return &m_TimeScale; }
+	const float *GetFrameRateRef() { return &m_FrameRate; }
+	const int *GetTotalFramesRef() { return &m_TotalFrames; }
+
 private:
 	friend class BaseGame;
 	void Start();

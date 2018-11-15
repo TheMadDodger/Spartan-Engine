@@ -202,6 +202,7 @@
     <ClInclude Include="Framework\Helpers\Time.h" />
     <ClInclude Include="Framework\Components\UIComponent.h" />
     <ClInclude Include="Framework\Components\TextRenderComponent.h" />
+    <ClInclude Include="Prefabs\UIButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework\Components\UIContainer.cpp" />
@@ -241,6 +242,7 @@
     <ClCompile Include="Framework\Helpers\Time.cpp" />
     <ClCompile Include="Framework\Components\UIComponent.cpp" />
     <ClCompile Include="Framework\Components\TextRenderComponent.cpp" />
+    <ClCompile Include="Prefabs\UIButton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

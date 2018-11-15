@@ -23,7 +23,7 @@ void Renderer::Initialize(const GameContext &gameContext)
 	UNREFERENCED_PARAMETER(gameContext);
 	// Open a window
 	m_pWindow = SDL_CreateWindow(BaseGame::GetGame()->GetGameSettings().AppName.data(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, SDL_WINDOW_OPENGL);
+		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN : SDL_WINDOW_OPENGL);
 
 	if (m_pWindow == NULL)
 	{
@@ -111,11 +111,12 @@ void Renderer::RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vec
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Renderer::RenderText(FontData *pFont, const std::string & text, const SDL_Color & clr, const Origin &origin)
+void Renderer::RenderText(FontData *pFont, const std::string & text, const SDL_Color & clr, const Origin &origin, Uint32 maxWidth)
 {
 	if (text.size() <= 0) return; // If there is no text, no need to waste resources to render it
 
-	SDL_Surface *pTextSurface = TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr);
+	SDL_Surface *pTextSurface = (maxWidth == 0) ? TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr) :
+		TTF_RenderUTF8_Blended_Wrapped(pFont->GetFontData(), text.data(), clr, maxWidth);
 	if (!pTextSurface)
 	{
 		Utilities::Debug::LogWarning("Renderer::RenderText > Could not render text surface! TTF_Error: " + string(TTF_GetError()));

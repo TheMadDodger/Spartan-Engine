@@ -55,6 +55,12 @@ public:
 
 	GameObject *GetParent() { return m_pParentObject; }
 
+	const std::string &GetTag();
+	void SetTag(const std::string &tag);
+
+	bool IsEnabled();
+	void SetEnabled(bool enabled);
+
 protected:
 	friend class GameScene;
 	void RootInitialize(const GameContext &gameContext);
@@ -74,5 +80,7 @@ private:
 	vector<GameObject*> m_pChildren;
 	GameObject *m_pParentObject = nullptr;
 	bool m_bInitialized = false;
+	bool m_Enabled = true;
+	std::string m_Tag;
 };
 

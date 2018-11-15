@@ -224,4 +224,23 @@ namespace Math
 		BottomMiddle,
 		BottomRight,
 	};
+
+	struct Rect
+	{
+		Rect(Vector2 topLeft, Vector2 bottomRight) : TopLeft(topLeft), BottomRight(bottomRight) {}
+
+		Vector2 TopLeft;
+		Vector2 BottomRight;
+	};
+
+	inline bool CheckPointInRect(const Vector2 &point, const Rect &rect)
+	{
+		if (point.x >= rect.TopLeft.x)
+			if (point.y >= rect.TopLeft.y)
+				if (point.x <= rect.BottomRight.x)
+					if (point.y <= rect.BottomRight.y)
+						return true;
+
+		return false;
+	}
 }

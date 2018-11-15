@@ -9,14 +9,26 @@ ImageRenderComponent::ImageRenderComponent(const char *assetFile) : m_AssetFile(
 {
 }
 
+ImageRenderComponent::ImageRenderComponent(TextureData *pTexture) : m_pImage(pTexture)
+{
+}
+
 ImageRenderComponent::~ImageRenderComponent()
 {
+}
+
+void ImageRenderComponent::SetTexture(TextureData * pTexture)
+{
+	m_pImage = pTexture;
 }
 
 void ImageRenderComponent::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	m_pImage = ContentManager::GetInstance()->Load<TextureData>(std::string(m_AssetFile));
+	if (!m_pImage && m_AssetFile)
+	{
+		m_pImage = ContentManager::GetInstance()->Load<TextureData>(std::string(m_AssetFile));
+	}
 }
 
 void ImageRenderComponent::Update(const GameContext &gameContext)
@@ -27,10 +39,13 @@ void ImageRenderComponent::Update(const GameContext &gameContext)
 void ImageRenderComponent::Draw(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	// Apply Transformation from TransformComponent
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
-	gameContext.pRenderer->RenderTexture(m_pImage);
-	glPopMatrix();
+	if (m_pImage)
+	{
+		// Apply Transformation from TransformComponent
+		glPushMatrix();
+		GetGameObject()->GetTransform()->ApplyTransform();
+		gameContext.pRenderer->RenderTexture(m_pImage);
+		glPopMatrix();
+	}
 }
 
