@@ -7,9 +7,13 @@
 #include <Framework/SoundManager.h>
 #include <Framework/Helpers/BinaryContainer.h>
 #include <Framework/Scenes/SceneManager.h>
+#include <Framework/Blackboard.h>
+
 
 TestScene::~TestScene()
 {
+	delete m_pBlackboard;
+	m_pBlackboard = nullptr;
 }
 
 void TestScene::Initialize(const GameContext &gameContext)
@@ -147,6 +151,17 @@ void TestScene::Initialize(const GameContext &gameContext)
 	m_pPartObject->AddComponent(new ParticleComponent(settings));
 
 	AddChild(m_pPartObject);
+
+
+	m_pBlackboard = new Blackboard();
+	m_pBlackboard->Add<float>(5.f, "somerandomfloat");
+
+	float data;
+	m_pBlackboard->Get<float>("somerandomfloat", data);
+
+	m_pBlackboard->Set<float>(10.f, "somerandomfloat");
+
+	m_pBlackboard->Get<float>("somerandomfloat", data);
 }
 
 void TestScene::PostInitialize(const GameContext &gameContext)

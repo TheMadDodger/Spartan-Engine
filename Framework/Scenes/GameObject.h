@@ -82,5 +82,7 @@ private:
 	bool m_bInitialized = false;
 	bool m_Enabled = true;
 	std::string m_Tag;
+
+	bool m_Persistent = false;
 };
 

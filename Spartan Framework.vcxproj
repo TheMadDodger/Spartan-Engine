@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Framework\Blackboard.h" />
     <ClInclude Include="Framework\Components\UIContainer.h" />
     <ClInclude Include="Framework\Content\FontLoader.h" />
     <ClInclude Include="Framework\Components\ColliderComponent.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Prefabs\UIButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\Blackboard.cpp" />
     <ClCompile Include="Framework\Components\UIContainer.cpp" />
     <ClCompile Include="Framework\Content\FontLoader.cpp" />
     <ClCompile Include="Framework\Components\ColliderComponent.cpp" />

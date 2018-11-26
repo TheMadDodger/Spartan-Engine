@@ -48,6 +48,12 @@ void GameScene::SetActiveCamera(CameraComponent *pCamera)
 	pCamera->m_bActive = true;
 }
 
+void GameScene::DontDestroyOnLoad(GameObject *pObject)
+{
+	pObject->m_Persistent = true;
+	m_pPersistentChildren.push_back(pObject);
+}
+
 void GameScene::RootInitialize(const GameContext &gameContext)
 {
 	// User Pre-Initialize
@@ -116,6 +122,14 @@ void GameScene::RootDraw(const GameContext &gameContext)
 	PostDraw(gameContext);
 }
 
+void GameScene::LoadPersistent()
+{
+	std::for_each(m_pPersistentChildren.begin(), m_pPersistentChildren.end(), [&](GameObject *pChild)
+	{
+		AddChild(pChild);
+	});
+}
+
 void GameScene::RootOnActive()
 {
 	OnActive();
@@ -131,7 +145,8 @@ void GameScene::RootCleanup()
 	// Clear the objects list
 	for (auto pChild : m_pChildren)
 	{
-		delete pChild;
+		if(!pChild->m_Persistent)
+			delete pChild;
 	}
 
 	m_pChildren.clear();

@@ -27,6 +27,9 @@ void SceneManager::LoadScene(int sceneIndex)
 	// Check if out of array
 	if ((size_t)sceneIndex < m_pScenes.size())
 	{
+		// Make a copy of the vector containing all the persistent objects
+		std::vector<GameObject*> persistentObjects = m_pScenes[m_CurrentScene]->m_pPersistentChildren;
+
 		// Call the RootOnDeActive() event
 		m_pScenes[m_CurrentScene]->RootOnDeActive();
 		// Clear the current scene
@@ -35,6 +38,9 @@ void SceneManager::LoadScene(int sceneIndex)
 		// Update m_CurrentScene
 		m_CurrentScene = sceneIndex;
 		m_SceneHasInitialized = false;
+
+		// Pass through persistent objects
+		m_pScenes[m_CurrentScene]->m_pPersistentChildren = persistentObjects;
 	}
 	else
 	{
@@ -92,7 +98,10 @@ void SceneManager::Initialize(const GameContext &gameContext)
 	}
 
 	m_pScenes[m_CurrentScene]->RootInitialize(gameContext);
+	m_pScenes[m_CurrentScene]->LoadPersistent();
 	m_SceneHasInitialized = true;
+
+	m_pScenes[m_CurrentScene]->GameStart(gameContext);
 }
 
 void SceneManager::Update(const GameContext &gameContext)

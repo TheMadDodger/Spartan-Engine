@@ -185,7 +185,7 @@ namespace Math
 
 		T diff = b - a;
 		float randomFactor = (float)rand() / (float)RAND_MAX;
-		return (diff * randomFactor) + a;
+		return (T)((diff * randomFactor) + a);
 	}
 
 	inline Vector2 RandomRangeVector2(const Vector2 &a, const Vector2 &b)

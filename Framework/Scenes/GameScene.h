@@ -21,6 +21,8 @@ public:
 
 	const std::string &GetName() const { return m_SceneName; }
 
+	void DontDestroyOnLoad(GameObject *pObject);
+
 protected:
 	friend class BaseGame;
 	friend class SceneManager;
@@ -28,6 +30,8 @@ protected:
 	virtual void PreInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+
+	virtual void GameStart(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
 	virtual void PreUpdate(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
@@ -47,6 +51,8 @@ private:
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
 
+	void LoadPersistent();
+
 	void RootOnActive();
 	void RootOnDeActive();
 
@@ -55,6 +61,7 @@ private:
 private:
 	friend class SceneManager;
 	std::vector<GameObject*> m_pChildren;
+	std::vector<GameObject*> m_pPersistentChildren;
 	std::string m_SceneName = "";
 	BasicCamera *m_pDefaultCamera = nullptr;
 	CameraComponent *m_pActiveCamera = nullptr;

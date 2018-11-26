@@ -2,6 +2,8 @@
 
 #include <Framework/BaseGame.h>
 
+class Blackboard;
+
 class GameApp : public BaseGame
 {
 public:
@@ -14,5 +16,6 @@ public:
 	void GamePaint(const GameContext &gameContext) override;
 
 private:
+	
 };
 

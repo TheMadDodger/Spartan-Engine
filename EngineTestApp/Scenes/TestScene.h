@@ -1,6 +1,8 @@
 #pragma once
 #include <Framework/Scenes/GameScene.h>
 
+class Blackboard;
+
 class TestScene : public GameScene
 {
 public:
@@ -27,5 +29,7 @@ private:
 	ParticleSystem *m_pPartSystem;
 
 	GameObject *m_pPartObject;
+
+	Blackboard *m_pBlackboard;
 };
 
