@@ -3,7 +3,7 @@
 #include "../Scenes/GameObject.h"
 #include "Components.h"
 
-UIContainer::UIContainer(const Vector2 &dimensions) : m_Dimensions(dimensions), m_Padding(Vector2::Zero()), m_Color({ 0.5f, 0.5f, 0.5f, 0.5f })
+UIContainer::UIContainer(const Vector2 &dimensions) : m_Dimensions(dimensions), m_Padding(Vector2::Zero()), m_Color({ 0.5f, 0.5f, 0.5f, 0.5f }), BaseComponent("UI Container")
 {
 }
 

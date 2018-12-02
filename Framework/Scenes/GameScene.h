@@ -14,6 +14,7 @@ public:
 	virtual ~GameScene();
 
 	void AddChild(GameObject *pObject);
+	void RemoveChild(GameObject *pObject, bool deleteObject = false);
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
@@ -22,6 +23,10 @@ public:
 	const std::string &GetName() const { return m_SceneName; }
 
 	void DontDestroyOnLoad(GameObject *pObject);
+
+	std::vector<GameObject*> GetChildren() { return m_pChildren; }
+	GameObject *GetChild(unsigned int ID) { return m_pChildren[ID]; }
+	
 
 protected:
 	friend class BaseGame;

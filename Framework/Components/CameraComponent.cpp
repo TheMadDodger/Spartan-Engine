@@ -5,7 +5,7 @@
 #include "../Scenes/GameObject.h"
 #include "../Scenes/GameScene.h"
 
-CameraComponent::CameraComponent() : m_CameraMatrix(Matrix3X3::CreateIdentityMatrix()), m_CameraInverseMatrix(Matrix3X3::CreateIdentityMatrix())
+CameraComponent::CameraComponent() : m_CameraMatrix(Matrix3X3::CreateIdentityMatrix()), m_CameraInverseMatrix(Matrix3X3::CreateIdentityMatrix()), BaseComponent("Camera")
 {
 }
 

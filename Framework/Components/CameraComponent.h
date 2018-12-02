@@ -14,6 +14,8 @@ public:
 
 	const Vector2 GetPosition();
 
+	virtual BaseComponent *Create() { return new CameraComponent(); }
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;

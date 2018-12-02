@@ -8,6 +8,8 @@ public:
 	ColliderComponent(Collider *collider);
 	virtual ~ColliderComponent();
 
+	virtual BaseComponent *Create() { return new ColliderComponent(nullptr); }
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;

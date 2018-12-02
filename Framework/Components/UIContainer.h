@@ -21,6 +21,8 @@ private:
 	void Draw(const GameContext &gameContext) override;
 
 private:
+	virtual BaseComponent *Create() { return new UIContainer(Vector2(20.f, 20.f)); }
+
 	Vector2 m_Dimensions;
 	Vector2 m_Padding;
 

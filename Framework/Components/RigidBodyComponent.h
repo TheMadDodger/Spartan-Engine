@@ -14,6 +14,8 @@ protected:
 	//void Draw(const GameContext &gameContext) override;
 
 private:
+	virtual BaseComponent *Create() { return new RigidBodyComponent(); }
+
 	b2Body *m_Body = nullptr;
 	Vector2 m_BodyPivot;
 

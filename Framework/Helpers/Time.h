@@ -31,6 +31,7 @@ public: // Reference returns
 
 private:
 	friend class BaseGame;
+	friend class GameTool;
 	void Start();
 	void StartFrame();
 	void EndFrame();

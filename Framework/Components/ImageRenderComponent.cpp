@@ -5,8 +5,13 @@
 #include "../Scenes/GameObject.h"
 #include "TransformComponent.h"
 
-ImageRenderComponent::ImageRenderComponent(const char *assetFile) : m_AssetFile(assetFile)
+ImageRenderComponent::ImageRenderComponent() : m_AssetFile(""), BaseComponent("Image"), m_pImage(nullptr)
 {
+}
+
+ImageRenderComponent::ImageRenderComponent(const char *assetFile) : m_AssetFile(""), BaseComponent("Image"), m_pImage(nullptr)
+{
+	memcpy(m_AssetFile, assetFile, strlen(assetFile));
 }
 
 ImageRenderComponent::ImageRenderComponent(TextureData *pTexture) : m_pImage(pTexture)
@@ -17,7 +22,7 @@ ImageRenderComponent::~ImageRenderComponent()
 {
 }
 
-void ImageRenderComponent::SetTexture(TextureData * pTexture)
+void ImageRenderComponent::SetTexture(TextureData *pTexture)
 {
 	m_pImage = pTexture;
 }
@@ -33,6 +38,16 @@ void ImageRenderComponent::Initialize(const GameContext &gameContext)
 
 void ImageRenderComponent::Update(const GameContext &gameContext)
 {
+	if (!m_pImage)
+	{
+		if(ContentManager::FileExists(m_AssetFile))
+			m_pImage = ContentManager::GetInstance()->Load<TextureData>(std::string(m_AssetFile));
+	}
+	else if (m_pImage->GetFile() != m_AssetFile)
+	{
+		m_pImage = nullptr;
+	}
+
 	UNREFERENCED_PARAMETER(gameContext);
 }
 

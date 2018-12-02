@@ -22,11 +22,15 @@ public:
 	Vector3 Rotation = Vector3(0, 0, 0);
 	Vector2 Scale = Vector2(1, 1);
 
+	COMPONENT_EDITOR
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 
 private:
+	virtual BaseComponent *Create() { return new TransformComponent(); }
+
 	Matrix3X3 m_TansformMatrix;
 	Vector2 m_WorldPosition;
 };

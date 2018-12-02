@@ -4,7 +4,7 @@
 #include "../Scenes/GameObject.h"
 #include "../Scenes/GameScene.h"
 
-RigidBodyComponent::RigidBodyComponent(const b2BodyType &type, const Vector2 &bodyPivot) : m_BodyPivot(bodyPivot), m_BodyType(type)
+RigidBodyComponent::RigidBodyComponent(const b2BodyType &type, const Vector2 &bodyPivot) : m_BodyPivot(bodyPivot), m_BodyType(type), BaseComponent("Rigidbody")
 {
 }
 

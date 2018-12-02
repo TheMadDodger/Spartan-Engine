@@ -2,3 +2,6 @@
 Debug/
 Resources/
 Release/
+bin/ImGUI/.github/
+bin/ImGUI/examples/.gitignore
+bin/ImGUI/examples/

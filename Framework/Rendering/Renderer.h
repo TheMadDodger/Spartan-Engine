@@ -17,6 +17,7 @@ public:
 	void Initialize(const GameContext &gameContext);
 	void DrawImage(TextureData *pImage, const GameContext &gameContext);
 	void RenderTexture(TextureData *pBitmap);
+	void RenderTexture(GLuint texID, float width, float height);
 	void RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vector2 &origin);
 	void RenderText(FontData *pFont, const std::string &text, const SDL_Color &clr, const Origin &origin = Origin::Center, Uint32 maxWidth = 0);
 	void ClearBackground();
@@ -24,6 +25,8 @@ public:
 	SDL_Renderer *GetSDLRenderer() { return m_pSDLRenderer; }
 	SDL_Window *GetWindow() { return m_pWindow; }
 	SDL_Surface *GetWindowSurface() { return m_pWindowSurface; }
+
+	SDL_GLContext *GetGLContext() { return &m_pSDLContext; }
 
 public:
 	// Primitive Rendering
@@ -37,6 +40,7 @@ public:
 
 private:
 	friend class BaseGame;
+	friend class GameTool;
 	SDL_Renderer * m_pSDLRenderer = nullptr;
 	SDL_Window *m_pWindow = nullptr;
 	SDL_Surface *m_pWindowSurface = nullptr;

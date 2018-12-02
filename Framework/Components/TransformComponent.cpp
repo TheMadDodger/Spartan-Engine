@@ -4,7 +4,7 @@
 #include "../Scenes/GameObject.h"
 #include "../Scenes/GameScene.h"
 
-TransformComponent::TransformComponent() : m_TansformMatrix(Matrix3X3::CreateIdentityMatrix())
+TransformComponent::TransformComponent() : m_TansformMatrix(Matrix3X3::CreateIdentityMatrix()), BaseComponent("Transform")
 {
 }
 

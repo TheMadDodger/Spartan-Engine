@@ -6,7 +6,7 @@
 
 SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Math::Origin &origin) : m_File(file),
 	m_pSpriteSheet(nullptr), m_CalculateOrigin(true), m_OriginType(origin),
-	m_CurrentFrame(0), m_Status(SIdle) {}
+	m_CurrentFrame(0), m_Status(SIdle), BaseComponent("Spritesheet") {}
 
 SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Vector2 &origin) : m_Origin(origin),
 	m_File(file), m_pSpriteSheet(nullptr), m_CurrentFrame(0), m_Status(SIdle) {}

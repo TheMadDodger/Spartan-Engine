@@ -9,6 +9,7 @@ class Content // Base Class for content
 public:
 	Content(const std::string &file) : m_FileName(file) {}
 	virtual ~Content() {}
+	const std::string &GetFile() { return m_FileName; };
 
 	template <class T>
 	T *As() { return static_cast<T*>(this); };
@@ -213,6 +214,7 @@ private:
 	TTF_Font *m_pTTFFont = nullptr;
 };
 
+#pragma warning(disable:4996)
 class ContentManager
 {
 public: // Singleton calls
@@ -246,6 +248,17 @@ public: // System methods
 		}
 
 		return nullptr;
+	}
+
+	static bool FileExists(const std::string &file)
+	{
+		if (FILE *f = fopen(file.c_str(), "r")) {
+			fclose(f);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 private:

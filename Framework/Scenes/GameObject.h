@@ -8,7 +8,7 @@ class GameScene;
 class GameObject
 {
 public:
-	GameObject();
+	GameObject(const char *name = "EmptyGameObject");
 	virtual ~GameObject();
 
 	void AddChild(GameObject *pChild, bool initialize = false);
@@ -29,6 +29,8 @@ public:
 		}
 		return pComponents;
 	}
+
+	vector<BaseComponent*> GetComponents() { return m_pComponents; }
 
 	template <typename T>
 	T *GetComponent()
@@ -61,6 +63,13 @@ public:
 	bool IsEnabled();
 	void SetEnabled(bool enabled);
 
+	char *GetName() { return m_Name; }
+
+	void SetName(const char *name);
+
+	void Select(bool bSelected) { m_Selected = bSelected; }
+	bool IsSelected() { return m_Selected; }
+
 protected:
 	friend class GameScene;
 	void RootInitialize(const GameContext &gameContext);
@@ -73,6 +82,7 @@ protected:
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 
 private:
+	friend class LevelEditor;
 	friend class GameScene;
 	TransformComponent *m_pTransform = nullptr;
 	std::vector<BaseComponent*> m_pComponents;
@@ -84,5 +94,9 @@ private:
 	std::string m_Tag;
 
 	bool m_Persistent = false;
+
+	char m_Name[200];
+	char m_PrefabName[200] = "";
+	bool m_Selected = false;
 };
 

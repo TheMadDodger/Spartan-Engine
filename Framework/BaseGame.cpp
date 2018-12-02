@@ -41,6 +41,9 @@ BaseGame::~BaseGame()
 
 bool BaseGame::RootInitialize()
 {
+	// Init GLEW
+	glewInit();
+
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -105,6 +108,8 @@ bool BaseGame::RootGameUpdate()
 
 	if (SDL_PollEvent(&windowEvent))
 	{
+		OnSDLEvent(&windowEvent);
+
 		switch (windowEvent.type)
 		{
 		case SDL_QUIT:

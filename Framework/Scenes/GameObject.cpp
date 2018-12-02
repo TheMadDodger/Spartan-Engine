@@ -5,8 +5,9 @@
 #include "../Components/TransformComponent.h"
 #include "GameScene.h"
 
-GameObject::GameObject() : m_pTransform(new TransformComponent()), m_Tag("")
+GameObject::GameObject(const char *name) : m_pTransform(new TransformComponent()), m_Tag("")
 {
+	memcpy(m_Name, name, strlen(name));
 	AddComponent(m_pTransform);
 }
 
@@ -98,6 +99,12 @@ bool GameObject::IsEnabled()
 void GameObject::SetEnabled(bool enabled)
 {
 	m_Enabled = enabled;
+}
+
+void GameObject::SetName(const char *name)
+{
+	ZeroMemory(m_Name, strlen(m_Name));
+	memcpy(m_Name, name, strlen(name));
 }
 
 void GameObject::RootInitialize(const GameContext &gameContext)

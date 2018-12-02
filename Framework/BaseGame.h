@@ -10,13 +10,14 @@ public:
 	BaseGame(const GameSettings &settings);
 	virtual ~BaseGame();
 
-	virtual bool RootInitialize() final;
-	virtual bool RootGameUpdate() final;
-	virtual void RootGamePaint() final;
+	virtual bool RootInitialize();
+	virtual bool RootGameUpdate();
+	virtual void RootGamePaint();
 
 	virtual void Initialize(const GameContext &gameContext) = 0;
 	virtual void GameUpdate(const GameContext &gameContext) = 0;
 	virtual void GamePaint(const GameContext &gameContext) = 0;
+	virtual void OnSDLEvent(SDL_Event *) {};
 
 	void QuitGame() { m_bQuitGame = true; }
 
@@ -31,6 +32,7 @@ private:
 	static void SetGame(BaseGame *pGame) { m_pGame = pGame; }
 
 private:
+	friend class GameTool;
 	GameSettings m_GameSettings;
 	GameContext m_GameContext;
 

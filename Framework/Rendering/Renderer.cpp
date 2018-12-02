@@ -31,6 +31,14 @@ void Renderer::Initialize(const GameContext &gameContext)
 		//return false;
 	}
 
+	// Create renderer
+	m_pSDLRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+	if (m_pSDLRenderer == nullptr)
+	{
+		std::cerr << "Could not ceate SDL Renderer: " << SDL_GetError() << std::endl;
+		return;
+	}
+
 	// Create OpenGL context 
 	m_pSDLContext = SDL_GL_CreateContext(m_pWindow);
 	if (m_pSDLContext == nullptr)
@@ -139,7 +147,7 @@ void Renderer::RenderTexture(TextureData *pBitmap)
 	float vertexTop = pBitmap->GetDimensions().y;
 
 	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0/*GL_REPLACE*/);
 
 	glEnable(GL_TEXTURE_2D);
 	{
@@ -156,6 +164,37 @@ void Renderer::RenderTexture(TextureData *pBitmap)
 
 			glTexCoord2f(1.0f, 1.0f);
 			glVertex2f(vertexRight - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
+		}
+		glEnd();
+	}
+	glDisable(GL_TEXTURE_2D);
+}
+
+void Renderer::RenderTexture(GLuint texID, float width, float height)
+{
+	float vertexLeft = 0;
+	float vertexBottom = 0;
+	float vertexRight = width;
+	float vertexTop = height;
+
+	glBindTexture(GL_TEXTURE_2D, texID);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0/*GL_REPLACE*/);
+
+	glEnable(GL_TEXTURE_2D);
+	{
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex2f(vertexLeft, vertexBottom);
+
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex2f(vertexLeft, vertexTop);
+
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex2f(vertexRight, vertexTop);
+
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex2f(vertexRight, vertexBottom);
 		}
 		glEnd();
 	}

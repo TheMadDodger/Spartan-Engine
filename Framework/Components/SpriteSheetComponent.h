@@ -32,6 +32,8 @@ public: // Animation Calls
 	void Pause();
 
 private:
+	virtual BaseComponent *Create() { return new SpriteSheetComponent(""); }
+
 	void CalculateOrigin(const Math::Origin &origin, const FrameData &frame);
 
 private:

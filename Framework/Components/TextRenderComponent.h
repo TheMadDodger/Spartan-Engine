@@ -13,11 +13,15 @@ public:
 
 	void SetMaxWidth(Uint32 maxWidth);
 
+	COMPONENT_EDITOR
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
 private:
+	virtual BaseComponent *Create() { return new TextRenderComponent(""); }
+
 	std::string m_FontFile;
 	std::string m_Text;
 	FontData *m_pFont;

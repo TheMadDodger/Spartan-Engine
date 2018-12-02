@@ -5,7 +5,7 @@
 #include "../Scenes/GameObject.h"
 #include "../Scenes/GameScene.h"
 
-ColliderComponent::ColliderComponent(Collider *collider) : m_pCollider(collider)
+ColliderComponent::ColliderComponent(Collider *collider) : m_pCollider(collider), BaseComponent("Collider")
 {
 }
 
@@ -17,6 +17,8 @@ ColliderComponent::~ColliderComponent()
 
 void ColliderComponent::Initialize(const GameContext &gameContext)
 {
+	if (!m_pCollider) return;
+
 	UNREFERENCED_PARAMETER(gameContext);
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (!pRigid)
@@ -34,6 +36,7 @@ void ColliderComponent::Initialize(const GameContext &gameContext)
 
 void ColliderComponent::Draw(const GameContext &gameContext)
 {
+	if (!m_pCollider) return;
 	if (Utilities::Debug::CanRenderDebug())
 	{
 		glPushMatrix();

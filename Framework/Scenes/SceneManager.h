@@ -26,6 +26,7 @@ private:
 
 private:
 	friend class BaseGame;
+	friend class GameTool;
 	SceneManager();
 	~SceneManager();
 };

@@ -39,6 +39,20 @@ void GameScene::AddChild(GameObject *pObject)
 	}
 }
 
+void GameScene::RemoveChild(GameObject *pObject, bool deleteObject)
+{
+	auto it = find(m_pChildren.begin(), m_pChildren.end(), pObject);
+	if (it == m_pChildren.end()) return;
+
+	m_pChildren.erase(it);
+
+	if (deleteObject)
+	{
+		delete pObject;
+		pObject = nullptr;
+	}
+}
+
 void GameScene::SetActiveCamera(CameraComponent *pCamera)
 {
 	if(m_pActiveCamera)
@@ -61,6 +75,7 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 
 	// Create default camera
 	m_pDefaultCamera = new BasicCamera();
+	m_pDefaultCamera->SetName("Main Camera");
 	auto pCam = new CameraComponent();
 	m_pDefaultCamera->AddComponent(pCam);
 	AddChild(m_pDefaultCamera);

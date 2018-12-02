@@ -45,6 +45,8 @@ public:
 
 	void Play(const GameContext &gameContext);
 
+	virtual BaseComponent *Create() { return new AudioSourceComponent(""); }
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;

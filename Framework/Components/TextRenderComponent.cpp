@@ -5,7 +5,7 @@
 #include "../Scenes/GameObject.h"
 #include "TransformComponent.h"
 
-TextRenderComponent::TextRenderComponent(const std::string &file) : m_FontFile(file), m_pFont(nullptr), m_Text("Hello World"), m_Origin(TopLeft), m_Color(1, 1, 1, 1)
+TextRenderComponent::TextRenderComponent(const std::string &file) : m_FontFile(file), m_pFont(nullptr), m_Text("Hello World"), m_Origin(TopLeft), m_Color(1, 1, 1, 1), BaseComponent("Text")
 {
 }
 

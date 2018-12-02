@@ -11,6 +11,8 @@ protected:
 	void Update(const GameContext &gameContext) override;
 
 private:
+	virtual BaseComponent *Create() { return new ParticleComponent(EmitterSettings()); }
+
 	EmitterSettings m_Settings;
 	ParticleSystem *m_pSystem;
 	ParticleEmitter *m_pEmitter;
