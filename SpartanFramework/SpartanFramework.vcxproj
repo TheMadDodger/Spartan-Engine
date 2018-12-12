@@ -20,14 +20,14 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{AA36EB9F-DD44-4B2F-A0EC-2C571115C7B4}</ProjectGuid>
+    <ProjectGuid>{519A2200-27E5-4AB9-A32B-50C86B5D2AEC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>SpartanEditor</RootNamespace>
+    <RootNamespace>SpartanFramework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,126 +72,181 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Debug\x86;$(LIBDIR)\GLEW\lib\Debug;$(LIBDIR)\Engine\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;SpartanFramework.lib;glew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Debug;$(LIBDIR)\GLEW\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x64;$(LIBDIR)\SDL2_image\lib\x64;$(LIBDIR)\SDL2_mixer\lib\x64;$(LIBDIR)\SDL2_ttf\lib\x64;$(LIBDIR)\Box2D\lib\Debug;$(SolutionDir)Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\lib\x64;D:\cpplibraries\Box2D-master\Box2D\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Release;$(LIBDIR)\GLEW\lib\Release;$(LIBDIR)\Engine\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;SpartanFramework.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x86;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\lib\x86;D:\cpplibraries\Box2D-master\Box2D\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x64;$(LIBDIR)\SDL2_image\lib\x64;$(LIBDIR)\SDL2_mixer\lib\x64;$(LIBDIR)\SDL2_ttf\lib\x64;$(LIBDIR)\Box2D\lib\Release;$(SolutionDir)Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\cpplibraries\SDL\SDL2-2.0.8\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_image-2.0.3\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_mixer-2.0.2\lib\x64;D:\cpplibraries\SDL\Addons\SDL2_ttf-2.0.14\lib\x64;D:\cpplibraries\Box2D-master\Box2D\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ComponentParameters.h" />
-    <ClInclude Include="EditorObject.h" />
-    <ClInclude Include="GameApp.h" />
-    <ClInclude Include="imconfig.h" />
-    <ClInclude Include="imgui.h" />
-    <ClInclude Include="imgui_impl_opengl2.h" />
-    <ClInclude Include="imgui_impl_sdl.h" />
-    <ClInclude Include="imgui_internal.h" />
-    <ClInclude Include="imstb_rectpack.h" />
-    <ClInclude Include="imstb_textedit.h" />
-    <ClInclude Include="imstb_truetype.h" />
-    <ClInclude Include="LevelEditor.h" />
+    <ClInclude Include="Blackboard.h" />
+    <ClInclude Include="UIContainer.h" />
+    <ClInclude Include="FontLoader.h" />
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Colliders.h" />
+    <ClInclude Include="BinaryContainer.h" />
+    <ClInclude Include="AudioSourceComponent.h" />
+    <ClInclude Include="AudioFileLoader.h" />
+    <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="Encryption.h" />
+    <ClInclude Include="BasicCamera.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="ContentLoader.h" />
+    <ClInclude Include="ContentManager.h" />
+    <ClInclude Include="ApplicationStructs.h" />
+    <ClInclude Include="BaseGame.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="MathHelpers.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="ImageRenderComponent.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SpriteSheetLoader.h" />
+    <ClInclude Include="SpriteSheetComponent.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="ParticleSystem.h" />
+    <ClInclude Include="ParticleComponent.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="GameTime.h" />
+    <ClInclude Include="UIComponent.h" />
+    <ClInclude Include="TextRenderComponent.h" />
+    <ClInclude Include="UIButton.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ComponentParameters.cpp" />
-    <ClCompile Include="EditorObject.cpp" />
-    <ClCompile Include="imgui.cpp" />
-    <ClCompile Include="imgui_demo.cpp" />
-    <ClCompile Include="imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_opengl2.cpp" />
-    <ClCompile Include="imgui_impl_sdl.cpp" />
-    <ClCompile Include="imgui_widgets.cpp" />
-    <ClCompile Include="LevelEditor.cpp" />
-    <ClCompile Include="SpartanEditor.cpp" />
-    <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="UIContainer.cpp" />
+    <ClCompile Include="FontLoader.cpp" />
+    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="BinaryContainer.cpp" />
+    <ClCompile Include="AudioSourceComponent.cpp" />
+    <ClCompile Include="AudioFileLoader.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
+    <ClCompile Include="TextureLoader.cpp" />
+    <ClCompile Include="BasicCamera.cpp" />
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="ContentManager.cpp" />
+    <ClCompile Include="BaseGame.cpp" />
+    <ClCompile Include="MathHelpers.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="ImageRenderComponent.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="ParticleComponent.cpp" />
+    <ClCompile Include="SpriteSheetLoader.cpp" />
+    <ClCompile Include="SpriteSheetComponent.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="GameTime.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
+    <ClCompile Include="TextRenderComponent.cpp" />
+    <ClCompile Include="UIButton.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,5 @@
 #pragma once
-#include <Framework/Scenes/GameScene.h>
+#include <GameScene.h>
 
 class LevelEditor : public GameScene
 {

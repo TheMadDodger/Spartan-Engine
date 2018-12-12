@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "LevelEditor.h"
-#include "Framework/Scenes/GameObject.h"
-#include "Framework/Components/Components.h"
+#include "GameObject.h"
+#include "Components.h"
 #include "ComponentParameters.h"
-#include <Framework/BaseGame.h>
+#include <BaseGame.h>
 
 LevelEditor::LevelEditor() : GameScene("Level Editor")
 {

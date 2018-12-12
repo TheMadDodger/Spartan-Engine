@@ -1,13 +1,12 @@
 #include "stdafx.h"
-#include "../stdafx.h"
 #include "GameApp.h"
-#include <Framework/Content/ContentManager.h>
-#include <Framework/Scenes/SceneManager.h>
+#include <ContentManager.h>
+#include <SceneManager.h>
 #include "LevelEditor.h"
-#include <Framework/ApplicationStructs.h>
-#include <Framework/InputManager.h>
-#include <Framework/SoundManager.h>
-#include <Framework/Framework.h>
+#include <ApplicationStructs.h>
+#include <InputManager.h>
+#include <SoundManager.h>
+#include <Framework.h>
 #include "ComponentParameters.h"
 
 #define BEGIN_BUILDPARAMS_FUNCTION(x) template <typename T> \
@@ -173,7 +172,7 @@ bool GameTool::RootInitialize()
 	// Initialize GameContext
 	m_GameContext.pRenderer = new Renderer();
 	m_GameContext.pRenderer->Initialize(m_GameContext);
-	m_GameContext.pTime = new Time();
+	m_GameContext.pTime = new GameTime();
 	m_GameContext.pTime->Start();
 	m_GameContext.pInput = new InputManager();
 	m_GameContext.pSound = new SoundManager();

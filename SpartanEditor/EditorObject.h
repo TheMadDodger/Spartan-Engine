@@ -1,5 +1,5 @@
 #pragma once
-#include <Framework/Scenes/GameObject.h>
+#include <GameObject.h>
 
 class EditorObject : public GameObject
 {

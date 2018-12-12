@@ -1,5 +1,5 @@
 #pragma once
-#include <Framework/Components/Components.h>
+#include <Components.h>
 
 template<typename T>
 struct Range
