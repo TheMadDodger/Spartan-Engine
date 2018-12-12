@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Framework/BaseGame.h>
+#include <BaseGame.h>
 
 class Blackboard;
 

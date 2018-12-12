@@ -1,8 +1,7 @@
 #include "stdafx.h"
-#include "../stdafx.h"
 #include "GameApp.h"
-#include <Framework/Content/ContentManager.h>
-#include <Framework/Scenes/SceneManager.h>
+#include <ContentManager.h>
+#include <SceneManager.h>
 #include "Scenes/TestScene.h"
 
 GameApp::GameApp(const GameSettings &settings) : BaseGame(settings)

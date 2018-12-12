@@ -23,6 +23,9 @@
     <Filter Include="EnginePrefabs">
       <UniqueIdentifier>{657b59b2-dbfc-4a0c-8373-ebc935fb7607}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{5780ec53-88b2-4513-b0e3-d937952b3595}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -141,6 +144,12 @@
     <ClInclude Include="GameTime.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Bone.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -236,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="GameTime.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Bone.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

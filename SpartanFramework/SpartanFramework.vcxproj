@@ -169,6 +169,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Blackboard.h" />
+    <ClInclude Include="Bone.h" />
+    <ClInclude Include="Skeleton.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -210,6 +212,8 @@
     <ClInclude Include="UIButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="UIContainer.cpp" />
     <ClCompile Include="FontLoader.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
