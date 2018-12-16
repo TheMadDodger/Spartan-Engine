@@ -57,6 +57,7 @@ namespace Math
 		Vector3 operator-(const Vector3 &other);
 		Vector3 operator*(const Vector3 &other);
 		Vector3 operator*(float factor);
+		Vector3 operator/(float factor);
 		Vector3 Normalized();
 
 		// Static methods
@@ -82,6 +83,8 @@ namespace Math
 
 	struct Matrix3X3
 	{
+		Matrix3X3() : m{ {0, 0, 0}, {0, 0, 0}, {0, 0, 0} } {}
+
 		float m[3][3];
 
 		Matrix3X3(float m11, float m12, float m13,
@@ -97,16 +100,20 @@ namespace Math
 
 		Matrix3X3 operator*(const Matrix3X3 &other);
 		Vector3 operator*(const Vector3 &other);
+		Matrix3X3 operator*(float factor);
+		Matrix3X3 operator+(const Matrix3X3 &other);
 
-		const Vector2 ExtraxtTranslation();
-		const Vector3 ExtraxtRotation();
-		const Vector2 ExtraxtScale();
+		const Vector2 ExtraxtTranslation() const;
+		const Vector3 ExtraxtRotation() const;
+		const Vector2 ExtraxtScale() const;
 
 		static Matrix3X3 CreateIdentityMatrix();
 		static Matrix3X3 CreateTranslationMatrix(const Vector2 &translation);
 		static Matrix3X3 CreateRotationMatrix(const Vector3 &rotation);
 		static Matrix3X3 CreateScalingMatrix(const Vector2 &scale);
 		static Matrix3X3 CreateScaleRotationTranslationMatrix(const Vector2 &translation, const Vector3 &rotation, const Vector2 &scale);
+
+		Matrix3X3 Inverse() const;
 	};
 
 	struct Color
@@ -242,5 +249,10 @@ namespace Math
 						return true;
 
 		return false;
+	}
+
+	inline Matrix3X3 BlendMatrices(Matrix3X3 &m1, float blend1, Matrix3X3 &m2, float blend2)
+	{
+		return m1 * blend1 + m2 * blend2;
 	}
 }

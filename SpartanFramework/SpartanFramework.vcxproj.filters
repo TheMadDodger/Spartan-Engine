@@ -146,6 +146,12 @@
     <ClInclude Include="Skeleton.h">
       <Filter>Animation</Filter>
     </ClInclude>
+    <ClInclude Include="SkinnedMeshComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinnedQuad.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -246,6 +252,12 @@
       <Filter>Animation</Filter>
     </ClCompile>
     <ClCompile Include="Skeleton.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedMeshComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinnedQuad.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
   </ItemGroup>

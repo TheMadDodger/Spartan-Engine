@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "BaseGame.h"
 #include "ContentManager.h"
+#include "Skeleton.h"
+#include "Bone.h"
+#include "Components.h"
 
 Renderer::Renderer()
 {
@@ -379,6 +382,75 @@ void Renderer::DrawPolygon(const std::vector<Vector2> &points, const Math::Color
 		}
 	}
 	glEnd();
+}
+
+void Renderer::DrawSkinnedQuad(const std::vector<SkinnedVertice>& vertices, Skeleton *pSkeleton, TextureData *pTexture)
+{
+	//glBindTexture(GL_TEXTURE_2D, pTexture->m_TextureID);
+	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0/*GL_REPLACE*/);
+
+	glBegin(GL_LINES);
+	{
+		for (size_t index = 0; index < vertices.size(); ++index)
+		{
+			auto vertex = vertices[index];
+
+			/*Vector3 blendedResult = Vector3::Zero();
+			for (size_t i = 0; i < vertex.Blending.BoneIndeces.size(); ++i)
+			{
+				auto blendIndex = vertex.Blending.BoneIndeces[i];
+				auto blendWeight = vertex.Blending.BoneWeights[i];
+				auto pBone = pSkeleton->GetBone(blendIndex);
+				auto m = pBone->GetTransform()->GetTransformMatrix();
+				auto result = m * Vector3(vertex.Position.x, vertex.Position.y, 1.f);
+				result = result * blendWeight;
+				blendedResult = blendedResult + result;
+			}*/
+
+			glColor4f((GLfloat)255.f, (GLfloat)255.f, (GLfloat)255.f, (GLfloat)255.f);
+			glVertex2f(vertex.TransformedPosition.x, vertex.TransformedPosition.y);
+		}
+	}
+	glEnd();
+
+	/*glEnable(GL_TEXTURE_2D);
+	{
+		glBegin(GL_QUADS);
+		{
+			for (auto vertex : vertices)
+			{
+				glPushMatrix();
+
+				Matrix3X3 blendedMatrix = Matrix3X3();
+				for (size_t i = 0; i < vertex.Blending.BoneIndeces.size(); ++i)
+				{
+					auto blendIndex = vertex.Blending.BoneIndeces[i];
+					auto blendWeight = vertex.Blending.BoneWeights[i];
+					auto m1 = pSkeleton->GetBone(vertex.Blending.BoneIndeces[blendIndex])->GetTransform()->GetTransformMatrix();
+					blendedMatrix = blendedMatrix + m1 * blendWeight;
+				}
+
+				// Extraxt all data from the Transform matrix
+				Vector2 pos = blendedMatrix.ExtraxtTranslation();
+				Vector2 scale = blendedMatrix.ExtraxtScale();
+				Vector3 rot = blendedMatrix.ExtraxtRotation();
+
+				// Convert rotation to Radians since OpenGL needs Radians
+				rot.z = rot.z / M_PI * 180.0f;
+
+				// Apply Transform to OpenGL
+				glTranslatef(pos.x, pos.y, 0);
+				glRotatef(rot.z, 0, 0, 1);
+				glScalef(scale.x, scale.y, 1);
+
+				glTexCoord2f(vertex.TextureCoordinates.x, vertex.TextureCoordinates.y);
+				glVertex2f(vertex.Position.x, vertex.Position.y);
+				glPopMatrix();
+			}
+		}
+		glEnd();
+	}
+	glDisable(GL_TEXTURE_2D);*/
 }
 
 const Vector2 Renderer::CalculateOrigin(const Math::Origin &origin, SDL_Surface *pImage)

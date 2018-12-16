@@ -171,6 +171,8 @@
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="SkinnedMeshComponent.h" />
+    <ClInclude Include="SkinnedQuad.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -214,6 +216,8 @@
   <ItemGroup>
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="SkinnedMeshComponent.cpp" />
+    <ClCompile Include="SkinnedQuad.cpp" />
     <ClCompile Include="UIContainer.cpp" />
     <ClCompile Include="FontLoader.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />

@@ -1,10 +1,12 @@
 #pragma once
 
 #include "MathHelpers.h"
+#include "SkinnedQuad.h"
 
 class TextureData;
 class SpriteSheetData;
 class FontData;
+class Skeleton;
 
 using namespace Math;
 
@@ -37,6 +39,7 @@ public:
 	void DrawCircle(const Vector2 &center, float radius, const Math::Color &color);
 	void DrawLine(const Vector2 &start, const Vector2 &end, const Math::Color &color);
 	void DrawPolygon(const std::vector<Vector2> &points, const Math::Color &color);
+	void DrawSkinnedQuad(const std::vector<SkinnedVertice> &vertices, Skeleton *pSkeleton, TextureData *pTexture);
 
 private:
 	friend class BaseGame;

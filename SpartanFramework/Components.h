@@ -11,3 +11,4 @@
 #include "TextRenderComponent.h"
 #include "ParticleComponent.h"
 #include "UIContainer.h"
+#include "SkinnedMeshComponent.h"

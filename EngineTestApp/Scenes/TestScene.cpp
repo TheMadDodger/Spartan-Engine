@@ -181,23 +181,23 @@ void TestScene::Update(const GameContext &gameContext)
 
 	if (gameContext.pInput->IsActionTriggered("Forward"))
 	{
-		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
-		m_pPartObject->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
+		//m_pPartObject->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Backward"))
 	{
-		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
-		m_pPartObject->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
+		//m_pPartObject->GetTransform()->Translate(Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Left"))
 	{
-		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
-		m_pPartObject->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		//m_pPartObject->GetTransform()->Translate(Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("Right"))
 	{
-		//GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
-		m_pPartObject->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+		//m_pPartObject->GetTransform()->Translate(Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 	}
 	if (gameContext.pInput->IsActionTriggered("ZoomOut"))
 	{

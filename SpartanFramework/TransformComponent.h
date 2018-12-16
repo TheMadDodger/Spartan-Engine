@@ -9,6 +9,7 @@ public:
 	void ApplyTransform();
 	void BuildTransform();
 	const Matrix3X3 &GetTransformMatrix();
+	const Matrix3X3 &GetWorldMatrix();
 	const Vector2 &GetWorldPosition();
 
 	void Translate(const Vector2 &position);
@@ -32,6 +33,7 @@ private:
 	virtual BaseComponent *Create() { return new TransformComponent(); }
 
 	Matrix3X3 m_TansformMatrix;
+	Matrix3X3 m_WorldTansformMatrix;
 	Vector2 m_WorldPosition;
 };
 

@@ -121,6 +121,15 @@ Vector3 Vector3::operator*(float factor)
 	return result;
 }
 
+Vector3 Math::Vector3::operator/(float factor)
+{
+	Vector3 result;
+	result.x = x / factor;
+	result.y = y / factor;
+	result.z = z / factor;
+	return result;
+}
+
 float Vector3::Normalize()
 {
 	float length = Length();
@@ -173,17 +182,39 @@ Vector3 Matrix3X3::operator*(const Vector3 &other)
 	return result;
 }
 
-const Vector2 Math::Matrix3X3::ExtraxtTranslation()
+Matrix3X3 Math::Matrix3X3::operator*(float factor)
+{
+	Matrix3X3 result = Matrix3X3::CreateIdentityMatrix();
+
+	for (size_t x = 0; x < 3; ++x)
+		for (size_t y = 0; y < 3; ++y)
+			result.m[x][y] = m[x][y] * factor;
+
+	return result;
+}
+
+Matrix3X3 Math::Matrix3X3::operator+(const Matrix3X3 &other)
+{
+	Matrix3X3 result = Matrix3X3::CreateIdentityMatrix();
+
+	for (size_t x = 0; x < 3; ++x)
+		for (size_t y = 0; y < 3; ++y)
+			result.m[x][y] = m[x][y] + other.m[x][y];
+
+	return result;
+}
+
+const Vector2 Math::Matrix3X3::ExtraxtTranslation() const
 {
 	return Vector2(m[2][0], m[2][1]);
 }
 
-const Vector3 Math::Matrix3X3::ExtraxtRotation()
+const Vector3 Math::Matrix3X3::ExtraxtRotation() const
 {
 	return Vector3(0, 0, atan2(m[0][1], m[0][0]));
 }
 
-const Vector2 Math::Matrix3X3::ExtraxtScale()
+const Vector2 Math::Matrix3X3::ExtraxtScale() const
 {
 	Vector2 xVec = Vector2();
 	Vector2 yVec = Vector2();
@@ -243,6 +274,35 @@ Matrix3X3 Matrix3X3::CreateScaleRotationTranslationMatrix(const Vector2 &transla
 	Matrix3X3 matScaleRotTrans = matTrans * matScaleRot;
 
 	return matScaleRotTrans;
+}
+
+Matrix3X3 Math::Matrix3X3::Inverse() const
+{
+	/// Calculate the inverse matrix
+	// Decompose matrix
+	auto trans = ExtraxtTranslation();
+	auto scale = ExtraxtScale();
+	auto rot = ExtraxtRotation();
+
+	if (scale.x == 0 || scale.y == 0)
+	{
+		Utilities::Debug::LogError("Math::Matrix3X3::Inverse > Scale is 0");
+	}
+
+	// Inverse each component and turn into a matrix
+	trans = trans * -1;
+	rot = rot * -1;
+	scale.x = 1.0f / scale.x;
+	scale.y = 1.0f / scale.y;
+
+	auto transMat = Matrix3X3::CreateTranslationMatrix(trans);
+	auto rotMat = Matrix3X3::CreateRotationMatrix(rot);
+	auto scaleMat = Matrix3X3::CreateScalingMatrix(scale);
+
+	// Multiply matrices in oposite order
+	auto scaleRotMat = scaleMat * rotMat;
+	auto scaleRotTransMat = scaleRotMat * transMat;
+	return scaleRotTransMat;
 }
 
 Color Color::Lerp(const Color &a, const Color &b, float t)

@@ -162,6 +162,7 @@
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Scenes\TestScene.h" />
     <ClInclude Include="Scenes\TestScene2.h" />
+    <ClInclude Include="Scenes\SkinningTestScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="Scenes\TestScene.cpp" />
     <ClCompile Include="Scenes\TestScene2.cpp" />
+    <ClCompile Include="Scenes\SkinningTestScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -38,7 +38,7 @@ void TransformComponent::Update(const GameContext &gameContext)
 	{
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 		m_TansformMatrix = parentTransformMatrix * m_TansformMatrix;
-
+		m_WorldTansformMatrix = m_TansformMatrix;
 		m_WorldPosition = m_TansformMatrix.ExtraxtTranslation();
 
 		// We don't need to apply the camera transform again
@@ -64,7 +64,7 @@ void TransformComponent::ApplyTransform()
 	Vector2 pos = m_TansformMatrix.ExtraxtTranslation();
 	Vector2 scale = m_TansformMatrix.ExtraxtScale();
 	Vector3 rot = m_TansformMatrix.ExtraxtRotation();
-	
+
 	// Convert rotation to Radians since OpenGL needs Radians
 	rot.z = rot.z / M_PI * 180.0f;
 
@@ -77,11 +77,17 @@ void TransformComponent::ApplyTransform()
 void TransformComponent::BuildTransform()
 {
 	m_TansformMatrix = Matrix3X3::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);
+	m_WorldTansformMatrix = m_TansformMatrix;
 }
 
 const Matrix3X3 &TransformComponent::GetTransformMatrix()
 {
 	return m_TansformMatrix;
+}
+
+const Matrix3X3 & TransformComponent::GetWorldMatrix()
+{
+	return m_WorldTansformMatrix;
 }
 
 const Vector2 &TransformComponent::GetWorldPosition()
