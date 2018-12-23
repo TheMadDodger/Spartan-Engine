@@ -41,13 +41,13 @@ void SkinnedMeshComponent::Initialize(const GameContext &)
 	blendData1.push_back(blend2);
 	blendData1.push_back(blend2);
 
-	blendData2.push_back(blend3);
-	blendData2.push_back(blend3);
+	blendData2.push_back(blend2);
+	blendData2.push_back(blend2);
 	blendData2.push_back(blend3);
 	blendData2.push_back(blend3);
 
-	m_Quads.push_back(new SkinnedQuad(blendData1, nullptr, m_pSkeleton));
-	//m_Quads.push_back(new SkinnedQuad(blendData2, nullptr, m_pSkeleton));
+	m_Quads.push_back(new SkinnedQuad(Vector2(0.0f, 0.0f), Vector2(100.0f, 100.0f), blendData1, nullptr, m_pSkeleton));
+	m_Quads.push_back(new SkinnedQuad(Vector2(100.0f, 0.0f), Vector2(200.0f, 100.0f), blendData2, nullptr, m_pSkeleton));
 }
 
 void SkinnedMeshComponent::Update(const GameContext &)

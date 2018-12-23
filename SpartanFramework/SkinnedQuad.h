@@ -21,6 +21,8 @@ class SkinnedQuad
 {
 public:
 	SkinnedQuad(std::vector<BlendWeightData> BlendData, TextureData *pTexture, Skeleton *pSkeleton);
+	SkinnedQuad(const Math::Vector2 &startPos, const Math::Vector2 &endPos, std::vector<BlendWeightData> BlendData, TextureData *pTexture, Skeleton *pSkeleton);
+	//SkinnedQuad(const std::vector<SkinnedVertice> &vertices, TextureData *pTexture, Skeleton *pSkeleton);
 
 	~SkinnedQuad();
 

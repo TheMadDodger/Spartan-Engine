@@ -37,8 +37,9 @@ void TransformComponent::Update(const GameContext &gameContext)
 	if (pParent && pUI == nullptr)
 	{
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
+		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
+		m_WorldTansformMatrix = parentWorldTransformMatrix * m_TansformMatrix;
 		m_TansformMatrix = parentTransformMatrix * m_TansformMatrix;
-		m_WorldTansformMatrix = m_TansformMatrix;
 		m_WorldPosition = m_TansformMatrix.ExtraxtTranslation();
 
 		// We don't need to apply the camera transform again
