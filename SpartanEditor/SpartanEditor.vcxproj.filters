@@ -60,6 +60,12 @@
     <ClInclude Include="ComponentParameters.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkeletonEditorComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -96,6 +102,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComponentParameters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonEditorComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

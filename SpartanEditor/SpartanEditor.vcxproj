@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SkeletonObject.h" />
     <ClInclude Include="ComponentParameters.h" />
     <ClInclude Include="EditorObject.h" />
     <ClInclude Include="GameApp.h" />
@@ -171,10 +172,12 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="LevelEditor.h" />
+    <ClInclude Include="SkeletonEditorComponent.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SkeletonObject.cpp" />
     <ClCompile Include="ComponentParameters.cpp" />
     <ClCompile Include="EditorObject.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -184,6 +187,7 @@
     <ClCompile Include="imgui_impl_sdl.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
+    <ClCompile Include="SkeletonEditorComponent.cpp" />
     <ClCompile Include="SpartanEditor.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="stdafx.cpp">

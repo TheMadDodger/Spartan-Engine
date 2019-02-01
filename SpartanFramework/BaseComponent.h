@@ -3,9 +3,13 @@
 
 class GameObject;
 
-#define COMPONENT_EDITOR const std::type_info &GetType() override \
+#define COMPONENT_EDITOR(comp) const std::type_info &GetType() override \
 { \
 	return typeid(this); \
+} \
+virtual BaseComponent *Create() override \
+{ \
+	return new comp; \
 }
 
 class BaseComponent
@@ -24,6 +28,8 @@ public:
 
 	virtual const std::type_info &GetType() { return typeid(this); }
 
+	virtual void CustomEditor() {};
+
 protected:
 	friend class GameObject;
 	void RootInitialize(const GameContext &gameContext);
@@ -35,6 +41,8 @@ protected:
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
 	static std::vector<BaseComponent*> m_pRegisteredComponents;
+	bool m_CanTickInEditor = false;
+	bool m_CanTickInGame = true;
 
 private:
 	friend class GameObject;

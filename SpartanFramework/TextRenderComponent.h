@@ -4,6 +4,7 @@ class TextRenderComponent : public BaseComponent
 {
 public:
 	TextRenderComponent(const std::string &file);
+	TextRenderComponent();
 	virtual ~TextRenderComponent();
 
 	void SetText(const std::string &text);
@@ -13,14 +14,13 @@ public:
 
 	void SetMaxWidth(Uint32 maxWidth);
 
-	COMPONENT_EDITOR
+	COMPONENT_EDITOR(TextRenderComponent)
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
 private:
-	virtual BaseComponent *Create() { return new TextRenderComponent(""); }
 
 	std::string m_FontFile;
 	std::string m_Text;

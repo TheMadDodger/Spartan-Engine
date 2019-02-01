@@ -8,6 +8,10 @@ TextRenderComponent::TextRenderComponent(const std::string &file) : m_FontFile(f
 {
 }
 
+TextRenderComponent::TextRenderComponent() : TextRenderComponent("")
+{
+}
+
 TextRenderComponent::~TextRenderComponent()
 {
 }

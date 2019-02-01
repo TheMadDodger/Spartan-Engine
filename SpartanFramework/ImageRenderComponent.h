@@ -13,9 +13,7 @@ public:
 	void SetTexture(TextureData *pTexture);
 	char m_AssetFile[100] = "";
 
-	virtual BaseComponent *Create() { return new ImageRenderComponent(""); }
-
-	COMPONENT_EDITOR
+	COMPONENT_EDITOR(ImageRenderComponent)
 
 private:
 	void Initialize(const GameContext &gameContext) override;

@@ -2,7 +2,7 @@
 #include "Skeleton.h"
 #include "Bone.h"
 
-Skeleton::Skeleton(bool usesPhysics) : m_UsesPhysics(usesPhysics)
+Skeleton::Skeleton(bool usesPhysics) : m_UsesPhysics(usesPhysics)//, GameObject("Skeleton")
 {
 }
 
@@ -15,6 +15,8 @@ Bone *Skeleton::AddBone(Bone *bone)
 	if (bone->m_pOwner) return nullptr;
 	m_Bones.push_back(bone);
 	bone->m_pOwner = this;
+
+	//AddChild(bone);
 
 	return bone;
 }

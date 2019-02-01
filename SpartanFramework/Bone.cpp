@@ -6,7 +6,7 @@
 #include "Skeleton.h"
 
 Bone::Bone(float length, float rotation) :
-	m_Length(length), m_Rotation(rotation)
+	m_Length(length), m_Rotation(rotation), GameObject("Bone")
 {
 }
 
@@ -55,6 +55,12 @@ void Bone::Draw(const GameContext &gameContext)
 
 void Bone::InitializeBone(bool usePhysics)
 {
+	if (GetParent())
+		GetParent()->RemoveChild(this);
+
+	if (GetGameScene())
+		GetGameScene()->RemoveChild(this);
+
 	// Initialize transform
 	GetTransform()->Rotate(Vector3(0.f, 0.f, m_Rotation));
 

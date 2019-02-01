@@ -1,6 +1,8 @@
 #pragma once
 class Bone;
 
+//#include "GameObject.h"
+
 class Skeleton
 {
 public:

@@ -4,6 +4,9 @@
 #include "Components.h"
 #include "ComponentParameters.h"
 #include <BaseGame.h>
+#include <Skeleton.h>
+#include <Bone.h>
+#include "SkeletonObject.h"
 
 LevelEditor::LevelEditor() : GameScene("Level Editor")
 {
@@ -22,43 +25,6 @@ void LevelEditor::RenderGUI()
 
 void LevelEditor::Initialize(const GameContext &gameContext)
 {
-	/*auto pObj = new GameObject("Parent Object");
-	pObj->AddComponent(new ImageRenderComponent("./Resources/TwitchAvatar.png"));
-	auto pObj1 = new GameObject("Child Of Parent");
-	pObj1->AddComponent(new ImageRenderComponent("./Resources/TwitchAvatar.png"));
-	pObj1->GetTransform()->SetScale(Vector2(0.5f, 0.5f));
-	pObj->AddChild(pObj1);
-	auto pObj2 = new GameObject("Child Of Child");
-	pObj2->AddComponent(new ImageRenderComponent("./Resources/TwitchAvatar.png"));
-	pObj2->GetTransform()->SetScale(Vector2(0.5f, 0.5f));
-	pObj1->AddChild(pObj2);
-
-	pObj1 = new GameObject("Child Of Parent");
-	pObj->AddChild(pObj1);
-	pObj2 = new GameObject("Child Of Child");
-	pObj1->AddChild(pObj2);
-
-	pObj1 = new GameObject("Child Of Parent");
-	pObj->AddChild(pObj1);
-	pObj2 = new GameObject("Child Of Child");
-	pObj1->AddChild(pObj2);
-
-	pObj1 = new GameObject("Child Of Parent");
-	pObj->AddChild(pObj1);
-	pObj2 = new GameObject("Child Of Child");
-	pObj1->AddChild(pObj2);
-
-	pObj1 = new GameObject("Child Of Parent");
-	pObj->AddChild(pObj1);
-	pObj2 = new GameObject("Child Of Child");
-	pObj1->AddChild(pObj2);
-
-	pObj1 = new GameObject("Child Of Parent");
-	pObj->AddChild(pObj1);
-	pObj2 = new GameObject("Child Of Child");
-	pObj1->AddChild(pObj2);
-
-	AddChild(pObj);*/
 }
 
 void LevelEditor::Update(const GameContext &)
@@ -190,7 +156,6 @@ void LevelEditor::CreateInspector()
 	ImGui::SetNextWindowSize(ImVec2(300, 680));
 
 	ImGui::Begin("Inspector", NULL, window_flags);
-	//ImGui::PushItemWidth(ImGui::GetFontSize() * -12);
 
 	if (m_CurrentSelectedObject)
 	{
@@ -208,6 +173,8 @@ void LevelEditor::CreateInspector()
 				auto pParam = ComponentParameterManager::GetInstance()->Create(pComponent);
 				if (pParam)
 					pParam->LoadParams();
+
+				pComponent->CustomEditor();
 
 				ImGui::TreePop();
 			}
@@ -253,7 +220,6 @@ void LevelEditor::ObjectMenu()
 		if (ImGui::MenuItem("Empty"))
 		{
 			pCreatedObj = new GameObject("Empty Game Object");
-			auto pTempComp = pCreatedObj->AddComponent(new ImageRenderComponent());
 		}
 		if (ImGui::BeginMenu("Geometry"))
 		{
@@ -262,6 +228,10 @@ void LevelEditor::ObjectMenu()
 
 			}
 			if (ImGui::MenuItem("Circle"))
+			{
+
+			}
+			if (ImGui::MenuItem("Skinned Mesh"))
 			{
 
 			}
@@ -291,11 +261,60 @@ void LevelEditor::ObjectMenu()
 			}
 			ImGui::EndMenu();
 		}
+		if (ImGui::BeginMenu("Animation"))
+		{
+			if (ImGui::MenuItem("Rig"))
+			{
+				pCreatedObj = new SkeletonObject(new Skeleton());
+			}
+			if (ImGui::MenuItem("Bone"))
+			{
+				pCreatedObj = new Bone(100.0f, 0.872664625f);
+			}
+			ImGui::EndMenu();
+		}
 		ImGui::EndMenu();
 	}
+
 	if (pCreatedObj)
+	{
 		if (m_CurrentRightClickedObject)
-			m_CurrentRightClickedObject->AddChild(pCreatedObj);
-		else
-			AddChild(pCreatedObj);
+		{
+			auto skeleton = dynamic_cast<SkeletonObject*>(m_CurrentRightClickedObject);
+			auto parentBone = dynamic_cast<Bone*>(m_CurrentRightClickedObject);
+			auto bone = static_cast<Bone*>(pCreatedObj);
+
+			if (skeleton)
+			{
+				if (bone)
+				{
+					skeleton->GetSkeleton()->AddBone(bone);
+					AddChild(bone);
+				}
+				else
+				{
+					// Only bones are allowed as children on a skeleton!
+					delete pCreatedObj;
+				}
+			}
+			else if (parentBone)
+			{
+				if (bone)
+				{
+					parentBone->AddChildBone(bone);
+					parentBone->AddChild(bone);
+				}
+				else
+				{
+					// Only bones are allowed as children on a skeleton!
+					delete pCreatedObj;
+				}
+			}
+			else
+			{
+				m_CurrentRightClickedObject->AddChild(pCreatedObj);
+			}
+		}
+		else AddChild(pCreatedObj);
+	}
 }
