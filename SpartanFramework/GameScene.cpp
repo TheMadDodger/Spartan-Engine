@@ -92,6 +92,11 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 		pChild->RootInitialize(gameContext);
 	}
 
+	for (auto pChild : m_pChildren)
+	{
+		pChild->RootPostInitialize(gameContext);
+	}
+
 	// User Post-Initialize
 	PostInitialize(gameContext);
 }

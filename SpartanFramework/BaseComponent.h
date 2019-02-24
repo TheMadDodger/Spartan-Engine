@@ -37,6 +37,7 @@ protected:
 	void RootDraw(const GameContext &gameContext);
 
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 

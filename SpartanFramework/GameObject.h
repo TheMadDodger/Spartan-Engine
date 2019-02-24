@@ -73,6 +73,7 @@ public:
 protected:
 	friend class GameScene;
 	void RootInitialize(const GameContext &gameContext);
+	void RootPostInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
 	void SetParent(GameObject *pParent);

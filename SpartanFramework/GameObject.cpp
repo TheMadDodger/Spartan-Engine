@@ -124,6 +124,19 @@ void GameObject::RootInitialize(const GameContext &gameContext)
 	m_bInitialized = true;
 }
 
+void GameObject::RootPostInitialize(const GameContext & gameContext)
+{
+	for (auto pComponent : m_pComponents)
+	{
+		pComponent->PostInitialize(gameContext);
+	}
+
+	for (auto pChild : m_pChildren)
+	{
+		pChild->RootPostInitialize(gameContext);
+	}
+}
+
 void GameObject::RootUpdate(const GameContext &gameContext)
 {
 	if (!m_bInitialized) // If we haven't initialised yet
