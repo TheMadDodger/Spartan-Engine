@@ -3,7 +3,7 @@
 #include <ContentManager.h>
 #include <SceneManager.h>
 #include "Scenes/TestScene.h"
-#include "Scenes/SkinningTestScene.h"
+#include "Scenes/BehaviourTreeTestScene.h"
 
 GameApp::GameApp(const GameSettings &settings) : BaseGame(settings)
 {
@@ -16,7 +16,7 @@ GameApp::~GameApp()
 void GameApp::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	SceneManager::GetInstance()->AddScene(new SkinningTestScene());
+	SceneManager::GetInstance()->AddScene(new BehaviourTreeTestScene());
 }
 
 void GameApp::GameUpdate(const GameContext &gameContext)

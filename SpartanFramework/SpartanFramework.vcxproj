@@ -168,15 +168,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="BaseAIBehaviour.h" />
-    <ClInclude Include="BehaviourTree.h" />
+    <ClInclude Include="AIBehaviourTree.h" />
     <ClInclude Include="BehaviourTreeNodes.h" />
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMeshComponent.h" />
     <ClInclude Include="SkinnedQuad.h" />
+    <ClInclude Include="Tasks.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -220,7 +222,8 @@
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />
-    <ClCompile Include="BehaviourTree.cpp" />
+    <ClCompile Include="AIBehaviourTree.cpp" />
+    <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />

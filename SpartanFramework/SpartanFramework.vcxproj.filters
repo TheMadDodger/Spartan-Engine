@@ -155,9 +155,6 @@
     <ClInclude Include="SkinnedQuad.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviourTree.h">
-      <Filter>AI</Filter>
-    </ClInclude>
     <ClInclude Include="AIComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
@@ -165,6 +162,15 @@
       <Filter>AI</Filter>
     </ClInclude>
     <ClInclude Include="BehaviourTreeNodes.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIBehaviourTree.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Tasks.h">
       <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,13 +281,16 @@
     <ClCompile Include="SkinnedQuad.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="BehaviourTree.cpp">
-      <Filter>AI</Filter>
-    </ClCompile>
     <ClCompile Include="AIComponent.cpp">
       <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="BaseAIBehaviour.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AIBehaviourTree.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourTreeNodes.cpp">
       <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
