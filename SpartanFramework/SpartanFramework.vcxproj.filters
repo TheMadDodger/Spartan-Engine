@@ -22,6 +22,9 @@
     <Filter Include="Animation">
       <UniqueIdentifier>{5780ec53-88b2-4513-b0e3-d937952b3595}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{6ac6dc29-7718-4b00-83b9-12233eb44abd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -152,6 +155,18 @@
     <ClInclude Include="SkinnedQuad.h">
       <Filter>Animation</Filter>
     </ClInclude>
+    <ClInclude Include="BehaviourTree.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAIBehaviour.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviourTreeNodes.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -259,6 +274,15 @@
     </ClCompile>
     <ClCompile Include="SkinnedQuad.cpp">
       <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviourTree.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAIBehaviour.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

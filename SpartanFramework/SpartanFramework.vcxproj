@@ -23,7 +23,7 @@
     <ProjectGuid>{519A2200-27E5-4AB9-A32B-50C86B5D2AEC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SpartanFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -168,6 +168,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AIComponent.h" />
+    <ClInclude Include="BaseAIBehaviour.h" />
+    <ClInclude Include="BehaviourTree.h" />
+    <ClInclude Include="BehaviourTreeNodes.h" />
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Skeleton.h" />
@@ -214,6 +218,9 @@
     <ClInclude Include="UIButton.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="BaseAIBehaviour.cpp" />
+    <ClCompile Include="BehaviourTree.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />
