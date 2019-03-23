@@ -173,6 +173,9 @@
     <ClInclude Include="Tasks.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="GUID.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />

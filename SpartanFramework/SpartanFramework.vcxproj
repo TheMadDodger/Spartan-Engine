@@ -175,6 +175,7 @@
     <ClInclude Include="BehaviourTreeNodes.h" />
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
+    <ClInclude Include="GUID.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMeshComponent.h" />
     <ClInclude Include="SkinnedQuad.h" />
