@@ -176,6 +176,9 @@
     <ClInclude Include="GUID.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
