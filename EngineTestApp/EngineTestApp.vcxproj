@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Scenes\GUIDTestScene.h" />
     <ClInclude Include="Scenes\BehaviourTreeTestScene.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="Scenes\TestScene.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scenes\GUIDTestScene.cpp" />
     <ClCompile Include="Scenes\BehaviourTreeTestScene.cpp" />
     <ClCompile Include="EngineTestApp.cpp" />
     <ClCompile Include="GameApp.cpp" />

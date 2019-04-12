@@ -1,42 +1,36 @@
 #pragma once
 #include "stdafx.h"
 
-struct GUID
+namespace Utilities
 {
 	// Generates a new GUID
-	static GUID GenerateGUID()
+	inline GUID GenerateGUID()
 	{
 		GUID guid = GUID();
-		guid.Data1 = RandomRange<DWORD>(0, numeric_limits<DWORD>().max);
-		guid.Data2 = RandomRange<WORD>(0, numeric_limits<WORD>().max);
-		guid.Data3 = RandomRange<WORD>(0, numeric_limits<WORD>().max);
+		//guid.Data1 = RandomRange<DWORD>(0, std::numeric_limits<DWORD>().infinity());
+		//guid.Data2 = RandomRange<WORD>(0, std::numeric_limits<WORD>().infinity());
+		//guid.Data3 = RandomRange<WORD>(0, numeric_limits<WORD>().infinity());
+		guid.Data1 = Random<unsigned long>();
+		guid.Data2 = Random<unsigned short>();
+		guid.Data3 = Random<unsigned short>();
 
 		for (size_t i = 0; i < 8; ++i)
 		{
-			guid.Data4[i] = RandomRange<BYTE>(0, numeric_limits<BYTE>().max);
+			guid.Data4[i] = RandomRange<BYTE>(0, 255);
 		}
+		/*guid.GuidString = "";
+		guid.GuidString += ((char)(guid.Data1 << 24));
+		guid.GuidString += ((char)(guid.Data1 << 16));
+		guid.GuidString += ((char)(guid.Data1 << 8));
+		guid.GuidString += ((char)(guid.Data1));
+		guid.GuidString += '-';
+		guid.GuidString += ((char)(guid.Data2 << 8));
+		guid.GuidString += ((char)(guid.Data2));
+		guid.GuidString += '-';
+		guid.GuidString += ((char)(guid.Data3 << 8));
+		guid.GuidString += ((char)(guid.Data3));
+		guid.GuidString += '-';*/
 
 		return guid;
 	}
-
-	bool operator==(const GUID &other)
-	{
-		if (other.Data1 != Data1) return false;
-		if (other.Data2 != Data2) return false;
-		if (other.Data3 != Data3) return false;
-		
-		for (size_t i = 0; i < 8; ++i)
-		{
-			if (other.Data4[i] != Data4[i]) return false;
-		}
-	}
-
-private:
-	GUID() {}
-
-	DWORD Data1;
-	WORD Data2;
-	WORD Data3;
-	BYTE Data4[8];
-};
-
+}
