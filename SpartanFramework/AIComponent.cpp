@@ -17,7 +17,11 @@ AIComponent::~AIComponent()
 
 void AIComponent::Initialize(const GameContext &)
 {
-	if(m_pAIBehaviour) m_pAIBehaviour->Initialize();
+	if (m_pAIBehaviour)
+	{
+		m_pAIBehaviour->SetOwner(this);
+		m_pAIBehaviour->Initialize();
+	}
 }
 
 void AIComponent::Update(const GameContext &gameContext)

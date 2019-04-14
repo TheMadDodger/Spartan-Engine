@@ -13,3 +13,8 @@ AIComponent *BaseAIBehaviour::GetAIOwner()
 {
 	return m_pAIOwner;
 }
+
+void BaseAIBehaviour::SetOwner(AIComponent *pOwner)
+{
+	m_pAIOwner = pOwner;
+}

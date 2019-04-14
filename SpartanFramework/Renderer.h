@@ -21,7 +21,7 @@ public:
 	void RenderTexture(TextureData *pBitmap);
 	void RenderTexture(GLuint texID, float width, float height);
 	void RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vector2 &origin);
-	void RenderText(FontData *pFont, const std::string &text, const SDL_Color &clr, const Origin &origin = Origin::Center, Uint32 maxWidth = 0);
+	TextureData *RenderText(FontData *pFont, const std::string &text, const SDL_Color &clr, const Origin &origin = Origin::Center, Uint32 maxWidth = 0);
 	void ClearBackground();
 
 	SDL_Renderer *GetSDLRenderer() { return m_pSDLRenderer; }

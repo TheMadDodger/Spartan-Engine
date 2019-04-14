@@ -14,6 +14,11 @@ TextRenderComponent::TextRenderComponent() : TextRenderComponent("")
 
 TextRenderComponent::~TextRenderComponent()
 {
+	if (m_pTextTexture)
+	{
+		delete m_pTextTexture;
+		m_pTextTexture = nullptr;
+	}
 }
 
 void TextRenderComponent::SetText(const std::string &text)
@@ -59,6 +64,20 @@ void TextRenderComponent::Draw(const GameContext &gameContext)
 	color.g = Uint8(m_Color.g * 255);
 	color.b = Uint8(m_Color.b * 255);
 	color.a = Uint8(m_Color.a * 255);
-	gameContext.pRenderer->RenderText(m_pFont, m_Text, color, m_Origin, m_MaxWidth);
+	if (m_Text != m_PreviousText)
+	{
+		if (m_pTextTexture)
+		{
+			delete m_pTextTexture;
+			m_pTextTexture = nullptr;
+		}
+		m_pTextTexture = gameContext.pRenderer->RenderText(m_pFont, m_Text, color, m_Origin, m_MaxWidth);
+		m_PreviousText = m_Text;
+	}
+	if (m_pTextTexture)
+	{
+		gameContext.pRenderer->RenderTexture(m_pTextTexture);
+	}
+
 	glPopMatrix();
 }

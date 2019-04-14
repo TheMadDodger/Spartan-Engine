@@ -24,6 +24,8 @@ private:
 
 	std::string m_FontFile;
 	std::string m_Text;
+	std::string m_PreviousText;
+	TextureData *m_pTextTexture = nullptr;
 	FontData *m_pFont;
 	Origin m_Origin;
 	Color m_Color;

@@ -121,24 +121,24 @@ void Renderer::RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vec
 	glDisable(GL_TEXTURE_2D);
 }
 
-void Renderer::RenderText(FontData *pFont, const std::string & text, const SDL_Color & clr, const Origin &origin, Uint32 maxWidth)
+TextureData *Renderer::RenderText(FontData *pFont, const std::string & text, const SDL_Color & clr, const Origin &origin, Uint32 maxWidth)
 {
-	if (text.size() <= 0) return; // If there is no text, no need to waste resources to render it
+	if (text.size() <= 0) return nullptr; // If there is no text, no need to waste resources to render it
 
 	SDL_Surface *pTextSurface = (maxWidth == 0) ? TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr) :
 		TTF_RenderUTF8_Blended_Wrapped(pFont->GetFontData(), text.data(), clr, maxWidth);
+
 	if (!pTextSurface)
 	{
 		Utilities::Debug::LogWarning("Renderer::RenderText > Could not render text surface! TTF_Error: " + string(TTF_GetError()));
-		return;
+		return nullptr;
 	}
 	TextureData *pTextTexture = new TextureData("", CalculateOrigin(origin, pTextSurface));
 	pTextTexture->m_pImage = pTextSurface;
 	pTextTexture->BuildTexture();
-	RenderTexture(pTextTexture);
+	//RenderTexture(pTextTexture);
 
-	delete pTextTexture;
-	pTextTexture = nullptr;
+	return pTextTexture;
 }
 
 void Renderer::RenderTexture(TextureData *pBitmap)
@@ -147,9 +147,9 @@ void Renderer::RenderTexture(TextureData *pBitmap)
 	float vertexBottom = 0;
 	float vertexRight = pBitmap->GetDimensions().x;
 	float vertexTop = pBitmap->GetDimensions().y;
-
+	
 	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0/*GL_REPLACE*/);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
 	glEnable(GL_TEXTURE_2D);
 	{

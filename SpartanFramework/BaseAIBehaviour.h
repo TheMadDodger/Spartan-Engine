@@ -10,6 +10,8 @@ public:
 
 	AIComponent *GetAIOwner();
 
+	void SetOwner(AIComponent *pOwner);
+
 	virtual void Initialize() = 0;
 	virtual void Tick(float deltaTime) = 0;
 

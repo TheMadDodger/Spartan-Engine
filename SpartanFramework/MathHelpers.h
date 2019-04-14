@@ -214,7 +214,7 @@ namespace Math
 	template<typename T>
 	inline int Absolute(T &value)
 	{
-		int sine = value / abs(value);
+		int sine = (int)(value / abs(value));
 		value = abs(value);
 		return sine;
 	}
@@ -261,5 +261,33 @@ namespace Math
 	inline Matrix3X3 BlendMatrices(Matrix3X3 &m1, float blend1, Matrix3X3 &m2, float blend2)
 	{
 		return m1 * blend1 + m2 * blend2;
+	}
+
+	inline float Dot(const Vector2 &v1, const Vector2 &v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y;
+	}
+
+	inline float Dot(const Vector3 &v1, const Vector3 &v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	}
+
+	inline Vector3 Cross(const Vector2 &a, const Vector2 &b)
+	{
+		Vector3 crossProduct = Vector3::Zero();
+		crossProduct.x = 0.0f;
+		crossProduct.y = 0.0f;
+		crossProduct.z = a.x * b.y - a.y * b.x;
+		return crossProduct;
+	}
+
+	inline Vector3 Cross(const Vector3 &a, const Vector3 &b)
+	{
+		Vector3 crossProduct = Vector3::Zero();
+		crossProduct.x = a.y * b.z - a.z * b.y;
+		crossProduct.y = a.z * b.x - a.x - b.z;
+		crossProduct.z = a.x * b.y - a.y * b.x;
+		return crossProduct;
 	}
 }
