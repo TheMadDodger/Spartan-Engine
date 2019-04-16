@@ -14,6 +14,7 @@ GameObject::~GameObject()
 {
 	for (auto pChild : m_pChildren)
 	{
+		pChild->OnDestroy();
 		delete pChild;
 	}
 	m_pChildren.clear();
@@ -22,7 +23,6 @@ GameObject::~GameObject()
 	{
 		delete pComponent;
 	}
-
 	m_pComponents.clear();
 }
 
@@ -38,18 +38,18 @@ void GameObject::AddChild(GameObject *pChild, bool initialize)
 	}
 }
 
-void GameObject::RemoveChild(GameObject *pChild, bool deleteObject)
+void GameObject::RemoveChild(GameObject *pChild)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
 
-	if (deleteObject)
+	/*if (deleteObject)
 	{
 		delete pChild;
 		pChild = nullptr;
-	}
+	}*/
 }
 
 BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)

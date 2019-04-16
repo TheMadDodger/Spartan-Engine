@@ -14,7 +14,7 @@ public:
 	virtual ~GameScene();
 
 	void AddChild(GameObject *pObject);
-	void RemoveChild(GameObject *pObject, bool deleteObject = false);
+	void RemoveChild(GameObject *pObject);
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
@@ -26,6 +26,9 @@ public:
 
 	std::vector<GameObject*> GetChildren() { return m_pChildren; }
 	GameObject *GetChild(unsigned int ID) { return m_pChildren[ID]; }
+
+	void Destroy(GameObject *gameObject);
+	void Instantiate(GameObject *gameObject, GameObject *pParent = nullptr);
 	
 
 protected:
@@ -63,8 +66,20 @@ private:
 
 	void RootCleanup();
 
+	void DestroyObjects();
+	void InstantiateObjects();
+
 private:
 	friend class SceneManager;
+
+	struct Instantiation
+	{
+		Instantiation(GameObject *pObject, GameObject *pParent) : Object(pObject), Parent(pParent) {}
+
+		GameObject *Object;
+		GameObject *Parent;
+	};
+
 	std::vector<GameObject*> m_pChildren;
 	std::vector<GameObject*> m_pPersistentChildren;
 	std::string m_SceneName = "";
@@ -72,5 +87,7 @@ private:
 	CameraComponent *m_pActiveCamera = nullptr;
 	b2World *m_pPhysicsWorld = nullptr;
 	b2Vec2 m_Gravity;
+	std::vector<GameObject*> m_pQueuedForDestruction;
+	std::vector<Instantiation> m_pInstantiateQueue;
 };
 

@@ -38,18 +38,12 @@ void GameScene::AddChild(GameObject *pObject)
 	}
 }
 
-void GameScene::RemoveChild(GameObject *pObject, bool deleteObject)
+void GameScene::RemoveChild(GameObject *pObject)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pObject);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
-
-	if (deleteObject)
-	{
-		delete pObject;
-		pObject = nullptr;
-	}
 }
 
 void GameScene::SetActiveCamera(CameraComponent *pCamera)
@@ -65,6 +59,16 @@ void GameScene::DontDestroyOnLoad(GameObject *pObject)
 {
 	pObject->m_Persistent = true;
 	m_pPersistentChildren.push_back(pObject);
+}
+
+void GameScene::Destroy(GameObject *gameObject)
+{
+	m_pQueuedForDestruction.push_back(gameObject);
+}
+
+void GameScene::Instantiate(GameObject *gameObject, GameObject *pParent)
+{
+	m_pInstantiateQueue.push_back(Instantiation(gameObject, pParent));
 }
 
 void GameScene::RootInitialize(const GameContext &gameContext)
@@ -103,6 +107,12 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 
 void GameScene::RootUpdate(const GameContext &gameContext)
 {
+	// Destroy all objects that were marked for destruction last frame
+	DestroyObjects();
+
+	// Spawn all objects that were Instantiated last frame
+	InstantiateObjects();
+
 	// User Pre-Update
 	PreUpdate(gameContext);
 
@@ -179,4 +189,41 @@ void GameScene::RootCleanup()
 
 	// User defined cleanup method
 	Cleanup();
+}
+
+void GameScene::DestroyObjects()
+{
+	for (auto gameObject : m_pQueuedForDestruction)
+	{
+		gameObject->OnDestroy();
+		if (gameObject->GetParent() != nullptr)
+		{
+			gameObject->GetParent()->RemoveChild(gameObject);
+		}
+		else
+		{
+			RemoveChild(gameObject);
+		}
+		delete gameObject;
+	}
+
+	m_pQueuedForDestruction.clear();
+}
+
+void GameScene::InstantiateObjects()
+{
+	for (auto instantiate : m_pInstantiateQueue)
+	{
+		if (instantiate.Parent != nullptr)
+		{
+			instantiate.Parent->AddChild(instantiate.Object);
+		}
+		else
+		{
+			AddChild(instantiate.Object);
+		}
+		instantiate.Object->OnCreated();
+	}
+
+	m_pInstantiateQueue.clear();
 }

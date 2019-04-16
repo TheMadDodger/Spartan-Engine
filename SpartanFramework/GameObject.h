@@ -12,7 +12,7 @@ public:
 	virtual ~GameObject();
 
 	void AddChild(GameObject *pChild, bool initialize = false);
-	void RemoveChild(GameObject *pChild, bool deleteObject = false);
+	void RemoveChild(GameObject *pChild);
 
 	const vector<BaseComponent*> GetAllComponents() { return m_pComponents; }
 
@@ -81,6 +81,8 @@ protected:
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+	virtual void OnDestroy() {};
+	virtual void OnCreated() {};
 
 private:
 	friend class LevelEditor;
