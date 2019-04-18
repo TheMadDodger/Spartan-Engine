@@ -41,6 +41,11 @@ bool UIButton::IsClicked()
 	return m_MouseClicked;
 }
 
+void UIButton::DisableButton(bool disable)
+{
+	m_ButtonDisabled = disable;
+}
+
 void UIButton::SetClickBoxSize(const Vector2 &size)
 {
 	m_Size = size;
@@ -67,6 +72,16 @@ void UIButton::Initialize(const GameContext &)
 
 void UIButton::Update(const GameContext &gameContext)
 {
+	if (m_ButtonDisabled)
+	{
+		m_MouseClicked = false;
+		m_MouseOver = false;
+		m_WasClickedThisFrame = false;
+		m_pCurrentTexture = m_pIdleTexture;
+		GetComponent<ImageRenderComponent>()->SetTexture(m_pCurrentTexture);
+		return;
+	}
+
 	m_MouseClicked = false;
 	auto mousePos = gameContext.pInput->GetMouseScreenPosition();
 

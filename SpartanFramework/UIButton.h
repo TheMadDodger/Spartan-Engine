@@ -16,6 +16,8 @@ public:
 	bool IsMouseOver();
 	bool IsClicked();
 
+	void DisableButton(bool disable);
+
 	void SetClickBoxSize(const Vector2 &size);
 
 protected:
@@ -40,6 +42,7 @@ protected:
 	bool m_MouseClicked;
 	bool m_MouseOver;
 	bool m_Selected;
+	bool m_ButtonDisabled = false;
 
 private:
 	TextureData *m_pIdleTexture = nullptr;
