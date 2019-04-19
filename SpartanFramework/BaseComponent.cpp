@@ -33,12 +33,21 @@ BaseComponent *BaseComponent::CreateFromName(const std::string &name)
 
 void BaseComponent::RootInitialize(const GameContext & gameContext)
 {
+	if (m_bInitialized) return;
+
 	// User defined Initialize()
 	Initialize(gameContext);
+
+	m_bInitialized = true;
 }
 
-void BaseComponent::RootUpdate(const GameContext & gameContext)
+void BaseComponent::RootUpdate(const GameContext &gameContext)
 {
+	if (!m_bInitialized)
+	{
+		RootInitialize(gameContext);
+	}
+
 	// User defined Update()
 	Update(gameContext);
 }

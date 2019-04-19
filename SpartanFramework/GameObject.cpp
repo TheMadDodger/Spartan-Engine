@@ -108,6 +108,8 @@ void GameObject::SetName(const char *name)
 
 void GameObject::RootInitialize(const GameContext &gameContext)
 {
+	if (m_bInitialized) return;
+
 	// User defined Initialize()
 	Initialize(gameContext);
 
@@ -124,7 +126,7 @@ void GameObject::RootInitialize(const GameContext &gameContext)
 	m_bInitialized = true;
 }
 
-void GameObject::RootPostInitialize(const GameContext & gameContext)
+void GameObject::RootPostInitialize(const GameContext &gameContext)
 {
 	for (auto pComponent : m_pComponents)
 	{
@@ -135,6 +137,8 @@ void GameObject::RootPostInitialize(const GameContext & gameContext)
 	{
 		pChild->RootPostInitialize(gameContext);
 	}
+
+	PostInitialize(gameContext);
 }
 
 void GameObject::RootUpdate(const GameContext &gameContext)
@@ -162,6 +166,9 @@ void GameObject::RootUpdate(const GameContext &gameContext)
 
 void GameObject::RootDraw(const GameContext & gameContext)
 {
+	// User defined Draw()
+	Draw(gameContext);
+
 	for (auto pComponent : m_pComponents)
 	{
 		pComponent->RootDraw(gameContext);
@@ -172,9 +179,6 @@ void GameObject::RootDraw(const GameContext & gameContext)
 		if (pChild->IsEnabled())
 			pChild->RootDraw(gameContext);
 	}
-
-	// User defined Draw()
-	Draw(gameContext);
 }
 
 void GameObject::SetParent(GameObject *pParent)

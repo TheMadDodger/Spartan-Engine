@@ -49,6 +49,7 @@ private:
 	friend class GameObject;
 	void SetGameObject(GameObject *pObject);
 	GameObject *m_pGameObject = nullptr;
+	bool m_bInitialized = false;
 
 	std::string m_Name;
 };
