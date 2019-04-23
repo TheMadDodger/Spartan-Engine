@@ -73,6 +73,11 @@ void SceneManager::LoadScene(const std::string &sceneName)
 	LoadScene(index);
 }
 
+void SceneManager::LoadSceneNextFrame(const std::string &sceneName)
+{
+	m_ToLoadNextFrame = sceneName;
+}
+
 SceneManager *SceneManager::GetInstance()
 {
 	if (m_pSceneManager)
@@ -105,6 +110,12 @@ void SceneManager::Initialize(const GameContext &gameContext)
 
 void SceneManager::Update(const GameContext &gameContext)
 {
+	if (m_ToLoadNextFrame != "")
+	{
+		LoadScene(m_ToLoadNextFrame);
+		m_ToLoadNextFrame = "";
+	}
+
 	// Check if the current scene has been initialized if not do that
 	if (!m_SceneHasInitialized)
 		Initialize(gameContext);

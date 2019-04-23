@@ -38,6 +38,11 @@ const Vector2 CameraComponent::GetPosition()
 	return camPos;
 }
 
+Vector3 CameraComponent::ConvertWorldToScreenSpace(Vector3 worldCoord)
+{
+	return m_CameraInverseMatrix * worldCoord;
+}
+
 void CameraComponent::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);

@@ -25,7 +25,7 @@ GameScene::~GameScene()
 	}
 }
 
-void GameScene::AddChild(GameObject *pObject)
+void GameScene::AddChild(GameObject *pObject, bool bForceInitialize)
 {
 	if (pObject != nullptr)
 	{
@@ -35,6 +35,11 @@ void GameScene::AddChild(GameObject *pObject)
 		{
 			pChild->m_pScene = this;
 		}
+	}
+
+	if (bForceInitialize)
+	{
+		pObject->RootInitialize(BaseGame::GetGame()->GetGameContext());
 	}
 }
 

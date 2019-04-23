@@ -13,7 +13,7 @@ public:
 	GameScene(const std::string &name);
 	virtual ~GameScene();
 
-	void AddChild(GameObject *pObject);
+	void AddChild(GameObject *pObject, bool bForceInitialize = false);
 	void RemoveChild(GameObject *pObject);
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }

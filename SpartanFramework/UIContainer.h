@@ -8,6 +8,7 @@ public:
 	virtual ~UIContainer();
 
 	void SetPadding(const Vector2 &padding);
+	void SetDimensions(const Vector2 &dimensions);
 	void SetColor(const Color &color);
 	const Vector2 &GetDimensions() { return m_Dimensions; }
 	const Vector2 &GetPadding() { return m_Padding; }

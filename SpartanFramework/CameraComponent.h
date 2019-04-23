@@ -13,6 +13,7 @@ public:
 	const Matrix3X3 &GetCameraMatrixInverse() { return m_CameraInverseMatrix; }
 
 	const Vector2 GetPosition();
+	Vector3 ConvertWorldToScreenSpace(Vector3 worldCoord);
 
 	virtual BaseComponent *Create() { return new CameraComponent(); }
 

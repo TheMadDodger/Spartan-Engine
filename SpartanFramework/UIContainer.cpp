@@ -17,6 +17,11 @@ void UIContainer::SetPadding(const Vector2 &padding)
 	m_Padding = padding;
 }
 
+void UIContainer::SetDimensions(const Vector2 &dimensions)
+{
+	m_Dimensions = dimensions;
+}
+
 void UIContainer::SetColor(const Color &color)
 {
 	m_Color = color;

@@ -9,6 +9,7 @@ public: // Methods
 	void AddScene(GameScene *pScene);
 	void LoadScene(int sceneIndex);
 	void LoadScene(const std::string &sceneName);
+	void LoadSceneNextFrame(const std::string &sceneName);
 
 public: // Singleton
 	static SceneManager *GetInstance();
@@ -23,6 +24,7 @@ private:
 	int m_CurrentScene = 0;
 	static SceneManager *m_pSceneManager;
 	bool m_SceneHasInitialized = false;
+	std::string m_ToLoadNextFrame = "";
 
 private:
 	friend class BaseGame;
