@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Event.h"
 
 class TextureData;
 
@@ -15,10 +16,16 @@ public:
 
 	bool IsMouseOver();
 	bool IsClicked();
+	void SetButtonID(int ID);
+	int GetButtonID();
 
 	void DisableButton(bool disable);
 
 	void SetClickBoxSize(const Vector2 &size);
+
+	Event<UIButton*> ButtonClicked;
+	Event<UIButton*> MouseOver;
+	Event<UIButton*> MouseLeave;
 
 protected:
 	virtual void OnMouseOver();
@@ -43,6 +50,7 @@ protected:
 	bool m_MouseOver;
 	bool m_Selected;
 	bool m_ButtonDisabled = false;
+	int m_ButtonID = -1;
 
 private:
 	TextureData *m_pIdleTexture = nullptr;

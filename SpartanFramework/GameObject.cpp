@@ -181,6 +181,14 @@ void GameObject::RootDraw(const GameContext & gameContext)
 	}
 }
 
+void GameObject::RootCleanup()
+{
+	for (auto pComp : m_pComponents)
+	{
+		pComp->RootCleanup();
+	}
+}
+
 void GameObject::SetParent(GameObject *pParent)
 {
 	m_pParentObject = pParent;

@@ -58,6 +58,11 @@ void BaseComponent::RootDraw(const GameContext & gameContext)
 	Draw(gameContext);
 }
 
+void BaseComponent::RootCleanup()
+{
+	Cleanup();
+}
+
 void BaseComponent::SetGameObject(GameObject *pObject)
 {
 	if (pObject != nullptr)

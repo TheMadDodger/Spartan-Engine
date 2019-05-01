@@ -41,6 +41,16 @@ bool UIButton::IsClicked()
 	return m_MouseClicked;
 }
 
+void UIButton::SetButtonID(int ID)
+{
+	m_ButtonID = ID;
+}
+
+int UIButton::GetButtonID()
+{
+	return m_ButtonID;
+}
+
 void UIButton::DisableButton(bool disable)
 {
 	m_ButtonDisabled = disable;
@@ -53,14 +63,17 @@ void UIButton::SetClickBoxSize(const Vector2 &size)
 
 void UIButton::OnMouseOver()
 {
+	MouseOver(this);
 }
 
 void UIButton::OnMouseLeave()
 {
+	MouseLeave(this);
 }
 
 void UIButton::OnMouseClick()
 {
+	ButtonClicked(this);
 }
 
 void UIButton::Initialize(const GameContext &)
@@ -96,6 +109,7 @@ void UIButton::Update(const GameContext &gameContext)
 			{
 				m_MouseClicked = true;
 				m_WasClickedThisFrame = true;
+				ButtonClicked(this);
 			}
 		}
 		else

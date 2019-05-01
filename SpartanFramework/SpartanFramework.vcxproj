@@ -33,7 +33,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -168,6 +168,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
     <ClInclude Include="AI.h" />
     <ClInclude Include="AIComponent.h" />
     <ClInclude Include="BaseAIBehaviour.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="GUID.h" />
+    <ClInclude Include="LineRenderComponent.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMeshComponent.h" />
@@ -227,6 +229,7 @@
     <ClCompile Include="AIBehaviourTree.cpp" />
     <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />

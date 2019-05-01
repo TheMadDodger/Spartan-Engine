@@ -10,11 +10,16 @@ public:
 
 	virtual BaseComponent *Create() { return new ColliderComponent(nullptr); }
 
+	void UpdateCollider(Collider *newCollider);
+
+
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
 private:
+	friend class RigidBodyComponent;
+
 	Collider *m_pCollider = nullptr;
 	b2FixtureDef m_FixtureDef;
 	b2Fixture *m_pFixture = nullptr;

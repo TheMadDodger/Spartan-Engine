@@ -10,8 +10,30 @@ ColliderComponent::ColliderComponent(Collider *collider) : m_pCollider(collider)
 
 ColliderComponent::~ColliderComponent()
 {
-	delete m_pCollider;
-	m_pCollider = nullptr;
+	if (m_pCollider)
+	{
+		delete m_pCollider;
+		m_pCollider = nullptr;
+	}
+}
+
+void ColliderComponent::UpdateCollider(Collider *newCollider)
+{
+	if (m_pCollider)
+	{
+		delete m_pCollider;
+		m_pCollider = nullptr;
+	}
+
+	m_pCollider = newCollider;
+
+	m_FixtureDef.shape = m_pCollider->ApplyShape();
+	m_FixtureDef.density = 1.0f;
+	m_FixtureDef.friction = 0.3f;
+
+	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+	pRigid->Getb2Body()->DestroyFixture(m_pFixture);
+	m_pFixture = pRigid->Getb2Body()->CreateFixture(&m_FixtureDef);
 }
 
 void ColliderComponent::Initialize(const GameContext &gameContext)

@@ -76,6 +76,7 @@ protected:
 	void RootPostInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
+	void RootCleanup();
 	void SetParent(GameObject *pParent);
 
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }

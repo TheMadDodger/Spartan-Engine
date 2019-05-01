@@ -21,6 +21,7 @@ namespace Math
 		Vector2 operator-(const Vector2 &other);
 		Vector2 operator*(const Vector2 &other);
 		Vector2 operator*(float factor);
+		void operator*=(float factor);
 		Vector2 operator/(float factor);
 		Vector2 Normalized();
 
@@ -289,5 +290,10 @@ namespace Math
 		crossProduct.y = a.z * b.x - a.x - b.z;
 		crossProduct.z = a.x * b.y - a.y * b.x;
 		return crossProduct;
+	}
+
+	inline b2Vec2 Vector2ToBox2DVec2(const Vector2 &vec)
+	{
+		return b2Vec2(vec.x, vec.y);
 	}
 }

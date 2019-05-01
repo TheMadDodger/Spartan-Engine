@@ -35,11 +35,13 @@ protected:
 	void RootInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
+	void RootCleanup();
 
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+	virtual void Cleanup() { }
 
 	static std::vector<BaseComponent*> m_pRegisteredComponents;
 	bool m_CanTickInEditor = false;

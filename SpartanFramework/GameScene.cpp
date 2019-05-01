@@ -12,6 +12,7 @@ GameScene::~GameScene()
 {
 	for (auto pChild : m_pChildren)
 	{
+		pChild->RootCleanup();
 		delete pChild;
 	}
 

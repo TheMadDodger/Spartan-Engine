@@ -179,6 +179,10 @@
     <ClInclude Include="Singleton.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="LineRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -299,5 +303,6 @@
     <ClCompile Include="BehaviourTreeNodes.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="LineRenderComponent.cpp" />
   </ItemGroup>
 </Project>

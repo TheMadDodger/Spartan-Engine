@@ -15,6 +15,7 @@ public:
 
 	void AddPage(GameObject *pPage);
 	void SetPage(size_t pageID);
+	GameObject *GetActivePage();
 
 private:
 	void Initialize(const GameContext &gameContext) override;

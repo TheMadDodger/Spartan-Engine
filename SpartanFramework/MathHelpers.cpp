@@ -47,6 +47,12 @@ Vector2 Vector2::operator*(float factor)
 	return result;
 }
 
+void Math::Vector2::operator*=(float factor)
+{
+	x *= factor;
+	y *= factor;
+}
+
 Vector2 Math::Vector2::operator/(float factor)
 {
 	Vector2 result;

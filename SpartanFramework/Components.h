@@ -12,3 +12,4 @@
 #include "ParticleComponent.h"
 #include "UIContainer.h"
 #include "SkinnedMeshComponent.h"
+#include "LineRenderComponent.h"

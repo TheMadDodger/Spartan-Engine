@@ -11,7 +11,7 @@ public:
 protected:
 	virtual b2Shape *ApplyShape() { return nullptr; }
 
-	~Collider()
+	virtual ~Collider()
 	{
 		if (m_pShape)
 		{
@@ -63,15 +63,19 @@ private:
 class Circle : public Collider
 {
 public:
-	Circle(float radius) : Radius(radius) {};
+	Circle(float radius) : m_Radius(radius) {};
 
 	virtual ~Circle() {};
 
-	const float Radius;
-
 	void DrawDebugShape(const GameContext &gameContext) override
 	{
-		gameContext.pRenderer->DrawSolidCircle(Vector2::Zero(), Radius, Color::Pink());
+		gameContext.pRenderer->DrawSolidCircle(Vector2::Zero(), m_Radius, Color::Pink());
+	}
+
+	void SetRadius(float radius)
+	{
+		m_Radius = radius;
+		m_pShape->m_radius = m_Radius;
 	}
 
 private:
@@ -79,6 +83,10 @@ private:
 	b2Shape *ApplyShape() override
 	{
 		m_pShape = new b2CircleShape();
+		m_pShape->m_radius = m_Radius;
 		return m_pShape;
 	}
+
+private:
+	float m_Radius;
 };

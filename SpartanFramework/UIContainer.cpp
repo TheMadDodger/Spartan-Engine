@@ -43,6 +43,11 @@ void UIContainer::SetPage(size_t pageID)
 	m_pUIPages[m_CurrentPage]->SetEnabled(true);
 }
 
+GameObject *UIContainer::GetActivePage()
+{
+	return m_pUIPages[m_CurrentPage];
+}
+
 void UIContainer::Initialize(const GameContext &)
 {
 }
