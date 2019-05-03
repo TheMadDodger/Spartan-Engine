@@ -101,6 +101,10 @@ namespace Utilities
 		static void WriteString(const string &data);
 
 		static void CreateDir(LPCSTR path);
+		static int GetReadPosition()
+		{
+			return m_BufferReadPos;
+		}
 
 	private:
 		static std::ifstream *m_piFileStream;

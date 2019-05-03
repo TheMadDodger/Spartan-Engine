@@ -6,7 +6,11 @@ class Singleton
 public:
 	static T *GetInstance()
 	{
-		if (!m_pInstance) m_pInstance = new T();
+		if (!m_pInstance)
+		{
+			m_pInstance = new T();
+			m_pInstance->OnInstanceCreated();
+		}
 		return m_pInstance;
 	}
 
@@ -18,6 +22,9 @@ public:
 			m_pInstance = nullptr;
 		}
 	}
+
+protected:
+	virtual void OnInstanceCreated() {}
 
 private:
 	static T *m_pInstance;
