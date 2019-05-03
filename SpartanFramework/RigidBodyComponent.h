@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
+
 class RigidBodyComponent : public BaseComponent
 {
 public:

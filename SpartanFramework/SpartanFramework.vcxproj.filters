@@ -183,6 +183,9 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="LineRenderComponent.h" />
+    <ClInclude Include="PhysicsMaterial.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />

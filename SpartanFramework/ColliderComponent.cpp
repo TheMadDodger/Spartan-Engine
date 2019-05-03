@@ -4,7 +4,8 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-ColliderComponent::ColliderComponent(Collider *collider) : m_pCollider(collider), BaseComponent("Collider")
+ColliderComponent::ColliderComponent(Collider *collider, const PhysicsMaterial &physicsMat) :
+	m_pCollider(collider), BaseComponent("Collider"), m_PhysicsMaterial(physicsMat)
 {
 }
 
@@ -28,8 +29,10 @@ void ColliderComponent::UpdateCollider(Collider *newCollider)
 	m_pCollider = newCollider;
 
 	m_FixtureDef.shape = m_pCollider->ApplyShape();
-	m_FixtureDef.density = 1.0f;
-	m_FixtureDef.friction = 0.3f;
+	m_FixtureDef.density = m_PhysicsMaterial.Density;
+	m_FixtureDef.friction = m_PhysicsMaterial.Friction;
+	m_FixtureDef.restitution = m_PhysicsMaterial.Restitution;
+	m_FixtureDef.filter = m_PhysicsMaterial.Filter;
 
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	pRigid->Getb2Body()->DestroyFixture(m_pFixture);
@@ -49,8 +52,10 @@ void ColliderComponent::Initialize(const GameContext &gameContext)
 	}
 
 	m_FixtureDef.shape = m_pCollider->ApplyShape();
-	m_FixtureDef.density = 1.0f;
-	m_FixtureDef.friction = 0.3f;
+	m_FixtureDef.density = m_PhysicsMaterial.Density;
+	m_FixtureDef.friction = m_PhysicsMaterial.Friction;
+	m_FixtureDef.restitution = m_PhysicsMaterial.Restitution;
+	m_FixtureDef.filter = m_PhysicsMaterial.Filter;
 
 	m_pFixture = pRigid->Getb2Body()->CreateFixture(&m_FixtureDef);
 }
