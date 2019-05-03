@@ -182,9 +182,11 @@
     <ClInclude Include="Event.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="LineRenderComponent.h" />
     <ClInclude Include="PhysicsMaterial.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="LineRenderComponent.h">
+      <Filter>Core Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,6 +308,8 @@
     <ClCompile Include="BehaviourTreeNodes.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="LineRenderComponent.cpp" />
+    <ClCompile Include="LineRenderComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
