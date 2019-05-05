@@ -141,7 +141,7 @@ TextureData *Renderer::RenderText(FontData *pFont, const std::string & text, con
 	return pTextTexture;
 }
 
-void Renderer::RenderTexture(TextureData *pBitmap)
+void Renderer::RenderTexture(TextureData *pBitmap, const Color &color)
 {
 	float vertexLeft = 0;
 	float vertexBottom = 0;
@@ -149,22 +149,26 @@ void Renderer::RenderTexture(TextureData *pBitmap)
 	float vertexTop = pBitmap->GetDimensions().y;
 	
 	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0);
 
 	glEnable(GL_TEXTURE_2D);
 	{
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0.0f, 1.0f);
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
 			glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
 
 			glTexCoord2f(0.0f, 0.0f);
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
 			glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexTop - pBitmap->GetOrigin().y);
 
 			glTexCoord2f(1.0f, 0.0f);
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
 			glVertex2f(vertexRight - pBitmap->GetOrigin().x, vertexTop - pBitmap->GetOrigin().y);
 
 			glTexCoord2f(1.0f, 1.0f);
+			glColor4f((GLfloat)color.r, (GLfloat)color.g, (GLfloat)color.b, (GLfloat)color.a);
 			glVertex2f(vertexRight - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
 		}
 		glEnd();

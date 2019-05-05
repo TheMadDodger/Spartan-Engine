@@ -11,6 +11,7 @@ public:
 	~ImageRenderComponent();
 
 	void SetTexture(TextureData *pTexture);
+	void SetColor(const Color &color);
 	std::string m_AssetFile = "";
 
 	COMPONENT_EDITOR(ImageRenderComponent)
@@ -23,5 +24,6 @@ private:
 private:
 	//const char* m_AssetFile = nullptr;
 	TextureData *m_pImage = nullptr;
+	Color m_Color = Color::White();
 };
 

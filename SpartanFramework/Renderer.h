@@ -18,7 +18,7 @@ public:
 
 	void Initialize(const GameContext &gameContext);
 	void DrawImage(TextureData *pImage, const GameContext &gameContext);
-	void RenderTexture(TextureData *pBitmap);
+	void RenderTexture(TextureData *pBitmap, const Color &color = Color::White());
 	void RenderTexture(GLuint texID, float width, float height);
 	void RenderSprite(TextureData *pBitmap, const SDL_Rect &src, const Vector2 &origin);
 	TextureData *RenderText(FontData *pFont, const std::string &text, const SDL_Color &clr, const Origin &origin = Origin::Center, Uint32 maxWidth = 0);

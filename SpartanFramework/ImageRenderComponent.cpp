@@ -26,6 +26,11 @@ void ImageRenderComponent::SetTexture(TextureData *pTexture)
 	m_pImage = pTexture;
 }
 
+void ImageRenderComponent::SetColor(const Color & color)
+{
+	m_Color = color;
+}
+
 void ImageRenderComponent::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
@@ -58,7 +63,7 @@ void ImageRenderComponent::Draw(const GameContext &gameContext)
 		// Apply Transformation from TransformComponent
 		glPushMatrix();
 		GetGameObject()->GetTransform()->ApplyTransform();
-		gameContext.pRenderer->RenderTexture(m_pImage);
+		gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
 		glPopMatrix();
 	}
 }
