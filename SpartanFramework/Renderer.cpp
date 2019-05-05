@@ -176,6 +176,37 @@ void Renderer::RenderTexture(TextureData *pBitmap, const Color &color)
 	glDisable(GL_TEXTURE_2D);
 }
 
+void Renderer::RenderTexture(TextureData * pBitmap)
+{
+	float vertexLeft = 0;
+	float vertexBottom = 0;
+	float vertexRight = pBitmap->GetDimensions().x;
+	float vertexTop = pBitmap->GetDimensions().y;
+
+	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+	glEnable(GL_TEXTURE_2D);
+	{
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(0.0f, 1.0f);
+			glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
+
+			glTexCoord2f(0.0f, 0.0f);
+			glVertex2f(vertexLeft - pBitmap->GetOrigin().x, vertexTop - pBitmap->GetOrigin().y);
+
+			glTexCoord2f(1.0f, 0.0f);
+			glVertex2f(vertexRight - pBitmap->GetOrigin().x, vertexTop - pBitmap->GetOrigin().y);
+
+			glTexCoord2f(1.0f, 1.0f);
+			glVertex2f(vertexRight - pBitmap->GetOrigin().x, vertexBottom - pBitmap->GetOrigin().y);
+		}
+		glEnd();
+	}
+	glDisable(GL_TEXTURE_2D);
+}
+
 void Renderer::RenderTexture(GLuint texID, float width, float height)
 {
 	float vertexLeft = 0;
@@ -471,3 +502,4 @@ const Vector2 Renderer::CalculateOrigin(const Math::Origin &origin, SDL_Surface 
 
 	return calculatedOrigin;
 }
+
