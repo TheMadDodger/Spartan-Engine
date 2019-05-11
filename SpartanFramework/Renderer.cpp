@@ -419,6 +419,19 @@ void Renderer::DrawPolygon(const std::vector<Vector2> &points, const Math::Color
 	glEnd();
 }
 
+void Renderer::DrawPixels(const std::vector<Vector2>& points, const std::vector<Color>& colors)
+{
+	glBegin(GL_POINTS);
+	{
+		for (size_t i = 0; i < points.size(); ++i)
+		{
+			glColor4f((GLfloat)colors[i].r, (GLfloat)colors[i].g, (GLfloat)colors[i].b, (GLfloat)colors[i].a);
+			glVertex2f((GLfloat)points[i].x, (GLfloat)points[i].y);
+		}
+	}
+	glEnd();
+}
+
 void Renderer::DrawSkinnedQuad(const std::vector<SkinnedVertice>& vertices, Skeleton *pSkeleton, TextureData *pTexture)
 {
 	//glBindTexture(GL_TEXTURE_2D, pTexture->m_TextureID);

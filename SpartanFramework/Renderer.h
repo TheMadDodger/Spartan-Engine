@@ -40,6 +40,7 @@ public:
 	void DrawCircle(const Vector2 &center, float radius, const Math::Color &color);
 	void DrawLine(const Vector2 &start, const Vector2 &end, const Math::Color &color);
 	void DrawPolygon(const std::vector<Vector2> &points, const Math::Color &color);
+	void DrawPixels(const std::vector<Vector2> &points, const std::vector<Color> &colors);
 	void DrawSkinnedQuad(const std::vector<SkinnedVertice> &vertices, Skeleton *pSkeleton, TextureData *pTexture);
 
 private:
