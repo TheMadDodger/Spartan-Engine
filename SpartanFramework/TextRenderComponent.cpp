@@ -42,6 +42,21 @@ void TextRenderComponent::SetFont(FontData *pFont)
 	m_FontSet = true;
 }
 
+FontData *TextRenderComponent::GetFont()
+{
+	return m_pFont;
+}
+
+TextureData * TextRenderComponent::GetTextureData()
+{
+	return m_pTextTexture;
+}
+
+const std::string & TextRenderComponent::GetText()
+{
+	return m_Text;
+}
+
 void TextRenderComponent::SetMaxWidth(Uint32 maxWidth)
 {
 	m_MaxWidth = maxWidth;

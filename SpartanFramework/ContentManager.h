@@ -209,6 +209,11 @@ public:
 
 	TTF_Font *GetFontData() { return m_pTTFFont; }
 
+	int GetSize()
+	{
+		return TTF_FontHeight(m_pTTFFont);
+	}
+
 private:
 	friend class FontLoader;
 	TTF_Font *m_pTTFFont = nullptr;

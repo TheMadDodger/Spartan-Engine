@@ -11,6 +11,9 @@ public:
 	void SetAllignment(const Origin &allignment);
 	void SetColor(const Color &col);
 	void SetFont(FontData *pFont);
+	FontData *GetFont();
+	TextureData *GetTextureData();
+	const std::string &GetText();
 
 	void SetMaxWidth(Uint32 maxWidth);
 
