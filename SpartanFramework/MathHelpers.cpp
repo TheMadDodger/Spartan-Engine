@@ -355,3 +355,13 @@ Color Math::Color::operator+(const Color & other)
 	result.a = a + other.a;
 	return result;
 }
+
+bool Math::Color::operator==(const Color & other)
+{
+	return (r == other.r && g == other.g && b == other.b && a == other.a);
+}
+
+bool Math::Color::operator!=(const Color & other)
+{
+	return (r != other.r || g != other.g || b != other.b || a != other.a);;
+}

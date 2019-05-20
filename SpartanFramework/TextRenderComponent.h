@@ -14,6 +14,7 @@ public:
 	FontData *GetFont();
 	TextureData *GetTextureData();
 	const std::string &GetText();
+	const Color &GetColor() const;
 
 	void SetMaxWidth(Uint32 maxWidth);
 
@@ -24,10 +25,9 @@ protected:
 	void Draw(const GameContext &gameContext) override;
 
 private:
-
 	std::string m_FontFile;
 	std::string m_Text;
-	std::string m_PreviousText;
+	bool m_IsDirty = true;
 	TextureData *m_pTextTexture = nullptr;
 	FontData *m_pFont;
 	Origin m_Origin;

@@ -26,6 +26,11 @@ void ImageRenderComponent::SetTexture(TextureData *pTexture)
 	m_pImage = pTexture;
 }
 
+TextureData *ImageRenderComponent::GetTexture()
+{
+	return m_pImage;
+}
+
 void ImageRenderComponent::SetColor(const Color & color)
 {
 	m_Color = color;

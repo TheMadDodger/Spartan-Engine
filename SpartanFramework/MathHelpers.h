@@ -147,6 +147,8 @@ namespace Math
 		Color operator*(float f);
 		Color operator-(const Color &other);
 		Color operator+(const Color &other);
+		bool operator==(const Color &other);
+		bool operator!=(const Color &other);
 
 	public: // Color values
 		float r;
