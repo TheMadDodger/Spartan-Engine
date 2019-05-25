@@ -30,6 +30,8 @@ public:
 
 	virtual void CustomEditor() {};
 
+	bool IsInitialized() { return m_bInitialized; }
+
 protected:
 	friend class GameObject;
 	void RootInitialize(const GameContext &gameContext);

@@ -128,6 +128,10 @@ TextureData *Renderer::RenderText(FontData *pFont, const std::string & text, con
 	SDL_Surface *pTextSurface = (maxWidth == 0) ? TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr) :
 		TTF_RenderUTF8_Blended_Wrapped(pFont->GetFontData(), text.data(), clr, maxWidth);
 
+	auto error = TTF_GetError();
+	if (error != "")
+		std::cout << error << std::endl;
+
 	if (!pTextSurface)
 	{
 		Utilities::Debug::LogWarning("Renderer::RenderText > Could not render text surface! TTF_Error: " + string(TTF_GetError()));
@@ -149,7 +153,13 @@ void Renderer::RenderTexture(TextureData *pBitmap, const Color &color)
 	float vertexTop = pBitmap->GetDimensions().y;
 	
 	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0);
+	GLenum error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 
 	glEnable(GL_TEXTURE_2D);
 	{
@@ -174,6 +184,9 @@ void Renderer::RenderTexture(TextureData *pBitmap, const Color &color)
 		glEnd();
 	}
 	glDisable(GL_TEXTURE_2D);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 }
 
 void Renderer::RenderTexture(TextureData * pBitmap)
@@ -184,7 +197,13 @@ void Renderer::RenderTexture(TextureData * pBitmap)
 	float vertexTop = pBitmap->GetDimensions().y;
 
 	glBindTexture(GL_TEXTURE_2D, pBitmap->GetID());
+	GLenum error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 
 	glEnable(GL_TEXTURE_2D);
 	{
@@ -205,6 +224,9 @@ void Renderer::RenderTexture(TextureData * pBitmap)
 		glEnd();
 	}
 	glDisable(GL_TEXTURE_2D);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 }
 
 void Renderer::RenderTexture(GLuint texID, float width, float height)
@@ -215,7 +237,13 @@ void Renderer::RenderTexture(GLuint texID, float width, float height)
 	float vertexTop = height;
 
 	glBindTexture(GL_TEXTURE_2D, texID);
+	GLenum error = glGetError();
+	if(error != 0)
+		std::cout << error << std::endl;
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, 0/*GL_REPLACE*/);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 
 	glEnable(GL_TEXTURE_2D);
 	{
@@ -236,6 +264,9 @@ void Renderer::RenderTexture(GLuint texID, float width, float height)
 		glEnd();
 	}
 	glDisable(GL_TEXTURE_2D);
+	error = glGetError();
+	if (error != 0)
+		std::cout << error << std::endl;
 }
 
 void Renderer::ClearBackground()

@@ -20,6 +20,11 @@ void RigidBodyComponent::Initialize(const GameContext &gameContext)
 	bodyDef.position.Set(m_BodyPivot.x, m_BodyPivot.y);
 	bodyDef.type = m_BodyType;
 	m_Body = physicsWorld->CreateBody(&bodyDef);
+
+	auto pos = GetGameObject()->GetTransform()->Position;
+	auto rot = GetGameObject()->GetTransform()->Rotation;
+
+	Getb2Body()->SetTransform(Tob2Vec2(pos), rot.z);
 }
 
 void RigidBodyComponent::Cleanup()

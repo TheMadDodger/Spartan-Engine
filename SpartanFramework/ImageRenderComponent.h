@@ -25,6 +25,6 @@ private:
 private:
 	//const char* m_AssetFile = nullptr;
 	TextureData *m_pImage = nullptr;
-	Color m_Color = Color::White();
+	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 };
 

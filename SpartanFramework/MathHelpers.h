@@ -201,8 +201,8 @@ namespace Math
 	template<typename T>
 	inline T Random()
 	{
-		float randomFactor = (float)rand() / (float)RAND_MAX;
-		return (T)randomFactor;
+		float randomVal = (float)rand();
+		return (T)randomVal;
 	}
 
 	inline Vector2 RandomRangeVector2(const Vector2 &a, const Vector2 &b)

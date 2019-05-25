@@ -68,7 +68,10 @@ void ImageRenderComponent::Draw(const GameContext &gameContext)
 		// Apply Transformation from TransformComponent
 		glPushMatrix();
 		GetGameObject()->GetTransform()->ApplyTransform();
-		gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
+		if (m_Color == Color::White())
+			gameContext.pRenderer->RenderTexture(m_pImage);
+		else
+			gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
 		glPopMatrix();
 	}
 }

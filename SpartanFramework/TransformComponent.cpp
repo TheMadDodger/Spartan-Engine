@@ -102,7 +102,7 @@ void TransformComponent::Translate(const Vector2 &position)
 
 	// Update rigid body if there is one
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
-	if (pRigid)
+	if (pRigid && pRigid->IsInitialized())
 	{
 		pRigid->Getb2Body()->SetTransform(Tob2Vec2(Position), pRigid->Getb2Body()->GetAngle());
 	}
