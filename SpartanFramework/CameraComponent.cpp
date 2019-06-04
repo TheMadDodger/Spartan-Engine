@@ -31,7 +31,7 @@ void CameraComponent::Zoom(float factor)
 const Vector2 CameraComponent::GetPosition()
 {
 	auto pTransform = GetGameObject()->GetTransform();
-	auto camPos = pTransform->GetPosition();
+	auto camPos = pTransform->GetPositionInScreenSpace();
 	camPos.x += BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f;
 	camPos.y += BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f;
 

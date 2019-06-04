@@ -86,6 +86,30 @@ Vector2 Math::Vector2::Lerp(const Vector2 &a, const Vector2 &b, float t)
 	return result;
 }
 
+IntVector2 Math::IntVector2::operator+(const IntVector2 &other)
+{
+	IntVector2 result = IntVector2();
+	result.x = x + other.x;
+	result.y = y + other.y;
+	return result;
+}
+
+IntVector2 Math::IntVector2::operator-(const IntVector2 &other)
+{
+	IntVector2 result = IntVector2();
+	result.x = x - other.x;
+	result.y = y - other.y;
+	return result;
+}
+
+IntVector2 Math::IntVector2::operator*(const IntVector2 &other)
+{
+	IntVector2 result = IntVector2();
+	result.x = x * other.x;
+	result.y = y * other.y;
+	return result;
+}
+
 float Vector3::Length()
 {
 	return sqrt((x * x) + (y * y) + (z * z));

@@ -39,6 +39,33 @@ namespace Math
 		}
 	};
 
+	struct IntVector2
+	{
+		int x;
+		int y;
+
+		// Constructors
+		IntVector2() { x = 0; y = 0; }
+		IntVector2(int _x, int _y) { x = _x; y = _y; }
+
+		// Math operations
+		IntVector2 operator+(const IntVector2 &other);
+		IntVector2 operator-(const IntVector2 &other);
+		IntVector2 operator*(const IntVector2 &other);
+
+		// Static methods
+		static IntVector2 Zero() { return IntVector2(); }
+		static IntVector2 Forward() { return IntVector2(0, 1); }
+		static IntVector2 Back() { return IntVector2(0, -1); }
+		static IntVector2 Right() { return IntVector2(1, 0); }
+		static IntVector2 Left() { return IntVector2(-1, 0); }
+
+		std::string ToString()
+		{
+			return std::string(std::to_string(x) + std::to_string(y));
+		}
+	};
+
 	struct Vector3
 	{
 		float x;

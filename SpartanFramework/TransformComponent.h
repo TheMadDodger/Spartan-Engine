@@ -17,7 +17,7 @@ public:
 	void Rotate(const Vector3 &rotation);
 	void SetScale(const Vector2 &scale);
 
-	const Vector2 GetPosition();
+	const Vector2 GetPositionInScreenSpace();
 
 	Vector2 Position = Vector2(0, 0);
 	Vector3 Rotation = Vector3(0, 0, 0);

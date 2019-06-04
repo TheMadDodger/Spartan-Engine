@@ -36,11 +36,13 @@ void TransformComponent::Update(const GameContext &gameContext)
 	auto pUI = GetGameObject()->GetComponent<UIComponent>();
 	if (pParent && pUI == nullptr)
 	{
-		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
 		m_WorldTansformMatrix = parentWorldTransformMatrix * m_TansformMatrix;
+		
+		m_WorldPosition = m_WorldTansformMatrix.ExtraxtTranslation();
+
+		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 		m_TansformMatrix = parentTransformMatrix * m_TansformMatrix;
-		m_WorldPosition = m_TansformMatrix.ExtraxtTranslation();
 
 		// We don't need to apply the camera transform again
 		// That was already applied to our parent
@@ -48,7 +50,7 @@ void TransformComponent::Update(const GameContext &gameContext)
 		return;
 	}
 
-	m_WorldPosition = m_TansformMatrix.ExtraxtTranslation();
+	m_WorldPosition = Position;
 
 	// Don't apply camera transform if it's a UI Component
 	if (pUI == nullptr)
@@ -134,7 +136,7 @@ void TransformComponent::SetScale(const Vector2 &scale)
 	Scale = scale;
 }
 
-const Vector2 TransformComponent::GetPosition()
+const Vector2 TransformComponent::GetPositionInScreenSpace()
 {
 	return m_TansformMatrix.ExtraxtTranslation();
 }
