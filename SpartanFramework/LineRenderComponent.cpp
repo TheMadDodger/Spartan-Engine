@@ -16,6 +16,12 @@ void LineRenderComponent::SetColor(Color color)
 	m_Color = color;
 }
 
+void LineRenderComponent::SetStartAndEnd(Vector2 startPos, Vector2 endPos)
+{
+	m_StartPos = startPos;
+	m_EndPos = endPos;
+}
+
 void LineRenderComponent::Draw(const GameContext & gameContext)
 {
 	glPushMatrix();

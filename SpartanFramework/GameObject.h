@@ -83,8 +83,11 @@ protected:
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+
 	virtual void OnDestroy() {};
 	virtual void OnCreated() {};
+	virtual void OnEnable() {};
+	virtual void OnDisable() {};
 
 private:
 	friend class LevelEditor;

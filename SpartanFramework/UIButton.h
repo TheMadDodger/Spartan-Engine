@@ -23,6 +23,8 @@ public:
 
 	void SetClickBoxSize(const Vector2 &size);
 
+	void SetTextures(TextureData *pIdleTexture, TextureData *pMouseOverTexture, TextureData *pMouseClicktexture, TextureData *pSelectedTexture);
+
 	Event<UIButton*> ButtonClicked;
 	Event<UIButton*> MouseOver;
 	Event<UIButton*> MouseLeave;

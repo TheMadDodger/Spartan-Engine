@@ -97,6 +97,13 @@ bool GameObject::IsEnabled()
 
 void GameObject::SetEnabled(bool enabled)
 {
+	if (m_Enabled != enabled)
+	{
+		if (m_Enabled)
+			OnEnable();
+		else
+			OnDisable();
+	}
 	m_Enabled = enabled;
 }
 

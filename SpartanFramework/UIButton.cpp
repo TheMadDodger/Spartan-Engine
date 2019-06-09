@@ -61,6 +61,14 @@ void UIButton::SetClickBoxSize(const Vector2 &size)
 	m_Size = size;
 }
 
+void UIButton::SetTextures(TextureData * pIdleTexture, TextureData * pMouseOverTexture, TextureData * pMouseClicktexture, TextureData * pSelectedTexture)
+{
+	m_pIdleTexture = pIdleTexture;
+	m_pMouseOverTexture = pMouseOverTexture;
+	m_pClickTexture = pMouseClicktexture;
+	m_pSelectedTexture = pSelectedTexture;
+}
+
 void UIButton::OnMouseOver()
 {
 	MouseOver(this);
