@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "InputManager.h"
 #include "SoundManager.h"
+#include "MaterialManager.h"
 
 BaseGame *BaseGame::m_pGame = nullptr;
 
@@ -20,6 +21,9 @@ BaseGame::~BaseGame()
 
 	// Clean up scenes
 	SceneManager::Destroy();
+
+	// Cleanup materials
+	MaterialManager::Cleanup();
 
 	// Clean up GameContext
 	delete m_GameContext.pRenderer;
@@ -40,9 +44,6 @@ BaseGame::~BaseGame()
 
 bool BaseGame::RootInitialize()
 {
-	// Init GLEW
-	glewInit();
-
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{

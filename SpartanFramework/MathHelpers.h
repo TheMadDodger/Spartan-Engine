@@ -196,7 +196,7 @@ namespace Math
 	inline Vector2 LengthDir(float length, float dir)
 	{
 		Vector2 result = Vector2::Zero();
-		float radians = dir / 180.0f * M_PI;
+		float radians = dir / 180.0f * (float)M_PI;
 		result.x = cos(radians) * length;
 		result.y = sin(radians) * length;
 		return result;

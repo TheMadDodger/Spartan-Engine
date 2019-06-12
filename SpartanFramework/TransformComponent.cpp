@@ -69,7 +69,7 @@ void TransformComponent::ApplyTransform()
 	Vector3 rot = m_TansformMatrix.ExtraxtRotation();
 
 	// Convert rotation to Radians since OpenGL needs Radians
-	rot.z = rot.z / M_PI * 180.0f;
+	rot.z = rot.z / (float)M_PI * 180.0f;
 
 	// Apply Transform to OpenGL
 	glTranslatef(pos.x, pos.y, 0);

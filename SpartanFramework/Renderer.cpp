@@ -23,6 +23,7 @@ Renderer::~Renderer()
 void Renderer::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
+
 	// Open a window
 	m_pWindow = SDL_CreateWindow(BaseGame::GetGame()->GetGameSettings().AppName.data(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN : SDL_WINDOW_OPENGL);
@@ -48,6 +49,15 @@ void Renderer::Initialize(const GameContext &gameContext)
 		std::cerr << "Could not ceate SDL GL Context: " << SDL_GetError() << std::endl;
 		return;
 	}
+
+	// Init GLEW
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		/* Problem: glewInit failed, something is seriously wrong. */
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
+	}
+	fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
 	if (BaseGame::GetGame()->GetGameSettings().EnableVSync)
 	{
@@ -129,7 +139,7 @@ TextureData *Renderer::RenderText(FontData *pFont, const std::string & text, con
 		TTF_RenderUTF8_Blended_Wrapped(pFont->GetFontData(), text.data(), clr, maxWidth);
 
 	auto error = TTF_GetError();
-	if (error != "")
+	if (string(error) != "")
 		std::cout << error << std::endl;
 
 	if (!pTextSurface)

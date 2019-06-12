@@ -188,6 +188,21 @@
     <ClInclude Include="LineRenderComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderLoader.h">
+      <Filter>Content Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh2DRenderComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexHelpers.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -310,6 +325,15 @@
     </ClCompile>
     <ClCompile Include="LineRenderComponent.cpp">
       <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderLoader.cpp">
+      <Filter>Content Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh2DRenderComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

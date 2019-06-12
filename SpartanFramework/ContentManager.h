@@ -219,6 +219,94 @@ private:
 	TTF_Font *m_pTTFFont = nullptr;
 };
 
+class Material : public Content
+{
+public:
+	Material(const std::string &file) : Content(file) {}
+	virtual ~Material()
+	{
+		glDeleteProgram(m_ShaderProgramID);
+	}
+
+	void SetFloat(const std::string &name, float value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform1f(ID, value);
+	}
+	
+	void SetBool(const std::string &name, bool value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform1i(ID, (int)value);
+	}
+	
+	void SetVec3(const std::string &name, const Vector3 &value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform3f(ID, value.x, value.y, value.z);
+	}
+
+	void SetVec2(const std::string &name, const Vector3 &value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform2f(ID, value.x, value.y);
+	}
+
+	void SetColor(const std::string &name, const Color &value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform4f(ID, value.r, value.g, value.b, value.a);
+	}
+
+	void SetDouble(const std::string &name, double value) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		glUniform1d(ID, value);
+	}
+
+	void SetMatrix(const std::string &name, const Matrix3X3 &m) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+
+		float mp[6] = {m.m[0][0], m.m[1][0], m.m[1][0], m.m[0][1], m.m[1][1], m.m[2][1]};
+		glUniformMatrix3x2fv(ID, 1, false, mp);
+	}
+
+	void SetMatrix(const std::string &name, const std::vector<Matrix3X3> &matrices) const
+	{
+		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		const size_t arraySize = matrices.size() * 6;
+		float *mp = new float[arraySize];
+		size_t index = 0;
+		for (Matrix3X3 m : matrices)
+		{
+			mp[index] = m.m[0][0];
+			mp[index + 1] = m.m[1][0];
+			mp[index + 2] = m.m[2][0];
+			mp[index + 3] = m.m[0][1];
+			mp[index + 4] = m.m[1][1];
+			mp[index + 5] = m.m[2][1];
+		}
+
+		glUniformMatrix3x2fv(ID, matrices.size(), false, mp);
+		delete[] mp;
+	}
+
+	void Use()
+	{
+		glUseProgram(m_ShaderProgramID);
+	}
+
+	static void Reset()
+	{
+		glUseProgram(0);
+	}
+
+private:
+	friend class ShaderLoader;
+	unsigned int m_ShaderProgramID;
+};
+
 #pragma warning(disable:4996)
 class ContentManager
 {

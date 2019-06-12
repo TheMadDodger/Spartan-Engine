@@ -5,6 +5,7 @@
 #include "AudioFileLoader.h"
 #include "SpriteSheetLoader.h"
 #include "FontLoader.h"
+#include "ShaderLoader.h"
 
 ContentManager *ContentManager::m_pContentManager = nullptr;
 
@@ -34,6 +35,7 @@ void ContentManager::Initialize()
 	AddLoader(new AudioFileLoader());
 	AddLoader(new SpriteSheetLoader());
 	AddLoader(new FontLoader());
+	AddLoader(new ShaderLoader());
 }
 
 ContentManager::ContentManager()

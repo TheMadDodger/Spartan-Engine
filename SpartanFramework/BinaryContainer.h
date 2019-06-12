@@ -106,6 +106,25 @@ namespace Utilities
 			return m_BufferReadPos;
 		}
 
+		static std::string ReadCompleteFile(const char *file)
+		{
+			int index = 0;
+			if (!BinaryContainer::OpenRead(file))
+			{
+				Debug::LogWarning("Error when trying to read file: " + std::string(file));
+				return "";
+			}
+			std::string fileOutput;
+			while (!BinaryContainer::ReachedEndOfFile())
+			{
+				char c = BinaryContainer::Read<char>();
+				fileOutput += c;
+				++index;
+			}
+			BinaryContainer::Close();
+			return fileOutput;
+		}
+
 	private:
 		static std::ifstream *m_piFileStream;
 		static std::ofstream *m_poFileStream;

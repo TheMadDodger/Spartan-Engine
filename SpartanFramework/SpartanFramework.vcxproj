@@ -178,7 +178,11 @@
     <ClInclude Include="Bone.h" />
     <ClInclude Include="GUID.h" />
     <ClInclude Include="LineRenderComponent.h" />
+    <ClInclude Include="MaterialManager.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Mesh2DRenderComponent.h" />
     <ClInclude Include="PhysicsMaterial.h" />
+    <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMeshComponent.h" />
@@ -223,6 +227,7 @@
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="TextRenderComponent.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="VertexHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
@@ -231,6 +236,9 @@
     <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="Mesh2DRenderComponent.cpp" />
+    <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />
