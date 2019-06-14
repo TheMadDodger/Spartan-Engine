@@ -1,6 +1,7 @@
 #pragma once
 #include "ContentLoader.h"
 #include "MathHelpers.h"
+#include "Debug.h"
 
 using namespace Math;
 
@@ -226,55 +227,71 @@ public:
 	virtual ~Material()
 	{
 		glDeleteProgram(m_ShaderProgramID);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetFloat(const std::string &name, float value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform1f(ID, value);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 	
 	void SetBool(const std::string &name, bool value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform1i(ID, (int)value);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 	
 	void SetVec3(const std::string &name, const Vector3 &value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform3f(ID, value.x, value.y, value.z);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetVec2(const std::string &name, const Vector3 &value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform2f(ID, value.x, value.y);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetColor(const std::string &name, const Color &value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform4f(ID, value.r, value.g, value.b, value.a);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetDouble(const std::string &name, double value) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		glUniform1d(ID, value);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetMatrix(const std::string &name, const Matrix3X3 &m) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 
 		float mp[6] = {m.m[0][0], m.m[1][0], m.m[1][0], m.m[0][1], m.m[1][1], m.m[2][1]};
 		glUniformMatrix3x2fv(ID, 1, false, mp);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void SetMatrix(const std::string &name, const std::vector<Matrix3X3> &matrices) const
 	{
 		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
 		const size_t arraySize = matrices.size() * 6;
 		float *mp = new float[arraySize];
 		size_t index = 0;
@@ -289,17 +306,20 @@ public:
 		}
 
 		glUniformMatrix3x2fv(ID, matrices.size(), false, mp);
+		Utilities::Debug::LogGLError(glGetError());
 		delete[] mp;
 	}
 
 	void Use()
 	{
 		glUseProgram(m_ShaderProgramID);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	static void Reset()
 	{
 		glUseProgram(0);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 private:

@@ -19,6 +19,8 @@ private:
 	void Update(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
+	virtual BaseComponent* Create() override { return new Mesh2DRenderComponent(); }
+
 private:
 	Mesh2D *m_pMesh;
 	size_t m_MaterialID;

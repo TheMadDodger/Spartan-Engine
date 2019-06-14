@@ -10,3 +10,12 @@ public:
 	Math::Vector2 Position;
 	Math::Vector2 Coord;
 };
+
+struct Vertex2DPosColor
+{
+public:
+	Vertex2DPosColor(const Math::Vector2 &position, const Math::Color &color) : Position(position), Color(color) {}
+
+	Math::Vector2 Position;
+	Math::Color Color;
+};

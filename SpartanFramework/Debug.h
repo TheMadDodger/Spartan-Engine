@@ -114,6 +114,7 @@ namespace Utilities
 		static void LogNotice(const std::string &message, bool bIncludeTimeStamp = true);
 		static void LogWarning(const std::string &message, bool bIncludeTimeStamp = true);
 		static void LogError(const std::string &message, bool bIncludeTimeStamp = true);
+		static void LogGLError(const GLenum &err, bool bIncludeTimeStamp = true);
 		static void UpdateAutoLogger(GameTime *pTime) { AutomaticLogger::Update(pTime); }  //{ m_pAutomaticLogger->Update(pTime); }
 
 		static void EnablePhysicsDebugRendering(bool enable);

@@ -51,16 +51,19 @@ void Mesh2DRenderComponent::Draw(const GameContext &)
 		Utilities::Debug::LogWarning("Material with ID " + to_string(m_MaterialID) + " does not exist!");
 		return;
 	}
-	pMaterial->Use();
+	//pMaterial->Use();
 
 	// Bind the vertex array
 	glBindVertexArray(m_pMesh->GetVertexArrayID());
+	Utilities::Debug::LogGLError(glGetError());
 
 	// Draw the vertices using the index buffer
 	glDrawElements(GL_TRIANGLES, m_pMesh->GetIndexCount(), GL_UNSIGNED_INT, nullptr);//(GLvoid*)(m_pMesh->GetVertexSize() * m_pMesh->GetVertexCount()));
+	Utilities::Debug::LogGLError(glGetError());
 
 	// Unbind vertex array
 	glBindVertexArray(0);
+	Utilities::Debug::LogGLError(glGetError());
 
 	// Reset material
 	Material::Reset();

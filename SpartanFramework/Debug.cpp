@@ -101,6 +101,15 @@ void Utilities::Debug::LogError(const std::string &message, bool bIncludeTimeSta
 	BaseGame::GetGame()->QuitGame();
 }
 
+void Utilities::Debug::LogGLError(const GLenum & err, bool bIncludeTimeStamp)
+{
+	if (err != GL_NO_ERROR)
+	{
+		const char *error = (const char*)glewGetErrorString(err);
+		Utilities::Debug::LogWarning(error, bIncludeTimeStamp);
+	}
+}
+
 void Utilities::Debug::EnablePhysicsDebugRendering(bool enable)
 {
 	m_PhysicsDebugRendering = enable;

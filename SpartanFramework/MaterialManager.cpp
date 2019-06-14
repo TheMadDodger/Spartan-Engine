@@ -5,10 +5,6 @@ std::vector<Material*> MaterialManager::m_pMaterials = std::vector<Material*>();
 
 void MaterialManager::Cleanup()
 {
-	for (Material *pMat : m_pMaterials)
-	{
-		delete pMat;
-	}
 	m_pMaterials.clear();
 }
 

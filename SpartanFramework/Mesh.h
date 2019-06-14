@@ -19,22 +19,32 @@ public:
 		if (m_IsMeshBuilt)
 		{
 			glBindVertexArray(m_VertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			Utilities::Debug::LogGLError(glGetError());
 			glDeleteBuffers(1, &m_IndexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 
-			for (size_t i = m_AttributeCount - 1; i >= 0; i++)
+			for (int i = m_AttributeCount - 1; i >= 0; --i)
 			{
 				glDisableVertexAttribArray(i);
+				Utilities::Debug::LogGLError(glGetError());
 			}
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			Utilities::Debug::LogGLError(glGetError());
 			glDeleteBuffers(1, &m_VertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 
 			glBindVertexArray(0);
+			Utilities::Debug::LogGLError(glGetError());
 			glDeleteVertexArrays(1, &m_VertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 		}
 	}
 
@@ -44,24 +54,51 @@ public:
 		if (m_IsMeshBuilt) return;
 
 		// Generate vertex array
-		glGenVertexArrays(1, &m_VertexArrayID);
+		//glGenVertexArrays(1, &m_VertexArrayID);
+		//Utilities::Debug::LogGLError(glGetError());
 
 		// Bind this new vertex array
-		glBindVertexArray(m_VertexArrayID);
+		//glBindVertexArray(m_VertexArrayID);
+		//Utilities::Debug::LogGLError(glGetError());
 
 		// Generate the vertex buffer
-		glGenBuffers(1, &m_VertexBufferID);
+		glGenBuffersARB(1, &m_VertexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
+		// Generate the index buffer
+		glGenBuffersARB(1, &m_IndexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
 
-		// Bind the buffer to vertex attributes
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-
+		// Bind the vertex buffer
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_VertexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
 		// Copy data to buffer
-		glBufferData(GL_ARRAY_BUFFER, m_VertexCount * m_VertexSize, m_pVertices, GL_STATIC_DRAW);
+		glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof(m_pVertices), m_pVertices, GL_STATIC_DRAW_ARB);
+		Utilities::Debug::LogGLError(glGetError());
+		// Unbind the buffer
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+		Utilities::Debug::LogGLError(glGetError());
 
-		size_t offset = 0;
+		// Bind index buffer
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, m_IndexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
+		// Copy data to buffer
+		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(m_pIndices), m_pIndices, GL_STATIC_DRAW_ARB);
+		Utilities::Debug::LogGLError(glGetError());
+		// Unbind the buffer
+		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+		Utilities::Debug::LogGLError(glGetError());
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
+
+		glBindBufferARB(GL_ARRAY_BUFFER_ARB, m_VertexBufferID);
+		glVertexPointer(2, GL_FLOAT, sizeof(Vertex2DPosColor), MEMBER_OFFSET)
+
+		/*size_t offset = 0;
 		for (size_t i = 0; i < m_AttributeCount; i++)
 		{
 			glEnableVertexAttribArray(i);
+			Utilities::Debug::LogGLError(glGetError());
 
 			Mesh2DAttribute attribute = m_Attributes[i];
 
@@ -69,28 +106,36 @@ public:
 			{
 			case AColor:
 				glVertexAttribPointer(i, 4, GL_FLOAT, GL_FALSE, m_VertexSize, (void*)offset);
+				Utilities::Debug::LogGLError(glGetError());
 				offset += 4 * sizeof(float);
 				break;
 			case APosition2D:
 			case ACoord:
 				glVertexAttribPointer(i, 2, GL_FLOAT, GL_FALSE, m_VertexSize, (void*)offset);
+				Utilities::Debug::LogGLError(glGetError());
 				offset += 2 * sizeof(float);
 				break;
 			default:
 				Utilities::Debug::LogWarning("Mesh::BuildMesh > This attribute type is not yet supported.");
 				break;
 			}
-		}
+		}*/
 
 		// Create index buffer
-		glGenBuffers(1, &m_IndexBufferID);
+		/*glGenBuffers(1, &m_IndexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexCount * sizeof(int), m_pIndices, GL_STATIC_DRAW);
+		Utilities::Debug::LogGLError(glGetError());
 
 		// Unbind buffers
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		Utilities::Debug::LogGLError(glGetError());
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		Utilities::Debug::LogGLError(glGetError());
 		glBindVertexArray(0);
+		Utilities::Debug::LogGLError(glGetError());*/
 
 		m_IsMeshBuilt = true;
 	}
@@ -134,7 +179,42 @@ private:
 class MeshHelper
 {
 public:
-	static Mesh2D *Generate2DBoxMesh(const Math::Vector2 &halfSize)
+	static Mesh2D *Generate2DBoxMeshPosColor(const Math::Vector2 &halfSize, const Color &color)
+	{
+		// Vertex array
+		Vertex2DPosColor vertices[4] =
+		{
+			Vertex2DPosColor(Vector2(-halfSize.x, halfSize.y), color), // TopLeft
+			Vertex2DPosColor(Vector2(halfSize.x, halfSize.y), color), // TopRight
+			Vertex2DPosColor(Vector2(-halfSize.x, -halfSize.y), color), // BottomLeft
+			Vertex2DPosColor(Vector2(halfSize.x, -halfSize.y), color), // BottomRight
+		};
+
+		// Index array
+		unsigned int indices[6] =
+		{
+			2, 0, 3,
+			1, 3, 0,
+		};
+
+		// Attribute array
+		Mesh2DAttribute attributes[] =
+		{
+			Mesh2DAttribute::APosition2D,
+			Mesh2DAttribute::AColor,
+		};
+
+		// Create the mesh
+		Mesh2D *pMesh = new Mesh2D((size_t)4, (float*)vertices, (size_t)6, indices, sizeof(Vertex2DPosUV), (size_t)2, attributes);
+
+		// Build the mesh
+		pMesh->BuildMesh();
+
+		// Return mesh
+		return pMesh;
+	}
+
+	static Mesh2D *Generate2DBoxMeshPosCoord(const Math::Vector2 &halfSize)
 	{
 		// Vertex array
 		Vertex2DPosUV vertices[4] =
