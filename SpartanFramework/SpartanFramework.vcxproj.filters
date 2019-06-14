@@ -203,6 +203,9 @@
     <ClInclude Include="MaterialManager.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -334,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,6 +12,9 @@ public:
 	const Matrix3X3 &GetCameraMatrix() { return m_CameraMatrix; }
 	const Matrix3X3 &GetCameraMatrixInverse() { return m_CameraInverseMatrix; }
 
+	const Matrix3X3 &GetCameraProjectionMatrix() { return m_CameraProjectionMatrix; }
+	const Matrix3X3 &GetCameraProjectionMatrixInverse() { return m_CameraProjectionInverseMatrix; }
+
 	const Vector2 GetPosition();
 	Vector3 ConvertWorldToScreenSpace(Vector3 worldCoord);
 
@@ -28,5 +31,8 @@ private:
 
 	Matrix3X3 m_CameraMatrix;
 	Matrix3X3 m_CameraInverseMatrix;
+
+	Matrix3X3 m_CameraProjectionMatrix;
+	Matrix3X3 m_CameraProjectionInverseMatrix;
 };
 

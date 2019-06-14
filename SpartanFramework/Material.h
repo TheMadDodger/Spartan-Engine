@@ -1,0 +1,40 @@
+#pragma once
+class ShaderData;
+class BaseComponent;
+
+class Material
+{
+public:
+	Material(ShaderData *pShader);
+	~Material();
+
+	void Use()
+	{
+		glUseProgram(m_pShader->m_ShaderProgramID);
+		Utilities::Debug::LogGLError(glGetError());
+	}
+
+	static void Reset()
+	{
+		glUseProgram(0);
+		Utilities::Debug::LogGLError(glGetError());
+	}
+
+protected: // Set shader vars
+	void SetFloat(const std::string &name, float value) const;
+	void SetBool(const std::string &name, bool value) const;
+	void SetVec3(const std::string &name, const Vector3 &value) const;
+	void SetVec2(const std::string &name, const Vector3 &value) const;
+	void SetColor(const std::string &name, const Color &value) const;
+	void SetDouble(const std::string &name, double value) const;
+	void SetMatrix(const std::string &name, float *pMatrix) const;
+	void SetTexture(GLuint textureID, TextureData *pTexture);
+
+protected:
+	virtual void SetShaderVars(BaseComponent *) {};
+
+private:
+	friend class Mesh2DRenderComponent;
+	ShaderData *m_pShader;
+};
+

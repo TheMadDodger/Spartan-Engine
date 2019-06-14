@@ -5,16 +5,11 @@ std::vector<Material*> MaterialManager::m_pMaterials = std::vector<Material*>();
 
 void MaterialManager::Cleanup()
 {
+	for (auto pMaterial : m_pMaterials)
+	{
+		delete pMaterial;
+	}
 	m_pMaterials.clear();
-}
-
-unsigned int MaterialManager::CreateMaterial(const std::string &shaderPath)
-{
-	Material *pMaterial = ContentManager::GetInstance()->Load<Material>(shaderPath);
-
-	m_pMaterials.push_back(pMaterial);
-
-	return m_pMaterials.size() - 1;
 }
 
 Material * MaterialManager::GetMaterial(size_t id)

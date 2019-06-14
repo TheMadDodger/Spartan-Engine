@@ -220,111 +220,40 @@ private:
 	TTF_Font *m_pTTFFont = nullptr;
 };
 
-class Material : public Content
+class ShaderData : public Content
 {
 public:
-	Material(const std::string &file) : Content(file) {}
-	virtual ~Material()
+	ShaderData(const std::string &file) : Content(file) {}
+	virtual ~ShaderData()
 	{
+		// Detach shaders
+		glDetachShader(m_ShaderProgramID, m_VertexShaderID);
+		Utilities::Debug::LogGLError(glGetError());
+		glDetachShader(m_ShaderProgramID, m_FragmentShaderID);
+		Utilities::Debug::LogGLError(glGetError());
+
+		// Delete shaders
+		glDeleteShader(m_VertexShaderID);
+		Utilities::Debug::LogGLError(glGetError());
+		glDeleteShader(m_FragmentShaderID);
+		Utilities::Debug::LogGLError(glGetError());
+
+		// Delete program
 		glDeleteProgram(m_ShaderProgramID);
 		Utilities::Debug::LogGLError(glGetError());
 	}
 
-	void SetFloat(const std::string &name, float value) const
+	const GLuint &GetProgramID()
 	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform1f(ID, value);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-	
-	void SetBool(const std::string &name, bool value) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform1i(ID, (int)value);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-	
-	void SetVec3(const std::string &name, const Vector3 &value) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform3f(ID, value.x, value.y, value.z);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	void SetVec2(const std::string &name, const Vector3 &value) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform2f(ID, value.x, value.y);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	void SetColor(const std::string &name, const Color &value) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform4f(ID, value.r, value.g, value.b, value.a);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	void SetDouble(const std::string &name, double value) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		glUniform1d(ID, value);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	void SetMatrix(const std::string &name, const Matrix3X3 &m) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-
-		float mp[6] = {m.m[0][0], m.m[1][0], m.m[1][0], m.m[0][1], m.m[1][1], m.m[2][1]};
-		glUniformMatrix3x2fv(ID, 1, false, mp);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	void SetMatrix(const std::string &name, const std::vector<Matrix3X3> &matrices) const
-	{
-		GLint ID = glGetUniformLocation(m_ShaderProgramID, name.c_str());
-		Utilities::Debug::LogGLError(glGetError());
-		const size_t arraySize = matrices.size() * 6;
-		float *mp = new float[arraySize];
-		size_t index = 0;
-		for (Matrix3X3 m : matrices)
-		{
-			mp[index] = m.m[0][0];
-			mp[index + 1] = m.m[1][0];
-			mp[index + 2] = m.m[2][0];
-			mp[index + 3] = m.m[0][1];
-			mp[index + 4] = m.m[1][1];
-			mp[index + 5] = m.m[2][1];
-		}
-
-		glUniformMatrix3x2fv(ID, matrices.size(), false, mp);
-		Utilities::Debug::LogGLError(glGetError());
-		delete[] mp;
-	}
-
-	void Use()
-	{
-		glUseProgram(m_ShaderProgramID);
-		Utilities::Debug::LogGLError(glGetError());
-	}
-
-	static void Reset()
-	{
-		glUseProgram(0);
-		Utilities::Debug::LogGLError(glGetError());
+		return m_ShaderProgramID;
 	}
 
 private:
 	friend class ShaderLoader;
-	unsigned int m_ShaderProgramID;
+	friend class Material;
+	GLuint m_ShaderProgramID;
+	GLuint m_VertexShaderID;
+	GLuint m_FragmentShaderID;
 };
 
 #pragma warning(disable:4996)

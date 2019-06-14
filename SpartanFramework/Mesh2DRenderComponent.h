@@ -24,5 +24,8 @@ private:
 private:
 	Mesh2D *m_pMesh;
 	size_t m_MaterialID;
+	GLuint gVBO;
+	GLuint gIBO;
+	GLuint gVertexPos2DLocation;
 };
 

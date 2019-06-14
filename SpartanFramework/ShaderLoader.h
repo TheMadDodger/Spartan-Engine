@@ -1,11 +1,11 @@
 #pragma once
-class ShaderLoader : public ContentLoader<Material>
+class ShaderLoader : public ContentLoader<ShaderData>
 {
 public:
 	ShaderLoader();
 	virtual ~ShaderLoader();
 
-	Material *LoadContent(const std::string& file) override;
+	ShaderData *LoadContent(const std::string& file) override;
 
 private:
 	bool GetCompiledShader(unsigned int &shaderID, unsigned int shader_type, const std::string &file);

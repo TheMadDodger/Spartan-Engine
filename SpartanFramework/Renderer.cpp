@@ -31,16 +31,16 @@ void Renderer::Initialize(const GameContext &gameContext)
 	if (m_pWindow == NULL)
 	{
 		std::cout << "Could not create window: " << SDL_GetError() << std::endl;
-		//return false;
+		return;
 	}
 
 	// Create renderer
-	m_pSDLRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
-	if (m_pSDLRenderer == nullptr)
+	//m_pSDLRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+	/*if (m_pSDLRenderer == nullptr)
 	{
 		std::cerr << "Could not ceate SDL Renderer: " << SDL_GetError() << std::endl;
 		return;
-	}
+	}*/
 
 	// Create OpenGL context 
 	m_pSDLContext = SDL_GL_CreateContext(m_pWindow);
@@ -51,6 +51,7 @@ void Renderer::Initialize(const GameContext &gameContext)
 	}
 
 	// Init GLEW
+	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
@@ -71,6 +72,8 @@ void Renderer::Initialize(const GameContext &gameContext)
 	{
 		SDL_GL_SetSwapInterval(0);
 	}
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Set the Projection matrix to the identity matrix
 	glMatrixMode(GL_PROJECTION);
@@ -281,7 +284,7 @@ void Renderer::RenderTexture(GLuint texID, float width, float height)
 
 void Renderer::ClearBackground()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 

@@ -10,7 +10,7 @@ ShaderLoader::~ShaderLoader()
 {
 }
 
-Material *ShaderLoader::LoadContent(const std::string &file)
+ShaderData *ShaderLoader::LoadContent(const std::string &file)
 {
 	unsigned int programID = glCreateProgram();
 	Utilities::Debug::LogGLError(glGetError());
@@ -25,7 +25,7 @@ Material *ShaderLoader::LoadContent(const std::string &file)
 	fs.pop_back();
 	fs += '\0';
 
-	unsigned int vsID, fsID;
+	GLuint vsID, fsID;
 	if (!GetCompiledShader(vsID, GL_VERTEX_SHADER, vs))
 	{
 		glDeleteProgram(programID);
@@ -49,13 +49,11 @@ Material *ShaderLoader::LoadContent(const std::string &file)
 	glValidateProgram(programID);
 	Utilities::Debug::LogGLError(glGetError());
 
-	Material *pMat = new Material(file);
+	ShaderData *pMat = new ShaderData(file);
 	pMat->m_ShaderProgramID = programID;
+	pMat->m_VertexShaderID = vsID;
+	pMat->m_FragmentShaderID = fsID;
 
-	glDeleteShader(vsID);
-	Utilities::Debug::LogGLError(glGetError());
-	glDeleteShader(fsID);
-	Utilities::Debug::LogGLError(glGetError());
 	return pMat;
 }
 
