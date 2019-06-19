@@ -71,5 +71,5 @@ void Material::SetTexture(GLuint textureID, TextureData *pTexture)
 {
 	glBindTexture(GL_TEXTURE_2D, pTexture->GetID());
 	glActiveTexture(textureID);
-	glBindTexture(GL_TEXTURE_2D, NULL);
+	//glBindTexture(GL_TEXTURE_2D, NULL);
 }
