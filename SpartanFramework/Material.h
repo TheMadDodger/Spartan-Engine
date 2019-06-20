@@ -12,6 +12,8 @@ public:
 	{
 		glUseProgram(m_pShader->m_ShaderProgramID);
 		Utilities::Debug::LogGLError(glGetError());
+
+		m_TextureCounter = 0;
 	}
 
 	static void Reset()
@@ -28,7 +30,7 @@ protected: // Set shader vars
 	void SetColor(const std::string &name, const Color &value) const;
 	void SetDouble(const std::string &name, double value) const;
 	void SetMatrix(const std::string &name, float *pMatrix) const;
-	void SetTexture(GLuint textureID, TextureData *pTexture);
+	void SetTexture(const std::string &name, TextureData *pTexture);
 
 protected:
 	virtual void SetShaderVars(BaseComponent *) {};
@@ -36,5 +38,6 @@ protected:
 private:
 	friend class Mesh2DRenderComponent;
 	ShaderData *m_pShader;
+	GLint m_TextureCounter;
 };
 

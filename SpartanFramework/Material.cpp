@@ -67,9 +67,13 @@ void Material::SetMatrix(const std::string & name, float * pMatrix) const
 	Utilities::Debug::LogGLError(glGetError());
 }
 
-void Material::SetTexture(GLuint textureID, TextureData *pTexture)
+void Material::SetTexture(const std::string & name, TextureData *pTexture)
 {
+	GLuint texLocation = glGetUniformLocation(m_pShader->m_ShaderProgramID, name.c_str());
+	glUniform1i(texLocation, m_TextureCounter);
+
+	glActiveTexture(GL_TEXTURE0 + m_TextureCounter);
 	glBindTexture(GL_TEXTURE_2D, pTexture->GetID());
-	glActiveTexture(textureID);
-	//glBindTexture(GL_TEXTURE_2D, NULL);
+
+	++m_TextureCounter;
 }
