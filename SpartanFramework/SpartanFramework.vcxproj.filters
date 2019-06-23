@@ -206,6 +206,9 @@
     <ClInclude Include="Material.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -339,6 +342,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Material.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>

@@ -176,6 +176,7 @@
     <ClInclude Include="BehaviourTreeNodes.h" />
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
+    <ClInclude Include="FastNoise.h" />
     <ClInclude Include="GUID.h" />
     <ClInclude Include="LineRenderComponent.h" />
     <ClInclude Include="Material.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="AIBehaviourTree.cpp" />
     <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />

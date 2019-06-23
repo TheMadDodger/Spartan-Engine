@@ -22,6 +22,12 @@ public:
 		Utilities::Debug::LogGLError(glGetError());
 	}
 
+	template<typename T>
+	T *As()
+	{
+		return dynamic_cast<T*>(this);
+	}
+
 protected: // Set shader vars
 	void SetFloat(const std::string &name, float value) const;
 	void SetBool(const std::string &name, bool value) const;

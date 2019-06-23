@@ -57,6 +57,25 @@ public:
 		return result;
 	}
 
+	void BuildTextureFromData(const Vector2 &dimensions, float *pData, GLint internalFormat, GLenum dataFormat)
+	{
+		m_Dimensions = dimensions;
+
+		glGenTextures(1, &m_TextureID);
+		glBindTexture(GL_TEXTURE_2D, m_TextureID);
+
+		GLenum e = glGetError();
+		if (e != GL_NO_ERROR)
+		{
+			std::cerr << "Texture::CreateFromSurface, error binding textures, Error id = " << e << '\n';
+		}
+
+		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, (GLsizei)m_Dimensions.x, (GLsizei)m_Dimensions.y, 0, dataFormat, GL_FLOAT, pData);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	}
+
 private:
 	void BuildTexture()
 	{
