@@ -212,7 +212,7 @@
     <ClInclude Include="ConsoleInput.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
+    <ClInclude Include="Commands.h">
       <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -354,6 +354,9 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleInput.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>

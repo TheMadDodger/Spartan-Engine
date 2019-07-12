@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ConsoleInput.h"
-#include "Command.h"
+#include "Commands.h"
 
 #ifdef _DEBUG
 inline int ConsoleThreadFunc(void *pConsoleObject)
@@ -26,6 +26,8 @@ ConsoleInput::~ConsoleInput()
 		delete pCommand;
 	}
 	m_pCommands.clear();
+
+	Parser::Destroy();
 }
 
 void ConsoleInput::Initialize()
@@ -62,7 +64,10 @@ void ConsoleInput::Update()
 		BaseConsoleCommand *pCommand = GetCommand(m_QueuedCommand.Command);
 
 		if (pCommand != nullptr)
-			pCommand->RootExecuteCommand(m_QueuedCommand.Args);
+		{
+			if (!pCommand->RootExecuteCommand(m_QueuedCommand.Args))
+				Utilities::Debug::LogNotice(">>>> Invalid argument count!", false);
+		}
 		else
 			Utilities::Debug::LogNotice(">>>> Unknown Command detected!", false);
 

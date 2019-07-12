@@ -32,7 +32,7 @@ public:
 
 #ifdef _DEBUG
 protected:
-	virtual void RegisterConsoleCommands(ConsoleInput *pConsole) {}
+	virtual void RegisterConsoleCommands(ConsoleInput *) {}
 #endif // _DEBUG
 
 private:

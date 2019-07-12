@@ -168,7 +168,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Command.h" />
+    <ClInclude Include="Commands.h" />
     <ClInclude Include="ConsoleInput.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="AI.h" />
@@ -239,6 +239,7 @@
     <ClCompile Include="AIBehaviourTree.cpp" />
     <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="Commands.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
     <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
