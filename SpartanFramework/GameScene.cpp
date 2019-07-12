@@ -77,6 +77,11 @@ void GameScene::Instantiate(GameObject *gameObject, GameObject *pParent)
 	m_pInstantiateQueue.push_back(Instantiation(gameObject, pParent));
 }
 
+void GameScene::SetEnabled(bool enabled)
+{
+	m_bEnabled = enabled;
+}
+
 void GameScene::RootInitialize(const GameContext &gameContext)
 {
 	// User Pre-Initialize
@@ -113,6 +118,8 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 
 void GameScene::RootUpdate(const GameContext &gameContext)
 {
+	if (!m_bEnabled) return;
+
 	// Destroy all objects that were marked for destruction last frame
 	DestroyObjects();
 
@@ -141,6 +148,8 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 void GameScene::RootDraw(const GameContext &gameContext)
 {
+	if (!m_bEnabled) return;
+
 	// User Pre-Draw
 	PreDraw(gameContext);
 

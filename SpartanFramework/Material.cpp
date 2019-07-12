@@ -18,6 +18,14 @@ void Material::SetFloat(const std::string & name, float value) const
 	Utilities::Debug::LogGLError(glGetError());
 }
 
+void Material::SetInt(const std::string & name, int value) const
+{
+	GLint ID = glGetUniformLocation(m_pShader->m_ShaderProgramID, name.c_str());
+	Utilities::Debug::LogGLError(glGetError());
+	glUniform1ui(ID, value);
+	Utilities::Debug::LogGLError(glGetError());
+}
+
 void Material::SetBool(const std::string & name, bool value) const
 {
 	GLint ID = glGetUniformLocation(m_pShader->m_ShaderProgramID, name.c_str());

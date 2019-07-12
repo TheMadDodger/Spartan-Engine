@@ -209,6 +209,12 @@
     <ClInclude Include="FastNoise.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="ConsoleInput.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -345,6 +351,9 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="FastNoise.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleInput.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>

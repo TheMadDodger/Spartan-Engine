@@ -21,7 +21,7 @@ void SceneManager::AddScene(GameScene *pScene)
 	}
 }
 
-void SceneManager::LoadScene(int sceneIndex)
+void SceneManager::LoadScene(int sceneIndex, int flags)
 {
 	// Check if out of array
 	if ((size_t)sceneIndex < m_pScenes.size())
@@ -37,9 +37,12 @@ void SceneManager::LoadScene(int sceneIndex)
 		// Update m_CurrentScene
 		m_CurrentScene = sceneIndex;
 		m_SceneHasInitialized = false;
-
+			
 		// Pass through persistent objects
 		m_pScenes[m_CurrentScene]->m_pPersistentChildren = persistentObjects;
+
+		// Enable the scene
+		m_pScenes[m_CurrentScene]->SetEnabled(true);
 	}
 	else
 	{
@@ -47,7 +50,7 @@ void SceneManager::LoadScene(int sceneIndex)
 	}
 }
 
-void SceneManager::LoadScene(const std::string &sceneName)
+void SceneManager::LoadScene(const std::string &sceneName, int flags)
 {
 	// Find the index of this scene
 	int index = 0;
@@ -70,7 +73,7 @@ void SceneManager::LoadScene(const std::string &sceneName)
 		return;
 	}
 
-	LoadScene(index);
+	LoadScene(index, flags);
 }
 
 void SceneManager::LoadSceneNextFrame(const std::string &sceneName)
@@ -121,6 +124,11 @@ void SceneManager::Update(const GameContext &gameContext)
 		Initialize(gameContext);
 
 	m_pScenes[m_CurrentScene]->RootUpdate(gameContext);
+
+	for(int i : m_AdditiveScenes)
+	{
+		m_pScenes[i]->RootUpdate(gameContext);
+	}
 }
 
 void SceneManager::Draw(const GameContext &gameContext)
@@ -128,6 +136,11 @@ void SceneManager::Draw(const GameContext &gameContext)
 	if (!m_SceneHasInitialized) return; // Safety check
 
 	m_pScenes[m_CurrentScene]->RootDraw(gameContext);
+
+	for (int i : m_AdditiveScenes)
+	{
+		m_pScenes[i]->RootDraw(gameContext);
+	}
 }
 
 SceneManager::SceneManager()

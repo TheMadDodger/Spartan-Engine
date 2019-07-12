@@ -4,6 +4,10 @@
 
 struct SDL_Window;
 
+#ifdef _DEBUG
+class ConsoleInput;
+#endif
+
 class BaseGame
 {
 public:
@@ -26,6 +30,11 @@ public:
 
 	static BaseGame *GetGame() { return m_pGame; }
 
+#ifdef _DEBUG
+protected:
+	virtual void RegisterConsoleCommands(ConsoleInput *pConsole) {}
+#endif // _DEBUG
+
 private:
 	friend class TextureLoader;
 	static BaseGame *m_pGame;
@@ -35,6 +44,10 @@ private:
 	friend class GameTool;
 	GameSettings m_GameSettings;
 	GameContext m_GameContext;
+
+#ifdef _DEBUG
+	ConsoleInput *m_pConspole;
+#endif
 
 	bool m_bQuitGame = false;
 };

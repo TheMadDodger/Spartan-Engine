@@ -7,6 +7,10 @@
 #include "SoundManager.h"
 #include "MaterialManager.h"
 
+#ifdef _DEBUG
+#include "ConsoleInput.h"
+#endif // _DEBUG
+
 BaseGame *BaseGame::m_pGame = nullptr;
 
 BaseGame::BaseGame(const GameSettings &settings) : m_GameSettings(settings)
@@ -36,6 +40,10 @@ BaseGame::~BaseGame()
 	m_GameContext.pSound = nullptr;
 	delete m_GameContext.pParticleManager;
 	m_GameContext.pParticleManager = nullptr;
+
+#ifdef _DEBUG
+	delete m_pConspole;
+#endif
 
 	// SDL Cleanup
 	SDL_Quit();
@@ -83,6 +91,12 @@ bool BaseGame::RootInitialize()
 	// Initialise Scenes
 	SceneManager::GetInstance()->Initialize(m_GameContext);
 
+#ifdef _DEBUG
+	m_pConspole = new ConsoleInput();
+	m_pConspole->Initialize();
+	RegisterConsoleCommands(m_pConspole);
+#endif // _DEBUG
+
 	return true;
 }
 
@@ -94,6 +108,11 @@ bool BaseGame::RootGameUpdate()
 
 	// Start the timer
 	m_GameContext.pTime->StartFrame();
+
+#ifdef _DEBUG
+	// Update console commands
+	m_pConspole->Update();
+#endif // _DEBUG
 
 	// Update InputManager
 	m_GameContext.pInput->Update();

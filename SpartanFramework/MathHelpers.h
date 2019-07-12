@@ -333,4 +333,29 @@ namespace Math
 		if (value > max) return max;
 		return value;
 	}
+
+	inline size_t GetWeightedRandom(const std::vector<float> &chances)
+	{
+		float totalWeights = 0.0f;
+		std::for_each(chances.begin(), chances.end(), [&](const float &chance)
+		{
+			totalWeights += chance;
+		});
+		
+		float r = RandomRange<float>(1, totalWeights);
+
+		size_t currentIndex = 0;
+		while (true)
+		{
+			float weight = chances[currentIndex];
+			r -= weight;
+
+			if (r <= 0.0f) break;
+
+			++currentIndex;
+			if (currentIndex >= chances.size()) currentIndex = 0;
+		}
+
+		return currentIndex;
+	}
 }

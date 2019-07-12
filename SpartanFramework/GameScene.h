@@ -29,6 +29,8 @@ public:
 
 	void Destroy(GameObject *gameObject);
 	void Instantiate(GameObject *gameObject, GameObject *pParent = nullptr);
+
+	void SetEnabled(bool enabled);
 	
 
 protected:
@@ -87,6 +89,7 @@ private:
 	CameraComponent *m_pActiveCamera = nullptr;
 	b2World *m_pPhysicsWorld = nullptr;
 	b2Vec2 m_Gravity;
+	bool m_bEnabled = false;
 	std::vector<GameObject*> m_pQueuedForDestruction;
 	std::vector<Instantiation> m_pInstantiateQueue;
 };
