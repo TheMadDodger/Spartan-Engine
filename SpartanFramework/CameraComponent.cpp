@@ -56,42 +56,16 @@ void CameraComponent::Update(const GameContext &gameContext)
 
 	auto window = BaseGame::GetGame()->GetGameSettings().Window;
 	auto view = Vector2((float)window.Width, (float)window.Height);
-	m_CameraProjectionMatrix = m_CameraMatrix * Matrix3X3::CreateScalingMatrix(view / 2.0f);
-
+	m_ProjectionMatrix = Matrix3X3::CreateScalingMatrix(view / 2.0f);
+	m_CameraProjectionMatrix = m_CameraMatrix * m_ProjectionMatrix;
 	/// Calculate the inverse matrix
-
-
-	//// Decompose matrix
-	//auto trans = m_CameraMatrix.ExtraxtTranslation();
-	//auto scale = m_CameraMatrix.ExtraxtScale();
-	//auto rot = m_CameraMatrix.ExtraxtRotation();
-
-	//if (scale.x == 0 || scale.y == 0)
-	//{
-	//	Utilities::Debug::LogError("CameraComponent::Update > Camera scale is 0");
-	//	return;
-	//}
-
-	//// Inverse each component and turn into a matrix
-	//trans = trans * -1;
-	//rot = rot * -1;
-	//scale.x = 1.0f / scale.x;
-	//scale.y = 1.0f / scale.y;
-
-	//auto transMat = Matrix3X3::CreateTranslationMatrix(trans);
-	//auto rotMat = Matrix3X3::CreateRotationMatrix(rot);
-	//auto scaleMat = Matrix3X3::CreateScalingMatrix(scale);
-
-	//// Multiply matrices in oposite order
-	//auto scaleRotMat = scaleMat * rotMat;
-	//auto scaleRotTransMat = scaleRotMat * transMat;
-
 	Vector2 screenMiddle = Vector2((float)window.Width, (float)window.Height) / 2.0f;
 
 	auto screenTransform = Matrix3X3::CreateTranslationMatrix(screenMiddle);
 
 	m_CameraInverseMatrix = screenTransform * m_CameraMatrix.Inverse();
 	m_CameraProjectionInverseMatrix = m_CameraProjectionMatrix.Inverse();
+	m_ProjectionInverseMatrix = m_ProjectionMatrix.Inverse();
 }
 
 void CameraComponent::Draw(const GameContext &gameContext)

@@ -16,6 +16,7 @@ public:
 	void Translate(float x, float y);
 	void Rotate(const Vector3 &rotation);
 	void SetScale(const Vector2 &scale);
+	bool UseCamera();
 
 	const Vector2 GetPositionInScreenSpace();
 
@@ -34,5 +35,6 @@ private:
 	Matrix3X3 m_TansformMatrix;
 	Matrix3X3 m_WorldTansformMatrix;
 	Vector2 m_WorldPosition;
+	bool m_UseCamera = true;
 };
 

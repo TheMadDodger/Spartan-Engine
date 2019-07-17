@@ -18,10 +18,10 @@ Mesh2DRenderComponent::Mesh2DRenderComponent(Mesh2D *pMesh) : m_pMesh(pMesh), m_
 
 Mesh2DRenderComponent::~Mesh2DRenderComponent()
 {
-	if(m_pMesh)
+	/*if(m_pMesh)
 		delete m_pMesh;
 
-	m_pMesh = nullptr;
+	m_pMesh = nullptr;*/
 }
 
 void Mesh2DRenderComponent::SetMesh(Mesh2D *pMesh)
@@ -65,8 +65,14 @@ void Mesh2DRenderComponent::Draw(const GameContext &)
 	pMaterial->Use();
 
 	auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraProjectionMatrixInverse();
+	auto projectionInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetProjectionMatrixInverse();
 	auto world = GetGameObject()->GetTransform()->GetWorldMatrix();
-	auto worldCamProjection = camInverse * world;
+
+	Matrix3X3 worldCamProjection;
+	if (GetGameObject()->GetTransform()->UseCamera())
+		worldCamProjection = world * projectionInverse;
+	else
+		worldCamProjection = camInverse * world;
 
 	float pMatrix[9];
 	size_t index = 0;
@@ -87,30 +93,4 @@ void Mesh2DRenderComponent::Draw(const GameContext &)
 	m_pMesh->DrawEnd();
 
 	Material::Reset();
-
-	//glEnableVertexAttribArray(0);
-
-	//glBindBuffer(GL_ARRAY_BUFFER, m_pMesh->GetVertexBufferID());
-	//glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
-
-	////Set index data and render
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_pMesh->GetIndexBufferID());
-	//glDrawElements(GL_TRIANGLE_FAN, 4, GL_UNSIGNED_INT, NULL);
-
-	////Disable vertex position
-	//glDisableVertexAttribArray(0);
-
-	// Bind the vertex array
-	//glBindVertexArray(m_pMesh->GetVertexArrayID());
-	//Utilities::Debug::LogGLError(glGetError());
-
-	//m_pMesh->Prepare();
-
-	// Draw the vertices using the index buffer
-	//glDrawElements(GL_TRIANGLES, m_pMesh->GetIndexCount(), GL_UNSIGNED_INT, nullptr);//(GLvoid*)(m_pMesh->GetVertexSize() * m_pMesh->GetVertexCount()));
-	//Utilities::Debug::LogGLError(glGetError());
-
-	// Unbind vertex array
-	//glBindVertexArray(0);
-	//Utilities::Debug::LogGLError(glGetError());
 }

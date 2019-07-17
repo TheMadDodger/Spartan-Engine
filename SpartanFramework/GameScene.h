@@ -69,7 +69,7 @@ private:
 	void RootCleanup();
 
 	void DestroyObjects();
-	void InstantiateObjects();
+	void InstantiateObjects(const GameContext &gameContext);
 
 private:
 	friend class SceneManager;

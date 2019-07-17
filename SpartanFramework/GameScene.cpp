@@ -120,12 +120,6 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 {
 	if (!m_bEnabled) return;
 
-	// Destroy all objects that were marked for destruction last frame
-	DestroyObjects();
-
-	// Spawn all objects that were Instantiated last frame
-	InstantiateObjects();
-
 	// User Pre-Update
 	PreUpdate(gameContext);
 
@@ -144,6 +138,12 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 	// User Post-Update
 	PostUpdate(gameContext);
+
+	// Destroy all objects that were marked for destruction last frame
+	DestroyObjects();
+
+	// Spawn all objects that were Instantiated last frame
+	InstantiateObjects(gameContext);
 }
 
 void GameScene::RootDraw(const GameContext &gameContext)
@@ -225,13 +225,14 @@ void GameScene::DestroyObjects()
 	m_pQueuedForDestruction.clear();
 }
 
-void GameScene::InstantiateObjects()
+void GameScene::InstantiateObjects(const GameContext &gameContext)
 {
 	for (auto instantiate : m_pInstantiateQueue)
 	{
 		if (instantiate.Parent != nullptr)
 		{
 			instantiate.Parent->AddChild(instantiate.Object);
+			instantiate.Object->RootInitialize(gameContext);
 		}
 		else
 		{

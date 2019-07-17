@@ -34,6 +34,9 @@ void TransformComponent::Update(const GameContext &gameContext)
 	// Apply parent transform if object has a parent
 	auto pParent = GetGameObject()->GetParent();
 	auto pUI = GetGameObject()->GetComponent<UIComponent>();
+
+	if (pUI != nullptr) m_UseCamera = false;
+
 	if (pParent && pUI == nullptr)
 	{
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
@@ -134,6 +137,11 @@ void TransformComponent::SetScale(const Vector2 &scale)
 		return;
 	}
 	Scale = scale;
+}
+
+bool TransformComponent::UseCamera()
+{
+	return m_UseCamera;
 }
 
 const Vector2 TransformComponent::GetPositionInScreenSpace()
