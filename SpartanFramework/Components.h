@@ -13,3 +13,4 @@
 #include "UIContainer.h"
 #include "SkinnedMeshComponent.h"
 #include "LineRenderComponent.h"
+#include "ShakeComponent.h"

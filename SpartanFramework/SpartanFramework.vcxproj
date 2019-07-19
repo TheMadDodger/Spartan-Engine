@@ -187,6 +187,7 @@
     <ClInclude Include="Mesh2DRenderComponent.h" />
     <ClInclude Include="PhysicsMaterial.h" />
     <ClInclude Include="ShaderLoader.h" />
+    <ClInclude Include="ShakeComponent.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SkinnedMeshComponent.h" />
@@ -247,6 +248,7 @@
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Mesh2DRenderComponent.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
+    <ClCompile Include="ShakeComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />

@@ -215,6 +215,9 @@
     <ClInclude Include="Commands.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="ShakeComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -358,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="Commands.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShakeComponent.cpp">
+      <Filter>Core Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
