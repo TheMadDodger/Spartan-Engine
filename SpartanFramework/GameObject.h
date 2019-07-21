@@ -12,7 +12,7 @@ public:
 	virtual ~GameObject();
 
 	void AddChild(GameObject *pChild, bool initialize = false);
-	void RemoveChild(GameObject *pChild);
+	void RemoveChild(GameObject *pChild, bool destroy = false);
 
 	const vector<BaseComponent*> GetAllComponents() { return m_pComponents; }
 

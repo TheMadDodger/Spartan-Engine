@@ -10,12 +10,12 @@ GameScene::GameScene(const std::string &name) : m_SceneName(name)
 
 GameScene::~GameScene()
 {
-	for (auto pChild : m_pChildren)
+	for (size_t i = 0; i < m_pChildren.size(); ++i)
 	{
-		pChild->RootCleanup();
+		auto pChild = m_pChildren[i];
+		pChild->OnDestroy();
 		delete pChild;
 	}
-
 	m_pChildren.clear();
 
 	// Delete the physics world (if it exists)
@@ -127,8 +127,9 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 	float32 timeStep = 1.0f / FixedUpdateSpeed;
 	m_pPhysicsWorld->Step(timeStep, Box2DVelocityIterations, Box2DPositionIterations);
 
-	for (auto pChild : m_pChildren)
+	for (size_t i = 0; i < m_pChildren.size(); ++i)
 	{
+		auto pChild = m_pChildren[i];
 		if(pChild->IsEnabled())
 			pChild->RootUpdate(gameContext);
 	}
@@ -217,7 +218,8 @@ void GameScene::DestroyObjects()
 		}
 		else
 		{
-			RemoveChild(gameObject);
+			auto it = std::find(m_pChildren.begin(), m_pChildren.end(), gameObject);
+			if(it != m_pChildren.end()) RemoveChild(gameObject);
 		}
 		delete gameObject;
 	}

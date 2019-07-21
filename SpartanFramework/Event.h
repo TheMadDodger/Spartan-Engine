@@ -24,6 +24,11 @@ public:
 		m_SubscribedFunctions.push_back(f);
 	}
 
+	void Clear()
+	{
+		m_SubscribedFunctions.clear();
+	}
+
 private:
 	std::vector<std::function<void(Args...)>> m_SubscribedFunctions;
 

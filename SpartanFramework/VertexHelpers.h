@@ -20,6 +20,16 @@ public:
 	Math::Color Color;
 };
 
+struct Vertex2DPosColorCoord
+{
+public:
+	Vertex2DPosColorCoord(const Math::Vector2 &position, const Math::Vector2 &coord, const Math::Color &color) : Position(position), Coord(coord), Color(color) {}
+
+	Math::Vector2 Position;
+	Math::Vector2 Coord;
+	Math::Color Color;
+};
+
 struct Vertex2DPos
 {
 	Vertex2DPos(const Math::Vector2 &position) : Position(position) {}

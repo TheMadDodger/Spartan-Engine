@@ -226,6 +226,34 @@ public:
 		return pMesh;
 	}
 
+	static Mesh2D *Generate2DBoxMeshPosColorCoord(const Math::Vector2 &halfSize, const Color &color)
+	{
+		//VBO data
+		Vertex2DPosColorCoord vertexData[] =
+		{
+			Vertex2DPosColorCoord(Vector2(-halfSize.x, -halfSize.y), Vector2(0.0f, 0.0f), color),
+			Vertex2DPosColorCoord(Vector2(halfSize.x, -halfSize.y), Vector2(1.0f, 0.0f), color),
+			Vertex2DPosColorCoord(Vector2(halfSize.x, halfSize.y), Vector2(1.0f, 1.0f), color),
+			Vertex2DPosColorCoord(Vector2(-halfSize.x,  halfSize.y), Vector2(0.0f, 1.0f), color)
+		};
+
+		//IBO data
+		GLuint indexData[] = { 0, 1, 2, 3 };
+
+		Mesh2DAttribute attributes[] =
+		{
+			Mesh2DAttribute::APosition2D,
+			Mesh2DAttribute::ACoord,
+			Mesh2DAttribute::AColor,
+		};
+
+		Mesh2D *pMesh = new Mesh2D(4, (float*)vertexData, 4, indexData, sizeof(Vertex2DPosColorCoord), 3, attributes);
+		pMesh->BuildMesh();
+
+		// Return mesh
+		return pMesh;
+	}
+
 	static Mesh2D *Generate2DBoxMeshPosCoord(const Math::Vector2 &halfSize)
 	{
 		//VBO data

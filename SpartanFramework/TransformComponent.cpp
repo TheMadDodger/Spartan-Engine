@@ -37,7 +37,7 @@ void TransformComponent::Update(const GameContext &gameContext)
 
 	if (pUI != nullptr) m_UseCamera = false;
 
-	if (pParent && pUI == nullptr)
+	if (pParent)// && pUI == nullptr)
 	{
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
 		m_WorldTansformMatrix = parentWorldTransformMatrix * m_TansformMatrix;

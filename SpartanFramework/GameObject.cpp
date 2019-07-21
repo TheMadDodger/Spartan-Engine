@@ -12,18 +12,20 @@ GameObject::GameObject(const char *name) : m_pTransform(new TransformComponent()
 
 GameObject::~GameObject()
 {
-	for (auto pChild : m_pChildren)
+	for (size_t i = 0; i < m_pComponents.size(); ++i)
 	{
-		pChild->OnDestroy();
-		delete pChild;
-	}
-	m_pChildren.clear();
-
-	for (auto pComponent : m_pComponents)
-	{
+		auto pComponent = m_pComponents[i];
 		delete pComponent;
 	}
 	m_pComponents.clear();
+
+	for (size_t i = 0; i < m_pChildren.size(); ++i)
+	{
+		auto pChild = m_pChildren[i];
+ 		pChild->OnDestroy();
+		delete pChild;
+	}
+	m_pChildren.clear();
 }
 
 void GameObject::AddChild(GameObject *pChild, bool initialize)
@@ -38,18 +40,14 @@ void GameObject::AddChild(GameObject *pChild, bool initialize)
 	}
 }
 
-void GameObject::RemoveChild(GameObject *pChild)
+void GameObject::RemoveChild(GameObject *pChild, bool destroy)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
 
-	/*if (deleteObject)
-	{
-		delete pChild;
-		pChild = nullptr;
-	}*/
+	if(destroy) GetGameScene()->Destroy(pChild);
 }
 
 BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
@@ -156,13 +154,15 @@ void GameObject::RootUpdate(const GameContext &gameContext)
 		RootInitialize(gameContext);
 	}
 
-	for (auto pComponent : m_pComponents)
+	for (size_t i = 0; i < m_pComponents.size(); ++i)
 	{
+		auto pComponent = m_pComponents[i];
 		pComponent->RootUpdate(gameContext);
 	}
 
-	for (auto pChild : m_pChildren)
+	for (size_t i = 0; i < m_pChildren.size(); ++i)
 	{
+		auto pChild = m_pChildren[i];
 		if (pChild->IsEnabled())
 			pChild->RootUpdate(gameContext);
 	}
