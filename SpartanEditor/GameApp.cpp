@@ -8,6 +8,7 @@
 #include <SoundManager.h>
 #include <Framework.h>
 #include "ComponentParameters.h"
+#include "EditorWindow.h"
 
 #define BEGIN_BUILDPARAMS_FUNCTION(x) template <typename T> \
 inline void x(ComponentParameters<T> *pParam)
@@ -26,10 +27,10 @@ BEGIN_BUILDPARAMS_FUNCTION(Transform)
 
 BEGIN_BUILDPARAMS_FUNCTION(Image)
 {
-	auto pComp = dynamic_cast<ImageRenderComponent*>(pParam->m_pComponent);
+	//auto pComp = dynamic_cast<ImageRenderComponent*>(pParam->m_pComponent);
 
-	auto pParam1 = new ComponentStringParam("File", pComp->m_AssetFile, pComp->m_AssetFile);
-	pParam->AddParam(pParam1);
+	//auto pParam1 = new ComponentStringParam("File", pComp->m_AssetFile, pComp->m_AssetFile);
+	//pParam->AddParam(pParam1);
 }
 
 GameTool::GameTool(const GameSettings &settings) : BaseGame(settings), m_Buffer("")
@@ -140,6 +141,8 @@ void GameTool::GamePaint(const GameContext &gameContext)
 	ImGui::ShowDemoWindow();
 
 	ContentManagerWindow();
+
+	EditorWindows();
 
 	/*ImGui::Begin("My Window");
 	ImGui::Text("Hello, World! %d", 123);
@@ -322,4 +325,10 @@ void GameTool::ContentManagerWindow()
 	ImGui::Begin("Content Manager");
 
 	ImGui::End();
+}
+
+void GameTool::EditorWindows()
+{
+	for (auto pWindow : EditorWindow::m_pActiveEditorWindows)
+		pWindow->RenderGUI();
 }

@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BehaviorTreeEditor.h" />
+    <ClInclude Include="EditorWindow.h" />
     <ClInclude Include="SkeletonObject.h" />
     <ClInclude Include="ComponentParameters.h" />
     <ClInclude Include="EditorObject.h" />
@@ -177,6 +179,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BehaviorTreeEditor.cpp" />
+    <ClCompile Include="EditorWindow.cpp" />
     <ClCompile Include="SkeletonObject.cpp" />
     <ClCompile Include="ComponentParameters.cpp" />
     <ClCompile Include="EditorObject.cpp" />

@@ -1,6 +1,8 @@
 #pragma once
 #include <GameScene.h>
 
+class EditorWindow;
+
 class LevelEditor : public GameScene
 {
 public:
@@ -26,5 +28,6 @@ private:
 	GameObject *m_CurrentRightClickedObject = nullptr;
 
 	std::map<std::string, bool> m_ComponentsCreated;
+	std::vector<EditorWindow*> m_pEditorWindows;
 };
 

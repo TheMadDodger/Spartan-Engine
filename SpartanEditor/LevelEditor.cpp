@@ -12,7 +12,6 @@ LevelEditor::LevelEditor() : GameScene("Level Editor")
 {
 }
 
-
 LevelEditor::~LevelEditor()
 {
 }

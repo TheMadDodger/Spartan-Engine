@@ -44,12 +44,15 @@ void GameScene::AddChild(GameObject *pObject, bool bForceInitialize)
 	}
 }
 
-void GameScene::RemoveChild(GameObject *pObject)
+void GameScene::RemoveChild(GameObject *pObject, bool del)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pObject);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
+
+	if (del)
+		delete pObject;
 }
 
 void GameScene::SetActiveCamera(CameraComponent *pCamera)

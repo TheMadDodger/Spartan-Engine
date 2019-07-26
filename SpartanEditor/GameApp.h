@@ -19,6 +19,7 @@ public:
 
 private:
 	void ContentManagerWindow();
+	void EditorWindows();
 
 private:
 	char m_Buffer[10];

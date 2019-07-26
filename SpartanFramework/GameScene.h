@@ -14,7 +14,7 @@ public:
 	virtual ~GameScene();
 
 	void AddChild(GameObject *pObject, bool bForceInitialize = false);
-	void RemoveChild(GameObject *pObject);
+	void RemoveChild(GameObject *pObject, bool del = false);
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
