@@ -8,3 +8,7 @@ BehaviorTreeEditor::BehaviorTreeEditor() : EditorWindowTemplate<BehaviorTreeEdit
 BehaviorTreeEditor::~BehaviorTreeEditor()
 {
 }
+
+void BehaviorTreeEditor::OnGUI()
+{
+}

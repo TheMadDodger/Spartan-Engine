@@ -9,6 +9,7 @@
 #include <Framework.h>
 #include "ComponentParameters.h"
 #include "EditorWindow.h"
+#include "BehaviorTreeEditor.h"
 
 #define BEGIN_BUILDPARAMS_FUNCTION(x) template <typename T> \
 inline void x(ComponentParameters<T> *pParam)
@@ -99,6 +100,8 @@ void GameTool::Initialize(const GameContext &gameContext)
 	GLsizei h = (GLsizei)m_GameSettings.Window.Height;
 	m_GameWindowWidth = w / 2.f;
 	m_GameWindowHeight = h / 2.f;
+
+	EditorWindow::GetWindow<BehaviorTreeEditor>();
 }
 
 void GameTool::GameUpdate(const GameContext &gameContext)
@@ -153,6 +156,8 @@ void GameTool::GamePaint(const GameContext &gameContext)
 	ImGui::InputText("string", m_Buffer, 10, IM_ARRAYSIZE(m_Buffer));
 	ImGui::SliderFloat("float", &m_Slider, 0.0f, 1.0f);
 	ImGui::End();*/
+
+
 }
 
 bool GameTool::RootInitialize()
