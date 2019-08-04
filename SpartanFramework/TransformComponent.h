@@ -30,6 +30,8 @@ protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 
+	void UpdateTransform();
+
 private:
 
 	Matrix3X3 m_TansformMatrix;

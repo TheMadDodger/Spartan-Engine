@@ -20,6 +20,11 @@ void TransformComponent::Update(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 
+	UpdateTransform();
+}
+
+void TransformComponent::UpdateTransform()
+{
 	// Check if a rigid body is applied to this object
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (pRigid)
@@ -41,7 +46,7 @@ void TransformComponent::Update(const GameContext &gameContext)
 	{
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
 		m_WorldTansformMatrix = parentWorldTransformMatrix * m_TansformMatrix;
-		
+
 		m_WorldPosition = m_WorldTansformMatrix.ExtraxtTranslation();
 
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
@@ -111,6 +116,8 @@ void TransformComponent::Translate(const Vector2 &position)
 	{
 		pRigid->Getb2Body()->SetTransform(Tob2Vec2(Position), pRigid->Getb2Body()->GetAngle());
 	}
+
+	UpdateTransform();
 }
 
 void TransformComponent::Translate(float x, float y)
@@ -127,6 +134,8 @@ void TransformComponent::Rotate(const Vector3 &rotation)
 	{
 		pRigid->Getb2Body()->SetTransform(pRigid->Getb2Body()->GetPosition(), Rotation.z);
 	}
+
+	UpdateTransform();
 }
 
 void TransformComponent::SetScale(const Vector2 &scale)
@@ -137,6 +146,8 @@ void TransformComponent::SetScale(const Vector2 &scale)
 		return;
 	}
 	Scale = scale;
+
+	UpdateTransform();
 }
 
 bool TransformComponent::UseCamera()
