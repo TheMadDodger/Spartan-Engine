@@ -12,10 +12,10 @@ public:
 	const Matrix3X3 &GetWorldMatrix();
 	const Vector2 &GetWorldPosition();
 
-	void Translate(const Vector2 &position);
-	void Translate(float x, float y);
-	void Rotate(const Vector3 &rotation);
-	void SetScale(const Vector2 &scale);
+	void Translate(const Vector2 &position, bool updateTransform = false);
+	void Translate(float x, float y, bool updateTransform = false);
+	void Rotate(const Vector3 &rotation, bool updateTransform = false);
+	void SetScale(const Vector2 &scale, bool updateTransform = false);
 	bool UseCamera();
 
 	const Vector2 GetPositionInScreenSpace();

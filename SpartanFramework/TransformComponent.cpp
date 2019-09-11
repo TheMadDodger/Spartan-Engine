@@ -106,7 +106,7 @@ const Vector2 &TransformComponent::GetWorldPosition()
 	return m_WorldPosition;
 }
 
-void TransformComponent::Translate(const Vector2 &position)
+void TransformComponent::Translate(const Vector2 &position, bool updateTransform)
 {
 	Position = position;
 
@@ -117,15 +117,15 @@ void TransformComponent::Translate(const Vector2 &position)
 		pRigid->Getb2Body()->SetTransform(Tob2Vec2(Position), pRigid->Getb2Body()->GetAngle());
 	}
 
-	UpdateTransform();
+	if (updateTransform) UpdateTransform();
 }
 
-void TransformComponent::Translate(float x, float y)
+void TransformComponent::Translate(float x, float y, bool updateTransform)
 {
-	Translate(Vector2(x, y));
+	Translate(Vector2(x, y), updateTransform);
 }
 
-void TransformComponent::Rotate(const Vector3 &rotation)
+void TransformComponent::Rotate(const Vector3 &rotation, bool updateTransform)
 {
 	Rotation = rotation;
 	// Update rigid body if there is one
@@ -135,10 +135,10 @@ void TransformComponent::Rotate(const Vector3 &rotation)
 		pRigid->Getb2Body()->SetTransform(pRigid->Getb2Body()->GetPosition(), Rotation.z);
 	}
 
-	UpdateTransform();
+	if (updateTransform) UpdateTransform();
 }
 
-void TransformComponent::SetScale(const Vector2 &scale)
+void TransformComponent::SetScale(const Vector2 &scale, bool updateTransform)
 {
 	if (scale.x == 0 || scale.y == 0)
 	{
@@ -147,7 +147,7 @@ void TransformComponent::SetScale(const Vector2 &scale)
 	}
 	Scale = scale;
 
-	UpdateTransform();
+	if (updateTransform) UpdateTransform();
 }
 
 bool TransformComponent::UseCamera()
