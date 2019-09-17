@@ -159,6 +159,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="GridTestScene.h" />
     <ClInclude Include="Scenes\GUIDTestScene.h" />
     <ClInclude Include="Scenes\BehaviourTreeTestScene.h" />
     <ClInclude Include="GameApp.h" />
@@ -169,6 +171,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FreeCamera.cpp" />
+    <ClCompile Include="GridTestScene.cpp" />
     <ClCompile Include="Scenes\GUIDTestScene.cpp" />
     <ClCompile Include="Scenes\BehaviourTreeTestScene.cpp" />
     <ClCompile Include="EngineTestApp.cpp" />

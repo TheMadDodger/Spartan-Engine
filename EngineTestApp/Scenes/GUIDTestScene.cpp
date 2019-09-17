@@ -13,7 +13,7 @@ GUIDTestScene::~GUIDTestScene()
 
 void GUIDTestScene::Initialize(const GameContext & gameContext)
 {
-	Utilities::GUID guid = Utilities::GUID::GenerateGUID();
+	GUID guid = Utilities::GenerateGUID();
 	//Utilities::Debug::LogInfo(guid);
 }
 

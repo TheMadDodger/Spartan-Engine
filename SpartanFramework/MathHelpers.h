@@ -2,6 +2,8 @@
 
 namespace Math
 {
+	struct IntVector2;
+
 	struct Vector2
 	{
 		float x;
@@ -17,12 +19,16 @@ namespace Math
 		float Normalize();
 
 		Vector2 operator+(const Vector2 &other);
+		bool operator==(const Vector2 &other);
+		bool operator!=(const Vector2 &other);
 		void operator+=(const Vector2 &other);
 		Vector2 operator-(const Vector2 &other);
 		Vector2 operator*(const Vector2 &other);
+		Vector2 operator*(const IntVector2 &other);
 		Vector2 operator*(float factor);
 		void operator*=(float factor);
 		Vector2 operator/(float factor);
+		Vector2 operator/(const Vector2 &other);
 		Vector2 Normalized();
 
 		// Static methods

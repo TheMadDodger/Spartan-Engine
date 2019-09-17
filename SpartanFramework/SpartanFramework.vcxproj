@@ -168,6 +168,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AStarPathFinding.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="ConsoleInput.h" />
     <ClInclude Include="Event.h" />
@@ -179,12 +180,15 @@
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="FastNoise.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="GridComponent.h" />
     <ClInclude Include="GUID.h" />
     <ClInclude Include="LineRenderComponent.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mesh2DRenderComponent.h" />
+    <ClInclude Include="PathFindingNodes.h" />
     <ClInclude Include="PhysicsMaterial.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShakeComponent.h" />
@@ -236,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AStarPathFinding.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />
     <ClCompile Include="AIBehaviourTree.cpp" />
     <ClCompile Include="BehaviourTreeNodes.cpp" />
@@ -243,10 +248,13 @@
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
     <ClCompile Include="FastNoise.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridComponent.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Mesh2DRenderComponent.cpp" />
+    <ClCompile Include="PathFindingNodes.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />

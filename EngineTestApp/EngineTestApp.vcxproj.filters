@@ -39,6 +39,12 @@
     <ClInclude Include="Scenes\GUIDTestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FreeCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GridTestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +69,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\GUIDTestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FreeCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GridTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

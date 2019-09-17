@@ -25,6 +25,9 @@
     <Filter Include="AI">
       <UniqueIdentifier>{6ac6dc29-7718-4b00-83b9-12233eb44abd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AI\PathFinding">
+      <UniqueIdentifier>{6793b0af-0605-4634-976a-8326dddfe742}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -218,6 +221,18 @@
     <ClInclude Include="ShakeComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GridComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathFinding.h">
+      <Filter>AI\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFindingNodes.h">
+      <Filter>AI\PathFinding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -364,6 +379,18 @@
     </ClCompile>
     <ClCompile Include="ShakeComponent.cpp">
       <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GridComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarPathFinding.cpp">
+      <Filter>AI\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFindingNodes.cpp">
+      <Filter>AI\PathFinding</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

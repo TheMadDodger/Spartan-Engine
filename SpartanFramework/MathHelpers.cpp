@@ -17,6 +17,16 @@ Vector2 Vector2::operator+(const Vector2 &other)
 	return result;
 }
 
+bool Math::Vector2::operator==(const Vector2 & other)
+{
+	return x == other.x && y == other.y;
+}
+
+bool Math::Vector2::operator!=(const Vector2 & other)
+{
+	return x != other.x || y != other.y;
+}
+
 void Math::Vector2::operator+=(const Vector2 &other)
 {
 	x += other.x;
@@ -39,6 +49,14 @@ Vector2 Vector2::operator*(const Vector2 & other)
 	return result;
 }
 
+Vector2 Vector2::operator*(const IntVector2 &other)
+{
+	Vector2 result;
+	result.x = x * (float)other.x;
+	result.y = y * (float)other.y;
+	return result;
+}
+
 Vector2 Vector2::operator*(float factor)
 {
 	Vector2 result;
@@ -58,6 +76,14 @@ Vector2 Math::Vector2::operator/(float factor)
 	Vector2 result;
 	result.x = x / factor;
 	result.y = y / factor;
+	return result;
+}
+
+Vector2 Math::Vector2::operator/(const Vector2 & other)
+{
+	Vector2 result;
+	result.x = x / other.x;
+	result.y = y / other.y;
 	return result;
 }
 
