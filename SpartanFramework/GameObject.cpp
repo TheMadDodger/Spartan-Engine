@@ -3,11 +3,17 @@
 #include "BaseComponent.h"
 #include "TransformComponent.h"
 #include "GameScene.h"
+#include "Layers.h"
 
-GameObject::GameObject(const char *name) : m_pTransform(new TransformComponent()), m_Tag("")
+GameObject::GameObject(const char *name, size_t layerID)
+	: m_pComponents(std::vector<BaseComponent*>()),
+	  m_pChildren(std::vector<GameObject*>()),
+	  m_Tag(""), m_LayerID(layerID)
 {
+	m_pTransform = CreateDefaultComponent<TransformComponent>();
+
 	memcpy(m_Name, name, strlen(name));
-	AddComponent(m_pTransform);
+	Construct();
 }
 
 GameObject::~GameObject()
@@ -15,6 +21,7 @@ GameObject::~GameObject()
 	for (size_t i = 0; i < m_pComponents.size(); ++i)
 	{
 		auto pComponent = m_pComponents[i];
+		pComponent->OnDestroy();
 		delete pComponent;
 	}
 	m_pComponents.clear();
@@ -28,29 +35,23 @@ GameObject::~GameObject()
 	m_pChildren.clear();
 }
 
-void GameObject::AddChild(GameObject *pChild, bool initialize)
+void GameObject::AddChild(GameObject *pChild)
 {
 	m_pChildren.push_back(pChild);
-	pChild->SetParent(this);
+	pChild->m_pParentObject = this;
 	pChild->m_pScene = m_pScene;
-
-	if (initialize)
-	{
-		pChild->RootInitialize(BaseGame::GetGame()->GetGameContext());
-	}
 }
 
-void GameObject::RemoveChild(GameObject *pChild, bool destroy)
+void GameObject::RemoveChild(GameObject *pChild)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
-
-	if(destroy) GetGameScene()->Destroy(pChild);
+	pChild->m_pParentObject = nullptr;
 }
 
-BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
+/*BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
 {
 	if (pComponent != nullptr)
 	{
@@ -58,7 +59,7 @@ BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
 		pComponent->SetGameObject(this);
 	}
 	return pComponent;
-}
+}*/
 
 GameScene *GameObject::GetGameScene() const
 {
@@ -109,6 +110,19 @@ void GameObject::SetName(const char *name)
 {
 	ZeroMemory(m_Name, strlen(m_Name));
 	memcpy(m_Name, name, strlen(name));
+}
+
+const LayerData& GameObject::GetLayer() const
+{
+	const LayerData& layer = LayerManager::GetInstance()->operator[](m_LayerID);
+	return layer;
+}
+
+void GameObject::SetLayer(int layerID)
+{
+	int oldLayer = m_LayerID;
+	m_LayerID = layerID;
+	GetGameScene()->UpdateLayers(this, oldLayer, m_LayerID);
 }
 
 void GameObject::RootInitialize(const GameContext &gameContext)
@@ -174,12 +188,15 @@ void GameObject::RootUpdate(const GameContext &gameContext)
 void GameObject::RootDraw(const GameContext & gameContext)
 {
 	// User defined Draw()
+	glPushMatrix();
+	m_pTransform->ApplyTransform();
 	Draw(gameContext);
 
 	for (auto pComponent : m_pComponents)
 	{
 		pComponent->RootDraw(gameContext);
 	}
+	glPopMatrix();
 
 	for (auto pChild : m_pChildren)
 	{
@@ -188,15 +205,16 @@ void GameObject::RootDraw(const GameContext & gameContext)
 	}
 }
 
-void GameObject::RootCleanup()
-{
-	for (auto pComp : m_pComponents)
-	{
-		pComp->RootCleanup();
-	}
-}
-
 void GameObject::SetParent(GameObject *pParent)
 {
-	m_pParentObject = pParent;
+	if (m_pParentObject->m_pParentObject)
+		m_pParentObject->m_pParentObject->RemoveChild(this);
+
+	if (pParent)
+	{
+		GetGameScene()->RemoveChild(this);
+		pParent->AddChild(this);
+	}
+	else
+		GetGameScene()->AddChild(this);
 }

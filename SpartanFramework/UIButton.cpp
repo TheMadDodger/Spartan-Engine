@@ -88,7 +88,7 @@ void UIButton::Initialize(const GameContext &)
 {
 	m_WasClickedThisFrame = false;
 
-	AddComponent(new ImageRenderComponent(m_pCurrentTexture));
+	//AddComponent(new ImageRenderComponent(m_pCurrentTexture));
 }
 
 void UIButton::Update(const GameContext &gameContext)

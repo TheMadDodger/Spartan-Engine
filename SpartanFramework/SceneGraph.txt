@@ -1,0 +1,19 @@
+Binary Scene file blocks:
+1. Scene name
+- Name: string
+2. Scene settings
+?
+3. Scene objects
+- Object count: size_t
+For each object in scene:
+- Object name: string
+- Prefab ID: size_t
+- Object transform:
+	- Position: Vector2
+	- Rotation: Vector3
+	- Scale: Vector2
+4. Component overrides
+For each component override
+- Object ID (from the scene objects block)
+- Component ID (from component factory)
+- Serialized component data

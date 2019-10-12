@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Components.h"
 
-SkinnedMeshComponent::SkinnedMeshComponent(Skeleton *pSkeleton) : m_pSkeleton(pSkeleton)
+SkinnedMeshComponent::SkinnedMeshComponent()
 {
 }
 
@@ -60,16 +60,8 @@ void SkinnedMeshComponent::Update(const GameContext &)
 
 void SkinnedMeshComponent::Draw(const GameContext &gameContext)
 {
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
 	for (auto pQuad : m_Quads)
 	{
 		pQuad->Draw(gameContext);
 	}
-	glPopMatrix();
-}
-
-BaseComponent *SkinnedMeshComponent::Create()
-{
-	return new SkinnedMeshComponent(nullptr);
 }

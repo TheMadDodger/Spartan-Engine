@@ -4,7 +4,7 @@
 #include "TransformComponent.h"
 #include "Grid.h"
 
-GridComponent::GridComponent(BaseGrid *pGrid) : m_pGrid(pGrid)
+GridComponent::GridComponent() : m_pGrid(nullptr)
 {
 }
 
@@ -15,6 +15,11 @@ GridComponent::~GridComponent()
 		delete m_pGrid;
 		m_pGrid = nullptr;
 	}
+}
+
+void GridComponent::SetGrid(BaseGrid* pGrid)
+{
+	m_pGrid = pGrid;
 }
 
 BaseGrid *GridComponent::GetGrid()
@@ -33,9 +38,6 @@ void GridComponent::Update(const GameContext &)
 void GridComponent::Draw(const GameContext &gameContext)
 {
 #ifdef _DEBUG
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
 	m_pGrid->RenderGrid(gameContext, GetGameObject()->GetTransform()->GetWorldPosition());
-	glPopMatrix();
 #endif // _DEBUG
 }

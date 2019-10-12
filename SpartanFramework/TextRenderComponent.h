@@ -3,7 +3,6 @@
 class TextRenderComponent : public BaseComponent
 {
 public:
-	TextRenderComponent(const std::string &file);
 	TextRenderComponent();
 	virtual ~TextRenderComponent();
 
@@ -18,6 +17,8 @@ public:
 
 	void SetMaxWidth(Uint32 maxWidth);
 
+	std::string m_FontFile;
+
 	COMPONENT_EDITOR(TextRenderComponent)
 
 protected:
@@ -25,7 +26,6 @@ protected:
 	void Draw(const GameContext &gameContext) override;
 
 private:
-	std::string m_FontFile;
 	std::string m_Text;
 	bool m_IsDirty = true;
 	TextureData *m_pTextTexture = nullptr;

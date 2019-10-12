@@ -6,15 +6,16 @@ class BaseAIBehaviour;
 class AIComponent : public BaseComponent
 {
 public:
-	COMPONENT_EDITOR(AIComponent)
-
-	AIComponent(BaseAIBehaviour *pAIBehaviour);
-	AIComponent() : m_pAIBehaviour(nullptr) {};
+	AIComponent();
 	virtual ~AIComponent();
+
+	void SetBehaviour(BaseAIBehaviour* pBehaviour);
 
 private:
 	virtual void Initialize(const GameContext &) override;
 	virtual void Update(const GameContext &gameContext) override;
+
+	COMPONENT_EDITOR(AIComponent)
 
 private:
 	BaseAIBehaviour *m_pAIBehaviour;

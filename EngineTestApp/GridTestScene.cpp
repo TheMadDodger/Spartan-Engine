@@ -21,9 +21,7 @@ GridTestScene::~GridTestScene()
 void GridTestScene::Initialize(const GameContext & gameContext)
 {
 	gameContext.pInput->AddInputAction(InputAction("Findpath", InputType::Pressed, 'f'));
-
-	m_pCamera = new FreeCamera(10.0f);
-	AddChild(m_pCamera);
+	m_pCamera = Instantiate<FreeCamera>();
 
 	Grid2D *pGrid = new Grid2D(60, 60, Vector2(10.0f, 10.0f));
 	pGrid->Generate<AStar2DGridNode>();
@@ -39,10 +37,9 @@ void GridTestScene::Initialize(const GameContext & gameContext)
 		pPathNode->SetMoveable(false);
 	}
 
-	m_pGrid = new GridComponent(pGrid);
-	GameObject *pGridObject = new GameObject("Grid");
-	pGridObject->AddComponent(m_pGrid);
-	AddChild(pGridObject);
+	GameObject* pGridObject = Instantiate<GameObject>();
+	m_pGrid = pGridObject->CreateRuntimeComponent<GridComponent>();
+	m_pGrid->SetGrid(pGrid);
 
 	m_pAStarPathFinding = new AStarPathFinding(pGrid);
 

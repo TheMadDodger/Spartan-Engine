@@ -17,24 +17,20 @@ TestScene::~TestScene()
 
 void TestScene::Initialize(const GameContext &gameContext)
 {
-	m_pObject = new GameObject();
+	m_pObject = Instantiate<GameObject>();
 	m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
 
-	m_pImage = new GameObject();
+	m_pImage = Instantiate<GameObject>(m_pObject);
 	m_pImage->GetTransform()->Translate(100.0f, 0.0f);
 	m_pImage->GetTransform()->SetScale(Vector2(0.1f, 0.1f));
-	m_pImage->AddComponent(new ImageRenderComponent("./Resources/TwitchAvatar.png"));
+	TextureData *pTexture = ContentManager::GetInstance()->Load<TextureData>("./Resources/TwitchAvatar.png");
+	m_pImage->CreateRuntimeComponent<ImageRenderComponent>()->SetTexture(pTexture);
 
-	m_pObject->AddChild(m_pImage);
-
-	auto pObject = new GameObject();
-	pObject->AddComponent(new ImageRenderComponent("./Resources/TwitchAvatar.png"));
-	pObject->AddComponent(new UIComponent());
+	auto pObject = Instantiate<GameObject>();
+	pObject->SetLayer(LayerManager::GetInstance()->operator[](DefaultLayerNames::UIBackground).LayerID);
+	pObject->CreateRuntimeComponent<ImageRenderComponent>()->SetTexture(pTexture);
 	pObject->GetTransform()->Translate(50.0f, 50.0f);
 	pObject->GetTransform()->SetScale(Vector2(0.1f, 0.1f));
-	AddChild(pObject);
-
-	AddChild(m_pObject);
 
 	gameContext.pInput->AddInputAction(InputAction("Forward", Down , 'w', 0, SDL_SCANCODE_LEFT));
 	gameContext.pInput->AddInputAction(InputAction("Backward", Down, 's'));
@@ -132,25 +128,20 @@ void TestScene::Initialize(const GameContext &gameContext)
 
 	AddChild(pText);*/
 
-	EmitterSettings settings;
-	settings.MaxParticles = 1000;
-	settings.Position = Vector2(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
-	settings.SpawnIntervals = 1000.0f;
-	settings.PartSettings.RandomSpeedBetween2Constants(100.f, 200.f);
-	settings.PartSettings.RandomDirectionBetween2Constants(0.f, 359.f);
-	settings.PartSettings.ConstantLifeTime(1.0f);
-	settings.PartSettings.ColorOverLifeTime(Color::Magenta());
-	settings.PartSettings.AlphaOverLifeTime2(1.0f, 0.0f);
-	settings.PartSettings.RandomRotationBetween2Constants(0.0f, 359.0f);
-	settings.PartSettings.RandomUniformScaleBetweenTwoConstants(5.0f, 10.0f);
-	settings.PartSettings.RandomAngularSpeedBetween2Constants(-100.0f, 100.0f);
-	settings.PartSettings.SetEndAngularSpeed(0.0f);
-
-	m_pPartObject = new GameObject();
-	m_pPartObject->AddComponent(new ParticleComponent(settings));
-
-	AddChild(m_pPartObject);
-
+	m_pPartObject = Instantiate<GameObject>();
+	ParticleComponent* pParticleComp = m_pPartObject->CreateRuntimeComponent<ParticleComponent>();
+	pParticleComp->m_Settings.MaxParticles = 1000;
+	pParticleComp->m_Settings.Position = Vector2(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
+	pParticleComp->m_Settings.SpawnIntervals = 1000.0f;
+	pParticleComp->m_Settings.PartSettings.RandomSpeedBetween2Constants(100.f, 200.f);
+	pParticleComp->m_Settings.PartSettings.RandomDirectionBetween2Constants(0.f, 359.f);
+	pParticleComp->m_Settings.PartSettings.ConstantLifeTime(1.0f);
+	pParticleComp->m_Settings.PartSettings.ColorOverLifeTime(Color::Magenta());
+	pParticleComp->m_Settings.PartSettings.AlphaOverLifeTime2(1.0f, 0.0f);
+	pParticleComp->m_Settings.PartSettings.RandomRotationBetween2Constants(0.0f, 359.0f);
+	pParticleComp->m_Settings.PartSettings.RandomUniformScaleBetweenTwoConstants(5.0f, 10.0f);
+	pParticleComp->m_Settings.PartSettings.RandomAngularSpeedBetween2Constants(-100.0f, 100.0f);
+	pParticleComp->m_Settings.PartSettings.SetEndAngularSpeed(0.0f);
 
 	m_pBlackboard = new Blackboard();
 	m_pBlackboard->Add<float>(5.f, "somerandomfloat");

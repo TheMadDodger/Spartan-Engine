@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-ParticleComponent::ParticleComponent(const EmitterSettings &settings) : m_Settings(settings), BaseComponent("Particle Emitter")
+ParticleComponent::ParticleComponent() : m_pEmitter(nullptr), m_pSystem(nullptr), BaseComponent("Particle Emitter")
 {
 }
 

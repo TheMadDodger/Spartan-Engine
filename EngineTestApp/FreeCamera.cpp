@@ -3,8 +3,9 @@
 #include <Components.h>
 #include <InputManager.h>
 
-FreeCamera::FreeCamera(float maxDistance) : m_MaxDistance(maxDistance)
+FreeCamera::FreeCamera() : m_MaxDistance(10.0f)
 {
+	m_pCameraComponent = CreateDefaultComponent<CameraComponent>();
 }
 
 FreeCamera::~FreeCamera()
@@ -13,9 +14,6 @@ FreeCamera::~FreeCamera()
 
 void FreeCamera::Initialize(const GameContext &gameContext)
 {
-	m_pCameraComponent = new CameraComponent();
-	AddComponent(m_pCameraComponent);
-
 	gameContext.pInput->AddInputAction(InputAction("MousePressed", InputType::Pressed, 0, SDL_BUTTON_RIGHT));
 	gameContext.pInput->AddInputAction(InputAction("MouseDown", InputType::Down, 0, SDL_BUTTON_RIGHT));
 	gameContext.pInput->AddInputAction(InputAction("RMousePressed", InputType::Pressed, 0, SDL_BUTTON_LEFT));

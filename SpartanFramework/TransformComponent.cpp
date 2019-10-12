@@ -2,6 +2,7 @@
 #include "Components.h"
 #include "GameObject.h"
 #include "GameScene.h"
+#include "Layers.h"
 
 TransformComponent::TransformComponent() : m_TansformMatrix(Matrix3X3::CreateIdentityMatrix()), BaseComponent("Transform")
 {
@@ -38,9 +39,8 @@ void TransformComponent::UpdateTransform()
 
 	// Apply parent transform if object has a parent
 	auto pParent = GetGameObject()->GetParent();
-	auto pUI = GetGameObject()->GetComponent<UIComponent>();
 
-	if (pUI != nullptr) m_UseCamera = false;
+	if (GetGameObject()->GetLayer().IsUILayer) m_UseCamera = false;
 
 	if (pParent)// && pUI == nullptr)
 	{
@@ -61,7 +61,7 @@ void TransformComponent::UpdateTransform()
 	m_WorldPosition = Position;
 
 	// Don't apply camera transform if it's a UI Component
-	if (pUI == nullptr)
+	if (m_UseCamera)
 	{
 		auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
 		m_TansformMatrix = camInverse * m_TansformMatrix;

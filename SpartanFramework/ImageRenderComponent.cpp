@@ -8,15 +8,6 @@ ImageRenderComponent::ImageRenderComponent() : m_AssetFile(""), BaseComponent("I
 {
 }
 
-ImageRenderComponent::ImageRenderComponent(const std::string &assetFile) : m_AssetFile(assetFile), BaseComponent("Image"), m_pImage(nullptr)
-{
-	//memcpy(m_AssetFile, assetFile, strlen(assetFile));
-}
-
-ImageRenderComponent::ImageRenderComponent(TextureData *pTexture) : m_pImage(pTexture)
-{
-}
-
 ImageRenderComponent::~ImageRenderComponent()
 {
 }
@@ -65,14 +56,10 @@ void ImageRenderComponent::Draw(const GameContext &gameContext)
 	UNREFERENCED_PARAMETER(gameContext);
 	if (m_pImage)
 	{
-		// Apply Transformation from TransformComponent
-		glPushMatrix();
-		GetGameObject()->GetTransform()->ApplyTransform();
 		if (m_Color == Color::White())
 			gameContext.pRenderer->RenderTexture(m_pImage);
 		else
 			gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
-		glPopMatrix();
 	}
 }
 

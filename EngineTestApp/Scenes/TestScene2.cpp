@@ -102,19 +102,16 @@ void TestScene2::Initialize(const GameContext &gameContext)
 	Utilities::BinaryContainer::Write<BYTE>(0);
 	Utilities::BinaryContainer::Close();
 
-	string path = "./Resources/Spritesheets/mario.bin";
+	m_pGroundBox = Instantiate<GameObject>();
+	m_pGroundBox->CreateRuntimeComponent<RigidBodyComponent>()->m_BodyType = b2_staticBody;
+	m_pGroundBox->CreateRuntimeComponent<ColliderComponent>()->SetCollider(new Box(500.0f, 50.0f));
 
-	m_pGroundBox = new GameObject();
-	m_pGroundBox->AddComponent(new RigidBodyComponent(b2_staticBody));
-	m_pGroundBox->AddComponent(new ColliderComponent(new Box(500.0f, 50.0f)));
-	AddChild(m_pGroundBox);
+	m_pSpriteSheetTest = Instantiate<GameObject>();
+	m_pSpriteSheetTest->CreateRuntimeComponent<RigidBodyComponent>();
+	m_pSpriteSheetTest->CreateRuntimeComponent<ColliderComponent>()->SetCollider(new Circle(8.0f));
 
-	m_pSpriteSheetTest = new GameObject();
-	m_pSpriteSheetTest->AddComponent(new RigidBodyComponent());
-	m_pSpriteSheetTest->AddComponent(new ColliderComponent(new Circle(8.0f)));
-	m_pSpriteSheetTest->AddComponent(new SpriteSheetComponent(path));
-
-	AddChild(m_pSpriteSheetTest);
+	SpriteSheetData *pSpriteSheet = ContentManager::GetInstance()->Load<SpriteSheetData>("./Resources/Spritesheets/mario.bin");
+	m_pSpriteSheetTest->CreateRuntimeComponent<SpriteSheetComponent>()->SetSpriteSheet(pSpriteSheet);
 
 	Utilities::Debug::EnablePhysicsDebugRendering(true);
 }

@@ -6,17 +6,20 @@
 class ColliderComponent : public BaseComponent
 {
 public:
-	ColliderComponent(Collider *collider, const PhysicsMaterial &physicsMat = PhysicsMaterial());
+	ColliderComponent();
 	virtual ~ColliderComponent();
 
-	virtual BaseComponent *Create() { return new ColliderComponent(nullptr); }
-
+	void SetCollider(Collider* newCollider);
 	void UpdateCollider(Collider *newCollider);
 
+	PhysicsMaterial m_PhysicsMaterial;
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
+
+private:
+	COMPONENT_EDITOR(ColliderComponent)
 
 private:
 	friend class RigidBodyComponent;
@@ -24,6 +27,5 @@ private:
 	Collider *m_pCollider = nullptr;
 	b2FixtureDef m_FixtureDef;
 	b2Fixture *m_pFixture = nullptr;
-	PhysicsMaterial m_PhysicsMaterial;
 };
 

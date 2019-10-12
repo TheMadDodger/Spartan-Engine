@@ -31,6 +31,14 @@ BaseComponent *BaseComponent::CreateFromName(const std::string &name)
 	return pComp->Create();
 }
 
+void BaseComponent::RootAwake()
+{
+	if (!m_pGameObject) return;
+	if (m_bEnabled) return;
+	Awake();
+	m_bEnabled = true;
+}
+
 void BaseComponent::RootInitialize(const GameContext & gameContext)
 {
 	if (m_bInitialized) return;
@@ -56,11 +64,6 @@ void BaseComponent::RootDraw(const GameContext & gameContext)
 {
 	// User defined Draw()
 	Draw(gameContext);
-}
-
-void BaseComponent::RootCleanup()
-{
-	Cleanup();
 }
 
 void BaseComponent::SetGameObject(GameObject *pObject)

@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Components.h"
 
-UIContainer::UIContainer(const Vector2 &dimensions) : m_Dimensions(dimensions), m_Padding(Vector2::Zero()), m_Color({ 0.5f, 0.5f, 0.5f, 0.5f }), BaseComponent("UI Container")
+UIContainer::UIContainer() : m_Padding(Vector2::Zero()), m_Color({ 0.5f, 0.5f, 0.5f, 0.5f }), BaseComponent("UI Container")
 {
 }
 
@@ -58,8 +58,5 @@ void UIContainer::Update(const GameContext &)
 
 void UIContainer::Draw(const GameContext &gameContext)
 {
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
 	gameContext.pRenderer->DrawSolidRect(m_Padding, m_Dimensions - m_Padding, m_Color);
-	glPopMatrix();
 }

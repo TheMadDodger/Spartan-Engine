@@ -3,8 +3,10 @@
 class FreeCamera : public GameObject
 {
 public:
-	FreeCamera(float maxDistance);
+	FreeCamera();
 	virtual ~FreeCamera();
+
+	float m_MaxDistance;
 
 private:
 	virtual void Initialize(const GameContext &gameContext) override;
@@ -18,6 +20,5 @@ private:
 	Vector2 m_MousePos;
 	Vector2 m_LastMouseDownPos;
 	bool m_InputDisabled = false;
-	float m_MaxDistance;
 };
 

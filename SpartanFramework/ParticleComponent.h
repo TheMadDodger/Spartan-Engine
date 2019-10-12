@@ -3,17 +3,18 @@
 class ParticleComponent : public BaseComponent
 {
 public:
-	ParticleComponent(const EmitterSettings &settings);
+	ParticleComponent();
 	virtual ~ParticleComponent();
+
+	EmitterSettings m_Settings;
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 
 private:
-	virtual BaseComponent *Create() { return new ParticleComponent(EmitterSettings()); }
+	COMPONENT_EDITOR(ParticleComponent)
 
-	EmitterSettings m_Settings;
 	ParticleSystem *m_pSystem;
 	ParticleEmitter *m_pEmitter;
 };

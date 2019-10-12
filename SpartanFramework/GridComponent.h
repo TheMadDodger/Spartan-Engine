@@ -6,14 +6,15 @@ class BaseGrid;
 class GridComponent : public BaseComponent
 {
 public:
-	GridComponent(BaseGrid *pGrid);
+	GridComponent();
 	virtual ~GridComponent();
-
+	
+	void SetGrid(BaseGrid* pGrid);
 	BaseGrid *GetGrid();
 
-	virtual BaseComponent *Create() override { return new GridComponent(nullptr); }
-
 private:
+	COMPONENT_EDITOR(GridComponent)
+
 	virtual void Initialize(const GameContext &gameContext);
 	virtual void Update(const GameContext &gameContext);
 	virtual void Draw(const GameContext &gameContext);

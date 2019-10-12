@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "ColliderComponent.h"
 
-RigidBodyComponent::RigidBodyComponent(const b2BodyType &type, const Vector2 &bodyPivot) : m_BodyPivot(bodyPivot), m_BodyType(type), BaseComponent("Rigidbody")
+RigidBodyComponent::RigidBodyComponent() : BaseComponent("Rigidbody")
 {
 }
 
@@ -27,7 +27,7 @@ void RigidBodyComponent::Initialize(const GameContext &gameContext)
 	Getb2Body()->SetTransform(Tob2Vec2(pos), rot.z);
 }
 
-void RigidBodyComponent::Cleanup()
+void RigidBodyComponent::OnDestroy()
 {
 	auto pCol = GetGameObject()->GetComponent<ColliderComponent>();
 

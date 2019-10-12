@@ -23,32 +23,32 @@
     <ProjectGuid>{519A2200-27E5-4AB9-A32B-50C86B5D2AEC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SpartanFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -59,6 +59,7 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Macros.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridComponent.h" />
     <ClInclude Include="GUID.h" />
+    <ClInclude Include="Layers.h" />
     <ClInclude Include="LineRenderComponent.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialManager.h" />
@@ -233,7 +235,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="GameTime.h" />
-    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="TextRenderComponent.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="VertexHelpers.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridComponent.cpp" />
+    <ClCompile Include="Layers.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
@@ -294,7 +296,6 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="GameTime.cpp" />
-    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
     <ClCompile Include="UIButton.cpp" />
   </ItemGroup>

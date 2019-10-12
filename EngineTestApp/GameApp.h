@@ -15,6 +15,8 @@ public:
 	void GameUpdate(const GameContext &gameContext) override;
 	void GamePaint(const GameContext &gameContext) override;
 
+	virtual void RegisterPrefabs(std::vector<GameObject*> &) override {};
+
 private:
 	
 };

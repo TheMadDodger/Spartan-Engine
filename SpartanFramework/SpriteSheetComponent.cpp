@@ -3,20 +3,28 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Math::Origin &origin) : m_File(file),
-	m_pSpriteSheet(nullptr), m_CalculateOrigin(true), m_OriginType(origin),
+SpriteSheetComponent::SpriteSheetComponent() : m_File(""),
+	m_pSpriteSheet(nullptr), m_CalculateOrigin(true), m_OriginType(Origin::Center),
 	m_CurrentFrame(0), m_Status(SIdle), BaseComponent("Spritesheet") {}
 
-SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Vector2 &origin) : m_Origin(origin),
-	m_File(file), m_pSpriteSheet(nullptr), m_CurrentFrame(0), m_Status(SIdle) {}
+//SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Math::Origin &origin) : m_File(file),
+//	m_pSpriteSheet(nullptr), m_CalculateOrigin(true), m_OriginType(origin),
+//	m_CurrentFrame(0), m_Status(SIdle), BaseComponent("Spritesheet") {}
+//
+//SpriteSheetComponent::SpriteSheetComponent(const std::string &file, const Vector2 &origin) : m_Origin(origin),
+//	m_File(file), m_pSpriteSheet(nullptr), m_CurrentFrame(0), m_Status(SIdle) {}
 
 SpriteSheetComponent::~SpriteSheetComponent() {}
+
+void SpriteSheetComponent::SetSpriteSheet(SpriteSheetData *pSpriteSheet)
+{
+	m_pSpriteSheet = pSpriteSheet;
+	m_CurrentAnimationClip = m_pSpriteSheet->m_AnimationClips[0];
+}
 
 void SpriteSheetComponent::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-
-	m_pSpriteSheet = ContentManager::GetInstance()->Load<SpriteSheetData>(m_File);
 
 	if (m_pSpriteSheet == nullptr)
 		return;
@@ -80,10 +88,7 @@ void SpriteSheetComponent::Draw(const GameContext &gameContext)
 	if (m_CalculateOrigin)
 		CalculateOrigin(m_OriginType, frame);
 
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
 	gameContext.pRenderer->RenderSprite(m_pSpriteSheet->m_pImageData, frame.FrameRect, m_Origin);
-	glPopMatrix();
 }
 
 void SpriteSheetComponent::Play(const std::string &clipName, bool loop)

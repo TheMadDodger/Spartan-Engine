@@ -4,6 +4,7 @@
 
 BasicCamera::BasicCamera()
 {
+	m_pCam = CreateDefaultComponent<CameraComponent>();
 }
 
 BasicCamera::~BasicCamera()
@@ -13,8 +14,6 @@ BasicCamera::~BasicCamera()
 void BasicCamera::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	if(GetAllComponents().size() <= 1)
-		AddComponent(new CameraComponent());
 }
 
 void BasicCamera::Update(const GameContext &gameContext)
@@ -25,4 +24,9 @@ void BasicCamera::Update(const GameContext &gameContext)
 void BasicCamera::Draw(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
+}
+
+CameraComponent* BasicCamera::GetCameraComponent()
+{
+	return m_pCam;
 }

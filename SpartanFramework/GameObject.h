@@ -4,17 +4,15 @@
 
 class TransformComponent;
 class GameScene;
+struct LayerData;
 
 class GameObject
 {
 public:
-	GameObject(const char *name = "EmptyGameObject");
+	GameObject(const char *name = "EmptyGameObject", size_t layerID = 0);
 	virtual ~GameObject();
 
-	void AddChild(GameObject *pChild, bool initialize = false);
-	void RemoveChild(GameObject *pChild, bool destroy = false);
-
-	const vector<BaseComponent*> GetAllComponents() { return m_pComponents; }
+	const vector<BaseComponent*> &GetAllComponents() { return m_pComponents; }
 
 	template <typename T>
 	vector<T*> GetComponents()
@@ -30,7 +28,7 @@ public:
 		return pComponents;
 	}
 
-	vector<BaseComponent*> GetComponents() { return m_pComponents; }
+	vector<BaseComponent*> &GetComponents() { return m_pComponents; }
 
 	template <typename T>
 	T *GetComponent()
@@ -48,14 +46,30 @@ public:
 	}
 
 	TransformComponent *GetTransform() const { return m_pTransform; }
-	BaseComponent *AddComponent(BaseComponent *pComponent);
+	//BaseComponent *AddComponent(BaseComponent *pComponent);
+
+	template <typename T>
+	T *CreateRuntimeComponent()
+	{
+		T* pT = new T();
+		BaseComponent* pComponent = dynamic_cast<BaseComponent*>(pT);
+		if (pComponent == nullptr)
+		{
+			Utilities::Debug::LogError("Can not create component because it does not derive from BaseComponent!");
+			return nullptr;
+		}
+		pComponent->m_pGameObject = this;
+		m_pComponents.push_back(pComponent);
+		pComponent->RootAwake();
+		return pT;
+	}
+
 	GameScene *GetGameScene() const;
 	GameObject *GetChild(size_t index);
 	const vector<GameObject*> &GetChildren();
-	//template <typename T>
-	//T* GetChildren();
 
 	GameObject *GetParent() { return m_pParentObject; }
+	void SetParent(GameObject* pParent);
 
 	const std::string &GetTag();
 	void SetTag(const std::string &tag);
@@ -70,15 +84,17 @@ public:
 	void Select(bool bSelected) { m_Selected = bSelected; }
 	bool IsSelected() { return m_Selected; }
 
+	const LayerData& GetLayer() const;
+	void SetLayer(int layerID);
+
 protected:
 	friend class GameScene;
 	void RootInitialize(const GameContext &gameContext);
 	void RootPostInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
-	void RootCleanup();
-	void SetParent(GameObject *pParent);
 
+	virtual void Construct() {};
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
@@ -88,6 +104,25 @@ protected:
 	virtual void OnCreated() {};
 	virtual void OnEnable() {};
 	virtual void OnDisable() {};
+
+	template<class T>
+	T *CreateDefaultComponent()
+	{
+		T* pComp = new T();
+		BaseComponent *pComponent = dynamic_cast<BaseComponent*>(pComp);
+		if (pComponent == nullptr)
+			throw new exception("ERROR: Class must be derived from BaseComponent!!!");
+
+		pComponent->m_pGameObject = this;
+		m_pComponents.push_back(pComponent);
+		pComponent->SetGameObject(this);
+		pComponent->RootAwake();
+		return pComp;
+	}
+
+private:
+	void AddChild(GameObject* pChild);
+	void RemoveChild(GameObject* pChild);
 
 private:
 	friend class LevelEditor;
@@ -106,5 +141,5 @@ private:
 	char m_Name[200];
 	char m_PrefabName[200] = "";
 	bool m_Selected = false;
+	size_t m_LayerID;
 };
-

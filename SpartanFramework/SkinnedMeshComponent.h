@@ -7,18 +7,19 @@ class SkinnedQuad;
 class SkinnedMeshComponent : public BaseComponent
 {
 public:
-	SkinnedMeshComponent(Skeleton *pSkeleton);
+	SkinnedMeshComponent();
 	virtual ~SkinnedMeshComponent();
+
+	Skeleton* m_pSkeleton;
 
 private:
 	virtual void Initialize(const GameContext &gameContext);
 	virtual void Update(const GameContext &gameContext);
 	virtual void Draw(const GameContext &gameContext);
 
-	virtual BaseComponent *Create();
+	COMPONENT_EDITOR(SkinnedMeshComponent)
 
 private:
 	vector<SkinnedQuad*> m_Quads;
-	Skeleton *m_pSkeleton;
 };
 

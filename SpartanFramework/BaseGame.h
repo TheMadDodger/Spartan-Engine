@@ -3,6 +3,8 @@
 #include "Framework.h"
 
 struct SDL_Window;
+class GameObject;
+class LayerManager;
 
 #ifdef _DEBUG
 class ConsoleInput;
@@ -30,6 +32,9 @@ public:
 
 	static BaseGame *GetGame() { return m_pGame; }
 
+	virtual void RegisterLayers(LayerManager *) {};
+	virtual void RegisterPrefabs(std::vector<GameObject*> &prefabs) = 0;
+
 #ifdef _DEBUG
 protected:
 	virtual void RegisterConsoleCommands(ConsoleInput *) {}
@@ -44,6 +49,7 @@ private:
 	friend class GameTool;
 	GameSettings m_GameSettings;
 	GameContext m_GameContext;
+	std::vector<GameObject*> m_pPrefabs;
 
 #ifdef _DEBUG
 	ConsoleInput *m_pConspole;

@@ -14,7 +14,7 @@ BehaviourTreeTestScene::~BehaviourTreeTestScene()
 
 void BehaviourTreeTestScene::Initialize(const GameContext &)
 {
-	GameObject *pAIObject = new GameObject();
+	GameObject *pAIObject = Instantiate<GameObject>();
 
 	BTTreeRootNode *pRootNode = new BTTreeRootNode();
 
@@ -28,8 +28,7 @@ void BehaviourTreeTestScene::Initialize(const GameContext &)
 	pSelectorNode->AddNode(pWaitTask);
 
 	AIBehaviourTree *pBehaviourTree = new AIBehaviourTree(pRootNode);
-	pAIObject->AddComponent(new AIComponent(pBehaviourTree));
-	AddChild(pAIObject);
+	pAIObject->CreateRuntimeComponent<AIComponent>()->SetBehaviour(pBehaviourTree);
 }
 
 void BehaviourTreeTestScene::Update(const GameContext &)

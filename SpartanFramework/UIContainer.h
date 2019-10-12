@@ -4,7 +4,7 @@
 class UIContainer : public BaseComponent
 {
 public:
-	UIContainer(const Vector2 &dimensions);
+	UIContainer();
 	virtual ~UIContainer();
 
 	void SetPadding(const Vector2 &padding);
@@ -23,7 +23,7 @@ private:
 	void Draw(const GameContext &gameContext) override;
 
 private:
-	virtual BaseComponent *Create() { return new UIContainer(Vector2(20.f, 20.f)); }
+	COMPONENT_EDITOR(UIContainer)
 
 	Vector2 m_Dimensions;
 	Vector2 m_Padding;

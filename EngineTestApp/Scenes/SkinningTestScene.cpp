@@ -21,9 +21,8 @@ void SkinningTestScene::Initialize(const GameContext &gameContext)
 	m_pChildBone = m_pRootBone->AddChildBone(new Bone(100.f, 0.f));
 	m_pSkeleton->Initialize();
 
-	auto pObject = new GameObject();
-	pObject->AddComponent(new SkinnedMeshComponent(m_pSkeleton));
-	AddChild(pObject);
+	auto pObject = Instantiate<GameObject>();
+	pObject->CreateRuntimeComponent<SkinnedMeshComponent>()->m_pSkeleton = m_pSkeleton;
 
 	gameContext.pInput->AddInputAction(InputAction("Forward", Down, 'w', 0, SDL_SCANCODE_LEFT));
 	gameContext.pInput->AddInputAction(InputAction("Backward", Down, 's'));

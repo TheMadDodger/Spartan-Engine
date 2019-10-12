@@ -6,11 +6,7 @@
 #include "Components.h"
 #include "SoundManager.h"
 
-AudioSourceComponent::AudioSourceComponent(const char* file) : m_AudioFile(file), m_pAudioData(nullptr), BaseComponent("Audio Source")
-{
-}
-
-AudioSourceComponent::AudioSourceComponent(AudioData *pAudioData) : m_pAudioData(pAudioData)
+AudioSourceComponent::AudioSourceComponent() : m_AudioFile(""), m_pAudioData(nullptr), BaseComponent("Audio Source")
 {
 }
 

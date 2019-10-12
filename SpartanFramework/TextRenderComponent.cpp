@@ -4,11 +4,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-TextRenderComponent::TextRenderComponent(const std::string &file) : m_FontFile(file), m_pFont(nullptr), m_Text("Hello World"), m_Origin(TopLeft), m_Color(1, 1, 1, 1), BaseComponent("Text")
-{
-}
-
-TextRenderComponent::TextRenderComponent() : TextRenderComponent("")
+TextRenderComponent::TextRenderComponent() : m_pFont(nullptr), m_Text("Hello World"), m_Origin(TopLeft), m_Color(1, 1, 1, 1), BaseComponent("Text")
 {
 }
 
@@ -93,8 +89,6 @@ void TextRenderComponent::Initialize(const GameContext &gameContext)
 
 void TextRenderComponent::Draw(const GameContext &gameContext)
 {
-	glPushMatrix();
-	GetGameObject()->GetTransform()->ApplyTransform();
 	SDL_Color color;
 	color.r = Uint8(m_Color.r * 255);
 	color.g = Uint8(m_Color.g * 255);
@@ -114,6 +108,4 @@ void TextRenderComponent::Draw(const GameContext &gameContext)
 	{
 		gameContext.pRenderer->RenderTexture(m_pTextTexture);
 	}
-
-	glPopMatrix();
 }

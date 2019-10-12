@@ -12,10 +12,6 @@ Mesh2DRenderComponent::Mesh2DRenderComponent() : m_pMesh(nullptr), m_MaterialID(
 {
 }
 
-Mesh2DRenderComponent::Mesh2DRenderComponent(Mesh2D *pMesh) : m_pMesh(pMesh), m_MaterialID(0)
-{
-}
-
 Mesh2DRenderComponent::~Mesh2DRenderComponent()
 {
 	/*if(m_pMesh)

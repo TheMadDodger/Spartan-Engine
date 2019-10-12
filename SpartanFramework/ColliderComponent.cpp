@@ -4,8 +4,8 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-ColliderComponent::ColliderComponent(Collider *collider, const PhysicsMaterial &physicsMat) :
-	m_pCollider(collider), BaseComponent("Collider"), m_PhysicsMaterial(physicsMat)
+ColliderComponent::ColliderComponent() :
+	m_pCollider(nullptr), BaseComponent("Collider"), m_PhysicsMaterial(PhysicsMaterial())
 {
 }
 
@@ -16,6 +16,11 @@ ColliderComponent::~ColliderComponent()
 		delete m_pCollider;
 		m_pCollider = nullptr;
 	}
+}
+
+void ColliderComponent::SetCollider(Collider* newCollider)
+{
+	m_pCollider = newCollider;
 }
 
 void ColliderComponent::UpdateCollider(Collider *newCollider)
@@ -65,9 +70,6 @@ void ColliderComponent::Draw(const GameContext &gameContext)
 	if (!m_pCollider) return;
 	if (Utilities::Debug::CanRenderDebug())
 	{
-		glPushMatrix();
-		GetGameObject()->GetTransform()->ApplyTransform();
 		m_pCollider->DrawDebugShape(gameContext);
-		glPopMatrix();
 	}
 }

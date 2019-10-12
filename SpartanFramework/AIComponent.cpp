@@ -2,7 +2,7 @@
 #include "AIComponent.h"
 #include "BaseAIBehaviour.h"
 
-AIComponent::AIComponent(BaseAIBehaviour *pAIBehaviour) : m_pAIBehaviour(pAIBehaviour)
+AIComponent::AIComponent() : m_pAIBehaviour(nullptr)
 {
 }
 
@@ -13,6 +13,11 @@ AIComponent::~AIComponent()
 		delete m_pAIBehaviour;
 		m_pAIBehaviour = nullptr;
 	}
+}
+
+void AIComponent::SetBehaviour(BaseAIBehaviour* pBehaviour)
+{
+	m_pAIBehaviour = pBehaviour;
 }
 
 void AIComponent::Initialize(const GameContext &)

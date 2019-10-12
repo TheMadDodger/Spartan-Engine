@@ -8,7 +8,6 @@ class Mesh2DRenderComponent : public BaseComponent
 {
 public:
 	Mesh2DRenderComponent();
-	Mesh2DRenderComponent(Mesh2D *pMesh);
 	virtual ~Mesh2DRenderComponent();
 
 	void SetMesh(Mesh2D *pMesh);
@@ -19,7 +18,7 @@ private:
 	void Update(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
-	virtual BaseComponent* Create() override { return new Mesh2DRenderComponent(); }
+	COMPONENT_EDITOR(Mesh2DRenderComponent)
 
 private:
 	Mesh2D *m_pMesh;

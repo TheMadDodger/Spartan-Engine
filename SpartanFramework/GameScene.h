@@ -1,6 +1,7 @@
 #pragma once
+#include "GameObject.h"
+#include "Layers.h"
 
-class GameObject;
 class BasicCamera;
 
 const int Box2DVelocityIterations = 6; // How many velocity iterations should Box2D per game tick perform?
@@ -13,8 +14,6 @@ public:
 	GameScene(const std::string &name);
 	virtual ~GameScene();
 
-	void AddChild(GameObject *pObject, bool bForceInitialize = false);
-	void RemoveChild(GameObject *pObject, bool del = false);
 	void SetActiveCamera(CameraComponent *pCamera);
 	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
 
@@ -28,7 +27,29 @@ public:
 	GameObject *GetChild(unsigned int ID) { return m_pChildren[ID]; }
 
 	void Destroy(GameObject *gameObject);
-	void Instantiate(GameObject *gameObject, GameObject *pParent = nullptr);
+
+	template<class T>
+	T *Instantiate(GameObject* pParent = nullptr)
+	{
+		T* pT = new T();
+		GameObject* pObject = dynamic_cast<GameObject*>(pT);
+		if (pObject == nullptr)
+		{
+			Utilities::Debug::LogError("Can not instantiate a class that does not derive from GameObject!");
+			return nullptr;
+		}
+
+		pObject->m_pScene = this;
+		if (pParent != nullptr)
+		{
+			pParent->AddChild(pObject);
+			return nullptr;
+		}
+
+		AddChild(pObject);
+		UpdateLayers(pObject, -1, pObject->GetLayer().LayerID);
+		return pT;
+	}
 
 	void SetEnabled(bool enabled);
 	
@@ -60,6 +81,7 @@ private:
 	void RootInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
+	void RenderLayer(const GameContext& gameContext, std::list<GameObject*> pObjectsOnLayer);
 
 	void LoadPersistent();
 
@@ -68,21 +90,17 @@ private:
 
 	void RootCleanup();
 
-	void DestroyObjects();
-	void InstantiateObjects(const GameContext &gameContext);
+	void UpdateLayers(GameObject* pObject, int oldLayer, int newLayer);
+
+	void AddChild(GameObject* pObject);
+	void RemoveChild(GameObject* pObject);
 
 private:
 	friend class SceneManager;
-
-	struct Instantiation
-	{
-		Instantiation(GameObject *pObject, GameObject *pParent) : Object(pObject), Parent(pParent) {}
-
-		GameObject *Object;
-		GameObject *Parent;
-	};
+	friend class GameObject;
 
 	std::vector<GameObject*> m_pChildren;
+	std::vector<std::list<GameObject*>> m_pLayers;
 	std::vector<GameObject*> m_pPersistentChildren;
 	std::string m_SceneName = "";
 	BasicCamera *m_pDefaultCamera = nullptr;
@@ -90,7 +108,5 @@ private:
 	b2World *m_pPhysicsWorld = nullptr;
 	b2Vec2 m_Gravity;
 	bool m_bEnabled = false;
-	std::vector<GameObject*> m_pQueuedForDestruction;
-	std::vector<Instantiation> m_pInstantiateQueue;
 };
 

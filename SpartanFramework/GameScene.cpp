@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "GameScene.h"
-#include "GameObject.h"
 #include "BasicCamera.h"
 #include "CameraComponent.h"
+#include "Layers.h"
 
 GameScene::GameScene(const std::string &name) : m_SceneName(name)
 {
@@ -10,6 +10,8 @@ GameScene::GameScene(const std::string &name) : m_SceneName(name)
 
 GameScene::~GameScene()
 {
+	m_pLayers.clear();
+
 	for (size_t i = 0; i < m_pChildren.size(); ++i)
 	{
 		auto pChild = m_pChildren[i];
@@ -26,7 +28,7 @@ GameScene::~GameScene()
 	}
 }
 
-void GameScene::AddChild(GameObject *pObject, bool bForceInitialize)
+void GameScene::AddChild(GameObject *pObject)
 {
 	if (pObject != nullptr)
 	{
@@ -37,22 +39,14 @@ void GameScene::AddChild(GameObject *pObject, bool bForceInitialize)
 			pChild->m_pScene = this;
 		}
 	}
-
-	if (bForceInitialize)
-	{
-		pObject->RootInitialize(BaseGame::GetGame()->GetGameContext());
-	}
 }
 
-void GameScene::RemoveChild(GameObject *pObject, bool del)
+void GameScene::RemoveChild(GameObject *pObject)
 {
 	auto it = find(m_pChildren.begin(), m_pChildren.end(), pObject);
 	if (it == m_pChildren.end()) return;
 
 	m_pChildren.erase(it);
-
-	if (del)
-		delete pObject;
 }
 
 void GameScene::SetActiveCamera(CameraComponent *pCamera)
@@ -70,14 +64,28 @@ void GameScene::DontDestroyOnLoad(GameObject *pObject)
 	m_pPersistentChildren.push_back(pObject);
 }
 
-void GameScene::Destroy(GameObject *gameObject)
+void GameScene::Destroy(GameObject *pGameObject)
 {
-	m_pQueuedForDestruction.push_back(gameObject);
-}
+	if (!pGameObject) return;
 
-void GameScene::Instantiate(GameObject *gameObject, GameObject *pParent)
-{
-	m_pInstantiateQueue.push_back(Instantiation(gameObject, pParent));
+	for (size_t i = 0; i < pGameObject->m_pChildren.size(); i++)
+	{
+		Destroy(pGameObject->GetChild(i));
+	}
+
+	pGameObject->OnDestroy();
+
+	if (pGameObject->GetParent())
+	{
+		pGameObject->GetParent()->RemoveChild(pGameObject);
+	}
+	else
+	{
+		RemoveChild(pGameObject);
+	}
+
+	delete pGameObject;
+	pGameObject = nullptr;
 }
 
 void GameScene::SetEnabled(bool enabled)
@@ -87,16 +95,20 @@ void GameScene::SetEnabled(bool enabled)
 
 void GameScene::RootInitialize(const GameContext &gameContext)
 {
+	for (size_t i = 0; i < LayerManager::GetInstance()->Size(); i++)
+	{
+		m_pLayers.push_back(std::list<GameObject*>());
+	}
+
 	// User Pre-Initialize
 	PreInitialize(gameContext);
 
 	// Create default camera
 	m_pDefaultCamera = new BasicCamera();
 	m_pDefaultCamera->SetName("Main Camera");
-	auto pCam = new CameraComponent();
-	m_pDefaultCamera->AddComponent(pCam);
+	m_pDefaultCamera->RootInitialize(gameContext);
 	AddChild(m_pDefaultCamera);
-	pCam->SetAsActive();
+	m_pDefaultCamera->GetCameraComponent()->SetAsActive();
 
 	// Create the physics world for this scene
 	m_Gravity = b2Vec2(0.0f, -9.81f);
@@ -130,9 +142,16 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 	float32 timeStep = 1.0f / FixedUpdateSpeed;
 	m_pPhysicsWorld->Step(timeStep, Box2DVelocityIterations, Box2DPositionIterations);
 
-	for (size_t i = 0; i < m_pChildren.size(); ++i)
+	// Since the child count at the start of the frame can change during a frames update
+	// We need to copy the objects to an array that won't change
+	// Otherwise we crash!!!
+	size_t childCountThisFrame = m_pChildren.size();
+	GameObject **pChildrenArray = new GameObject*[childCountThisFrame];
+	std::copy(m_pChildren.begin(), m_pChildren.end(), pChildrenArray);
+	for (size_t i = 0; i < childCountThisFrame; ++i)
 	{
-		auto pChild = m_pChildren[i];
+		auto pChild = pChildrenArray[i];
+
 		if(pChild->IsEnabled())
 			pChild->RootUpdate(gameContext);
 	}
@@ -142,12 +161,6 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 	// User Post-Update
 	PostUpdate(gameContext);
-
-	// Destroy all objects that were marked for destruction last frame
-	DestroyObjects();
-
-	// Spawn all objects that were Instantiated last frame
-	InstantiateObjects(gameContext);
 }
 
 void GameScene::RootDraw(const GameContext &gameContext)
@@ -157,10 +170,10 @@ void GameScene::RootDraw(const GameContext &gameContext)
 	// User Pre-Draw
 	PreDraw(gameContext);
 
-	for (auto pChild : m_pChildren)
+	// Rendering layer by layer
+	for (size_t i = 0; i < m_pLayers.size(); i++)
 	{
-		if (pChild->IsEnabled())
-			pChild->RootDraw(gameContext);
+		RenderLayer(gameContext, m_pLayers[i]);
 	}
 
 	// User defined Draw()
@@ -168,6 +181,15 @@ void GameScene::RootDraw(const GameContext &gameContext)
 
 	// User Post-Draw
 	PostDraw(gameContext);
+}
+
+void GameScene::RenderLayer(const GameContext& gameContext, std::list<GameObject*> pObjectsOnLayer)
+{
+	for (GameObject *pChild : pObjectsOnLayer)
+	{
+		if (pChild->IsEnabled())
+			pChild->RootDraw(gameContext);
+	}
 }
 
 void GameScene::LoadPersistent()
@@ -210,41 +232,10 @@ void GameScene::RootCleanup()
 	Cleanup();
 }
 
-void GameScene::DestroyObjects()
+void GameScene::UpdateLayers(GameObject* pObject, int oldLayer, int newLayer)
 {
-	for (auto gameObject : m_pQueuedForDestruction)
-	{
-		gameObject->OnDestroy();
-		if (gameObject->GetParent() != nullptr)
-		{
-			gameObject->GetParent()->RemoveChild(gameObject);
-		}
-		else
-		{
-			auto it = std::find(m_pChildren.begin(), m_pChildren.end(), gameObject);
-			if(it != m_pChildren.end()) RemoveChild(gameObject);
-		}
-		delete gameObject;
-	}
+	if(oldLayer != -1)
+		m_pLayers[oldLayer].remove(pObject);
 
-	m_pQueuedForDestruction.clear();
-}
-
-void GameScene::InstantiateObjects(const GameContext &gameContext)
-{
-	for (auto instantiate : m_pInstantiateQueue)
-	{
-		if (instantiate.Parent != nullptr)
-		{
-			instantiate.Parent->AddChild(instantiate.Object);
-			instantiate.Object->RootInitialize(gameContext);
-		}
-		else
-		{
-			AddChild(instantiate.Object);
-		}
-		instantiate.Object->OnCreated();
-	}
-
-	m_pInstantiateQueue.clear();
+	m_pLayers[newLayer].push_back(pObject);
 }

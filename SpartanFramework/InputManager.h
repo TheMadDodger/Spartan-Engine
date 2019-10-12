@@ -29,7 +29,7 @@ private:
 	bool m_bTriggeredLastFrame = false;
 };
 
-enum JoystickType
+enum class JoystickType
 {
 	LeftThumbStick,
 	RightThumbStick,

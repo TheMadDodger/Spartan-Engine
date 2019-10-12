@@ -137,9 +137,6 @@
     <ClInclude Include="UIButton.h">
       <Filter>EnginePrefabs</Filter>
     </ClInclude>
-    <ClInclude Include="UIComponent.h">
-      <Filter>Core Components</Filter>
-    </ClInclude>
     <ClInclude Include="UIContainer.h">
       <Filter>Core Components</Filter>
     </ClInclude>
@@ -233,6 +230,9 @@
     <ClInclude Include="PathFindingNodes.h">
       <Filter>AI\PathFinding</Filter>
     </ClInclude>
+    <ClInclude Include="Layers.h">
+      <Filter>SceneGraph</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -307,9 +307,6 @@
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Content Management</Filter>
-    </ClCompile>
-    <ClCompile Include="UIComponent.cpp">
-      <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="UIContainer.cpp">
       <Filter>Core Components</Filter>
@@ -391,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="PathFindingNodes.cpp">
       <Filter>AI\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Layers.cpp">
+      <Filter>SceneGraph</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -85,6 +85,8 @@ bool BaseGame::RootInitialize()
 		return false;
 	}
 
+	RegisterPrefabs(m_pPrefabs);
+
 	// Run user defined Initialize()
 	Initialize(m_GameContext);
 

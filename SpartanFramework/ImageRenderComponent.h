@@ -6,8 +6,6 @@ class ImageRenderComponent : public BaseComponent
 {
 public:
 	ImageRenderComponent();
-	ImageRenderComponent(const std::string &assetFile);
-	ImageRenderComponent(TextureData *pTexture);
 	~ImageRenderComponent();
 
 	void SetTexture(TextureData *pTexture);
@@ -15,16 +13,17 @@ public:
 	void SetColor(const Color &color);
 	std::string m_AssetFile = "";
 
-	COMPONENT_EDITOR(ImageRenderComponent)
+	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 
 private:
 	void Initialize(const GameContext &gameContext) override;
 	void Update(const GameContext &gameContext) override;
 	void Draw(const GameContext &gameContext) override;
 
+	COMPONENT_EDITOR(ImageRenderComponent)
+
 private:
 	//const char* m_AssetFile = nullptr;
 	TextureData *m_pImage = nullptr;
-	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 };
 

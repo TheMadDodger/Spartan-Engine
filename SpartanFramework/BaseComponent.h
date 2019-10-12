@@ -31,19 +31,22 @@ public:
 	virtual void CustomEditor() {};
 
 	bool IsInitialized() { return m_bInitialized; }
+	bool IsEnabled() { return m_bEnabled; }
+	bool SetEnabled(bool enabled) { m_bEnabled = enabled; }
 
 protected:
 	friend class GameObject;
+	void RootAwake();
 	void RootInitialize(const GameContext &gameContext);
 	void RootUpdate(const GameContext &gameContext);
 	void RootDraw(const GameContext &gameContext);
-	void RootCleanup();
 
+	virtual void Awake() {};
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void Cleanup() { }
+	virtual void OnDestroy() { }
 
 	static std::vector<BaseComponent*> m_pRegisteredComponents;
 	bool m_CanTickInEditor = false;
@@ -54,6 +57,7 @@ private:
 	void SetGameObject(GameObject *pObject);
 	GameObject *m_pGameObject = nullptr;
 	bool m_bInitialized = false;
+	bool m_bEnabled = false;
 
 	std::string m_Name;
 };

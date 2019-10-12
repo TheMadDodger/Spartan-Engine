@@ -16,9 +16,12 @@ enum AnimationPlayerStatus
 class SpriteSheetComponent : public BaseComponent
 {
 public:
-	SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
-	SpriteSheetComponent(const std::string &file, const Vector2 &origin);
+	SpriteSheetComponent();
 	~SpriteSheetComponent();
+	//SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
+	//SpriteSheetComponent(const std::string &file, const Vector2 &origin);
+
+	void SetSpriteSheet(SpriteSheetData *pSpriteSheet);
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
@@ -32,7 +35,7 @@ public: // Animation Calls
 	void Pause();
 
 private:
-	virtual BaseComponent *Create() { return new SpriteSheetComponent(""); }
+	COMPONENT_EDITOR(SpriteSheetComponent)
 
 	void CalculateOrigin(const Math::Origin &origin, const FrameData &frame);
 

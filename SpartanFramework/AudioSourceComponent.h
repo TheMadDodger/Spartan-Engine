@@ -36,8 +36,7 @@ struct AudioSourceSettings
 class AudioSourceComponent : public BaseComponent
 {
 public:
-	AudioSourceComponent(const char* file);
-	AudioSourceComponent(AudioData *pAudioData);
+	AudioSourceComponent();
 	~AudioSourceComponent();
 
 	void SetSettings(const AudioSourceSettings &settings);
@@ -45,7 +44,7 @@ public:
 
 	void Play(const GameContext &gameContext);
 
-	virtual BaseComponent *Create() { return new AudioSourceComponent(""); }
+	AudioSourceSettings m_Settings;
 
 protected:
 	void Initialize(const GameContext &gameContext) override;
@@ -59,13 +58,13 @@ private:
 
 	void ConstantSource(const GameContext &gameContext);
 
+	COMPONENT_EDITOR(AudioSourceComponent)
+
 private:
 	const char* m_AudioFile;
 	AudioData *m_pAudioData;
 
 	bool m_bIsPlaying = false;
 	int m_PlayingChannel = -1;
-
-	AudioSourceSettings m_Settings;
 };
 
