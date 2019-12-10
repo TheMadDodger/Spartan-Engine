@@ -1,5 +1,5 @@
 #pragma once
-enum BTNodeResult
+enum class BTNodeResult
 {
 	BTNotStarted,
 	BTInProgress,

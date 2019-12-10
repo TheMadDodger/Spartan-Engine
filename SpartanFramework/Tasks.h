@@ -4,7 +4,7 @@
 class BTWaitTask : public BTTaskNode
 {
 public:
-	BTWaitTask(float waitTime = 1.0f) : m_WaitTime(waitTime) {};
+	BTWaitTask(float waitTime = 1.0f) : m_WaitTime(waitTime), m_Timer(0.0f) {};
 	virtual ~BTWaitTask() {};
 
 private:
