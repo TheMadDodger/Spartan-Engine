@@ -71,18 +71,18 @@ void SkinnedQuad::Update()
 {
 	for (auto &vertex : m_Vertices)
 	{
-		Vector3 endPos = Vector3::Zero();
+		Vector2 endPos = Vector2::Zero();
 
 		for (size_t i = 0; i < vertex.Blending.BoneIndeces.size(); ++i)
 		{
 			auto boneIndex = vertex.Blending.BoneIndeces[i];
 			auto blendWeight = vertex.Blending.BoneWeights[i];
 			auto pBone = m_pSkeleton->GetBone(boneIndex);
-			Matrix3X3 bindPose = pBone->GetBindPose();
-			Matrix3X3 boneWorld = pBone->GetTransform()->GetWorldMatrix();
-			Matrix3X3 boneTransform = boneWorld * bindPose;
-			auto newPos = boneTransform * Vector3(vertex.OriginalPosition.x, vertex.OriginalPosition.y, 1.f);
-			endPos = endPos + newPos * blendWeight;
+			Matrix4X4 bindPose = pBone->GetBindPose();
+			Matrix4X4 boneWorld = pBone->GetTransform()->GetWorldMatrix();
+			Matrix4X4 boneTransform = boneWorld * bindPose;
+			auto newPos = boneTransform * Vector3(vertex.OriginalPosition.x, vertex.OriginalPosition.y, 0.f);
+			endPos = endPos + newPos.xy() * blendWeight;
 		}
 
 		vertex.TransformedPosition = Vector2(endPos.x, endPos.y);

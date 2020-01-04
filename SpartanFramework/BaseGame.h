@@ -1,6 +1,7 @@
 #pragma once
 #include "ApplicationStructs.h"
 #include "Framework.h"
+#include "SEObject.h"
 
 struct SDL_Window;
 class GameObject;
@@ -10,7 +11,7 @@ class LayerManager;
 class ConsoleInput;
 #endif
 
-class BaseGame
+class BaseGame : SEObject
 {
 public:
 	BaseGame(const GameSettings &settings);

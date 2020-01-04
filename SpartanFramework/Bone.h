@@ -10,7 +10,7 @@ public:
 
 	Bone *AddChildBone(Bone *bone);
 
-	const Matrix3X3 &GetBindPose() const;
+	const Matrix4X4 &GetBindPose() const;
 
 private:
 	virtual void Initialize(const GameContext &gameContext);
@@ -27,7 +27,7 @@ private:
 	Bone *m_pParentBone;
 	std::vector<Bone*> m_ChildBones;
 
-	Matrix3X3 m_BindingPose;
+	Matrix4X4 m_BindingPose;
 	float m_Length;
 	float m_Rotation;
 };

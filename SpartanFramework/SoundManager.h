@@ -1,5 +1,5 @@
 #pragma once
-class SoundManager
+class SoundManager : Manager
 {
 public:
 	SoundManager();

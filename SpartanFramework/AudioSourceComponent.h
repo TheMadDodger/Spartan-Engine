@@ -51,7 +51,7 @@ protected:
 	void Update(const GameContext &gameContext) override;
 
 private:
-	float InterpolateVolume(Vector2 &listenPosition);
+	float InterpolateVolume(Vector3 &listenPosition);
 	float LinInterpolate(float value);
 	float ExpInterpolate(float value);
 	float LogInterpolate(float value);

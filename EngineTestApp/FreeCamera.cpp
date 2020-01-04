@@ -32,7 +32,7 @@ void FreeCamera::Update(const GameContext &gameContext)
 	m_CurrentZoom = Lerp(m_CurrentZoom, m_DesiredZoom, 0.1f);
 	GetComponent<CameraComponent>()->Zoom(m_CurrentZoom);
 
-	GetTransform()->Position = Vector2::Lerp(GetTransform()->Position, m_FocusPos, 0.01f);
+	GetTransform()->Position = Vector3::Lerp(GetTransform()->Position, m_FocusPos, 0.01f);
 
 	if (m_InputDisabled) return;
 

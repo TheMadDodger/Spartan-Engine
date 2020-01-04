@@ -3,6 +3,7 @@
 #define GET_VARIABLE_NAME(Variable) (#Variable)
 
 #include "GameTime.h"
+#include "SEObject.h"
 
 namespace Utilities
 {
@@ -14,7 +15,7 @@ namespace Utilities
 		Error, // An error will display the error in a seperate window and then close the game
 	};
 
-	class LoggingData
+	class LoggingData : SEObject
 	{
 	public:
 		LoggingData(const float *pDataToLog, float logInterval)

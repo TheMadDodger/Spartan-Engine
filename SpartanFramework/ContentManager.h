@@ -2,10 +2,12 @@
 #include "ContentLoader.h"
 #include "MathHelpers.h"
 #include "Debug.h"
+#include "SEObject.h"
+#include "Manager.h"
 
 using namespace Math;
 
-class Content // Base Class for content
+class Content : SEObject // Base Class for content
 {
 public:
 	Content(const std::string &file) : m_FileName(file) {}
@@ -276,7 +278,7 @@ private:
 };
 
 #pragma warning(disable:4996)
-class ContentManager
+class ContentManager : Manager
 {
 public: // Singleton calls
 	static ContentManager *GetInstance();

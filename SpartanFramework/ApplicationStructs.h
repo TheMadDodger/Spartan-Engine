@@ -4,7 +4,7 @@ class GameTime;
 class CameraComponent;
 class InputManager;
 class SoundManager;
-class ParticleManager;
+//class ParticleManager;
 
 struct WindowSettings
 {
@@ -27,5 +27,5 @@ struct GameContext
 	GameTime *pTime = nullptr;
 	InputManager *pInput = nullptr;
 	SoundManager *pSound = nullptr;
-	ParticleManager *pParticleManager = nullptr;
+	//ParticleManager *pParticleManager = nullptr;
 };

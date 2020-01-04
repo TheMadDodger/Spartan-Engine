@@ -1,5 +1,7 @@
 #pragma once
-class BaseGridNode
+#include "Node.h"
+
+class BaseGridNode : Node
 {
 public:
 	BaseGridNode(const Vector2 &worldPosition) : m_WorldPosition(worldPosition) {}
@@ -43,7 +45,7 @@ public:
 	const IntVector2 m_Coord;
 };
 
-class BaseGrid
+class BaseGrid : SEObject
 {
 public:
 	BaseGrid(size_t size, const Vector2 &cellSize) : m_Size(size), m_GridCellSize(cellSize)

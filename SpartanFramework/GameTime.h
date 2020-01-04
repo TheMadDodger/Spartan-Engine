@@ -1,12 +1,13 @@
 #pragma once
 #include "stdafx.h"
+#include "SEObject.h"
 
 using namespace std;
 
 using frame = chrono::duration<int32_t, ratio<1, 60>>;
 using ms = chrono::duration<float, milli>;
 
-class GameTime
+class GameTime : SEObject
 {
 public:
 	GameTime() {}

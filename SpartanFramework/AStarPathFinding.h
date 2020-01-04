@@ -1,9 +1,10 @@
 #pragma once
 #include "Grid.h"
+#include "SEObject.h"
 
 class IAStarPathNode;
 
-class AStarPathFinding
+class AStarPathFinding : SEObject
 {
 public:
 	AStarPathFinding(BaseGrid *pGrid) : m_pGrid(pGrid) {}

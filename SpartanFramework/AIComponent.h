@@ -20,4 +20,3 @@ private:
 private:
 	BaseAIBehaviour *m_pAIBehaviour;
 };
-

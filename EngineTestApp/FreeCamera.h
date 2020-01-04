@@ -16,7 +16,7 @@ private:
 	CameraComponent *m_pCameraComponent;
 	float m_CurrentZoom = 1.0f;
 	float m_DesiredZoom = 1.0f;
-	Vector2 m_FocusPos;
+	Vector3 m_FocusPos;
 	Vector2 m_MousePos;
 	Vector2 m_LastMouseDownPos;
 	bool m_InputDisabled = false;

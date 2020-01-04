@@ -3,6 +3,9 @@
 namespace Math
 {
 	struct IntVector2;
+	struct Vector3;
+	struct Vector4;
+	struct Quaternion;
 
 	struct Vector2
 	{
@@ -11,6 +14,7 @@ namespace Math
 
 		// Constructors
 		Vector2() { x = 0; y = 0; }
+		Vector2(const Vector3 &vec3);
 		Vector2(float _x, float _y) { x = _x; y = _y; }
 
 		// Math operations
@@ -80,6 +84,7 @@ namespace Math
 
 		// Constructors
 		Vector3() { x = 0; y = 0; z = 0; }
+		Vector3(const Vector4& vec4);
 		Vector3(float _x, float _y, float _z) { x = _x; y = _y; z = _z; }
 
 		// Math operations
@@ -88,11 +93,15 @@ namespace Math
 		float Normalize();
 
 		Vector3 operator+(const Vector3 &other);
+		Vector3 operator+(const Vector2 &other);
 		Vector3 operator-(const Vector3 &other);
 		Vector3 operator*(const Vector3 &other);
 		Vector3 operator*(float factor);
 		Vector3 operator/(float factor);
-		Vector3 Normalized();
+		Vector3 Normalized() const;
+		Vector2 xy() const { return Vector2(x, y); }
+		static Vector3 Rotate(const Vector3 &vec, Quaternion& rotation);
+		static Vector3 Lerp(const Vector3& a, const Vector3& b, float t);
 
 		// Static methods
 		static Vector3 Zero() { return Vector3(); }
@@ -104,6 +113,18 @@ namespace Math
 		static Vector3 Down() { return Vector3(0, 0, -1); }
 	};
 
+	struct Vector4
+	{
+		Vector4(const Vector3 &vec3, float w) : x(vec3.x), y(vec3.y), z(vec3.z), w(w) {}
+
+		float x;
+		float y;
+		float z;
+		float w;
+
+		Vector2 xy() const { return Vector2(x, y); }
+	};
+
 	struct Float4
 	{
 		Float4() : x(0), y(0), w(0), h(0) {}
@@ -113,6 +134,40 @@ namespace Math
 		float y;
 		float w;
 		float h;
+	};
+
+	struct Quaternion
+	{
+		float x;
+		float y;
+		float z;
+		float w;
+
+		Quaternion();
+		Quaternion(float x, float y, float z, float w);
+		float Length();
+		float Normalize();
+		Quaternion Normalized() const;
+		Quaternion Conjugate() const;
+		Quaternion operator*(const Quaternion& other);
+		Quaternion operator*(const Vector3& other);
+		Quaternion operator-(const Quaternion& other);
+		Quaternion operator+(const Quaternion& other);
+		Quaternion operator*(float f);
+		Quaternion Multiply(const Quaternion& other) const;
+		Quaternion Multiply(const Vector3& vec) const;
+
+		Vector3 GetForward() const;
+		Vector3 GetBack() const;
+		Vector3 GetUp() const;
+		Vector3 GetDown() const;
+		Vector3 GetLeft() const;
+		Vector3 GetRight() const;
+
+		static Quaternion Euler(const Vector3 &eulerAngles);
+		static Quaternion Euler(float x, float y, float z);
+		static Quaternion Multiply(const Quaternion& q1, const Quaternion& q2);
+		Vector3 Rotate(const Vector3 &toRotate) const;
 	};
 
 	struct Matrix3X3
@@ -150,10 +205,52 @@ namespace Math
 		Matrix3X3 Inverse() const;
 	};
 
+	struct Matrix4X4
+	{
+		Matrix4X4() : m{ {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0} } {}
+
+		float m[4][4];
+
+		Matrix4X4(float m11, float m12, float m13, float m14,
+			float m21, float m22, float m23, float m24,
+			float m31, float m32, float m33, float m34,
+			float m41, float m42, float m43, float m44)
+		{
+			m[0][0] = m11; m[1][0] = m12; m[2][0] = m13; m[3][0] = m14;
+
+			m[0][1] = m21; m[1][1] = m22; m[2][1] = m23; m[3][1] = m24;
+
+			m[0][2] = m31; m[1][2] = m32; m[2][2] = m33; m[3][2] = m34;
+
+			m[0][3] = m41; m[1][3] = m42; m[2][3] = m43; m[3][3] = m44;
+		}
+
+		Matrix4X4 operator*(const Matrix4X4& other);
+		Vector4 operator*(const Vector3& other);
+		Matrix4X4 operator*(float factor);
+		Matrix4X4 operator+(const Matrix4X4& other);
+
+		const Vector3 ExtraxtTranslation() const;
+		const Vector3 ExtraxtRotation() const;
+		const Vector3 ExtraxtScale() const;
+
+		static Matrix4X4 CreateIdentityMatrix();
+		static Matrix4X4 CreateTranslationMatrix(const Vector3& translation);
+		static Matrix4X4 CreateRotationMatrix(const Vector3& rotation);
+		static Matrix4X4 CreateRotationMatrix(const Quaternion& rotation);
+		static Matrix4X4 CreateRotationMatrix(const Vector3 &forward, const Vector3 &up);
+		static Matrix4X4 CreateRotationMatrix(const Vector3 &forward, const Vector3 &up, const Vector3 &right);
+		static Matrix4X4 CreateScalingMatrix(const Vector3& scale);
+		static Matrix4X4 CreateScaleRotationTranslationMatrix(const Vector3& translation, const Vector3& rotation, const Vector3& scale);
+		static Matrix4X4 CreateScaleRotationTranslationMatrix(const Vector3& translation, const Quaternion& rotation, const Vector3& scale);
+
+		Matrix4X4 Inverse() const;
+	};
+
 	struct Color
 	{
 	public: // Constructors
-		Color() : r(0), g(0), b(0), a(0) {}
+		Color() : r(0), g(0), b(0), a(1.0f) {}
 		Color(float _r, float _g, float _b, float _a) : r(_r), g(_g), b(_b), a(_a) {}
 
 	public: // Static methods color library
@@ -191,6 +288,15 @@ namespace Math
 	};
 
 	inline float Distance(Vector2 &pos1, Vector2 &pos2)
+	{
+		// Calculate Vector2 from end point to begin point
+		auto p12 = pos2 - pos1;
+
+		// Return the length of this Vector2
+		return p12.Length();
+	}
+
+	inline float Distance(Vector3 &pos1, Vector3 &pos2)
 	{
 		// Calculate Vector2 from end point to begin point
 		auto p12 = pos2 - pos1;

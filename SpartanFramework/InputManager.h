@@ -1,4 +1,5 @@
 #pragma once
+#include "Manager.h"
 
 #define INPUT_DEADZONE 3500
 #define MAX_STICK_MAGNITUDE 32767
@@ -36,7 +37,7 @@ enum class JoystickType
 	Trigger,
 };
 
-class InputManager
+class InputManager : Manager
 {
 public:
 	InputManager();

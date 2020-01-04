@@ -50,7 +50,7 @@ void AudioSourceComponent::Update(const GameContext &gameContext)
 		ConstantSource(gameContext);
 }
 
-float AudioSourceComponent::InterpolateVolume(Vector2 &listenPosition)
+float AudioSourceComponent::InterpolateVolume(Vector3 &listenPosition)
 {
 	auto sourcePosition = GetGameObject()->GetTransform()->GetWorldPosition();
 

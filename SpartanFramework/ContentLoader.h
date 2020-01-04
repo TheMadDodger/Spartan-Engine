@@ -1,7 +1,8 @@
 #pragma once
 #include "stdafx.h"
+#include "SEObject.h"
 
-class BaseLoader
+class BaseLoader : SEObject
 {
 public:
 	BaseLoader() {}
@@ -35,7 +36,7 @@ public:
 		// Remove properties at end
 		auto index = file.find(':');
 		auto noProp = file;
-		if (index != string::npos)
+		if (index != std::string::npos)
 		{
 			noProp = noProp.substr(0, index);
 		}

@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "VertexHelpers.h"
+#include "SEObject.h"
 
 #define MEMBER_OFFSET(s,m) ((char *)NULL + (offsetof(s,m)))
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -12,7 +13,7 @@ enum Mesh2DAttribute : unsigned int
 	ACoord = 2,
 };
 
-class Mesh2D
+class Mesh2D : SEObject
 {
 public:
 	Mesh2D(size_t vertexCount, float *pVertices, size_t indexCount, unsigned int *pIndices, size_t vertexSize, size_t attributeCount, Mesh2DAttribute *attributes) :
@@ -196,7 +197,7 @@ private:
 	Mesh2DAttribute *m_pAttributes;
 };
 
-class MeshHelper
+class MeshHelper : SEObject
 {
 public:
 	static Mesh2D *Generate2DBoxMeshPosColor(const Math::Vector2 &halfSize, const Color &color)

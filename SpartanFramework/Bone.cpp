@@ -32,7 +32,7 @@ Bone *Bone::AddChildBone(Bone *bone)
 	return bone;
 }
 
-const Matrix3X3 & Bone::GetBindPose() const
+const Matrix4X4 &Bone::GetBindPose() const
 {
 	return m_BindingPose;
 }

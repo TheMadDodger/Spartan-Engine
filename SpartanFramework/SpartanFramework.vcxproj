@@ -169,6 +169,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
     <ClInclude Include="Commands.h" />
     <ClInclude Include="ConsoleInput.h" />

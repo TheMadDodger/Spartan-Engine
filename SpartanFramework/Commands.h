@@ -1,7 +1,8 @@
 #pragma once
+#include "SEObject.h"
 
 #ifdef _DEBUG
-class BaseParser
+class BaseParser : SEObject
 {
 public:
 	virtual const std::type_info &GetType() = 0;
@@ -91,7 +92,7 @@ class SizeTParser : public TemplatedParser<size_t>
 	}
 };
 
-class Parser
+class Parser : SEObject
 {
 public:
 	template<typename T>
@@ -123,7 +124,7 @@ private:
 	static std::vector<BaseParser*> m_Parsers;
 };
 
-class BaseConsoleCommand
+class BaseConsoleCommand : SEObject
 {
 public:
 	BaseConsoleCommand(const std::string &command) : m_Command(command) {}

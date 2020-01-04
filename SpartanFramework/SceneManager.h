@@ -1,4 +1,5 @@
 #pragma once
+#include "Manager.h"
 
 class GameScene;
 
@@ -9,7 +10,7 @@ enum LoadSceneFlags : int
 	EnableNewSceneAfterLoad = 0x02,
 };
 
-class SceneManager
+class SceneManager : Manager
 {
 public: // Methods
 	GameScene * GetCurrentScene() const;

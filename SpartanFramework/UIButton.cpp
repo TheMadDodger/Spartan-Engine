@@ -106,7 +106,7 @@ void UIButton::Update(const GameContext &gameContext)
 	m_MouseClicked = false;
 	auto mousePos = gameContext.pInput->GetMouseScreenPosition();
 
-	auto pos = GetTransform()->GetWorldPosition();
+	auto pos = GetTransform()->GetWorldPosition().xy();
 	auto bottomRight = pos + m_Size;
 
 	Vector2 offset = Vector2::Zero();
@@ -115,7 +115,7 @@ void UIButton::Update(const GameContext &gameContext)
 		offset = m_pCurrentTexture->GetOrigin();
 	}
 
-	if (CheckPointInRect(mousePos, { (Vector2&)GetTransform()->GetWorldPosition() - offset + Vector2(5.0f, 5.0f), bottomRight - offset - Vector2(5.0f, 5.0f) }))
+	if (CheckPointInRect(mousePos, { GetTransform()->GetWorldPosition().xy() - offset + Vector2(5.0f, 5.0f), bottomRight - offset - Vector2(5.0f, 5.0f) }))
 	{
 		if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
 		{

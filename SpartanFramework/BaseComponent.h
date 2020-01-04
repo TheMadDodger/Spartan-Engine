@@ -12,7 +12,7 @@ virtual BaseComponent *Create() override \
 	return new comp; \
 }
 
-class BaseComponent
+class BaseComponent : SEObject
 {
 public:
 	BaseComponent(const char *name = "BaseComponent");

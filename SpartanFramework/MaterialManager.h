@@ -1,7 +1,8 @@
 #pragma once
 #include "Material.h"
+#include "Manager.h"
 
-class MaterialManager
+class MaterialManager : Manager
 {
 public:
 	static void Cleanup();

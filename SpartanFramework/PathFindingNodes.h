@@ -1,7 +1,8 @@
 #pragma once
 #include "Grid.h"
+#include "Node.h"
 
-class IAStarPathNode
+class IAStarPathNode : Node
 {
 public:
 	IAStarPathNode() : m_HCost(0), m_GCost(0), m_Moveable(true), m_MovementPenalty(0) {};

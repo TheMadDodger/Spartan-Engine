@@ -64,7 +64,7 @@ void Mesh2DRenderComponent::Draw(const GameContext &)
 	auto projectionInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetProjectionMatrixInverse();
 	auto world = GetGameObject()->GetTransform()->GetWorldMatrix();
 
-	Matrix3X3 worldCamProjection;
+	Matrix4X4 worldCamProjection;
 	if (!GetGameObject()->GetTransform()->UseCamera())
 		worldCamProjection = projectionInverse * world;
 	else

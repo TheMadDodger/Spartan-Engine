@@ -2,8 +2,9 @@
 #include "MathHelpers.h"
 #include "stdafx.h"
 #include "TransformComponent.h"
+#include "SEObject.h"
 
-class Collider
+class Collider : SEObject
 {
 public:
 	virtual void DrawDebugShape(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };

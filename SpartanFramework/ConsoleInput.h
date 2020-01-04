@@ -1,4 +1,5 @@
 #pragma once
+#include "SEObject.h"
 
 #ifdef _DEBUG
 class BaseConsoleCommand;
@@ -10,7 +11,7 @@ struct QueudCommand
 	bool CommandIsWaiting = false;
 };
 
-class ConsoleInput
+class ConsoleInput : SEObject
 {
 public:
 	ConsoleInput();

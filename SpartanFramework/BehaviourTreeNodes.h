@@ -1,4 +1,6 @@
 #pragma once
+#include "Node.h"
+
 enum class BTNodeResult
 {
 	BTNotStarted,
@@ -8,7 +10,7 @@ enum class BTNodeResult
 	BTAbort,
 };
 
-class BTNode
+class BTNode : Node
 {
 public:
 	BTNode();

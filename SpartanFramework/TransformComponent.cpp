@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "Layers.h"
 
-TransformComponent::TransformComponent() : m_TansformMatrix(Matrix3X3::CreateIdentityMatrix()), BaseComponent("Transform")
+TransformComponent::TransformComponent() : m_TansformMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Transform")
 {
 }
 
@@ -30,8 +30,10 @@ void TransformComponent::UpdateTransform()
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (pRigid)
 	{
-		Position = ToVector2(pRigid->Getb2Body()->GetPosition());
-		Rotation = Vector3(0, 0, pRigid->Getb2Body()->GetAngle());
+		Vector2 rigidPos = ToVector2(pRigid->Getb2Body()->GetPosition());
+		Position = Vector3(rigidPos.x, rigidPos.y, Position.z);
+		// TODO: Convert euler angle to Quaternion
+		//Rotation = Vector3(0, 0, pRigid->Getb2Body()->GetAngle());
 	}
 
 	// Build own transform
@@ -72,8 +74,8 @@ void TransformComponent::ApplyTransform()
 {
 	/// Applies the transform to OpenGL so everything rendered after it uses its transform
 	// Extraxt all data from the Transform matrix
-	Vector2 pos = m_TansformMatrix.ExtraxtTranslation();
-	Vector2 scale = m_TansformMatrix.ExtraxtScale();
+	Vector3 pos = m_TansformMatrix.ExtraxtTranslation();
+	Vector3 scale = m_TansformMatrix.ExtraxtScale();
 	Vector3 rot = m_TansformMatrix.ExtraxtRotation();
 
 	// Convert rotation to Radians since OpenGL needs Radians
@@ -87,26 +89,26 @@ void TransformComponent::ApplyTransform()
 
 void TransformComponent::BuildTransform()
 {
-	m_TansformMatrix = Matrix3X3::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);
+	m_TansformMatrix = Matrix4X4::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);
 	m_WorldTansformMatrix = m_TansformMatrix;
 }
 
-const Matrix3X3 &TransformComponent::GetTransformMatrix()
+const Matrix4X4 &TransformComponent::GetTransformMatrix()
 {
 	return m_TansformMatrix;
 }
 
-const Matrix3X3 & TransformComponent::GetWorldMatrix()
+const Matrix4X4 &TransformComponent::GetWorldMatrix()
 {
 	return m_WorldTansformMatrix;
 }
 
-const Vector2 &TransformComponent::GetWorldPosition()
+const Vector3 &TransformComponent::GetWorldPosition()
 {
 	return m_WorldPosition;
 }
 
-void TransformComponent::Translate(const Vector2 &position, bool updateTransform)
+void TransformComponent::Translate(const Vector3 &position, bool updateTransform)
 {
 	Position = position;
 
@@ -114,20 +116,31 @@ void TransformComponent::Translate(const Vector2 &position, bool updateTransform
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (pRigid && pRigid->IsInitialized())
 	{
-		pRigid->Getb2Body()->SetTransform(Tob2Vec2(Position), pRigid->Getb2Body()->GetAngle());
+
+		pRigid->Getb2Body()->SetTransform(b2Vec2(Position.x, Position.y), pRigid->Getb2Body()->GetAngle());
 	}
 
 	if (updateTransform) UpdateTransform();
 }
 
+void TransformComponent::Translate(const Vector2 &position, bool updateTransform)
+{
+	Translate(Vector3(position.x, position.y, Position.z), updateTransform);
+}
+
+void TransformComponent::Translate(float x, float y, float z, bool updateTransform)
+{
+	Translate(Vector3(x, y, z), updateTransform);
+}
+
 void TransformComponent::Translate(float x, float y, bool updateTransform)
 {
-	Translate(Vector2(x, y), updateTransform);
+	Translate(Vector3(x, y, Position.z), updateTransform);
 }
 
 void TransformComponent::Rotate(const Vector3 &rotation, bool updateTransform)
 {
-	Rotation = rotation;
+	Rotation = Quaternion::Euler(rotation);
 	// Update rigid body if there is one
 	auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
 	if (pRigid)
@@ -138,9 +151,9 @@ void TransformComponent::Rotate(const Vector3 &rotation, bool updateTransform)
 	if (updateTransform) UpdateTransform();
 }
 
-void TransformComponent::SetScale(const Vector2 &scale, bool updateTransform)
+void TransformComponent::SetScale(const Vector3 &scale, bool updateTransform)
 {
-	if (scale.x == 0 || scale.y == 0)
+	if (scale.x == 0 || scale.y == 0 || scale.z == 0)
 	{
 		Utilities::Debug::LogWarning("TransformComponent::SetScale > A scale of 0 is not allowed!");
 		return;
@@ -155,7 +168,7 @@ bool TransformComponent::UseCamera()
 	return m_UseCamera;
 }
 
-const Vector2 TransformComponent::GetPositionInScreenSpace()
+const Vector3 TransformComponent::GetPositionInScreenSpace()
 {
 	return m_TansformMatrix.ExtraxtTranslation();
 }

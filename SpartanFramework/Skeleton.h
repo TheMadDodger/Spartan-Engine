@@ -1,9 +1,9 @@
 #pragma once
+#include "SEObject.h"
+
 class Bone;
 
-//#include "GameObject.h"
-
-class Skeleton
+class Skeleton : SEObject
 {
 public:
 	Skeleton(bool usesPhysics = false);

@@ -1,5 +1,7 @@
 #pragma once
-class BlackboardValueBase
+#include "SEObject.h"
+
+class BlackboardValueBase : SEObject
 {
 public:
 	explicit BlackboardValueBase() {}
@@ -14,7 +16,7 @@ public:
 	T Data;
 };
 
-class Blackboard
+class Blackboard : SEObject
 {
 public:
 	Blackboard() {};

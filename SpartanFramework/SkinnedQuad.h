@@ -1,4 +1,5 @@
 #pragma once
+#include "SEObject.h"
 
 struct BlendWeightData
 {
@@ -17,7 +18,7 @@ struct SkinnedVertice
 class TextureData;
 class Skeleton;
 
-class SkinnedQuad
+class SkinnedQuad : SEObject
 {
 public:
 	SkinnedQuad(std::vector<BlendWeightData> BlendData, TextureData *pTexture, Skeleton *pSkeleton);

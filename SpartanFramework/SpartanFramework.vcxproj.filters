@@ -233,6 +233,15 @@
     <ClInclude Include="Layers.h">
       <Filter>SceneGraph</Filter>
     </ClInclude>
+    <ClInclude Include="SEObject.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />

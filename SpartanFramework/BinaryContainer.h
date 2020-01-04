@@ -1,8 +1,9 @@
 #pragma once
+#include "SEObject.h"
 
 namespace Utilities
 {
-	class BinaryContainer
+	class BinaryContainer : SEObject
 	{
 	public:
 		// Closing

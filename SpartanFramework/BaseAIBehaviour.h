@@ -1,8 +1,9 @@
 #pragma once
+#include "SEObject.h"
 
 class AIComponent;
 
-class BaseAIBehaviour
+class BaseAIBehaviour : SEObject
 {
 public:
 	BaseAIBehaviour();

@@ -1,12 +1,13 @@
 #pragma once
 #include "ApplicationStructs.h"
 #include "BaseComponent.h"
+#include "SEObject.h"
 
 class TransformComponent;
 class GameScene;
 struct LayerData;
 
-class GameObject
+class GameObject : public SEObject
 {
 public:
 	GameObject(const char *name = "EmptyGameObject", size_t layerID = 0);

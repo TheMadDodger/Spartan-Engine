@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-CameraComponent::CameraComponent() : m_CameraMatrix(Matrix3X3::CreateIdentityMatrix()), m_CameraInverseMatrix(Matrix3X3::CreateIdentityMatrix()), BaseComponent("Camera")
+CameraComponent::CameraComponent() : m_CameraMatrix(Matrix4X4::CreateIdentityMatrix()), m_CameraInverseMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Camera")
 {
 }
 
@@ -25,10 +25,10 @@ void CameraComponent::Zoom(float factor)
 		Utilities::Debug::LogWarning("A zoom factor of 0 is not allowed!");
 		return;
 	}
-	GetGameObject()->GetTransform()->SetScale(Vector2(1.0f / factor, 1.0f / factor));
+	GetGameObject()->GetTransform()->SetScale(Vector3(1.0f / factor, 1.0f / factor, 1.0f / factor));
 }
 
-const Vector2 CameraComponent::GetPosition()
+const Vector3 CameraComponent::GetPosition()
 {
 	auto pTransform = GetGameObject()->GetTransform();
 	auto camPos = pTransform->GetPositionInScreenSpace();
@@ -55,13 +55,13 @@ void CameraComponent::Update(const GameContext &gameContext)
 	m_CameraMatrix = GetGameObject()->GetTransform()->GetTransformMatrix();
 
 	auto window = BaseGame::GetGame()->GetGameSettings().Window;
-	auto view = Vector2((float)window.Width, (float)window.Height);
-	m_ProjectionMatrix = Matrix3X3::CreateScalingMatrix(view / 2.0f);
+	auto view = Vector3((float)window.Width, (float)window.Height, 1.0f);
+	m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
 	m_CameraProjectionMatrix = m_CameraMatrix * m_ProjectionMatrix;
 	/// Calculate the inverse matrix
-	Vector2 screenMiddle = Vector2((float)window.Width, (float)window.Height) / 2.0f;
+	Vector3 screenMiddle = Vector3((float)window.Width, (float)window.Height, 2.0f) / 2.0f;
 
-	auto screenTransform = Matrix3X3::CreateTranslationMatrix(screenMiddle);
+	auto screenTransform = Matrix4X4::CreateTranslationMatrix(screenMiddle);
 
 	m_CameraInverseMatrix = screenTransform * m_CameraMatrix.Inverse();
 	m_CameraProjectionInverseMatrix = m_CameraProjectionMatrix.Inverse();

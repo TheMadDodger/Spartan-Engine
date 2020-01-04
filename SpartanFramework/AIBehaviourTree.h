@@ -19,4 +19,3 @@ private:
 	Blackboard *m_pBlackboard;
 	BTNode *m_pRootNode;
 };
-

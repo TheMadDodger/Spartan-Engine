@@ -1,7 +1,8 @@
 #pragma once
+#include "SEObject.h"
 
 template<typename T>
-class Singleton
+class Singleton : Manager
 {
 public:
 	static T *GetInstance()

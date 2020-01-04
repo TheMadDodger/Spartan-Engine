@@ -1,8 +1,10 @@
 #pragma once
+#include "SEObject.h"
+
 class ShaderData;
 class BaseComponent;
 
-class Material
+class Material : SEObject
 {
 public:
 	Material(ShaderData *pShader);

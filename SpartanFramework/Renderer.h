@@ -2,6 +2,7 @@
 
 #include "MathHelpers.h"
 #include "SkinnedQuad.h"
+#include "SEObject.h"
 
 class TextureData;
 class SpriteSheetData;
@@ -10,7 +11,7 @@ class Skeleton;
 
 using namespace Math;
 
-class Renderer
+class Renderer : SEObject
 {
 public:
 	Renderer();

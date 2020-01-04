@@ -22,7 +22,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 
 	m_pImage = Instantiate<GameObject>(m_pObject);
 	m_pImage->GetTransform()->Translate(100.0f, 0.0f);
-	m_pImage->GetTransform()->SetScale(Vector2(0.1f, 0.1f));
+	m_pImage->GetTransform()->SetScale(Vector3(0.1f, 0.1f, 1.0f));
 	TextureData *pTexture = ContentManager::GetInstance()->Load<TextureData>("./Resources/TwitchAvatar.png");
 	m_pImage->CreateRuntimeComponent<ImageRenderComponent>()->SetTexture(pTexture);
 
@@ -30,7 +30,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 	pObject->SetLayer(LayerManager::GetInstance()->operator[](DefaultLayerNames::UIBackground).LayerID);
 	pObject->CreateRuntimeComponent<ImageRenderComponent>()->SetTexture(pTexture);
 	pObject->GetTransform()->Translate(50.0f, 50.0f);
-	pObject->GetTransform()->SetScale(Vector2(0.1f, 0.1f));
+	pObject->GetTransform()->SetScale(Vector3(0.1f, 0.1f, 1.0f));
 
 	gameContext.pInput->AddInputAction(InputAction("Forward", Down , 'w', 0, SDL_SCANCODE_LEFT));
 	gameContext.pInput->AddInputAction(InputAction("Backward", Down, 's'));
@@ -128,7 +128,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 
 	AddChild(pText);*/
 
-	m_pPartObject = Instantiate<GameObject>();
+	/*m_pPartObject = Instantiate<GameObject>();
 	ParticleComponent* pParticleComp = m_pPartObject->CreateRuntimeComponent<ParticleComponent>();
 	pParticleComp->m_Settings.MaxParticles = 1000;
 	pParticleComp->m_Settings.Position = Vector2(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
@@ -141,7 +141,7 @@ void TestScene::Initialize(const GameContext &gameContext)
 	pParticleComp->m_Settings.PartSettings.RandomRotationBetween2Constants(0.0f, 359.0f);
 	pParticleComp->m_Settings.PartSettings.RandomUniformScaleBetweenTwoConstants(5.0f, 10.0f);
 	pParticleComp->m_Settings.PartSettings.RandomAngularSpeedBetween2Constants(-100.0f, 100.0f);
-	pParticleComp->m_Settings.PartSettings.SetEndAngularSpeed(0.0f);
+	pParticleComp->m_Settings.PartSettings.SetEndAngularSpeed(0.0f);*/
 
 	m_pBlackboard = new Blackboard();
 	m_pBlackboard->Add<float>(5.f, "somerandomfloat");
