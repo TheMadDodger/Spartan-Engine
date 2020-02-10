@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,6 +170,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
@@ -192,7 +193,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Mesh2DRenderComponent.h" />
+    <ClInclude Include="MeshRenderComponent.h" />
     <ClInclude Include="PathFindingNodes.h" />
     <ClInclude Include="PhysicsMaterial.h" />
     <ClInclude Include="ShaderLoader.h" />
@@ -258,7 +259,8 @@
     <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Mesh2DRenderComponent.cpp" />
+    <ClCompile Include="MeshRenderComponent.cpp" />
+    <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />

@@ -13,3 +13,4 @@
 #include "SkinnedMeshComponent.h"
 #include "LineRenderComponent.h"
 #include "ShakeComponent.h"
+#include "MeshRenderComponent.h"

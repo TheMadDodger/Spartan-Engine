@@ -7,6 +7,9 @@ public:
 	CameraComponent();
 	~CameraComponent();
 
+	void SetPerspective(float fov, float zNear, float zFar);
+	void SetOrthographic(float nearPlane, float farPlane);
+
 	void SetAsActive();
 	void Zoom(float factor);
 
@@ -18,6 +21,8 @@ public:
 
 	const Matrix4X4 &GetProjectionMatrix() { return m_ProjectionMatrix; }
 	const Matrix4X4 &GetProjectionMatrixInverse() { return m_ProjectionInverseMatrix; }
+
+	const Matrix4X4 &GetScreenMatrix() { return m_ScreenMatrix; }
 
 	const Vector3 GetPosition();
 	Vector3 ConvertWorldToScreenSpace(Vector3 worldCoord);
@@ -41,5 +46,7 @@ private:
 
 	Matrix4X4 m_ProjectionMatrix;
 	Matrix4X4 m_ProjectionInverseMatrix;
+
+	Matrix4X4 m_ScreenMatrix;
 };
 

@@ -26,7 +26,7 @@ void Renderer::Initialize(const GameContext &gameContext)
 
 	// Open a window
 	m_pWindow = SDL_CreateWindow(BaseGame::GetGame()->GetGameSettings().AppName.data(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN : SDL_WINDOW_OPENGL);
+		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? (SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN) : SDL_WINDOW_OPENGL);
 
 	if (m_pWindow == NULL)
 	{
@@ -75,24 +75,29 @@ void Renderer::Initialize(const GameContext &gameContext)
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	// Set the Projection matrix to the identity matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	//// Set the Projection matrix to the identity matrix
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
 
-	// Set up a two-dimensional orthographic viewing region.
-	gluOrtho2D(0, BaseGame::GetGame()->GetGameSettings().Window.Width, 0, BaseGame::GetGame()->GetGameSettings().Window.Height); // y from bottom to top
+	//// Set up a two-dimensional orthographic viewing region.
+	//gluOrtho2D(0, BaseGame::GetGame()->GetGameSettings().Window.Width, 0, BaseGame::GetGame()->GetGameSettings().Window.Height); // y from bottom to top
 
-	// Set the viewport to the client window area
-	// The viewport is the rectangular region of the window where the image is drawn.
-	glViewport(0, 0, int(BaseGame::GetGame()->GetGameSettings().Window.Width), int(BaseGame::GetGame()->GetGameSettings().Window.Height));
+	//// Set the viewport to the client window area
+	//// The viewport is the rectangular region of the window where the image is drawn.
+	//glViewport(0, 0, int(BaseGame::GetGame()->GetGameSettings().Window.Width), int(BaseGame::GetGame()->GetGameSettings().Window.Height));
 
-	// Set the Modelview matrix to the identity matrix
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	//// Set the Modelview matrix to the identity matrix
+	//glMatrixMode(GL_MODELVIEW);
+	//glLoadIdentity();
 
-	// Enable color blending and use alpha blending
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//// Enable color blending and use alpha blending
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Enable depth test
+	glEnable(GL_DEPTH_TEST);
+	//// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
 }
 
 void Renderer::DrawImage(TextureData *pImage, const GameContext &gameContext)
@@ -285,7 +290,7 @@ void Renderer::RenderTexture(GLuint texID, float width, float height)
 void Renderer::ClearBackground()
 {
 	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color)

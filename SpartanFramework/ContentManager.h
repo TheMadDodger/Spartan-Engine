@@ -4,6 +4,7 @@
 #include "Debug.h"
 #include "SEObject.h"
 #include "Manager.h"
+#include "VertexHelpers.h"
 
 using namespace Math;
 
@@ -275,6 +276,21 @@ private:
 	GLuint m_ShaderProgramID;
 	GLuint m_VertexShaderID;
 	GLuint m_FragmentShaderID;
+};
+
+class MeshData : public Content
+{
+public:
+	MeshData(const std::string &path) : Content(path) {}
+	~MeshData() {}
+
+private:
+	std::vector<SuperVertex3D> m_Vertices;
+	bool m_HasPosition;
+	bool m_HasNormal;
+	bool m_HasTangent;
+	bool m_HasCoord;
+	bool m_HasColor;
 };
 
 #pragma warning(disable:4996)

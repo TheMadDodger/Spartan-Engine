@@ -61,6 +61,12 @@ public:
 
 protected:
 	virtual T* LoadContent(const std::string& file) = 0;
+	
+	std::string GetFileExtension(const std::string& file)
+	{
+		int dotIndex = file.rfind('.') + 1;
+		return file.substr(dotIndex);
+	}
 
 private:
 	static int m_Loaders;

@@ -191,9 +191,6 @@
     <ClInclude Include="ShaderLoader.h">
       <Filter>Content Management</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh2DRenderComponent.h">
-      <Filter>Core Components</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -241,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelLoader.h">
+      <Filter>Content Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +368,6 @@
     <ClCompile Include="ShaderLoader.cpp">
       <Filter>Content Management</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh2DRenderComponent.cpp">
-      <Filter>Core Components</Filter>
-    </ClCompile>
     <ClCompile Include="MaterialManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -400,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="Layers.cpp">
       <Filter>SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderComponent.cpp">
+      <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelLoader.cpp">
+      <Filter>Content Management</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

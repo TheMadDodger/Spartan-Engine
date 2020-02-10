@@ -30,7 +30,7 @@ public:
 		return dynamic_cast<T*>(this);
 	}
 
-protected: // Set shader vars
+public: // Set shader vars
 	void SetFloat(const std::string &name, float value) const;
 	void SetInt(const std::string &name, int value) const;
 	void SetBool(const std::string &name, bool value) const;
@@ -45,7 +45,7 @@ protected:
 	virtual void SetShaderVars(BaseComponent *) {};
 
 private:
-	friend class Mesh2DRenderComponent;
+	friend class MeshRenderComponent;
 	ShaderData *m_pShader;
 	GLint m_TextureCounter;
 };

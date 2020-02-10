@@ -71,7 +71,7 @@ void Material::SetMatrix(const std::string & name, float * pMatrix) const
 	GLint ID = glGetUniformLocation(m_pShader->m_ShaderProgramID, name.c_str());
 	Utilities::Debug::LogGLError(glGetError());
 
-	glUniformMatrix3fv(ID, 1, GL_FALSE, pMatrix);
+	glUniformMatrix4fv(ID, 1, GL_FALSE, pMatrix);
 	Utilities::Debug::LogGLError(glGetError());
 }
 

@@ -144,7 +144,7 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 
 	// Since the child count at the start of the frame can change during a frames update
 	// We need to copy the objects to an array that won't change
-	// Otherwise we crash!!!
+	// Otherwise we crash when an object is destroyed or instantiated during this frame!!!
 	size_t childCountThisFrame = m_pChildren.size();
 	GameObject **pChildrenArray = new GameObject*[childCountThisFrame];
 	std::copy(m_pChildren.begin(), m_pChildren.end(), pChildrenArray);
@@ -155,6 +155,9 @@ void GameScene::RootUpdate(const GameContext &gameContext)
 		if(pChild->IsEnabled())
 			pChild->RootUpdate(gameContext);
 	}
+
+	// Delete the allocated array cus yea memory leaks ya kno
+	delete[] pChildrenArray;
 
 	// User defined Update()
 	Update(gameContext);

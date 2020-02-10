@@ -445,40 +445,62 @@ bool Math::Color::operator!=(const Color & other)
 	return (r != other.r || g != other.g || b != other.b || a != other.a);;
 }
 
-
-
-
-
-
-
-
 Matrix4X4 Math::Matrix4X4::operator*(const Matrix4X4& other)
 {
-	auto result = CreateIdentityMatrix();
+	Matrix4X4 result = Matrix4X4();
 
-	// First row
-	result.m[0][0] = m[0][0] * other.m[0][0] + m[1][0] * other.m[0][1] + m[2][0] * other.m[0][2] + m[3][0] * other.m[0][3];
-	result.m[1][0] = m[0][0] * other.m[1][0] + m[1][0] * other.m[1][1] + m[2][0] * other.m[1][2] + m[3][0] * other.m[1][3];
-	result.m[2][0] = m[0][0] * other.m[2][0] + m[1][0] * other.m[2][1] + m[2][0] * other.m[2][2] + m[3][0] * other.m[2][3];
-	result.m[3][0] = m[0][0] * other.m[3][0] + m[1][0] * other.m[3][1] + m[2][0] * other.m[3][2] + m[3][0] * other.m[3][3];
+	/// THESE CALCULATIONS ARE CORRECT
+	/// YOU ALREADY TRIPPLE CHECKED THEM
+	/// PLS STOP DOUBTING THEM K THX
+	for (size_t row = 0; row < 4; ++row)
+	{
+		for (size_t col = 0; col < 4; ++col)
+		{
+			for (size_t row2 = 0; row2 < 4; ++row2)
+			{
+				result.m[row][col] += m[row][row2] * other.m[row2][col];
+			}
+		}
+	}
 
-	// Second row
-	result.m[0][1] = m[0][1] * other.m[0][0] + m[1][1] * other.m[0][1] + m[2][1] * other.m[0][2] + m[3][1] * other.m[0][3];
-	result.m[1][1] = m[0][1] * other.m[1][0] + m[1][1] * other.m[1][1] + m[2][1] * other.m[1][2] + m[3][1] * other.m[1][3];
-	result.m[2][1] = m[0][1] * other.m[2][0] + m[1][1] * other.m[2][1] + m[2][1] * other.m[2][2] + m[3][1] * other.m[2][3];
-	result.m[3][1] = m[0][1] * other.m[3][0] + m[1][1] * other.m[3][1] + m[2][1] * other.m[3][2] + m[3][1] * other.m[3][3];
+	/*Vector4 row1 = Row(0);
+	Vector4 row2 = Row(1);
+	Vector4 row3 = Row(2);
+	Vector4 row4 = Row(3);
 
-	// Third row
-	result.m[0][2] = m[0][2] * other.m[0][0] + m[1][2] * other.m[0][1] + m[2][2] * other.m[0][2] + m[3][2] * other.m[0][3];
-	result.m[1][2] = m[0][2] * other.m[1][0] + m[1][2] * other.m[1][1] + m[2][2] * other.m[1][2] + m[3][2] * other.m[1][3];
-	result.m[2][2] = m[0][2] * other.m[2][0] + m[1][2] * other.m[2][1] + m[2][2] * other.m[2][2] + m[3][2] * other.m[2][3];
-	result.m[3][2] = m[0][2] * other.m[3][0] + m[1][2] * other.m[3][1] + m[2][2] * other.m[3][2] + m[3][2] * other.m[3][3];
+	Vector4 col1 = other.Col(0);
+	Vector4 col2 = other.Col(1);
+	Vector4 col3 = other.Col(2);
+	Vector4 col4 = other.Col(3);
 
-	// Fourth row
-	result.m[0][3] = m[0][3] * other.m[0][0] + m[1][3] * other.m[0][1] + m[2][3] * other.m[0][2] + m[3][3] * other.m[0][3];
-	result.m[1][3] = m[0][3] * other.m[1][0] + m[1][3] * other.m[1][1] + m[2][3] * other.m[1][2] + m[3][3] * other.m[1][3];
-	result.m[2][3] = m[0][3] * other.m[2][0] + m[1][3] * other.m[2][1] + m[2][3] * other.m[2][2] + m[3][3] * other.m[2][3];
-	result.m[3][3] = m[0][3] * other.m[3][0] + m[1][3] * other.m[3][1] + m[2][3] * other.m[3][2] + m[3][3] * other.m[3][3];
+	result.m[0][0] = Dot(row1, col1); result.m[0][1] = Dot(row1, col2); result.m[0][2] = Dot(row1, col3); result.m[0][3] = Dot(row1, col4);
+	result.m[1][0] = Dot(row2, col1); result.m[1][1] = Dot(row2, col2); result.m[1][2] = Dot(row2, col3); result.m[1][3] = Dot(row2, col4);
+	result.m[2][0] = Dot(row3, col1); result.m[2][1] = Dot(row3, col2); result.m[2][2] = Dot(row3, col3); result.m[2][3] = Dot(row3, col4);
+	result.m[3][0] = Dot(row4, col1); result.m[3][1] = Dot(row4, col2); result.m[3][2] = Dot(row4, col3); result.m[3][3] = Dot(row4, col4);*/
+
+	////First row
+	//result.m[0][0] = m[0][0] * other.m[0][0] + m[1][0] * other.m[0][1] + m[2][0] * other.m[0][2] + m[3][0] * other.m[0][3];
+	//result.m[1][0] = m[0][0] * other.m[1][0] + m[1][0] * other.m[1][1] + m[2][0] * other.m[1][2] + m[3][0] * other.m[1][3];
+	//result.m[2][0] = m[0][0] * other.m[2][0] + m[1][0] * other.m[2][1] + m[2][0] * other.m[2][2] + m[3][0] * other.m[2][3];
+	//result.m[3][0] = m[0][0] * other.m[3][0] + m[1][0] * other.m[3][1] + m[2][0] * other.m[3][2] + m[3][0] * other.m[3][3];
+
+	////Second row
+	//result.m[0][1] = m[0][1] * other.m[0][0] + m[1][1] * other.m[0][1] + m[2][1] * other.m[0][2] + m[3][1] * other.m[0][3];
+	//result.m[1][1] = m[0][1] * other.m[1][0] + m[1][1] * other.m[1][1] + m[2][1] * other.m[1][2] + m[3][1] * other.m[1][3];
+	//result.m[2][1] = m[0][1] * other.m[2][0] + m[1][1] * other.m[2][1] + m[2][1] * other.m[2][2] + m[3][1] * other.m[2][3];
+	//result.m[3][1] = m[0][1] * other.m[3][0] + m[1][1] * other.m[3][1] + m[2][1] * other.m[3][2] + m[3][1] * other.m[3][3];
+
+	////Third row
+	//result.m[0][2] = m[0][2] * other.m[0][0] + m[1][2] * other.m[0][1] + m[2][2] * other.m[0][2] + m[3][2] * other.m[0][3];
+	//result.m[1][2] = m[0][2] * other.m[1][0] + m[1][2] * other.m[1][1] + m[2][2] * other.m[1][2] + m[3][2] * other.m[1][3];
+	//result.m[2][2] = m[0][2] * other.m[2][0] + m[1][2] * other.m[2][1] + m[2][2] * other.m[2][2] + m[3][2] * other.m[2][3];
+	//result.m[3][2] = m[0][2] * other.m[3][0] + m[1][2] * other.m[3][1] + m[2][2] * other.m[3][2] + m[3][2] * other.m[3][3];
+
+	////Fourth row
+	//result.m[0][3] = m[0][3] * other.m[0][0] + m[1][3] * other.m[0][1] + m[2][3] * other.m[0][2] + m[3][3] * other.m[0][3];
+	//result.m[1][3] = m[0][3] * other.m[1][0] + m[1][3] * other.m[1][1] + m[2][3] * other.m[1][2] + m[3][3] * other.m[1][3];
+	//result.m[2][3] = m[0][3] * other.m[2][0] + m[1][3] * other.m[2][1] + m[2][3] * other.m[2][2] + m[3][3] * other.m[2][3];
+	//result.m[3][3] = m[0][3] * other.m[3][0] + m[1][3] * other.m[3][1] + m[2][3] * other.m[3][2] + m[3][3] * other.m[3][3];
 
 	return result;
 }
@@ -522,10 +544,9 @@ const Vector3 Math::Matrix4X4::ExtraxtTranslation() const
 	return Vector3(m[3][0], m[3][1], m[3][2]);
 }
 
-const Vector3 Math::Matrix4X4::ExtraxtRotation() const
+const Quaternion Math::Matrix4X4::ExtraxtRotation() const
 {
-	return Vector3();
-	//return Vector3(0, 0, atan2(m[0][1], m[0][0]));
+	return Quaternion(*this);
 }
 
 const Vector3 Math::Matrix4X4::ExtraxtScale() const
@@ -569,7 +590,33 @@ Matrix4X4 Matrix4X4::CreateTranslationMatrix(const Vector3& translation)
 
 Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Vector3& rotation)
 {
-	return CreateRotationMatrix(Quaternion::Euler(rotation));
+	Matrix4X4 rx = Matrix4X4();
+	Matrix4X4 ry = Matrix4X4();
+	Matrix4X4 rz = Matrix4X4();
+
+	Vector3 rotationRadians;
+	rotationRadians.x = rotation.x / 180.0f * M_PI;
+	rotationRadians.y = rotation.y / 180.0f * M_PI;
+	rotationRadians.z = rotation.z / 180.0f * M_PI;
+
+	rz.m[0][0] = (float)cos(rotationRadians.z);  rz.m[0][1] = (float)sin(rotationRadians.z);	rz.m[0][2] = 0;	rz.m[0][3] = 0;
+	rz.m[1][0] = -(float)sin(rotationRadians.z); rz.m[1][1] = (float)cos(rotationRadians.z);	rz.m[1][2] = 0;	rz.m[1][3] = 0;
+	rz.m[2][0] = 0;								 rz.m[2][1] = 0;								rz.m[2][2] = 1;	rz.m[2][3] = 0;
+	rz.m[3][0] = 0;								 rz.m[3][1] = 0;								rz.m[3][2] = 0;	rz.m[3][3] = 1;
+
+	rx.m[0][0] = 1; rx.m[0][1] = 0;								 rx.m[0][2] = 0;								rx.m[0][3] = 0;
+	rx.m[1][0] = 0; rx.m[1][1] = (float)cos(rotationRadians.x);  rx.m[1][2] = (float)sin(rotationRadians.x);	rx.m[1][3] = 0;
+	rx.m[2][0] = 0; rx.m[2][1] = -(float)sin(rotationRadians.x); rx.m[2][2] = (float)cos(rotationRadians.x);	rx.m[2][3] = 0;
+	rx.m[3][0] = 0; rx.m[3][1] = 0;								 rx.m[3][2] = 0;								rx.m[3][3] = 1;
+
+	ry.m[0][0] = (float)cos(rotationRadians.y); ry.m[0][1] = 0; ry.m[0][2] = -(float)sin(rotationRadians.y);	ry.m[0][3] = 0;
+	ry.m[1][0] = 0;								ry.m[1][1] = 1; ry.m[1][2] = 0;									ry.m[1][3] = 0;
+	ry.m[2][0] = (float)sin(rotationRadians.y); ry.m[2][1] = 0; ry.m[2][2] = (float)cos(rotationRadians.y);		ry.m[2][3] = 0;
+	ry.m[3][0] = 0;								ry.m[3][1] = 0; ry.m[3][2] = 0;									ry.m[3][3] = 1;
+
+	return rz * ry * rx;
+
+	//return CreateRotationMatrix(Quaternion::Euler(rotation));
 }
 
 Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Quaternion& rotation)
@@ -589,10 +636,10 @@ Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Vector3& forward, const Ve
 Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Vector3& forward, const Vector3& up, const Vector3& right)
 {
 	Matrix4X4 rotation = CreateIdentityMatrix();
-	rotation.m[0][0] = right.x;		rotation.m[1][0] = right.y;		rotation.m[2][0] = right.z;		rotation.m[3][0] = 0;
-	rotation.m[0][1] = up.x;		rotation.m[1][1] = up.y;		rotation.m[2][1] = up.z;		rotation.m[3][1] = 0;
-	rotation.m[0][2] = forward.x;	rotation.m[1][2] = forward.y;	rotation.m[2][2] = forward.z;	rotation.m[3][2] = 0;
-	rotation.m[0][3] = 0;			rotation.m[1][3] = 0;			rotation.m[2][3] = 0;			rotation.m[3][3] = 1;
+	rotation.m[0][0] = right.x;		rotation.m[0][1] = right.y;		rotation.m[0][2] = right.z;		rotation.m[0][3] = 0;
+	rotation.m[1][0] = up.x;		rotation.m[1][1] = up.y;		rotation.m[1][2] = up.z;		rotation.m[1][3] = 0;
+	rotation.m[2][0] = forward.x;	rotation.m[2][1] = forward.y;	rotation.m[2][2] = forward.z;	rotation.m[2][3] = 0;
+	rotation.m[3][0] = 0;			rotation.m[3][1] = 0;			rotation.m[3][2] = 0;			rotation.m[3][3] = 1;
 	return rotation;
 }
 
@@ -612,8 +659,7 @@ Matrix4X4 Matrix4X4::CreateScaleRotationTranslationMatrix(const Vector3& transla
 	Matrix4X4 matRot = Matrix4X4::CreateRotationMatrix(rotation);
 	Matrix4X4 matScale = Matrix4X4::CreateScalingMatrix(scale);
 
-	Matrix4X4 matScaleRot = matRot * matScale;
-	Matrix4X4 matScaleRotTrans = matTrans * matScaleRot;
+	Matrix4X4 matScaleRotTrans = matScale * matRot * matTrans;
 
 	return matScaleRotTrans;
 }
@@ -624,10 +670,69 @@ Matrix4X4 Math::Matrix4X4::CreateScaleRotationTranslationMatrix(const Vector3& t
 	Matrix4X4 matRot = Matrix4X4::CreateRotationMatrix(rotation);
 	Matrix4X4 matScale = Matrix4X4::CreateScalingMatrix(scale);
 
-	Matrix4X4 matScaleRot = matRot * matScale;
-	Matrix4X4 matScaleRotTrans = matTrans * matScaleRot;
+	Matrix4X4 matScaleRotTrans = matScale * matRot * matTrans;
 
 	return matScaleRotTrans;
+}
+
+Matrix4X4 Math::Matrix4X4::CreateOrthographicProjectionMatrix(float left, float right, float bottom, float top, float nearPlane, float farPlane)
+{
+	float rl = right - left;
+	float tb = top - bottom;
+	float fn = farPlane - nearPlane;
+
+	Matrix4X4 ortho = Matrix4X4();
+
+	//m[0] = 2.0f / rl;
+	//m[5] = 2.0f / tb;
+	//m[10] = -2.0f / fn;
+	//m[12] = -(left + right) / rl;
+	//m[13] = -(top + bottom) / tb;
+	//m[14] = -(far + near) / fn;
+	//m[15] = 1.0f;
+
+	return Matrix4X4(
+		2.0f / rl, 0, 0, 0,
+		0, 2.0f / tb, 0, 0,
+		0, 0, -2.0f / fn, -1,
+		-(left + right) / rl, -(top + bottom) / tb, -(farPlane + nearPlane) / fn, 1.0f);
+
+	/*ortho.m[0][0] = 2.0f / rl;	ortho.m[0][1] = 0;			ortho.m[0][2] = 0;			ortho.m[0][3] = -(right + left) / width;
+	ortho.m[1][0] = 0;			ortho.m[1][1] = 2.0f / tb;	ortho.m[1][2] = 0;			ortho.m[1][3] = -(top + bottom) / height;
+	ortho.m[2][0] = 0;			ortho.m[2][1] = 0;			ortho.m[2][2] = -2 / depth; ortho.m[2][3] = -(farPlane + nearPlane) / depth;
+	ortho.m[3][0] = 0;			ortho.m[3][1] = 0;			ortho.m[3][2] = 0;			ortho.m[3][3] = 1;*/
+	//return ortho;
+}
+
+Matrix4X4 Math::Matrix4X4::CreatePerspectiveProjectionMatrix(float fov, float width, float height, float zNear, float zFar)
+{
+	float aspect = width / height;
+	float tanHalfFovy = tan(fov / 2.0f);
+
+	Matrix4X4 result;
+	result.m[0][0] = 1.0f / (aspect * tanHalfFovy);
+	result.m[1][1] = 1.0f / (tanHalfFovy);
+	result.m[2][2] = -(zFar + zNear) / (zFar - zNear);
+	result.m[2][3] = -1.0f;
+	result.m[3][2] = -(2.0f * zFar * zNear) / (zFar - zNear);
+	return result;
+
+	/*return Matrix4X4(
+		xScale, 0, 0, 0,
+		0, yScale, 0, 0,
+		0, 0, (zFar + zNear) / nearmfar, -1,
+		0, 0, 2 * zFar * zNear / nearmfar, 0);*/
+
+	/*float aspectRatio = width / height;
+	float tanHalfFOV = (float)tan(fov * M_PI / 180.0f / 2.0f);
+	float zRange = zNear - zFar;
+
+	Matrix4X4 perspective;
+	perspective.m[0][0] = 1.0f / (tanHalfFOV * aspectRatio);	perspective.m[0][1] = 0.0f;					perspective.m[0][2] = 0.0f;						perspective.m[0][3] = 0.0f;
+	perspective.m[1][0] = 0;									perspective.m[1][1] = 1.0f / tanHalfFOV;	perspective.m[1][2] = 0.0f;						perspective.m[1][3] = 0.0f;
+	perspective.m[2][0] = 0;									perspective.m[2][1] = 0.0f;					perspective.m[2][2] = (-zNear - zFar) / zRange; perspective.m[2][3] = 2.0f * zFar * zNear / zRange;
+	perspective.m[3][0] = 0;									perspective.m[3][1] = 0.0f;					perspective.m[3][2] = 1.0f;						perspective.m[3][3] = 0.0f;
+	return perspective;*/
 }
 
 Matrix4X4 Math::Matrix4X4::Inverse() const
@@ -645,7 +750,7 @@ Matrix4X4 Math::Matrix4X4::Inverse() const
 
 	// Inverse each component and turn into a matrix
 	trans = trans * -1;
-	rot = rot * -1;
+	rot = rot.Conjugate();
 	scale.x = 1.0f / scale.x;
 	scale.y = 1.0f / scale.y;
 	scale.z = 1.0f / scale.z;
@@ -655,14 +760,70 @@ Matrix4X4 Math::Matrix4X4::Inverse() const
 	auto scaleMat = Matrix4X4::CreateScalingMatrix(scale);
 
 	// Multiply matrices in oposite order
-	auto scaleRotMat = scaleMat * rotMat;
-	auto scaleRotTransMat = scaleRotMat * transMat;
+	auto scaleRotTransMat = transMat * rotMat * scaleMat;
 	return scaleRotTransMat;
+}
+
+Vector4 Math::Matrix4X4::Row(int rowIndex) const
+{
+	return Vector4(m[rowIndex][0], m[rowIndex][1], m[rowIndex][2], m[rowIndex][3]);
+}
+
+Vector4 Math::Matrix4X4::Col(int colIndex) const
+{
+	return Vector4(m[0][colIndex], m[1][colIndex], m[2][colIndex], m[3][colIndex]);
 }
 
 Math::Quaternion::Quaternion() : x(0.0f), y(0.0f), z(0.0f), w(1.0f) {}
 
 Math::Quaternion::Quaternion(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
+
+Math::Quaternion::Quaternion(const Matrix4X4& rotation)
+{
+	float trace = rotation.m[0][0] + rotation.m[1][1] + rotation.m[2][2];
+
+	if (trace > 0)
+	{
+		float s = 0.5f / (float)sqrt(trace + 1.0f);
+		w = 0.25f / s;
+		x = (rotation.m[2][1] - rotation.m[1][2]) * s;
+		y = (rotation.m[0][2] - rotation.m[2][0]) * s;
+		z = (rotation.m[1][0] - rotation.m[0][1]) * s;
+	}
+	else
+	{
+		if (rotation.m[0][0] > rotation.m[1][1] && rotation.m[0][0] > rotation.m[2][2])
+		{
+			float s = 2.0f * (float)sqrt(1.0f + rotation.m[0][0] - rotation.m[1][1] - rotation.m[2][2]);
+			w = (rotation.m[2][1] - rotation.m[1][2]) / s;
+			x = 0.25f * s;
+			y = (rotation.m[0][1] + rotation.m[1][0]) / s;
+			z = (rotation.m[0][2] + rotation.m[2][0]) / s;
+		}
+		else if (rotation.m[1][1] > rotation.m[2][2])
+		{
+			float s = 2.0f * (float)sqrt(1.0f + rotation.m[1][1] - rotation.m[0][0] - rotation.m[2][2]);
+			w = (rotation.m[0][2] - rotation.m[2][0]) / s;
+			x = (rotation.m[0][1] + rotation.m[1][0]) / s;
+			y = 0.25f * s;
+			z = (rotation.m[1][2] + rotation.m[2][1]) / s;
+		}
+		else
+		{
+			float s = 2.0f * sqrt(1.0f + rotation.m[2][2] - rotation.m[0][0] - rotation.m[1][1]);
+			w = (rotation.m[1][0] - rotation.m[0][1]) / s;
+			x = (rotation.m[0][2] + rotation.m[2][0]) / s;
+			y = (rotation.m[2][1] + rotation.m[1][2]) / s;
+			z = 0.25f * s;
+		}
+	}
+
+	float length = (float)sqrt(x * x + y * y + z * z + w * w);
+	x /= length;
+	y /= length;
+	z /= length;
+	w /= length;
+}
 
 float Math::Quaternion::Length()
 {
@@ -797,4 +958,14 @@ Vector3 Math::Quaternion::Rotate(const Vector3& toRotate) const
 	Quaternion conjugate = Conjugate();
 	Quaternion w = Multiply(toRotate) * conjugate;
 	return Vector3(w.x, w.y, w.z);
+}
+
+Vector4 Math::Vector4::operator*(const Vector4& other)
+{
+	Vector4 result;
+	result.x = x * other.x;
+	result.y = y * other.y;
+	result.z = z * other.z;
+	result.w = w * other.w;
+	return result;
 }

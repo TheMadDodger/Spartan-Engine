@@ -12,6 +12,21 @@ CameraComponent::~CameraComponent()
 {
 }
 
+void CameraComponent::SetPerspective(float fov, float zNear, float zFar)
+{
+	auto window = BaseGame::GetGame()->GetGameSettings().Window;
+	m_ProjectionMatrix = Matrix4X4::CreatePerspectiveProjectionMatrix(fov, (float)window.Width, (float)window.Height, zNear, zFar);
+}
+
+void CameraComponent::SetOrthographic(float nearPlane, float farPlane)
+{
+	float top = tan(0.5f * 1.0f) * nearPlane;
+	float right = top * 1280.0f / 720.0f;
+
+	auto window = BaseGame::GetGame()->GetGameSettings().Window;
+	m_ProjectionMatrix = Matrix4X4::CreateOrthographicProjectionMatrix(0.0f, right, 0.0f, top, nearPlane, farPlane);
+}
+
 void CameraComponent::SetAsActive()
 {
 	GetGameObject()->GetGameScene()->SetActiveCamera(this);
@@ -56,14 +71,12 @@ void CameraComponent::Update(const GameContext &gameContext)
 
 	auto window = BaseGame::GetGame()->GetGameSettings().Window;
 	auto view = Vector3((float)window.Width, (float)window.Height, 1.0f);
-	m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
+	//m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
+	m_ScreenMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f).Inverse();
 	m_CameraProjectionMatrix = m_CameraMatrix * m_ProjectionMatrix;
-	/// Calculate the inverse matrix
-	Vector3 screenMiddle = Vector3((float)window.Width, (float)window.Height, 2.0f) / 2.0f;
 
-	auto screenTransform = Matrix4X4::CreateTranslationMatrix(screenMiddle);
-
-	m_CameraInverseMatrix = screenTransform * m_CameraMatrix.Inverse();
+	/// Calculate the inverse matrices
+	m_CameraInverseMatrix = m_CameraMatrix.Inverse();
 	m_CameraProjectionInverseMatrix = m_CameraProjectionMatrix.Inverse();
 	m_ProjectionInverseMatrix = m_ProjectionMatrix.Inverse();
 }

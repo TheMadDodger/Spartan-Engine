@@ -45,6 +45,9 @@
     <ClInclude Include="GridTestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RenderTestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GridTestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

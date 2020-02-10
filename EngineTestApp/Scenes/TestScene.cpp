@@ -17,7 +17,7 @@ TestScene::~TestScene()
 
 void TestScene::Initialize(const GameContext &gameContext)
 {
-	m_pObject = Instantiate<GameObject>();
+	/*m_pObject = Instantiate<GameObject>();
 	m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
 
 	m_pImage = Instantiate<GameObject>(m_pObject);
@@ -170,7 +170,7 @@ void TestScene::Update(const GameContext &gameContext)
 
 	//GetActiveCamera()->GetGameObject()->GetTransform()->Rotate(Vector3(0, 0, 0.001f) * *gameContext.pTime->GetDeltaTime());
 
-	if (gameContext.pInput->IsActionTriggered("Forward"))
+	/*if (gameContext.pInput->IsActionTriggered("Forward"))
 	{
 		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
 		//m_pPartObject->GetTransform()->Translate(Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
@@ -218,12 +218,12 @@ void TestScene::Update(const GameContext &gameContext)
 
 	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
 
-	if (gameContext.pInput->IsControllerConnected(0))
+	/*if (gameContext.pInput->IsControllerConnected(0))
 	{
 		auto leftThumbStick = gameContext.pInput->GetControllerJoystickPosition(0, JoystickType::LeftThumbStick);
 
 		m_pPartObject->GetTransform()->Translate(leftThumbStick * gameContext.pTime->GetDeltaTime() / 1000.0f * 0.01f);
-	}
+	}*/
 }
 
 void TestScene::Draw(const GameContext &gameContext)
@@ -232,7 +232,7 @@ void TestScene::Draw(const GameContext &gameContext)
 	//gameContext.pRenderer->DrawCircle(Vector2(500.0f, 500.0f), 50.0f, Math::Color::Cyan());
 	//gameContext.pRenderer->DrawRect(Vector2(40.0f, 40.0f), Vector2(500.0f, 500.0f), Math::Color::Red());
 	//gameContext.pRenderer->DrawLine(Vector2(100.0f, 700.0f), Vector2(50.0f, 10.0f), Math::Color::Gold());
-	if (m_Points.size() >= 2)
+	/*if (m_Points.size() >= 2)
 	{
 		gameContext.pRenderer->DrawPolygon(m_Points, Color::Cyan());
 	}
@@ -240,5 +240,5 @@ void TestScene::Draw(const GameContext &gameContext)
 	for (auto point : m_Points)
 	{
 		gameContext.pRenderer->DrawCircle(point, 5.0f,Color::Red());
-	}
+	}*/
 }

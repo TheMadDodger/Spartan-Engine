@@ -115,12 +115,16 @@ namespace Math
 
 	struct Vector4
 	{
+		Vector4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f) {}
+		Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 		Vector4(const Vector3 &vec3, float w) : x(vec3.x), y(vec3.y), z(vec3.z), w(w) {}
 
 		float x;
 		float y;
 		float z;
 		float w;
+
+		Vector4 operator*(const Vector4& other);
 
 		Vector2 xy() const { return Vector2(x, y); }
 	};
@@ -136,6 +140,8 @@ namespace Math
 		float h;
 	};
 
+	struct Matrix4X4;
+
 	struct Quaternion
 	{
 		float x;
@@ -145,6 +151,7 @@ namespace Math
 
 		Quaternion();
 		Quaternion(float x, float y, float z, float w);
+		Quaternion(const Matrix4X4& rotation);
 		float Length();
 		float Normalize();
 		Quaternion Normalized() const;
@@ -216,13 +223,13 @@ namespace Math
 			float m31, float m32, float m33, float m34,
 			float m41, float m42, float m43, float m44)
 		{
-			m[0][0] = m11; m[1][0] = m12; m[2][0] = m13; m[3][0] = m14;
+			m[0][0] = m11; m[0][1] = m12; m[0][2] = m13; m[0][3] = m14;
 
-			m[0][1] = m21; m[1][1] = m22; m[2][1] = m23; m[3][1] = m24;
+			m[1][0] = m21; m[1][1] = m22; m[1][2] = m23; m[1][3] = m24;
 
-			m[0][2] = m31; m[1][2] = m32; m[2][2] = m33; m[3][2] = m34;
+			m[2][0] = m31; m[2][1] = m32; m[2][2] = m33; m[2][3] = m34;
 
-			m[0][3] = m41; m[1][3] = m42; m[2][3] = m43; m[3][3] = m44;
+			m[3][0] = m41; m[3][1] = m42; m[3][2] = m43; m[3][3] = m44;
 		}
 
 		Matrix4X4 operator*(const Matrix4X4& other);
@@ -231,7 +238,7 @@ namespace Math
 		Matrix4X4 operator+(const Matrix4X4& other);
 
 		const Vector3 ExtraxtTranslation() const;
-		const Vector3 ExtraxtRotation() const;
+		const Quaternion ExtraxtRotation() const;
 		const Vector3 ExtraxtScale() const;
 
 		static Matrix4X4 CreateIdentityMatrix();
@@ -243,8 +250,13 @@ namespace Math
 		static Matrix4X4 CreateScalingMatrix(const Vector3& scale);
 		static Matrix4X4 CreateScaleRotationTranslationMatrix(const Vector3& translation, const Vector3& rotation, const Vector3& scale);
 		static Matrix4X4 CreateScaleRotationTranslationMatrix(const Vector3& translation, const Quaternion& rotation, const Vector3& scale);
+		static Matrix4X4 CreateOrthographicProjectionMatrix(float left, float right, float bottom, float top, float nearPlane, float farPlane);
+		static Matrix4X4 CreatePerspectiveProjectionMatrix(float fov, float width, float height, float zNear, float zFar);
 
 		Matrix4X4 Inverse() const;
+
+		Vector4 Row(int rowIndex) const;
+		Vector4 Col(int colIndex) const;
 	};
 
 	struct Color
@@ -413,6 +425,11 @@ namespace Math
 	inline float Dot(const Vector3 &v1, const Vector3 &v2)
 	{
 		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+	}
+
+	inline float Dot(const Vector4& v1, const Vector4& v2)
+	{
+		return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
 	}
 
 	inline Vector3 Cross(const Vector2 &a, const Vector2 &b)

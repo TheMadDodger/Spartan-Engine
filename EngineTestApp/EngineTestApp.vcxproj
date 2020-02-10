@@ -91,13 +91,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Debug\x86;$(LIBDIR)\GLEW\lib\Debug\x86;$(LIBDIR)\Engine\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32d.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Debug\x86;$(LIBDIR)\GLEW\lib\Debug\x86;$(LIBDIR)\FBXSDK\lib\Debug\x86;$(LIBDIR)\glm\lib\Debug\x86;$(LIBDIR)\Engine\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libfbxsdk.lib;glew32d.lib;glm_static.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -108,13 +108,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x64;$(LIBDIR)\SDL2_image\lib\x64;$(LIBDIR)\SDL2_mixer\lib\x64;$(LIBDIR)\SDL2_ttf\lib\x64;$(LIBDIR)\Box2D\lib\Debug;$(SolutionDir)Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,7 +135,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Release;$(LIBDIR)\GLEW\lib\Release;$(LIBDIR)\Engine\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libfbxsdk.lib;glew32.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,12 +156,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x64;$(LIBDIR)\SDL2_image\lib\x64;$(LIBDIR)\SDL2_mixer\lib\x64;$(LIBDIR)\SDL2_ttf\lib\x64;$(LIBDIR)\Box2D\lib\Release;$(SolutionDir)Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libfbxsdk.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridTestScene.h" />
+    <ClInclude Include="RenderTestScene.h" />
     <ClInclude Include="Scenes\GUIDTestScene.h" />
     <ClInclude Include="Scenes\BehaviourTreeTestScene.h" />
     <ClInclude Include="GameApp.h" />
@@ -174,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridTestScene.cpp" />
+    <ClCompile Include="RenderTestScene.cpp" />
     <ClCompile Include="Scenes\GUIDTestScene.cpp" />
     <ClCompile Include="Scenes\BehaviourTreeTestScene.cpp" />
     <ClCompile Include="EngineTestApp.cpp" />

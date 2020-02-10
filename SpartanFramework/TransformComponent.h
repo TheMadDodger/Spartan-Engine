@@ -6,6 +6,8 @@ public:
 	TransformComponent();
 	~TransformComponent();
 
+	/// DEPRECATED!!!
+	/// USE SHADERS!!!
 	void ApplyTransform();
 	void BuildTransform();
 	const Matrix4X4 &GetTransformMatrix();

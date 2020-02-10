@@ -6,6 +6,7 @@
 #include "SpriteSheetLoader.h"
 #include "FontLoader.h"
 #include "ShaderLoader.h"
+#include "ModelLoader.h"
 
 ContentManager *ContentManager::m_pContentManager = nullptr;
 
@@ -36,6 +37,7 @@ void ContentManager::Initialize()
 	AddLoader(new SpriteSheetLoader());
 	AddLoader(new FontLoader());
 	AddLoader(new ShaderLoader());
+	AddLoader(new ModelLoader());
 }
 
 ContentManager::ContentManager()

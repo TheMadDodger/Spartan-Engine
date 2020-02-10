@@ -62,28 +62,30 @@ void TransformComponent::UpdateTransform()
 
 	m_WorldPosition = Position;
 
-	// Don't apply camera transform if it's a UI Component
-	if (m_UseCamera)
-	{
-		auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
-		m_TansformMatrix = camInverse * m_TansformMatrix;
-	}
+	//// Don't apply camera transform if it's a UI Component
+	//if (m_UseCamera)
+	//{
+	//	auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
+	//	m_TansformMatrix = camInverse * m_TansformMatrix;
+	//}
 }
 
+/// DEPRECATED!!!
+/// USE SHADERS!!!
 void TransformComponent::ApplyTransform()
 {
 	/// Applies the transform to OpenGL so everything rendered after it uses its transform
 	// Extraxt all data from the Transform matrix
 	Vector3 pos = m_TansformMatrix.ExtraxtTranslation();
 	Vector3 scale = m_TansformMatrix.ExtraxtScale();
-	Vector3 rot = m_TansformMatrix.ExtraxtRotation();
+	Quaternion rot = m_TansformMatrix.ExtraxtRotation();
 
 	// Convert rotation to Radians since OpenGL needs Radians
-	rot.z = rot.z / (float)M_PI * 180.0f;
+	//rot.z = rot.z / (float)M_PI * 180.0f;
 
 	// Apply Transform to OpenGL
 	glTranslatef(pos.x, pos.y, 0);
-	glRotatef(rot.z, 0, 0, 1);
+	//glRotatef(rot.z, 0, 0, 1);
 	glScalef(scale.x, scale.y, 1);
 }
 
