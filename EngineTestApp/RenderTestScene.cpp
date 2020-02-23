@@ -5,45 +5,7 @@
 #include <Mesh.h>
 #include <MaterialManager.h>
 #include <InputManager.h>
-
-const GLfloat RenderTestScene::g_vertex_buffer_data[] = {
-	-1.0f,-1.0f,-1.0f, // triangle 1 : begin
-	-1.0f,-1.0f, 1.0f,
-	-1.0f, 1.0f, 1.0f, // triangle 1 : end
-	1.0f, 1.0f,-1.0f, // triangle 2 : begin
-	-1.0f,-1.0f,-1.0f,
-	-1.0f, 1.0f,-1.0f, // triangle 2 : end
-	1.0f,-1.0f, 1.0f,
-	-1.0f,-1.0f,-1.0f,
-	1.0f,-1.0f,-1.0f,
-	1.0f, 1.0f,-1.0f,
-	1.0f,-1.0f,-1.0f,
-	-1.0f,-1.0f,-1.0f,
-	-1.0f,-1.0f,-1.0f,
-	-1.0f, 1.0f, 1.0f,
-	-1.0f, 1.0f,-1.0f,
-	1.0f,-1.0f, 1.0f,
-	-1.0f,-1.0f, 1.0f,
-	-1.0f,-1.0f,-1.0f,
-	-1.0f, 1.0f, 1.0f,
-	-1.0f,-1.0f, 1.0f,
-	1.0f,-1.0f, 1.0f,
-	1.0f, 1.0f, 1.0f,
-	1.0f,-1.0f,-1.0f,
-	1.0f, 1.0f,-1.0f,
-	1.0f,-1.0f,-1.0f,
-	1.0f, 1.0f, 1.0f,
-	1.0f,-1.0f, 1.0f,
-	1.0f, 1.0f, 1.0f,
-	1.0f, 1.0f,-1.0f,
-	-1.0f, 1.0f,-1.0f,
-	1.0f, 1.0f, 1.0f,
-	-1.0f, 1.0f,-1.0f,
-	-1.0f, 1.0f, 1.0f,
-	1.0f, 1.0f, 1.0f,
-	-1.0f, 1.0f, 1.0f,
-	1.0f,-1.0f, 1.0f
-};
+#include <ContentManager.h>
 
 RenderTestScene::RenderTestScene() : GameScene("Render Test Scene")
 {
@@ -59,11 +21,14 @@ void RenderTestScene::Initialize(const GameContext& gameContext)
 
 	m_pObject = Instantiate<GameObject>();
 	MeshRenderComponent *pMeshRenderer = m_pObject->CreateRuntimeComponent<MeshRenderComponent>();
-	pMeshRenderer->SetMesh(MeshHelper::Generate3DBoxMeshPosColor(Vector3(1.0f, 1.0f, 1.0f), Color::Red(), Color::Blue(), Color::Green(), Color::Gold(), Color::Cyan(), Color::Magenta()));
+	//pMeshRenderer->SetMesh(MeshHelper::Generate3DBoxMeshPosColor(Vector3(1.0f, 1.0f, 1.0f), Color::Red(), Color::Blue(), Color::Green(), Color::Gold(), Color::Cyan(), Color::Magenta()));
 	//pMeshRenderer->SetMesh(MeshHelper::Generate3DBoxMeshPosColor(Vector2(1.0f, 1.0f), Color::Red()));
-	pMeshRenderer->SetMaterial(id);
+	Model* pModel = ContentManager::GetInstance()->Load<Model>("./Resources/Models/Test.fbx");
+	pMeshRenderer->SetMesh(pModel->GetMesh(0));
+	//pMeshRenderer->SetMaterial(id);
 
 	m_pObject->GetTransform()->Translate(0.0f, 0.0f, 0.0f);
+	//m_pObject->GetTransform()->SetScale(Vector3(0.1f, 0.1f, 0.1f));
 
 	/*auto forward = Vector3(0.01f, 0.01f, 1.0f).Normalized();
 	auto up = Math::Cross(Vector3::Up(), forward);
@@ -96,7 +61,7 @@ void RenderTestScene::Update(const GameContext& gameContext)
 		m_CameraYaw -= 45.0f * gameContext.pTime->GetDeltaTime() / 1000.0f;
 	}
 
-	Matrix4X4 rotation = Matrix4X4::CreateRotationMatrix(Vector3(m_ObjectRot, m_ObjectRot, m_ObjectRot));
+	Matrix4X4 rotation = Matrix4X4::CreateRotationMatrix(Vector3(m_ObjectRot + 90.0f, m_ObjectRot, m_ObjectRot));
 	m_pObject->GetTransform()->Rotation = Quaternion(rotation);
 
 	m_ObjectRot += 45.0f * gameContext.pTime->GetDeltaTime() / 1000.0f;

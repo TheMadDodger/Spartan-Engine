@@ -278,19 +278,19 @@ private:
 	GLuint m_FragmentShaderID;
 };
 
-class MeshData : public Content
+class Mesh;
+
+class Model : public Content
 {
 public:
-	MeshData(const std::string &path) : Content(path) {}
-	~MeshData() {}
+	Model(const std::string &path) : Content(path) {}
+	~Model() {}
+
+	void AddMesh(Mesh* pMesh) { m_pMeshes.push_back(pMesh); }
+	Mesh* GetMesh(size_t index) { return m_pMeshes[index]; }
 
 private:
-	std::vector<SuperVertex3D> m_Vertices;
-	bool m_HasPosition;
-	bool m_HasNormal;
-	bool m_HasTangent;
-	bool m_HasCoord;
-	bool m_HasColor;
+	std::vector<Mesh*> m_pMeshes;
 };
 
 #pragma warning(disable:4996)

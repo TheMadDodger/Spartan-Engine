@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 // A simple vertex with a position and UV coordinate
 struct Vertex2DPosUV
@@ -32,6 +31,7 @@ public:
 struct Vertex3DPos
 {
 public:
+	Vertex3DPos() : Position(Vector3::Zero()) {}
 	Vertex3DPos(const Math::Vector3& position) : Position(position) {}
 
 	Math::Vector3 Position;
@@ -54,11 +54,19 @@ struct Vertex2DPos
 	Math::Vector2 Position;
 };
 
-struct SuperVertex3D
+struct RawVertex
 {
-	Math::Vector3 Position;
-	Math::Vector3 Normal;
-	Math::Vector3 Tangent;
-	Math::Vector2 Coord;
-	Math::Color Color;
+public: // Constructors
+	RawVertex() : m_VertexData(nullptr) {}
+	RawVertex(const std::vector<float> &data) : m_VertexData(new float[data.size()])
+	{
+		memcpy(m_VertexData, &data[0], data.size() * sizeof(float));
+	}
+	RawVertex(unsigned int size) : m_VertexData(new float[size]) {}
+
+public: // Methods
+	float &operator[](unsigned int index) { return m_VertexData[index]; }
+
+public:
+	float *m_VertexData;
 };

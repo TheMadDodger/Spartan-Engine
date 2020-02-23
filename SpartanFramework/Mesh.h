@@ -14,16 +14,17 @@ enum MeshAttribute : unsigned int
 	ATangent,
 	AColor,
 	ACoord,
+	ABiNormal,
 };
 
-class Mesh : Content
+class Mesh : public SEObject
 {
 public:
 	Mesh(size_t vertexCount, float *pVertices, size_t indexCount, unsigned int *pIndices, size_t vertexSize, size_t attributeCount, MeshAttribute *attributes, GLuint primitiveTopology = GL_TRIANGLE_FAN) :
 		m_VertexCount(vertexCount), m_pVertices(pVertices),
 		m_IndexCount(indexCount), m_pIndices(pIndices),
 		m_VertexSize(vertexSize), m_AttributeCount(attributeCount),
-		m_pAttributes(new MeshAttribute[m_AttributeCount]), m_PrimitiveTopoloy(primitiveTopology), Content("")
+		m_pAttributes(new MeshAttribute[m_AttributeCount]), m_PrimitiveTopoloy(primitiveTopology)
 	{
 		memcpy(m_pAttributes, attributes, m_AttributeCount * sizeof(unsigned int));
 	}
@@ -115,6 +116,7 @@ private:
 				offset += 2 * sizeof(GLfloat);
 				break;
 			case ATangent:
+			case ABiNormal:
 			case ANormal:
 			case APosition3D:
 				glVertexAttribPointer(i, 3, GL_FLOAT, GL_FALSE, m_VertexSize, (void*)offset);

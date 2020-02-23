@@ -1,6 +1,5 @@
 .vs/
 Debug/
-Resources/
 Release/
 bin/ImGUI/.github/
 bin/ImGUI/examples/.gitignore

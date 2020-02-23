@@ -407,5 +407,8 @@
     <ClCompile Include="ModelLoader.cpp">
       <Filter>Content Management</Filter>
     </ClCompile>
+    <ClCompile Include="VertexHelpers.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

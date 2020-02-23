@@ -75,12 +75,12 @@
     <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <IncludePath>$(IncludePath)</IncludePath>
-    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
+    <OutDir>$(solutiondir)bin\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(IncludePath)</IncludePath>
-    <OutDir>$(libdir)\Engine\$(Configuration)\</OutDir>
+    <OutDir>$(solutiondir)bin\Engine\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\FBXSDK\include;$(LIBDIR)\glm\include;C:\Program Files\Autodesk\FBX\FBX SDK\2019.0\include;$(LIBDIR)\GLEW\include;$(LIBDIR)\Box2D\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -303,6 +303,7 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="VertexHelpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
