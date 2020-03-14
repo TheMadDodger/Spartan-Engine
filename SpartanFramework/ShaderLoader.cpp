@@ -12,47 +12,49 @@ ShaderLoader::~ShaderLoader()
 
 ShaderData *ShaderLoader::LoadContent(const std::string &file)
 {
-	unsigned int programID = glCreateProgram();
+	GLuint programID = glCreateProgram();
 	Utilities::Debug::LogGLError(glGetError());
 
-	std::string vertexShaderPath = file + "_vs.shader";
-	std::string fragmentShaderPath = file + "_fs.shader";
-
-	std::string vs = Utilities::BinaryContainer::ReadCompleteFile(vertexShaderPath.data());
-	vs.pop_back();
-	vs += '\0';
-	std::string fs = Utilities::BinaryContainer::ReadCompleteFile(fragmentShaderPath.data());
-	fs.pop_back();
-	fs += '\0';
-
-	GLuint vsID, fsID;
-	if (!GetCompiledShader(vsID, GL_VERTEX_SHADER, vs))
+	std::ifstream fxFileStream(file);
+	if (!fxFileStream.is_open())
 	{
-		glDeleteProgram(programID);
-		Utilities::Debug::LogGLError(glGetError());
-		return nullptr;
-	}
-	if (!GetCompiledShader(fsID, GL_FRAGMENT_SHADER, fs))
-	{
-		glDeleteProgram(programID);
-		Utilities::Debug::LogGLError(glGetError());
+		Utilities::Debug::LogWarning("Could not open fx file " + file);
 		return nullptr;
 	}
 
-	glAttachShader(programID, vsID);
-	Utilities::Debug::LogGLError(glGetError());
-	glAttachShader(programID, fsID);
-	Utilities::Debug::LogGLError(glGetError());
+	ShaderData* pMat = new ShaderData(file);
+	pMat->m_ShaderProgramID = programID;
+
+	std::string line;
+	std::string shaderFile;
+
+	while (!fxFileStream.eof())
+	{
+		std::getline(fxFileStream, line);
+		shaderFile = file;
+		GLuint shaderType = GetShaderType(line, shaderFile);
+		std::string shaderSource = Utilities::BinaryContainer::ReadCompleteFile(shaderFile.data());
+		shaderSource.pop_back();
+		shaderSource += '\0';
+
+		GLuint shaderID;
+		if (!GetCompiledShader(shaderID, shaderType, shaderSource))
+		{
+			glDeleteProgram(programID);
+			Utilities::Debug::LogGLError(glGetError());
+			return nullptr;
+		}
+
+		glAttachShader(programID, shaderID);
+		Utilities::Debug::LogGLError(glGetError());
+
+		pMat->m_ShaderIDs.push_back(shaderID);
+	}
 
 	glLinkProgram(programID);
 	Utilities::Debug::LogGLError(glGetError());
 	glValidateProgram(programID);
 	Utilities::Debug::LogGLError(glGetError());
-
-	ShaderData *pMat = new ShaderData(file);
-	pMat->m_ShaderProgramID = programID;
-	pMat->m_VertexShaderID = vsID;
-	pMat->m_FragmentShaderID = fsID;
 
 	return pMat;
 }
@@ -91,4 +93,25 @@ bool ShaderLoader::GetCompiledShader(unsigned int &shaderID, unsigned int shader
 	}
 
 	return true;
+}
+
+GLuint ShaderLoader::GetShaderType(const std::string& line, std::string& path)
+{
+	int seperatorPos = line.find(":");
+	std::string typeString = line.substr(0, seperatorPos);
+	std::string file = line.substr(seperatorPos + 1);
+	size_t forwardSlashPos = path.rfind('/');
+	size_t backwardSlashPos = path.rfind('\\');
+	size_t slashPos = forwardSlashPos;
+	if (backwardSlashPos != string::npos && backwardSlashPos > forwardSlashPos) slashPos = backwardSlashPos;
+	path = path.substr(0, slashPos + 1) + file;
+
+	if (typeString == "vs") return GL_VERTEX_SHADER;
+	if (typeString == "fs") return GL_FRAGMENT_SHADER;
+	if (typeString == "gs") return GL_GEOMETRY_SHADER;
+	if (typeString == "tc") return GL_TESS_CONTROL_SHADER;
+	if (typeString == "te") return GL_TESS_EVALUATION_SHADER;
+
+	Utilities::Debug::LogError("Unknown shader type: " + typeString + " in file " + file);
+	return 0;
 }

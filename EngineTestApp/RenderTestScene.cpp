@@ -17,7 +17,7 @@ RenderTestScene::~RenderTestScene()
 
 void RenderTestScene::Initialize(const GameContext& gameContext)
 {
-	size_t id = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/pos_color3D");
+	size_t id = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/pos_color3D.fx");
 
 	m_pObject = Instantiate<GameObject>();
 	MeshRenderComponent *pMeshRenderer = m_pObject->CreateRuntimeComponent<MeshRenderComponent>();

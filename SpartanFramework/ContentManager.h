@@ -245,27 +245,26 @@ private:
 class ShaderData : public Content
 {
 public:
-	ShaderData(const std::string &file) : Content(file) {}
+	ShaderData(const std::string& file) : Content(file), m_ShaderProgramID(0) {}
 	virtual ~ShaderData()
 	{
-		// Detach shaders
-		glDetachShader(m_ShaderProgramID, m_VertexShaderID);
-		Utilities::Debug::LogGLError(glGetError());
-		glDetachShader(m_ShaderProgramID, m_FragmentShaderID);
-		Utilities::Debug::LogGLError(glGetError());
+		for (size_t i = 0; i < m_ShaderIDs.size(); i++)
+		{
+			// Detach shader
+			glDetachShader(m_ShaderProgramID, m_ShaderIDs[i]);
+			Utilities::Debug::LogGLError(glGetError());
 
-		// Delete shaders
-		glDeleteShader(m_VertexShaderID);
-		Utilities::Debug::LogGLError(glGetError());
-		glDeleteShader(m_FragmentShaderID);
-		Utilities::Debug::LogGLError(glGetError());
+			// Delete shader
+			glDeleteShader(m_ShaderIDs[i]);
+			Utilities::Debug::LogGLError(glGetError());
+		}
 
 		// Delete program
 		glDeleteProgram(m_ShaderProgramID);
 		Utilities::Debug::LogGLError(glGetError());
 	}
 
-	const GLuint &GetProgramID()
+	const GLuint& GetProgramID()
 	{
 		return m_ShaderProgramID;
 	}
@@ -274,9 +273,44 @@ private:
 	friend class ShaderLoader;
 	friend class Material;
 	GLuint m_ShaderProgramID;
-	GLuint m_VertexShaderID;
-	GLuint m_FragmentShaderID;
+	std::vector<GLuint> m_ShaderIDs;
 };
+
+//class ShaderData : public Content
+//{
+//public:
+//	ShaderData(const std::string &file) : Content(file) {}
+//	virtual ~ShaderData()
+//	{
+//		// Detach shaders
+//		glDetachShader(m_ShaderProgramID, m_VertexShaderID);
+//		Utilities::Debug::LogGLError(glGetError());
+//		glDetachShader(m_ShaderProgramID, m_FragmentShaderID);
+//		Utilities::Debug::LogGLError(glGetError());
+//
+//		// Delete shaders
+//		glDeleteShader(m_VertexShaderID);
+//		Utilities::Debug::LogGLError(glGetError());
+//		glDeleteShader(m_FragmentShaderID);
+//		Utilities::Debug::LogGLError(glGetError());
+//
+//		// Delete program
+//		glDeleteProgram(m_ShaderProgramID);
+//		Utilities::Debug::LogGLError(glGetError());
+//	}
+//
+//	const GLuint &GetProgramID()
+//	{
+//		return m_ShaderProgramID;
+//	}
+//
+//private:
+//	friend class ShaderLoader;
+//	friend class Material;
+//	GLuint m_ShaderProgramID;
+//	GLuint m_VertexShaderID;
+//	GLuint m_FragmentShaderID;
+//};
 
 class Mesh;
 

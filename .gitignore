@@ -4,3 +4,9 @@ Release/
 bin/ImGUI/.github/
 bin/ImGUI/examples/.gitignore
 bin/ImGUI/examples/
+OrbisSepiaPrototype/
+OrbisSepiaPrototypeUXP/
+SpartanEditor/Resources/
+Resources1/
+bin/Box2D/lib.rar
+EngineTestApp/Resources.rar

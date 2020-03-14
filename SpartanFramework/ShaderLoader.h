@@ -9,5 +9,6 @@ public:
 
 private:
 	bool GetCompiledShader(unsigned int &shaderID, unsigned int shader_type, const std::string &file);
+	GLuint GetShaderType(const std::string& line, std::string& path);
 };
 
