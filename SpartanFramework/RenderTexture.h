@@ -17,6 +17,8 @@ public: // Instance functions
 	void Resize(int width, int height);
 	void Use();
 	void StopUse();
+	const GLuint &GetTextureID();
+	const IntVector2& GetDimensions();
 
 private: // Constructors
 	RenderTexture(int width, int height, bool hasDepthBuffer);

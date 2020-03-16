@@ -98,6 +98,7 @@ namespace Math
 		Vector3 operator*(const Vector3 &other);
 		Vector3 operator*(float factor);
 		Vector3 operator/(float factor);
+		Vector3 operator/(const Vector3& other);
 		Vector3 Normalized() const;
 		Vector2 xy() const { return Vector2(x, y); }
 		static Vector3 Rotate(const Vector3 &vec, Quaternion& rotation);

@@ -88,6 +88,16 @@ void RenderTexture::StopUse()
 	UseDefaultRenderTexture();
 }
 
+const GLuint &RenderTexture::GetTextureID()
+{
+	return m_GLTextureID;
+}
+
+const IntVector2& RenderTexture::GetDimensions()
+{
+	return m_Dimensions;
+}
+
 RenderTexture::RenderTexture(int width, int height, bool hasDepthBuffer) : m_Dimensions(width, height), m_GLFrameBufferID(NULL), m_GLTextureID(NULL), m_HasDepthBuffer(hasDepthBuffer), m_GLDepthBufferID(NULL)
 {
 }
@@ -173,6 +183,7 @@ void RenderTexture::DestroyGLData()
 	if (m_GLTextureID != NULL) glDeleteTextures(1, &m_GLTextureID);
 
 	m_GLFrameBufferID = NULL;
+	m_GLDepthBufferID = NULL;
 	m_GLTextureID = NULL;
 }
 

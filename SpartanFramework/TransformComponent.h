@@ -11,6 +11,7 @@ public:
 	void ApplyTransform();
 	void BuildTransform();
 	const Matrix4X4 &GetTransformMatrix();
+	const Matrix4X4 &GetLocalTransformMatrix();
 	const Matrix4X4 &GetWorldMatrix();
 	const Vector3 &GetWorldPosition();
 
@@ -38,6 +39,7 @@ protected:
 
 private:
 	Matrix4X4 m_TansformMatrix;
+	Matrix4X4 m_LocalTansformMatrix;
 	Matrix4X4 m_WorldTansformMatrix;
 	Vector3 m_WorldPosition;
 	bool m_UseCamera = true;

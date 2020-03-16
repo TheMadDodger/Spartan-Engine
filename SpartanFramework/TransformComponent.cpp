@@ -61,13 +61,6 @@ void TransformComponent::UpdateTransform()
 	}
 
 	m_WorldPosition = Position;
-
-	//// Don't apply camera transform if it's a UI Component
-	//if (m_UseCamera)
-	//{
-	//	auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
-	//	m_TansformMatrix = camInverse * m_TansformMatrix;
-	//}
 }
 
 /// DEPRECATED!!!
@@ -92,12 +85,18 @@ void TransformComponent::ApplyTransform()
 void TransformComponent::BuildTransform()
 {
 	m_TansformMatrix = Matrix4X4::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);
+	m_LocalTansformMatrix = m_TansformMatrix;
 	m_WorldTansformMatrix = m_TansformMatrix;
 }
 
 const Matrix4X4 &TransformComponent::GetTransformMatrix()
 {
 	return m_TansformMatrix;
+}
+
+const Matrix4X4& TransformComponent::GetLocalTransformMatrix()
+{
+	return m_LocalTansformMatrix;
 }
 
 const Matrix4X4 &TransformComponent::GetWorldMatrix()

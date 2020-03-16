@@ -24,7 +24,8 @@ public:
 		m_VertexCount(vertexCount), m_pVertices(pVertices),
 		m_IndexCount(indexCount), m_pIndices(pIndices),
 		m_VertexSize(vertexSize), m_AttributeCount(attributeCount),
-		m_pAttributes(new MeshAttribute[m_AttributeCount]), m_PrimitiveTopoloy(primitiveTopology)
+		m_pAttributes(new MeshAttribute[m_AttributeCount]), m_PrimitiveTopoloy(primitiveTopology),
+		m_IndexBufferID(NULL), m_VertexBufferID(NULL)
 	{
 		memcpy(m_pAttributes, attributes, m_AttributeCount * sizeof(unsigned int));
 	}
