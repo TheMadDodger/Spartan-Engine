@@ -88,6 +88,9 @@ public:
 	const LayerData& GetLayer() const;
 	void SetLayer(int layerID);
 
+	bool IsDirty();
+	void SetDirty();
+
 protected:
 	friend class GameScene;
 	void RootInitialize(const GameContext &gameContext);
@@ -100,6 +103,7 @@ protected:
 	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 
 	virtual void OnDestroy() {};
 	virtual void OnCreated() {};
@@ -125,6 +129,8 @@ private:
 	void AddChild(GameObject* pChild);
 	void RemoveChild(GameObject* pChild);
 
+	void SetDirty(bool dirty);
+
 private:
 	friend class LevelEditor;
 	friend class GameScene;
@@ -143,4 +149,5 @@ private:
 	char m_PrefabName[200] = "";
 	bool m_Selected = false;
 	size_t m_LayerID;
+	bool m_IsDirty;
 };

@@ -8,7 +8,7 @@
 GameObject::GameObject(const char *name, size_t layerID)
 	: m_pComponents(std::vector<BaseComponent*>()),
 	  m_pChildren(std::vector<GameObject*>()),
-	  m_Tag(""), m_LayerID(layerID)
+	  m_Tag(""), m_LayerID(layerID), m_IsDirty(true)
 {
 	m_pTransform = CreateDefaultComponent<TransformComponent>();
 
@@ -49,6 +49,15 @@ void GameObject::RemoveChild(GameObject *pChild)
 
 	m_pChildren.erase(it);
 	pChild->m_pParentObject = nullptr;
+}
+
+void GameObject::SetDirty(bool dirty)
+{
+	m_IsDirty = dirty;
+	for (size_t i = 0; i < m_pChildren.size(); i++)
+	{
+		m_pChildren[i]->SetDirty(dirty);
+	}
 }
 
 /*BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
@@ -123,6 +132,21 @@ void GameObject::SetLayer(int layerID)
 	int oldLayer = m_LayerID;
 	m_LayerID = layerID;
 	GetGameScene()->UpdateLayers(this, oldLayer, m_LayerID);
+}
+
+bool GameObject::IsDirty()
+{
+	if (m_IsDirty) return true;
+	for (size_t i = 0; i < m_pChildren.size(); i++)
+	{
+		if (m_pChildren[i]->IsDirty()) return true;
+	}
+	return false;
+}
+
+void GameObject::SetDirty()
+{
+	SetDirty(true);
 }
 
 void GameObject::RootInitialize(const GameContext &gameContext)
@@ -203,6 +227,8 @@ void GameObject::RootDraw(const GameContext & gameContext)
 		if (pChild->IsEnabled())
 			pChild->RootDraw(gameContext);
 	}
+
+	PostDraw(gameContext);
 }
 
 void GameObject::SetParent(GameObject *pParent)

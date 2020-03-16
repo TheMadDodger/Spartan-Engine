@@ -1,6 +1,7 @@
 #version 400
 
-out vec4 out_Color;
+layout(location = 0) out vec4 out_Color;
+
 in vec4 Color;
 
 void main()

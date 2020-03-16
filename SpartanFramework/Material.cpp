@@ -87,3 +87,16 @@ void Material::SetTexture(const std::string &name, TextureData *pTexture)
 
 	++m_TextureCounter;
 }
+
+void Material::SetTexture(const std::string& name, const GLuint& textureID)
+{
+	GLuint texLocation = glGetUniformLocation(m_pShader->m_ShaderProgramID, name.c_str());
+	glUniform1i(texLocation, m_TextureCounter);
+
+	glActiveTexture(GL_TEXTURE0 + m_TextureCounter);
+	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	glActiveTexture(GL_TEXTURE0);
+
+	++m_TextureCounter;
+}

@@ -8,6 +8,7 @@ class TextureData;
 class SpriteSheetData;
 class FontData;
 class Skeleton;
+class ScreenRect;
 
 using namespace Math;
 
@@ -18,6 +19,7 @@ public:
 	~Renderer();
 
 	void Initialize(const GameContext &gameContext);
+	void CreateScreen();
 	void DrawImage(TextureData *pImage, const GameContext &gameContext);
 	void RenderTexture(TextureData *pBitmap, const Color &color);
 	void RenderTexture(TextureData *pBitmap);
@@ -31,6 +33,8 @@ public:
 	SDL_Surface *GetWindowSurface() { return m_pWindowSurface; }
 
 	SDL_GLContext *GetGLContext() { return &m_pSDLContext; }
+
+	void RenderEnd();
 
 public:
 	// Primitive Rendering
@@ -51,6 +55,8 @@ private:
 	SDL_Window *m_pWindow = nullptr;
 	SDL_Surface *m_pWindowSurface = nullptr;
 	SDL_GLContext m_pSDLContext;
+
+	ScreenRect* m_pScreen;
 
 	const int CIRCLEPOLYGONS = 20;
 

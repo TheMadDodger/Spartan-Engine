@@ -28,6 +28,9 @@
     <Filter Include="AI\PathFinding">
       <UniqueIdentifier>{6793b0af-0605-4634-976a-8326dddfe742}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{c7d817b6-7e60-4450-8729-1304a6e7e148}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -245,6 +248,18 @@
     <ClInclude Include="ModelLoader.h">
       <Filter>Content Management</Filter>
     </ClInclude>
+    <ClInclude Include="UICanvas.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenRect.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -408,6 +423,18 @@
       <Filter>Content Management</Filter>
     </ClCompile>
     <ClCompile Include="VertexHelpers.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="UICanvas.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenRect.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>

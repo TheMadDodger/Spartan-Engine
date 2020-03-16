@@ -24,8 +24,9 @@ void RenderTestScene::Initialize(const GameContext& gameContext)
 	//pMeshRenderer->SetMesh(MeshHelper::Generate3DBoxMeshPosColor(Vector3(1.0f, 1.0f, 1.0f), Color::Red(), Color::Blue(), Color::Green(), Color::Gold(), Color::Cyan(), Color::Magenta()));
 	//pMeshRenderer->SetMesh(MeshHelper::Generate3DBoxMeshPosColor(Vector2(1.0f, 1.0f), Color::Red()));
 	Model* pModel = ContentManager::GetInstance()->Load<Model>("./Resources/Models/Test.fbx");
+	//pModel->GetMesh(0)->SetPrimitiveTopology(GL_PATCHES);
 	pMeshRenderer->SetMesh(pModel->GetMesh(0));
-	//pMeshRenderer->SetMaterial(id);
+	pMeshRenderer->SetMaterial(id);
 
 	m_pObject->GetTransform()->Translate(0.0f, 0.0f, 0.0f);
 	//m_pObject->GetTransform()->SetScale(Vector3(0.1f, 0.1f, 0.1f));

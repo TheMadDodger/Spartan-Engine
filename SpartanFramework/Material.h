@@ -20,7 +20,7 @@ public:
 
 	static void Reset()
 	{
-		glUseProgram(0);
+		glUseProgram(NULL);
 		Utilities::Debug::LogGLError(glGetError());
 	}
 
@@ -40,6 +40,7 @@ public: // Set shader vars
 	void SetDouble(const std::string &name, double value) const;
 	void SetMatrix(const std::string &name, float *pMatrix) const;
 	void SetTexture(const std::string &name, TextureData *pTexture);
+	void SetTexture(const std::string &name, const GLuint &textureID);
 
 protected:
 	virtual void SetShaderVars(BaseComponent *) {};

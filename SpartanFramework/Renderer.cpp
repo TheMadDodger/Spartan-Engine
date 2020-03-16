@@ -5,13 +5,22 @@
 #include "Skeleton.h"
 #include "Bone.h"
 #include "Components.h"
+#include "RenderTexture.h"
+#include "ScreenRect.h"
 
-Renderer::Renderer()
+Renderer::Renderer() : m_pScreen(nullptr)
 {
 }
 
 Renderer::~Renderer()
 {
+	delete m_pScreen;
+	m_pScreen = nullptr;
+
+	RenderTexture::DestroyAll();
+	delete RenderTexture::m_pDefaultTexture;
+	RenderTexture::m_pDefaultTexture = nullptr;
+
 	SDL_FreeSurface(m_pWindowSurface);
 	SDL_DestroyRenderer(m_pSDLRenderer);
 	SDL_DestroyWindow(m_pWindow);
@@ -24,9 +33,11 @@ void Renderer::Initialize(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 
+	GameSettings gameSettings = BaseGame::GetGame()->GetGameSettings();
+
 	// Open a window
 	m_pWindow = SDL_CreateWindow(BaseGame::GetGame()->GetGameSettings().AppName.data(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-		BaseGame::GetGame()->GetGameSettings().Window.Width, BaseGame::GetGame()->GetGameSettings().Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? (SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN) : SDL_WINDOW_OPENGL);
+		gameSettings.Window.Width, gameSettings.Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? (SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN) : SDL_WINDOW_OPENGL);
 
 	if (m_pWindow == NULL)
 	{
@@ -98,6 +109,16 @@ void Renderer::Initialize(const GameContext &gameContext)
 	glEnable(GL_DEPTH_TEST);
 	//// Accept fragment if it closer to the camera than the former one
 	glDepthFunc(GL_LESS);
+
+	// Create render texture
+	RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
+	RenderTexture::UseDefaultRenderTexture();
+}
+
+void Renderer::CreateScreen()
+{
+	// Create the screen
+	m_pScreen = new ScreenRect();
 }
 
 void Renderer::DrawImage(TextureData *pImage, const GameContext &gameContext)
@@ -291,6 +312,11 @@ void Renderer::ClearBackground()
 {
 	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void Renderer::RenderEnd()
+{
+	m_pScreen->RenderScreen(this);
 }
 
 void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color)

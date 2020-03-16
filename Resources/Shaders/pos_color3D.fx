@@ -1,0 +1,2 @@
+vs:pos_color3D_vs.shader
+fs:pos_color3D_fs.shader

@@ -78,6 +78,8 @@ bool BaseGame::RootInitialize()
 	// Initialize Content Manager
 	ContentManager::GetInstance()->Initialize();
 
+	m_GameContext.pRenderer->CreateScreen();
+
 	// Initialize SDL_ttf
 	if (TTF_Init() < 0)
 	{
@@ -191,6 +193,9 @@ void BaseGame::RootGamePaint()
 
 	// Update window
 	SDL_GL_SwapWindow(m_GameContext.pRenderer->m_pWindow);
+
+	// Render to the screen
+	m_GameContext.pRenderer->RenderEnd();
 
 	// End the frame timer
 	m_GameContext.pTime->EndFrame();

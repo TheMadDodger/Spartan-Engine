@@ -87,6 +87,11 @@ public:
 		return m_VertexSize;
 	}
 
+	void SetPrimitiveTopology(GLuint topology)
+	{
+		m_PrimitiveTopoloy = topology;
+	}
+
 private:
 	friend class MeshRenderComponent;
 

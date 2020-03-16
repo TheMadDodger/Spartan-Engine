@@ -37,6 +37,16 @@ public:
 	Math::Vector3 Position;
 };
 
+struct Vertex3DPosCoord
+{
+public:
+	Vertex3DPosCoord() : Position(Vector3::Zero()), Coord(Vector2::Zero()) {}
+	Vertex3DPosCoord(const Math::Vector3& position, const Math::Vector2& coord) : Position(position), Coord(coord) {}
+
+	Math::Vector3 Position;
+	Math::Vector2 Coord;
+};
+
 struct Vertex2DPosColorCoord
 {
 public:

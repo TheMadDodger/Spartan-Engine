@@ -172,6 +172,8 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="RenderTexture.h" />
+    <ClInclude Include="ScreenRect.h" />
     <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
     <ClInclude Include="Commands.h" />
@@ -203,6 +205,7 @@
     <ClInclude Include="SkinnedMeshComponent.h" />
     <ClInclude Include="SkinnedQuad.h" />
     <ClInclude Include="Tasks.h" />
+    <ClInclude Include="UICanvas.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="TextRenderComponent.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIObject.h" />
     <ClInclude Include="VertexHelpers.h" />
   </ItemGroup>
   <ItemGroup>
@@ -262,11 +266,14 @@
     <ClCompile Include="MeshRenderComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
+    <ClCompile Include="RenderTexture.cpp" />
+    <ClCompile Include="ScreenRect.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
     <ClCompile Include="UIContainer.cpp" />
     <ClCompile Include="FontLoader.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
@@ -303,6 +310,7 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="VertexHelpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
