@@ -1,7 +1,7 @@
-#version 400
+#version 450
 
 out vec4 FragColor;
-in vec3 gFacetNormal;
+in vec3 gNormal;
 in vec3 gTriDistance;
 in vec3 gPatchDistance;
 in float gPrimitive;
@@ -17,9 +17,11 @@ float amplify(float d, float scale, float offset)
 	return d;
 }
 
+vec3 lightDirection = vec3(-0.7, -0.7, -0.7);
+
 void main()
 {
-	vec3 N = normalize(gFacetNormal);
+	/*vec3 N = normalize(gFacetNormal);
 	vec3 L = LightPosition;
 	float df = abs(dot(N, L));
 	vec3 color = AmbientMaterial + df * DiffuseMaterial;
@@ -27,5 +29,8 @@ void main()
 	float d1 = min(min(gTriDistance.x, gTriDistance.y), gTriDistance.z);
 	float d2 = min(min(gPatchDistance.x, gPatchDistance.y), gPatchDistance.z);
 	color = amplify(d1, 40, -0.5) * amplify(d2, 60, -0.5) * color;
-	FragColor = vec4(color, 1.0);
+	FragColor = vec4(color, 1.0);*/
+
+	float diffuse = dot(normalize(lightDirection), -gNormal);
+	FragColor = vec4(1.0 * diffuse, 0.0, 0.0, 1.0);
 }

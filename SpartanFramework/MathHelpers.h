@@ -188,12 +188,14 @@ namespace Math
 				  float m21, float m22, float m23,
 				  float m31, float m32, float m33)
 		{
-			m[0][0] = m11; m[1][0] = m12; m[2][0] = m13;
-			
-			m[0][1] = m21; m[1][1] = m22; m[2][1] = m23;
-			
-			m[0][2] = m31; m[1][2] = m32; m[2][2] = m33;
+			m[0][0] = m11; m[0][1] = m12; m[0][2] = m13;
+
+			m[1][0] = m21; m[1][1] = m22; m[1][2] = m23;
+
+			m[2][0] = m31; m[2][1] = m32; m[2][2] = m33;
 		}
+
+		Matrix3X3(const Matrix4X4& mat4);
 
 		Matrix3X3 operator*(const Matrix3X3 &other);
 		Vector3 operator*(const Vector3 &other);

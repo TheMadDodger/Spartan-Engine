@@ -1,5 +1,8 @@
 #pragma once
 #include <GameScene.h>
+
+class PlanetMaterial;
+
 class RenderTestScene : public GameScene
 {
 public:
@@ -17,6 +20,8 @@ private:
 	float m_ObjectRot = 0.0f;
 	float m_CameraPitch = 0.0f;
 	GameObject* m_pObject;
+
+	PlanetMaterial* m_pMaterial;
 
 	static const GLfloat g_vertex_buffer_data[];
 };

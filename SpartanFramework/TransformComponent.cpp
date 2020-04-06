@@ -104,6 +104,11 @@ const Matrix4X4 &TransformComponent::GetWorldMatrix()
 	return m_WorldTansformMatrix;
 }
 
+Matrix3X3 TransformComponent::GetRotationMatrix()
+{
+	return Matrix3X3(m_WorldTansformMatrix);
+}
+
 const Vector3 &TransformComponent::GetWorldPosition()
 {
 	return m_WorldPosition;

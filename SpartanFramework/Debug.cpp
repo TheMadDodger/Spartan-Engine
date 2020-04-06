@@ -70,18 +70,19 @@ void Utilities::Debug::LogError(const std::string &message, bool bIncludeTimeSta
 	const SDL_MessageBoxButtonData buttons[] = {
 		{ /* .flags, .buttonid, .text */        0, 0, "OK" },
 	};
-	const SDL_MessageBoxColorScheme colorScheme = {
+	const SDL_MessageBoxColorScheme colorScheme =
+	{
 		{ /* .colors (.r, .g, .b) */
 		  /* [SDL_MESSAGEBOX_COLOR_BACKGROUND] */
 			{ 255, 255, 255 },
 			/* [SDL_MESSAGEBOX_COLOR_TEXT] */
-	{ 0, 0, 0 },
-	/* [SDL_MESSAGEBOX_COLOR_BUTTON_BORDER] */
-	{ 0, 0, 0 },
-	/* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
-	{ 255, 255, 255 },
-	/* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
-	{ 128, 128, 128 }
+			{ 0, 0, 0 },
+			/* [SDL_MESSAGEBOX_COLOR_BUTTON_BORDER] */
+			{ 0, 0, 0 },
+			/* [SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND] */
+			{ 255, 255, 255 },
+			/* [SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED] */
+			{ 128, 128, 128 }
 		}
 	};
 	const SDL_MessageBoxData messageboxdata = {

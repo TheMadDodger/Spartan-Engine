@@ -7,8 +7,10 @@
 #include "Components.h"
 #include "RenderTexture.h"
 #include "ScreenRect.h"
+#include "MaterialManager.h"
+#include "UIRenderMaterial.h"
 
-Renderer::Renderer() : m_pScreen(nullptr)
+Renderer::Renderer() : m_pScreen(nullptr), m_pUIRenderer(nullptr)
 {
 }
 
@@ -113,12 +115,18 @@ void Renderer::Initialize(const GameContext &gameContext)
 	// Create render texture
 	RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
 	RenderTexture::UseDefaultRenderTexture();
+
+	
 }
 
-void Renderer::CreateScreen()
+void Renderer::CreateScreenAndMaterials()
 {
 	// Create the screen
 	m_pScreen = new ScreenRect();
+
+	// Create UI Render material
+	size_t matID = MaterialManager::CreateMaterial<UIRenderMaterial>("./Resources/Shaders/UIRenderer.fx");
+	m_pUIRenderer = MaterialManager::GetMaterial<UIRenderMaterial>(matID);
 }
 
 void Renderer::DrawImage(TextureData *pImage, const GameContext &gameContext)
@@ -317,6 +325,11 @@ void Renderer::ClearBackground()
 void Renderer::RenderEnd()
 {
 	m_pScreen->RenderScreen(this);
+}
+
+UIRenderMaterial* Renderer::GetUIRenderer()
+{
+	return m_pUIRenderer;
 }
 
 void Renderer::DrawSolidRect(const Vector2 &topLeft, const Vector2 &bottomRight, const Math::Color &color)

@@ -74,7 +74,7 @@ void MeshRenderComponent::Draw(const GameContext &)
 	else
 		worldCamProjection = camInverse * world;*/
 
-	pMaterial->SetMatrix("WorldViewProjection", &worldCamProjection.m[0][0]);
+	pMaterial->SetMatrix4("WorldViewProjection", &worldCamProjection.m[0][0]);
 	pMaterial->SetShaderVars(this);
 
 	m_pMesh->ApplyAttributes();

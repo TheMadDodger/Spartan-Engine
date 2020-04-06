@@ -31,6 +31,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{c7d817b6-7e60-4450-8729-1304a6e7e148}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Rendering">
+      <UniqueIdentifier>{7463af22-446d-41df-999f-fe972a51f6a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -110,9 +113,6 @@
     <ClInclude Include="ParticleSystem.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
@@ -139,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="UIButton.h">
       <Filter>EnginePrefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="UIContainer.h">
-      <Filter>Core Components</Filter>
     </ClInclude>
     <ClInclude Include="GameTime.h">
       <Filter>Core</Filter>
@@ -200,12 +197,6 @@
     <ClInclude Include="VertexHelpers.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialManager.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="FastNoise.h">
       <Filter>Helpers</Filter>
     </ClInclude>
@@ -254,11 +245,26 @@
     <ClInclude Include="UIObject.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTexture.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="ScreenRect.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTexture.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UIContainer.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="UIRenderMaterial.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,9 +323,6 @@
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBodyComponent.cpp">
       <Filter>Core Components</Filter>
     </ClCompile>
@@ -334,9 +337,6 @@
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Content Management</Filter>
-    </ClCompile>
-    <ClCompile Include="UIContainer.cpp">
-      <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteSheetComponent.cpp">
       <Filter>Core Components</Filter>
@@ -383,12 +383,6 @@
     <ClCompile Include="ShaderLoader.cpp">
       <Filter>Content Management</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="FastNoise.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
@@ -431,11 +425,26 @@
     <ClCompile Include="UIObject.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="RenderTexture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenRect.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTexture.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="UIContainer.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="UIRenderMaterial.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

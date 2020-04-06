@@ -9,6 +9,7 @@ class SpriteSheetData;
 class FontData;
 class Skeleton;
 class ScreenRect;
+class UIRenderMaterial;
 
 using namespace Math;
 
@@ -19,7 +20,7 @@ public:
 	~Renderer();
 
 	void Initialize(const GameContext &gameContext);
-	void CreateScreen();
+	void CreateScreenAndMaterials();
 	void DrawImage(TextureData *pImage, const GameContext &gameContext);
 	void RenderTexture(TextureData *pBitmap, const Color &color);
 	void RenderTexture(TextureData *pBitmap);
@@ -35,6 +36,8 @@ public:
 	SDL_GLContext *GetGLContext() { return &m_pSDLContext; }
 
 	void RenderEnd();
+
+	UIRenderMaterial* GetUIRenderer();
 
 public:
 	// Primitive Rendering
@@ -57,6 +60,7 @@ private:
 	SDL_GLContext m_pSDLContext;
 
 	ScreenRect* m_pScreen;
+	UIRenderMaterial* m_pUIRenderer;
 
 	const int CIRCLEPOLYGONS = 20;
 

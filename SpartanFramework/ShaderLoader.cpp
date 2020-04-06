@@ -32,13 +32,12 @@ ShaderData *ShaderLoader::LoadContent(const std::string &file)
 	{
 		std::getline(fxFileStream, line);
 		shaderFile = file;
-		GLuint shaderType = GetShaderType(line, shaderFile);
+		std::string rootPath;
+		GLuint shaderType = GetShaderType(line, shaderFile, rootPath);
 		std::string shaderSource = Utilities::BinaryContainer::ReadCompleteFile(shaderFile.data());
-		shaderSource.pop_back();
-		shaderSource += '\0';
 
 		GLuint shaderID;
-		if (!GetCompiledShader(shaderID, shaderType, shaderSource))
+		if (!GetCompiledShader(shaderID, shaderType, rootPath, shaderSource))
 		{
 			glDeleteProgram(programID);
 			Utilities::Debug::LogGLError(glGetError());
@@ -59,13 +58,15 @@ ShaderData *ShaderLoader::LoadContent(const std::string &file)
 	return pMat;
 }
 
-bool ShaderLoader::GetCompiledShader(unsigned int &shaderID, unsigned int shader_type, const std::string & file)
+bool ShaderLoader::GetCompiledShader(unsigned int &shaderID, unsigned int shader_type, const std::string& path, std::string &source)
 {
+	PreProcessShader(path, source);
+
 	shaderID = glCreateShader(shader_type);
 	Utilities::Debug::LogGLError(glGetError());
 
-	const char *path = file.c_str();
-	glShaderSource(shaderID, 1, &path, nullptr);
+	const char *sourceCode = source.c_str();
+	glShaderSource(shaderID, 1, &sourceCode, nullptr);
 	Utilities::Debug::LogGLError(glGetError());
 	glCompileShader(shaderID);
 	Utilities::Debug::LogGLError(glGetError());
@@ -84,7 +85,7 @@ bool ShaderLoader::GetCompiledShader(unsigned int &shaderID, unsigned int shader
 		glGetShaderInfoLog(shaderID, length, &length, strInfoLog);
 		Utilities::Debug::LogGLError(glGetError());
 
-		std::string errorMessage = "Error compiling shader " + file + "\n";
+		std::string errorMessage = "Error compiling shader " + source + "\n";
 		errorMessage += std::string(strInfoLog);
 		Utilities::Debug::LogError(errorMessage);
 
@@ -95,7 +96,48 @@ bool ShaderLoader::GetCompiledShader(unsigned int &shaderID, unsigned int shader
 	return true;
 }
 
-GLuint ShaderLoader::GetShaderType(const std::string& line, std::string& path)
+bool ShaderLoader::PreProcessShader(const std::string& path, std::string& source)
+{
+	std::istringstream stream(source);
+	std::string line;
+
+	source = "";
+
+	while (!stream.eof())
+	{
+		getline(stream, line);
+		if (line[0] == '#')
+		{
+			size_t space = line.find(' ');
+			std::string keyword = line.substr(1, space - 1);
+			if (keyword == "include")
+			{
+				std::string toincludeFile = line.substr(space + 1);
+				size_t startPos = toincludeFile.find('\"');
+				size_t endPos = toincludeFile.rfind('\"');
+				if (startPos == string::npos || endPos == string::npos) return false;
+				toincludeFile = toincludeFile.substr(startPos + 1, endPos - 1);
+				std::string toincludeFilePath = path + "/" + toincludeFile;
+				std::string shaderSource = Utilities::BinaryContainer::ReadCompleteFile(toincludeFilePath.data());
+				if (shaderSource == "")
+				{
+					return false;
+				}
+				if (!PreProcessShader(path, shaderSource)) return false;
+				shaderSource.pop_back();
+				shaderSource.pop_back();
+				source += shaderSource + '\n';
+				continue;
+			}
+		}
+		source += line + '\n';
+	}
+	source.pop_back();
+	source += '\0';
+	return true;
+}
+
+GLuint ShaderLoader::GetShaderType(const std::string& line, std::string& path, std::string &rootPath)
 {
 	int seperatorPos = line.find(":");
 	std::string typeString = line.substr(0, seperatorPos);
@@ -104,7 +146,8 @@ GLuint ShaderLoader::GetShaderType(const std::string& line, std::string& path)
 	size_t backwardSlashPos = path.rfind('\\');
 	size_t slashPos = forwardSlashPos;
 	if (backwardSlashPos != string::npos && backwardSlashPos > forwardSlashPos) slashPos = backwardSlashPos;
-	path = path.substr(0, slashPos + 1) + file;
+	rootPath = path.substr(0, slashPos);
+	path = rootPath + '/' + file;
 
 	if (typeString == "vs") return GL_VERTEX_SHADER;
 	if (typeString == "fs") return GL_FRAGMENT_SHADER;

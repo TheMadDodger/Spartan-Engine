@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridTestScene.h" />
+    <ClInclude Include="PlanetMaterial.h" />
     <ClInclude Include="RenderTestScene.h" />
     <ClInclude Include="Scenes\GUIDTestScene.h" />
     <ClInclude Include="Scenes\BehaviourTreeTestScene.h" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridTestScene.cpp" />
+    <ClCompile Include="PlanetMaterial.cpp" />
     <ClCompile Include="RenderTestScene.cpp" />
     <ClCompile Include="Scenes\GUIDTestScene.cpp" />
     <ClCompile Include="Scenes\BehaviourTreeTestScene.cpp" />

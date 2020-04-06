@@ -78,7 +78,7 @@ bool BaseGame::RootInitialize()
 	// Initialize Content Manager
 	ContentManager::GetInstance()->Initialize();
 
-	m_GameContext.pRenderer->CreateScreen();
+	m_GameContext.pRenderer->CreateScreenAndMaterials();
 
 	// Initialize SDL_ttf
 	if (TTF_Init() < 0)

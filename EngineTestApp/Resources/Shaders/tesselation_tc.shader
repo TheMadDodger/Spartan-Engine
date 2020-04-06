@@ -1,10 +1,15 @@
-#version 400
+#version 450
 
 layout(vertices = 3) out;
 in vec3 vPosition[];
 out vec3 tcPosition[];
-uniform float TessLevelInner = 1;
-uniform float TessLevelOuter = 1;
+
+uniform vec3 CameraPosition;
+uniform mat4 WorldMatrix;
+
+const float MaxDistance = 256;
+const float MaxTessLevel = 20;
+const float Intensity = 5;
 
 #define ID gl_InvocationID
 
@@ -13,9 +18,18 @@ void main()
     tcPosition[ID] = vPosition[ID];
     if (ID == 0)
     {
-        gl_TessLevelInner[0] = TessLevelInner;
-        gl_TessLevelOuter[0] = TessLevelOuter;
-        gl_TessLevelOuter[1] = TessLevelOuter;
-        gl_TessLevelOuter[2] = TessLevelOuter;
+        vec3 worldPosition = (WorldMatrix * vec4(vPosition[0], 1.0)).xyz;
+        float dst = distance(CameraPosition, worldPosition);
+        float factor = dst / MaxDistance;
+
+        factor = clamp(factor, 0.0, 1.0);
+        factor = 1.0 - factor;
+        float tessLevel = MaxTessLevel * pow(factor, Intensity);
+        tessLevel = clamp(tessLevel, 1.0, MaxTessLevel);
+
+        gl_TessLevelInner[0] = tessLevel;
+        gl_TessLevelOuter[0] = tessLevel;
+        gl_TessLevelOuter[1] = tessLevel;
+        gl_TessLevelOuter[2] = tessLevel;
     }
 }

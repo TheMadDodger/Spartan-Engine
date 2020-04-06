@@ -13,6 +13,7 @@ public:
 	const Matrix4X4 &GetTransformMatrix();
 	const Matrix4X4 &GetLocalTransformMatrix();
 	const Matrix4X4 &GetWorldMatrix();
+	Matrix3X3 GetRotationMatrix();
 	const Vector3 &GetWorldPosition();
 
 	void Translate(const Vector3 &position, bool updateTransform = false);

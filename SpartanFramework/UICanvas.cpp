@@ -41,6 +41,7 @@ void UICanvas::SetRenderMode(const CanvasRenderMode& renderMode)
 const Matrix4X4& UICanvas::GetProjectionMatrix()
 {
 	// TODO: insert return statement here
+	return m_ProjectionMatrix;
 }
 
 const CanvasRenderMode& UICanvas::GetRenderMode()
@@ -71,7 +72,7 @@ void UICanvas::PostDraw(const GameContext& gameContext)
 {
 	m_pRenderTexture->StopUse();
 	m_pCanvasRenderer->Use();
-	m_pCanvasRenderer->SetMatrix("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
+	m_pCanvasRenderer->SetMatrix4("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
 	m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
 	DrawCanvasMesh();
 	Material::Reset();

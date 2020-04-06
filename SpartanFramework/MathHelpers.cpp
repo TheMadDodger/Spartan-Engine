@@ -243,6 +243,13 @@ Vector3 Math::Vector3::Lerp(const Vector3& a, const Vector3& b, float t)
 	return result;
 }
 
+Math::Matrix3X3::Matrix3X3(const Matrix4X4& mat4) : Matrix3X3(mat4.m[0][0], mat4.m[0][1], mat4.m[0][2],
+															  mat4.m[1][0], mat4.m[1][1], mat4.m[1][2],
+															  mat4.m[2][0], mat4.m[2][1], mat4.m[2][2])
+{
+
+}
+
 Matrix3X3 Matrix3X3::operator*(const Matrix3X3 & other)
 {
 	auto result = CreateIdentityMatrix();
