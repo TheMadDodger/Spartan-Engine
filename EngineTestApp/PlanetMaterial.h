@@ -23,6 +23,8 @@ struct NoiseLayer
     float Weight;
 };
 
+class Gradient;
+
 class PlanetMaterial : public Material
 {
 public:
@@ -47,5 +49,6 @@ private:
     NoiseLayer m_NoiseLayers[MAXNOISELAYERS];
     int m_NumLayers;
     GLuint m_UniformNoiseBuffer;
+    Gradient* m_pGradient;
 };
 

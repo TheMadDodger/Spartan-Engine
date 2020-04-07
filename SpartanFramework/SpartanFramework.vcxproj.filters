@@ -266,6 +266,9 @@
     <ClInclude Include="UIRenderMaterial.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Gradient.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -445,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="UIRenderMaterial.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Gradient.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

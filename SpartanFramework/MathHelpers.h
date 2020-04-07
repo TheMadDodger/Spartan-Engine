@@ -381,6 +381,11 @@ namespace Math
 		return (1 - t) * a + t * b;
 	}
 
+	inline float InverseLerp(float a, float b, float t)
+	{
+		return (t - a) / (b - a);
+	}
+
 	enum Origin
 	{
 		TopLeft,

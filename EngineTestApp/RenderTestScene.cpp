@@ -7,6 +7,7 @@
 #include <InputManager.h>
 #include <ContentManager.h>
 #include "PlanetMaterial.h"
+#include <Gradient.h>
 
 RenderTestScene::RenderTestScene() : GameScene("Render Test Scene")
 {

@@ -169,6 +169,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Gradient.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
     <ClCompile Include="FastNoise.cpp" />
+    <ClCompile Include="Gradient.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridComponent.cpp" />
     <ClCompile Include="Layers.cpp" />

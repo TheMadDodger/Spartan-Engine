@@ -12,6 +12,8 @@ uniform vec3 AmbientMaterial;
 uniform mat4 WorldViewProjection;
 uniform mat3 NormalMatrix;
 
+uniform sampler2D GradientTexture;
+
 float amplify(float d, float scale, float offset)
 {
 	d = scale * d + offset;
@@ -35,5 +37,5 @@ void main()
 	FragColor = vec4(color, 1.0);*/
 
 	float diffuse = dot(normalize(lightDirection), -gNormal);
-	FragColor = vec4(gElevation, gElevation, gElevation, 1.0);
+	FragColor = vec4(texture2D(GradientTexture, vec2(gElevation, 0.5)).xyz * diffuse, 1.0);
 }

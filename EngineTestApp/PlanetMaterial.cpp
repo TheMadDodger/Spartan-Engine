@@ -3,6 +3,7 @@
 #include "Components.h"
 #include "GameObject.h"
 #include "GameScene.h"
+#include <Gradient.h>
 
 /// Initial permutation table
 const int PlanetMaterial::Source[] =
@@ -27,12 +28,22 @@ PlanetMaterial::PlanetMaterial(ShaderData* pShader) : Material(pShader), m_Rando
 {
     Randomize(0);
     m_UniformNoiseBuffer = CreateUniformBuffer("NoiseBlock", sizeof(NoiseLayer) * MAXNOISELAYERS);
+
+    m_pGradient = new Gradient(512);
+    m_pGradient->SetKey(Color(0, 0.7f, 0.7f, 0.7f), 0.0f);
+    m_pGradient->SetKey(Color::Yellow(), 5.0f);
+    m_pGradient->SetKey(Color::Green(), 15.0f);
+    m_pGradient->SetKey(Color::Green(), 20.0f);
+    m_pGradient->SetKey(Color::Gray(), 80.0f);
+    m_pGradient->SetKey(Color::White(), 100.0f);
+    m_pGradient->BuildTexture();
 }
 
 PlanetMaterial::~PlanetMaterial()
 {
     if (m_Random != nullptr) delete[] m_Random;
     m_Random = nullptr;
+    delete m_pGradient;
 }
 
 void PlanetMaterial::SetShaderVars(BaseComponent *pComponent)
@@ -50,6 +61,7 @@ void PlanetMaterial::SetShaderVars(BaseComponent *pComponent)
 	SetMatrix3("NormalMatrix", &rotationMatrix.m[0][0]);
     SetIntArray("_random", RandomSize, m_Random);
     SetUniformBuffer(m_UniformNoiseBuffer, m_NoiseLayers, sizeof(NoiseLayer) * MAXNOISELAYERS);
+    SetTexture("GradientTexture", m_pGradient->GetTexture());
 }
 
 void PlanetMaterial::Randomize(int seed)
