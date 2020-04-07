@@ -5,9 +5,12 @@ in vec3 gNormal;
 in vec3 gTriDistance;
 in vec3 gPatchDistance;
 in float gPrimitive;
+in float gElevation;
 uniform vec3 LightPosition;
 uniform vec3 DiffuseMaterial;
 uniform vec3 AmbientMaterial;
+uniform mat4 WorldViewProjection;
+uniform mat3 NormalMatrix;
 
 float amplify(float d, float scale, float offset)
 {
@@ -32,5 +35,5 @@ void main()
 	FragColor = vec4(color, 1.0);*/
 
 	float diffuse = dot(normalize(lightDirection), -gNormal);
-	FragColor = vec4(1.0 * diffuse, 0.0, 0.0, 1.0);
+	FragColor = vec4(gElevation, gElevation, gElevation, 1.0);
 }

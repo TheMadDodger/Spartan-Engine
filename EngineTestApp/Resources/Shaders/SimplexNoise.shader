@@ -258,4 +258,3 @@ float RigidEvaluate(vec3 p, int numLayers, float baseRoughness, float roughness,
     noiseValue = max(0.0, noiseValue - minValue);
     return noiseValue * strength;
 }
-
