@@ -92,6 +92,7 @@ Vector2 Math::Vector2::operator/(const Vector2 & other)
 float Vector2::Normalize()
 {
 	float length = Length();
+	if (length == 0.0f) return 0.0f;
 	x /= length;
 	y /= length;
 	return length;
@@ -643,8 +644,8 @@ Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Quaternion& rotation)
 Matrix4X4 Math::Matrix4X4::CreateRotationMatrix(const Vector3& forward, const Vector3& up)
 {
 	Vector3 f = forward.Normalized();
-	Vector3 r = up.Normalized();
-	Vector3 u = Cross(f, r);
+	Vector3 u = up.Normalized();
+	Vector3 r = Cross(u, f);
 
 	return CreateRotationMatrix(f, u, r);
 }
@@ -766,7 +767,7 @@ Matrix4X4 Math::Matrix4X4::Inverse() const
 
 	// Inverse each component and turn into a matrix
 	trans = trans * -1;
-	rot = rot.Conjugate();
+	//rot = rot.Conjugate();
 	scale.x = 1.0f / scale.x;
 	scale.y = 1.0f / scale.y;
 	scale.z = 1.0f / scale.z;
@@ -839,6 +840,17 @@ Math::Quaternion::Quaternion(const Matrix4X4& rotation)
 	y /= length;
 	z /= length;
 	w /= length;
+}
+
+Quaternion::Quaternion(Vector3 axis, float angle)
+{
+	float sinHalfAngle = sin(angle / 2.0f);
+	float cosHalfAngle = cos(angle / 2.0f);
+
+	x = axis.x * sinHalfAngle;
+	y = axis.y * sinHalfAngle;
+	z = axis.z * sinHalfAngle;
+	w = cosHalfAngle;
 }
 
 float Math::Quaternion::Length()
@@ -922,6 +934,67 @@ Quaternion Math::Quaternion::Multiply(const Vector3& vec) const
 	result.y = w * vec.y + z * vec.x - x * vec.z;
 	result.z = w * vec.z + x * vec.y - y * vec.x;
 	return result;
+}
+
+Quaternion Quaternion::Lerp(Quaternion quaternion1, Quaternion quaternion2, float amount)
+{
+	float num = amount;
+	float num2 = 1.0f - num;
+	Quaternion quaternion = Quaternion();
+	float num5 = (((quaternion1.x * quaternion2.x) + (quaternion1.y * quaternion2.y)) + (quaternion1.z * quaternion2.z)) + (quaternion1.w * quaternion2.w);
+	if (num5 >= 0.0f)
+	{
+		quaternion.x = (num2 * quaternion1.x) + (num * quaternion2.x);
+		quaternion.y = (num2 * quaternion1.y) + (num * quaternion2.y);
+		quaternion.z = (num2 * quaternion1.z) + (num * quaternion2.z);
+		quaternion.w = (num2 * quaternion1.w) + (num * quaternion2.w);
+	}
+	else
+	{
+		quaternion.x = (num2 * quaternion1.x) - (num * quaternion2.x);
+		quaternion.y = (num2 * quaternion1.y) - (num * quaternion2.y);
+		quaternion.z = (num2 * quaternion1.z) - (num * quaternion2.z);
+		quaternion.w = (num2 * quaternion1.w) - (num * quaternion2.w);
+	}
+	float num4 = (((quaternion.x * quaternion.x) + (quaternion.y * quaternion.y)) + (quaternion.z * quaternion.z)) + (quaternion.w * quaternion.w);
+	float num3 = 1.0f / sqrt(num4);
+	quaternion.x *= num3;
+	quaternion.y *= num3;
+	quaternion.z *= num3;
+	quaternion.w *= num3;
+	return quaternion;
+}
+
+Quaternion Quaternion::Slerp(Quaternion quaternion1, Quaternion quaternion2, float amount)
+{
+	float num2;
+	float num3;
+	Quaternion quaternion;
+	float num = amount;
+	float num4 = (((quaternion1.x * quaternion2.x) + (quaternion1.y * quaternion2.y)) + (quaternion1.z * quaternion2.z)) + (quaternion1.w * quaternion2.w);
+	bool flag = false;
+	if (num4 < 0.0f)
+	{
+		flag = true;
+		num4 = -num4;
+	}
+	if (num4 > 0.999999f)
+	{
+		num3 = 1.0f - num;
+		num2 = flag ? -num : num;
+	}
+	else
+	{
+		float num5 = acos(num4);
+		float num6 = (1.0 / sin(num5));
+		num3 = (sin((1.0f - num) * num5)) * num6;
+		num2 = flag ? (sin(num * num5)) * num6 : ((sin(num * num5)) * num6);
+	}
+	quaternion.x = (num3 * quaternion1.x) + (num2 * quaternion2.x);
+	quaternion.y = (num3 * quaternion1.y) + (num2 * quaternion2.y);
+	quaternion.z = (num3 * quaternion1.z) + (num2 * quaternion2.z);
+	quaternion.w = (num3 * quaternion1.w) + (num2 * quaternion2.w);
+	return quaternion;
 }
 
 Vector3 Math::Quaternion::GetForward() const

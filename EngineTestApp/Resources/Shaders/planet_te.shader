@@ -58,29 +58,33 @@ float LayeredEvaluate(vec3 p)
 
     float totalStrength = CalculateTotalStrength();
 
+    float unscaledElevation = 0.0;
+    float scaledElevation = 0.0;
+
     float noiseValue = 0.0;
     float strengthPercentage = 0.0;
     if (NumNoiseLayers > 0)
     {
-        firstLayerValue = Evaluate(p, 0);
-        noiseValue = firstLayerValue;
-        strengthPercentage = _NoiseData.NoiseLayers[0].Strength / totalStrength;
-        elevationAverage = noiseValue;
+        unscaledElevation = Evaluate(p, 0);
+        scaledElevation = max(0.0, unscaledElevation);
+        noiseValue = scaledElevation;
+        elevationAverage = unscaledElevation;
+        firstLayerValue = noiseValue;
     }
 
     for (int i = 1; i < NumNoiseLayers; i++)
     {
         float mask = (_NoiseData.NoiseLayers[i].UseFirstLayerAsMask == 1) ? firstLayerValue : 1.0;
-        float elevation = Evaluate(p, i) * mask;
-        strengthPercentage = _NoiseData.NoiseLayers[i].Strength / totalStrength * mask;
-        elevationAverage += elevation;
+        unscaledElevation = Evaluate(p, 0);
+        scaledElevation = max(0.0, unscaledElevation);
+        elevationAverage += unscaledElevation;
 
-        noiseValue += elevation;
+        noiseValue += scaledElevation;
     }
 
     elevationAverage /= totalStrength;
 
-    teElevation = clamp(elevationAverage * 115.0, 0.0, 1.0);
+    teElevation = clamp(elevationAverage * 115.0, -0.99, 0.99);
 
     return noiseValue;
 }

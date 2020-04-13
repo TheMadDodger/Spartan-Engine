@@ -106,12 +106,12 @@ namespace Math
 
 		// Static methods
 		static Vector3 Zero() { return Vector3(); }
-		static Vector3 Forward() { return Vector3(1, 0, 0); }
-		static Vector3 Back() { return Vector3(-1, 0, 0); }
-		static Vector3 Right() { return Vector3(0, 1, 0); }
-		static Vector3 Left() { return Vector3(0, -1, 0); }
-		static Vector3 Up() { return Vector3(0, 0, 1); }
-		static Vector3 Down() { return Vector3(0, 0, -1); }
+		static Vector3 Forward() { return Vector3(0, 0, 1); }
+		static Vector3 Back() { return Vector3(0, 0, -1); }
+		static Vector3 Right() { return Vector3(1, 0, 0); }
+		static Vector3 Left() { return Vector3(-1, 0, 0); }
+		static Vector3 Up() { return Vector3(0, 1, 0); }
+		static Vector3 Down() { return Vector3(0, -1, 0); }
 	};
 
 	struct Vector4
@@ -153,6 +153,9 @@ namespace Math
 		Quaternion();
 		Quaternion(float x, float y, float z, float w);
 		Quaternion(const Matrix4X4& rotation);
+		Quaternion(Vector3 axis, float angle);
+
+
 		float Length();
 		float Normalize();
 		Quaternion Normalized() const;
@@ -164,6 +167,8 @@ namespace Math
 		Quaternion operator*(float f);
 		Quaternion Multiply(const Quaternion& other) const;
 		Quaternion Multiply(const Vector3& vec) const;
+		static Quaternion Lerp(Quaternion quaternion1, Quaternion quaternion2, float amount);
+		static Quaternion Slerp(Quaternion quaternion1, Quaternion quaternion2, float amount);
 
 		Vector3 GetForward() const;
 		Vector3 GetBack() const;
@@ -453,7 +458,7 @@ namespace Math
 	{
 		Vector3 crossProduct = Vector3::Zero();
 		crossProduct.x = a.y * b.z - a.z * b.y;
-		crossProduct.y = a.z * b.x - a.x - b.z;
+		crossProduct.y = a.z * b.x - a.x * b.z;
 		crossProduct.z = a.x * b.y - a.y * b.x;
 		return crossProduct;
 	}

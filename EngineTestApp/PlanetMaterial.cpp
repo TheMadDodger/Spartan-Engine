@@ -29,13 +29,21 @@ PlanetMaterial::PlanetMaterial(ShaderData* pShader) : Material(pShader), m_Rando
     Randomize(0);
     m_UniformNoiseBuffer = CreateUniformBuffer("NoiseBlock", sizeof(NoiseLayer) * MAXNOISELAYERS);
 
-    m_pGradient = new Gradient(512);
-    m_pGradient->SetKey(Color(0, 0.7f, 0.7f, 0.7f), 0.0f);
-    m_pGradient->SetKey(Color::Yellow(), 5.0f);
+    m_pGradient = new Gradient(512, 2);
+    m_pGradient->SetKey(Color(242.0f / 256.0f, 209.0f / 256.0f, 107.0f / 256.0f, 1.0f), 0.0f);
     m_pGradient->SetKey(Color::Green(), 15.0f);
-    m_pGradient->SetKey(Color::Green(), 20.0f);
-    m_pGradient->SetKey(Color::Gray(), 80.0f);
+    m_pGradient->SetKey(Color(116.0f / 256.0f, 102.0f / 256.0f, 59.0f / 256.0f, 1.0f), 40.0f);
+    m_pGradient->SetKey(Color::Gray(), 90.0f);
     m_pGradient->SetKey(Color::White(), 100.0f);
+
+
+    //(0.3f, 0.25f, 0.7f, 1.0f)
+    //(0.0f, 0.8f, 0.82f, 1.0f)
+    m_pGradient->SetKey(Color::Cyan(), 0.0f, 1);
+    m_pGradient->SetKey(Color(0.13f, 0.36f, 0.63f, 1.0f), 50.f, 1);
+    m_pGradient->SetKey(Color(0.13f, 0.36f, 0.63f, 1.0f), 100.f, 1);
+    //m_pGradient->SetKey(Color(0.3f, 0.25f, 0.7f, 1.0f), 50.f, 1);
+    //m_pGradient->SetKey(Color(0.2f, 0.2f, 0.6f, 1.0f), 100.0f, 1);
     m_pGradient->BuildTexture();
 }
 

@@ -17,6 +17,8 @@ void main()
 {
     vec3 A = gl_in[2].gl_Position.xyz - gl_in[0].gl_Position.xyz;
     vec3 B = gl_in[1].gl_Position.xyz - gl_in[0].gl_Position.xyz;
+    //vec3 A = tePosition[2] - tePosition[0];
+    //vec3 B = tePosition[1] - tePosition[0];
     gNormal = NormalMatrix * normalize(cross(A, B));
 
     gPatchDistance = tePatchDistance[0];

@@ -50,7 +50,7 @@ public:
 	const Vector2 &GetMouseScreenPosition() { return m_MousePosition; };
 	// This returns the mouse position relative to the world
 	// It needs a camera matrix to transform the mouse coordiantes
-	const Vector2 GetMouseWorldPosition(Matrix3X3 &cameraMatrix);
+	const Vector3 GetMouseWorldPosition(Matrix4X4 &cameraMatrix);
 	const Vector2 &GetMouseWheelMovement() { return m_LastFrameWheelData; }
 
 	Vector2 GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick);

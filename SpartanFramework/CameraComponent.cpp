@@ -66,8 +66,7 @@ void CameraComponent::Initialize(const GameContext &gameContext)
 void CameraComponent::Update(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	GetGameObject()->GetTransform()->BuildTransform();
-	m_CameraMatrix = GetGameObject()->GetTransform()->GetTransformMatrix();
+	m_CameraMatrix = GetGameObject()->GetTransform()->GetWorldMatrix();
 
 	auto window = BaseGame::GetGame()->GetGameSettings().Window;
 	auto view = Vector3((float)window.Width, (float)window.Height, 1.0f);

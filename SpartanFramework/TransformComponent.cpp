@@ -12,15 +12,13 @@ TransformComponent::~TransformComponent()
 {
 }
 
-void TransformComponent::Initialize(const GameContext &gameContext)
+void TransformComponent::Initialize(const GameContext&)
 {
-	UNREFERENCED_PARAMETER(gameContext);
+	UpdateTransform();
 }
 
-void TransformComponent::Update(const GameContext &gameContext)
+void TransformComponent::Update(const GameContext&)
 {
-	UNREFERENCED_PARAMETER(gameContext);
-
 	UpdateTransform();
 }
 
@@ -47,12 +45,12 @@ void TransformComponent::UpdateTransform()
 	if (pParent)// && pUI == nullptr)
 	{
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
-		m_WorldTansformMatrix = parentWorldTransformMatrix * m_TansformMatrix;
+		m_WorldTansformMatrix = m_TansformMatrix * parentWorldTransformMatrix;
 
 		m_WorldPosition = m_WorldTansformMatrix.ExtraxtTranslation();
 
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
-		m_TansformMatrix = parentTransformMatrix * m_TansformMatrix;
+		m_TansformMatrix = m_TansformMatrix * parentTransformMatrix;
 
 		// We don't need to apply the camera transform again
 		// That was already applied to our parent

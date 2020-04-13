@@ -14,18 +14,18 @@ struct GradientKey
 class Gradient : public SEObject
 {
 public:
-	Gradient(size_t resolution);
+	Gradient(size_t resolution, size_t layers = 1);
 	virtual ~Gradient();
 
 	void BuildTexture();
 	TextureData* GetTexture() const;
 
-	void SetKey(const Math::Color& color, float percentage);
-	void RemoveKey(float percentage);
-	void MoveKey(float fromPercentage, float toPercentage);
+	void SetKey(const Math::Color& color, float percentage, size_t layer = 0);
+	void RemoveKey(float percentage, size_t layer = 1);
+	void MoveKey(float fromPercentage, float toPercentage, size_t layer = 0);
 	void ClearKeys();
 
-	Color GetColor(float percentage);
+	Color GetColor(float percentage, size_t layer = 0);
 
 private:
 	float* GenerateGradientData();
@@ -34,7 +34,8 @@ private:
 
 private:
 	size_t m_Resolution;
+	size_t m_Layers;
 	TextureData* m_pTexture;
-	std::vector<GradientKey> m_GradientKeys;
+	std::vector<std::vector<GradientKey>> m_GradientKeys;
 };
 

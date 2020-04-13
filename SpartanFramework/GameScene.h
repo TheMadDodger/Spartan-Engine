@@ -43,13 +43,15 @@ public:
 		if (pParent != nullptr)
 		{
 			pParent->AddChild(pObject);
-			return nullptr;
+			return pT;
 		}
 
 		AddChild(pObject);
 		UpdateLayers(pObject, -1, pObject->GetLayer().LayerID);
 		return pT;
 	}
+
+	GameObject* Instantiate(GameObject* pObject, GameObject* pParent = nullptr);
 
 	void SetEnabled(bool enabled);
 	

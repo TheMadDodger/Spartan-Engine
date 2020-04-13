@@ -37,5 +37,5 @@ void main()
 	FragColor = vec4(color, 1.0);*/
 
 	float diffuse = dot(normalize(lightDirection), -gNormal);
-	FragColor = vec4(texture2D(GradientTexture, vec2(gElevation, 0.5)).xyz * diffuse, 1.0);
+	FragColor = vec4(texture2D(GradientTexture, vec2(abs(gElevation), gElevation <= 0.0 ? 0.7 : 0.0)).xyz * diffuse, 1.0);
 }

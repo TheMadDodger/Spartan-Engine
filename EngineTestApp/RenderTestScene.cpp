@@ -19,7 +19,7 @@ RenderTestScene::~RenderTestScene()
 
 void RenderTestScene::Initialize(const GameContext& gameContext)
 {
-	size_t id = MaterialManager::CreateMaterial<PlanetMaterial>("./Resources/Shaders/tesselation.fx");
+	size_t id = MaterialManager::CreateMaterial<PlanetMaterial>("./Resources/Shaders/planet.fx");
 
 	m_pObject = Instantiate<GameObject>();
 	MeshRenderComponent *pMeshRenderer = m_pObject->CreateRuntimeComponent<MeshRenderComponent>();

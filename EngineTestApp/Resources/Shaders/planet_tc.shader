@@ -7,9 +7,9 @@ out vec3 tcPosition[];
 uniform vec3 CameraPosition;
 uniform mat4 WorldMatrix;
 
-const float MaxDistance = 256;
-const float MaxTessLevel = 20;
-const float Intensity = 5;
+const float MaxDistance = 1024;
+const float MaxTessLevel = 10;
+const float Intensity = 20;
 
 #define ID gl_InvocationID
 

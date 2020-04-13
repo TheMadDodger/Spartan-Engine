@@ -88,6 +88,20 @@ void GameScene::Destroy(GameObject *pGameObject)
 	pGameObject = nullptr;
 }
 
+GameObject* GameScene::Instantiate(GameObject* pObject, GameObject* pParent)
+{
+	pObject->m_pScene = this;
+	if (pParent != nullptr)
+	{
+		pParent->AddChild(pObject);
+		return nullptr;
+	}
+
+	AddChild(pObject);
+	UpdateLayers(pObject, -1, pObject->GetLayer().LayerID);
+	return pObject;
+}
+
 void GameScene::SetEnabled(bool enabled)
 {
 	m_bEnabled = enabled;
@@ -108,6 +122,8 @@ void GameScene::RootInitialize(const GameContext &gameContext)
 	m_pDefaultCamera->SetName("Main Camera");
 	m_pDefaultCamera->RootInitialize(gameContext);
 	AddChild(m_pDefaultCamera);
+
+	m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f, 0.1f, 999999.0f);
 	m_pDefaultCamera->GetCameraComponent()->SetAsActive();
 
 	// Create the physics world for this scene

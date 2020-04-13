@@ -54,11 +54,18 @@ void InputManager::ReplaceInputAction(const string & actionName, const InputActi
 	*it = inputAction;
 }
 
-const Vector2 InputManager::GetMouseWorldPosition(Matrix3X3 &cameraMatrix)
+//const Vector2 InputManager::GetMouseWorldPosition(Matrix3X3& cameraMatrix)
+//{
+//	Vector3 transVec = Vector3(m_MousePosition.x - BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, m_MousePosition.y - BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f, 1.0f);
+//	auto transPos = cameraMatrix * transVec;
+//	return Vector2(transPos.x, transPos.y);
+//}
+
+const Vector3 InputManager::GetMouseWorldPosition(Matrix4X4& cameraMatrix)
 {
-	Vector3 transVec = Vector3(m_MousePosition.x - BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, m_MousePosition.y - BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f, 1.0f);
+	Vector4 transVec = Vector4(m_MousePosition.x - BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, m_MousePosition.y - BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f, 0.0f, 1.0f);
 	auto transPos = cameraMatrix * transVec;
-	return Vector2(transPos.x, transPos.y);
+	return Vector3(transPos.x, transPos.y, transPos.z);
 }
 
 Vector2 InputManager::GetControllerJoystickPosition(DWORD controllerID, const JoystickType &stick)
