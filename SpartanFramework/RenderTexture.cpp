@@ -83,6 +83,7 @@ void RenderTexture::StopUse()
 	{
 		RenderTexture* pEnd = m_pRenderTextureUsedList.back();
 		pEnd->Bind();
+		m_pCurrentlyInUse = pEnd;
 		return;
 	}
 	UseDefaultRenderTexture();

@@ -1,0 +1,2 @@
+vs:CanvasRenderer_vs.shader
+fs:CanvasRenderer_fs.shader

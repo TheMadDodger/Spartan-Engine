@@ -65,7 +65,7 @@ void UICanvas::Draw(const GameContext& gameContext)
 {
 	if (!IsDirty()) return;
 	m_pRenderTexture->Use();
-	gameContext.pRenderer->ClearBackground();
+	gameContext.pRenderer->ClearBackground(true);
 }
 
 void UICanvas::PostDraw(const GameContext& gameContext)
