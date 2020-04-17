@@ -54,7 +54,7 @@ void GridTestScene::PostInitialize(const GameContext & gameContext)
 
 void GridTestScene::Update(const GameContext &gameContext)
 {
-	if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
+	/*if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
 	{
 		auto worldClick = gameContext.pInput->GetMouseWorldPosition((Matrix3X3&)GetActiveCamera()->GetCameraMatrix());
 		m_pStartNode = m_pGrid->GetGrid()->GetNodeAtWorldPosition(worldClick);
@@ -72,7 +72,7 @@ void GridTestScene::Update(const GameContext &gameContext)
 	{
 		if (m_pStartNode == nullptr || m_pEndNode == nullptr) return;
 		m_pAStarPathFinding->FindPath(m_pStartNode, m_pEndNode);
-	}
+	}*/
 }
 
 void GridTestScene::Draw(const GameContext &gameContext)

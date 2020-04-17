@@ -132,6 +132,8 @@ bool ShaderLoader::PreProcessShader(const std::string& path, std::string& source
 		}
 		source += line + '\n';
 	}
+
+	source.pop_back();
 	source.pop_back();
 	source += '\0';
 	return true;

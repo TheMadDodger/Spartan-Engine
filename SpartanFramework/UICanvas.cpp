@@ -31,6 +31,9 @@ void UICanvas::SetSize(int width, int height)
 		DestroyGLData();
 		CreateCanvasQuad();
 	}
+
+	Vector3 canvasSize = Vector3((float)m_Dimensions.x, (float)m_Dimensions.y, 2.0f);
+	m_UIProjectionMatrix = Matrix4X4::CreateScalingMatrix(canvasSize / 2.0f).Inverse();
 }
 
 void UICanvas::SetRenderMode(const CanvasRenderMode& renderMode)
@@ -47,6 +50,11 @@ const Matrix4X4& UICanvas::GetProjectionMatrix()
 const CanvasRenderMode& UICanvas::GetRenderMode()
 {
 	return m_RenderMode;
+}
+
+const Matrix4X4& UICanvas::GetUIProjectionMatrix()
+{
+	return m_UIProjectionMatrix;
 }
 
 void UICanvas::Initialize(const GameContext& gameContext)
@@ -148,12 +156,10 @@ void UICanvas::CalculateMatrices()
 		//m_pParentCanvas->m_CanvasProjectionMatrix
 		return;
 	}
+
 	IntVector2 renderWindow = RenderTexture::GetDefaultRenderTexture()->GetDimensions();
 	Vector3 gameWindow = Vector3((float)renderWindow.x, (float)renderWindow.y, 2.0f);
-	Vector3 canvasSize = Vector3((float)m_Dimensions.x, (float)m_Dimensions.y, 2.0f);
-
 	m_CanvasMatrix = (Matrix4X4)GetTransform()->GetLocalTransformMatrix();
-
 	auto view = Vector3(gameWindow.x, gameWindow.y, 2.0f);
 	m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
 	m_CanvasProjectionMatrix = Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_CanvasMatrix * m_ProjectionMatrix.Inverse();

@@ -22,6 +22,8 @@ public:
 	const Matrix4X4& GetProjectionMatrix();
 	const CanvasRenderMode& GetRenderMode();
 
+	const Matrix4X4& GetUIProjectionMatrix();
+
 private:
 	void Initialize(const GameContext& gameContext) override;
 	void Update(const GameContext& gameContext) override;
@@ -40,6 +42,7 @@ private:
 	GLuint m_CanvasQuadVertexBufferID;
 	Matrix4X4 m_CanvasMatrix;
 	Matrix4X4 m_ProjectionMatrix;
+	Matrix4X4 m_UIProjectionMatrix;
 	Matrix4X4 m_CanvasProjectionMatrix;
 	CanvasRenderMode m_RenderMode;
 	UICanvas* m_pParentCanvas;

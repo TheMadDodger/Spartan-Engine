@@ -49,5 +49,5 @@ void main()
 	out_TexCoord = vec2(1.0, 0.0);
 	EmitVertex();
 
-	EmitPrimitive();
+	EndPrimitive();
 }
