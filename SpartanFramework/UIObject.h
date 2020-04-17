@@ -1,9 +1,16 @@
 #pragma once
 #include "GameObject.h"
+
+class UICanvas;
+
 class UIObject : public GameObject
 {
-public:
-	void Initialize(const GameContext& gameContext) override;
-	void Update(const GameContext& gameContext) override;
-	void Draw(const GameContext& gameContext) override;
+	UIObject();
+	~UIObject();
+
+private:
+	void OnParentUpdated(GameObject* pNewParent) override;
+
+protected:
+	UICanvas* m_pCanvas;
 };

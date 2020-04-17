@@ -5,16 +5,11 @@
 #include "Components.h"
 #include "Framework.h"
 
-UIButton::UIButton(TextureData *pIdleTexture, TextureData *pMouseOverTexture, TextureData *pMouseClicktexture, 
-	TextureData *pSelectedTexture) :
-	m_pIdleTexture(pIdleTexture), m_pMouseOverTexture(pMouseOverTexture), m_pClickTexture(pMouseClicktexture),
-	m_pCurrentTexture(pIdleTexture), m_Size(m_pIdleTexture->GetDimensions()), m_pSelectedTexture(pSelectedTexture)
-{
-	SetTag("UIButton");
-}
-
 UIButton::UIButton() : m_Size(10.f, 10.f)
 {
+	m_pImageRenderer = CreateDefaultComponent<ImageRenderComponent>();
+
+	SetName("UIButton");
 }
 
 UIButton::~UIButton()
@@ -87,8 +82,6 @@ void UIButton::OnMouseClick()
 void UIButton::Initialize(const GameContext &)
 {
 	m_WasClickedThisFrame = false;
-
-	//AddComponent(new ImageRenderComponent(m_pCurrentTexture));
 }
 
 void UIButton::Update(const GameContext &gameContext)
@@ -99,7 +92,7 @@ void UIButton::Update(const GameContext &gameContext)
 		m_MouseOver = false;
 		m_WasClickedThisFrame = false;
 		m_pCurrentTexture = m_pIdleTexture;
-		GetComponent<ImageRenderComponent>()->SetTexture(m_pCurrentTexture);
+		m_pImageRenderer->SetTexture(m_pCurrentTexture);
 		return;
 	}
 
@@ -164,7 +157,7 @@ void UIButton::Update(const GameContext &gameContext)
 		m_pCurrentTexture = m_pIdleTexture;
 	}
 
-	GetComponent<ImageRenderComponent>()->SetTexture(m_pCurrentTexture);
+	m_pImageRenderer->SetTexture(m_pCurrentTexture);
 }
 
 void UIButton::Draw(const GameContext &)

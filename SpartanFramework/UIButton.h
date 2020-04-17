@@ -3,11 +3,11 @@
 #include "Event.h"
 
 class TextureData;
+class ImageRenderComponent;
 
 class UIButton : public GameObject
 {
 public:
-	UIButton(TextureData *pIdleTexture, TextureData *pMouseOverTexture, TextureData *pMouseClicktexture, TextureData *pSelectedTexture);
 	UIButton();
 	virtual ~UIButton();
 
@@ -62,5 +62,6 @@ private:
 
 	TextureData *m_pCurrentTexture = nullptr;
 	Vector2 m_Size;
+	ImageRenderComponent* m_pImageRenderer = nullptr;
 };
 

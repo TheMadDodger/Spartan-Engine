@@ -1,14 +1,28 @@
 #include "stdafx.h"
 #include "UIObject.h"
+#include "UICanvas.h"
+#include "Layers.h"
 
-void UIObject::Initialize(const GameContext& gameContext)
+UIObject::UIObject() : m_pCanvas(nullptr), GameObject("UIObject")
 {
 }
 
-void UIObject::Update(const GameContext& gameContext)
+UIObject::~UIObject()
 {
 }
 
-void UIObject::Draw(const GameContext& gameContext)
+void UIObject::OnParentUpdated(GameObject* pNewParent)
 {
+	GameObject* pParent = GetParent();
+	while (pParent != nullptr)
+	{
+		UICanvas *pCanvas = dynamic_cast<UICanvas*>(pParent);
+		if (pCanvas != nullptr)
+		{
+			m_pCanvas = pCanvas;
+			return;
+		}
+	}
+	m_pCanvas = nullptr;
+	Utilities::Debug::LogWarning("UIObject only works when it is parrented to a UICanvas!\nThis object will not render properly!");
 }

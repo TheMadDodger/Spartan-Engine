@@ -104,6 +104,7 @@ protected:
 	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+	virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
 
 	virtual void OnDestroy() {};
 	virtual void OnCreated() {};

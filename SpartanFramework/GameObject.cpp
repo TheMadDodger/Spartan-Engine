@@ -40,6 +40,7 @@ void GameObject::AddChild(GameObject *pChild)
 	m_pChildren.push_back(pChild);
 	pChild->m_pParentObject = this;
 	pChild->m_pScene = m_pScene;
+	pChild->OnParentUpdated(this);
 }
 
 void GameObject::RemoveChild(GameObject *pChild)
@@ -49,6 +50,7 @@ void GameObject::RemoveChild(GameObject *pChild)
 
 	m_pChildren.erase(it);
 	pChild->m_pParentObject = nullptr;
+	pChild->OnParentUpdated(nullptr);
 }
 
 void GameObject::SetDirty(bool dirty)
