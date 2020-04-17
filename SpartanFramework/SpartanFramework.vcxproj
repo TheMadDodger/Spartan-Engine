@@ -207,6 +207,7 @@
     <ClInclude Include="SkinnedQuad.h" />
     <ClInclude Include="Tasks.h" />
     <ClInclude Include="UICanvas.h" />
+    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -277,6 +278,7 @@
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />
     <ClCompile Include="UICanvas.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="UIContainer.cpp" />
     <ClCompile Include="FontLoader.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />

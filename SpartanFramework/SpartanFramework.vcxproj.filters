@@ -269,6 +269,9 @@
     <ClInclude Include="Gradient.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Core Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="Gradient.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Core Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
