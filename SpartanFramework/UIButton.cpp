@@ -108,8 +108,69 @@ void UIButton::Update(const GameContext &gameContext)
 		offset = m_pCurrentTexture->GetOrigin();
 	}
 
-	if (CheckPointInRect(mousePos, { GetTransform()->GetWorldPosition().xy() - offset + Vector2(5.0f, 5.0f), bottomRight - offset - Vector2(5.0f, 5.0f) }))
+	if (m_Selected)
 	{
+		m_pCurrentTexture = m_pSelectedTexture;
+	}
+	else if (m_MouseClicked)
+	{
+		m_pCurrentTexture = m_pClickTexture;
+	}
+	else if (m_MouseOver)
+	{
+		m_pCurrentTexture = m_pMouseOverTexture;
+
+		if (m_WasMouseOverLastFrame)
+		{
+			OnMouseLeave();
+			m_WasMouseOverLastFrame = false;
+		}
+	}
+	else
+	{
+		m_pCurrentTexture = m_pIdleTexture;
+
+		if (!m_WasMouseOverLastFrame)
+		{
+			OnMouseOver();
+			m_WasMouseOverLastFrame = true;
+		}
+	}
+
+	m_pImageRenderer->SetTexture(m_pCurrentTexture);
+
+	m_MouseOver = false;
+}
+
+void UIButton::Draw(const GameContext &)
+{
+}
+
+void UIButton::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+{
+	auto topLeft = Vector2(0.0f, 0.0f);
+	auto bottomRight = Vector2((float)m_pCurrentTexture->GetDimensions().x, (float)m_pCurrentTexture->GetDimensions().y);
+
+	Matrix4X4 matLocalInverse = GetTransform()->GetLocalTransformMatrix().Inverse();
+
+	Vector4 mousePosVec4 = Vector4(relativeMousePos.x, relativeMousePos.y, 0.0f, 1.0f);
+	Vector2 localMousePos = (matLocalInverse * mousePosVec4).xy();
+
+	//Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
+
+	if (CheckPointInRect(localMousePos, { topLeft, bottomRight }))
+	{
+		if (m_ButtonDisabled)
+		{
+			m_MouseClicked = false;
+			m_MouseOver = false;
+			m_WasClickedThisFrame = false;
+			m_pCurrentTexture = m_pIdleTexture;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
+			return;
+		}
+
+		Utilities::Debug::LogInfo("IN BUTTON!");
 		if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
 		{
 			if (!m_WasClickedThisFrame)
@@ -124,42 +185,9 @@ void UIButton::Update(const GameContext &gameContext)
 			m_WasClickedThisFrame = false;
 			m_MouseClicked = false;
 		}
-		
-		if (!m_MouseOver)
-		{
-			OnMouseOver();
-		}
+
 		m_MouseOver = true;
+		
+		//std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos); });
 	}
-	else
-	{
-		if (m_MouseOver)
-		{
-			OnMouseLeave();
-		}
-		m_MouseOver = false;
-	}
-
-	if (m_Selected)
-	{
-		m_pCurrentTexture = m_pSelectedTexture;
-	}
-	else if (m_MouseClicked)
-	{
-		m_pCurrentTexture = m_pClickTexture;
-	}
-	else if (m_MouseOver)
-	{
-		m_pCurrentTexture = m_pMouseOverTexture;
-	}
-	else
-	{
-		m_pCurrentTexture = m_pIdleTexture;
-	}
-
-	m_pImageRenderer->SetTexture(m_pCurrentTexture);
-}
-
-void UIButton::Draw(const GameContext &)
-{
 }

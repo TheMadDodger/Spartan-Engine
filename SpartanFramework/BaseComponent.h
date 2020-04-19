@@ -36,10 +36,10 @@ public:
 
 protected:
 	friend class GameObject;
-	void RootAwake();
-	void RootInitialize(const GameContext &gameContext);
-	void RootUpdate(const GameContext &gameContext);
-	void RootDraw(const GameContext &gameContext);
+	virtual void RootAwake();
+	virtual void RootInitialize(const GameContext &gameContext);
+	virtual void RootUpdate(const GameContext &gameContext);
+	virtual void RootDraw(const GameContext &gameContext);
 
 	virtual void Awake() {};
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };

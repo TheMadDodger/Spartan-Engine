@@ -105,6 +105,7 @@ protected:
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
+	virtual void UIHandleMouse(const Vector2& relativeMousePos, const GameContext&);
 
 	virtual void OnDestroy() {};
 	virtual void OnCreated() {};
@@ -135,6 +136,7 @@ private:
 private:
 	friend class LevelEditor;
 	friend class GameScene;
+	friend class UICanvas;
 	TransformComponent *m_pTransform = nullptr;
 	std::vector<BaseComponent*> m_pComponents;
 	GameScene *m_pScene = nullptr;

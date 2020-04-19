@@ -1,2 +1,102 @@
 #include "stdafx.h"
 #include "UIComponent.h"
+#include "MaterialManager.h"
+#include "UIRenderMaterial.h"
+#include "UICanvas.h"
+#include "TransformComponent.h"
+
+size_t UIComponent::m_UIVertexBufferID = 0;
+bool UIComponent::m_DoesVertexBufferExist = false;
+int UIComponent::m_InstanceCount = 0;
+
+UIComponent::UIComponent(const char* name) : BaseComponent(name), m_pUIRenderer(nullptr)
+{
+	if (!m_DoesVertexBufferExist)
+	{
+		static const GLfloat vertexData[] = {
+			0.0f, 0.0f, 0.0f,
+		};
+
+		glGenBuffers(1, &m_UIVertexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
+		glBindBuffer(GL_ARRAY_BUFFER, m_UIVertexBufferID);
+		Utilities::Debug::LogGLError(glGetError());
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+		Utilities::Debug::LogGLError(glGetError());
+
+		m_DoesVertexBufferExist = true;
+	}
+
+	++m_InstanceCount;
+}
+
+UIComponent::~UIComponent()
+{
+	--m_InstanceCount;
+
+	if (m_InstanceCount == 0)
+	{
+		glDeleteBuffers(1, &m_UIVertexBufferID);
+		m_DoesVertexBufferExist = false;
+	}
+}
+
+UIObject* UIComponent::GetGameObject()
+{
+	return static_cast<UIObject*>(BaseComponent::GetGameObject());
+}
+
+void UIComponent::RootUpdate(const GameContext& gameContext)
+{
+	if (!IsInitialized())
+	{
+		RootInitialize(gameContext);
+	}
+
+	UIObject* pObject = GetGameObject();
+	UICanvas* pCanvas = pObject->GetCanvas();
+	Matrix4X4 uiProjection = pCanvas->GetUIProjectionMatrix();
+	Matrix4X4 world = pObject->GetTransform()->GetWorldMatrix();
+	m_UIMatrix = world * uiProjection;
+
+	Update(gameContext);
+}
+
+void UIComponent::RootDraw(const GameContext& gameContext)
+{
+	// User defined Draw()
+	m_pUIRenderer = gameContext.pRenderer->GetUIRenderer();
+	m_pUIRenderer->Use();
+	m_pUIRenderer->SetWorldProjection(m_UIMatrix);
+	Draw(gameContext);
+	m_pUIRenderer->SetShaderVars(this);
+	Render();
+	Material::Reset();
+}
+
+void UIComponent::Render()
+{
+	glEnableVertexAttribArray(0);
+	Utilities::Debug::LogGLError(glGetError());
+	glBindBuffer(GL_ARRAY_BUFFER, m_UIVertexBufferID);
+	Utilities::Debug::LogGLError(glGetError());
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	Utilities::Debug::LogGLError(glGetError());
+
+	// Draw the point !
+	glDrawArrays(GL_POINTS, 0, 1); // 2*3 indices starting at 0 -> 2 triangles
+	Utilities::Debug::LogGLError(glGetError());
+
+	glDisableVertexAttribArray(0);
+	Utilities::Debug::LogGLError(glGetError());
+
+	glBindBuffer(GL_ARRAY_BUFFER, NULL);
+	Utilities::Debug::LogGLError(glGetError());
+}

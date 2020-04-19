@@ -14,6 +14,11 @@ void UIRenderMaterial::SetUITexture(TextureData* pTexture)
 	m_pTexture = pTexture;
 }
 
+void UIRenderMaterial::SetWorldProjection(const Matrix4X4& worldProjection)
+{
+    m_WorldProjection = worldProjection;
+}
+
 void UIRenderMaterial::SetAllignment(const Origin& allignment)
 {
 	m_Allignment = allignment;

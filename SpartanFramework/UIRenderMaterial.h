@@ -10,12 +10,14 @@ public:
 	virtual ~UIRenderMaterial();
 
 	void SetUITexture(TextureData* pTexture);
+	void SetWorldProjection(const Matrix4X4& worldProjection);
 	void SetAllignment(const Origin& allignment);
 
 private:
 	void SetShaderVars(BaseComponent *);
 
 private:
+	friend class UIComponent;
 	TextureData* m_pTexture;
 	Origin m_Allignment;
 	Vector4 m_CenterOffsets;

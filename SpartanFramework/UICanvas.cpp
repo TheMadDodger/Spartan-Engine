@@ -4,10 +4,11 @@
 #include "Material.h"
 #include "MaterialManager.h"
 #include "TransformComponent.h"
+#include "InputManager.h"
 
 Material* UICanvas::m_pCanvasRenderer = nullptr;
 
-UICanvas::UICanvas() : GameObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pParentCanvas(nullptr), m_pLastParrent(nullptr)
+UICanvas::UICanvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr)
 {
 	if (m_pCanvasRenderer == nullptr)
 	{
@@ -33,7 +34,7 @@ void UICanvas::SetSize(int width, int height)
 	}
 
 	Vector3 canvasSize = Vector3((float)m_Dimensions.x, (float)m_Dimensions.y, 2.0f);
-	m_UIProjectionMatrix = Matrix4X4::CreateScalingMatrix(canvasSize / 2.0f).Inverse();
+	m_UIProjectionMatrix = Matrix4X4::CreateTranslationMatrix(canvasSize / -2.0f) * Matrix4X4::CreateScalingMatrix(canvasSize / 2.0f).Inverse();
 }
 
 void UICanvas::SetRenderMode(const CanvasRenderMode& renderMode)
@@ -59,14 +60,19 @@ const Matrix4X4& UICanvas::GetUIProjectionMatrix()
 
 void UICanvas::Initialize(const GameContext& gameContext)
 {
-	m_pRenderTexture = RenderTexture::CreateRenderTexture(m_Dimensions.x, m_Dimensions.y);
+	m_pRenderTexture = RenderTexture::CreateRenderTexture(m_Dimensions.x, m_Dimensions.y, false);
 	CreateCanvasQuad();
 }
 
 void UICanvas::Update(const GameContext& gameContext)
 {
-	if (m_pLastParrent != GetParent()) FindParentCanvas();
 	CalculateMatrices();
+
+	if (m_pParentCanvas == nullptr)
+	{
+		auto mousePos = gameContext.pInput->GetMouseScreenPosition();
+		UIHandleMouse(mousePos, gameContext);
+	}
 }
 
 void UICanvas::Draw(const GameContext& gameContext)
@@ -84,6 +90,21 @@ void UICanvas::PostDraw(const GameContext& gameContext)
 	m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
 	DrawCanvasMesh();
 	Material::Reset();
+}
+
+void UICanvas::OnParentUpdated(GameObject* pNewParent)
+{
+	GameObject* pParent = GetParent();
+	while (pParent != nullptr)
+	{
+		UICanvas* pCanvas = dynamic_cast<UICanvas*>(pParent);
+		if (pCanvas != nullptr)
+		{
+			m_pParentCanvas = pCanvas;
+			return;
+		}
+	}
+	m_pParentCanvas = nullptr;
 }
 
 void UICanvas::CreateCanvasQuad()
@@ -129,26 +150,6 @@ void UICanvas::DrawCanvasMesh()
 	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 }
 
-void UICanvas::FindParentCanvas()
-{
-	m_pParentCanvas = nullptr;
-	m_pLastParrent = GetParent();
-	if (m_pLastParrent == nullptr) return;
-
-	GameObject* pParent = m_pLastParrent;
-	while (pParent != nullptr)
-	{
-		UICanvas* pParentCanvas = dynamic_cast<UICanvas*>(pParent);
-		if (pParentCanvas != nullptr)
-		{
-			m_pParentCanvas = pParentCanvas;
-			m_pParentCanvas->SetDirty();
-			break;
-		}
-		pParent = pParent->GetParent();
-	}
-}
-
 void UICanvas::CalculateMatrices()
 {
 	if (m_pParentCanvas)
@@ -162,5 +163,24 @@ void UICanvas::CalculateMatrices()
 	m_CanvasMatrix = (Matrix4X4)GetTransform()->GetLocalTransformMatrix();
 	auto view = Vector3(gameWindow.x, gameWindow.y, 2.0f);
 	m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
-	m_CanvasProjectionMatrix = Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_CanvasMatrix * m_ProjectionMatrix.Inverse();
+	m_CanvasProjectionMatrix =  m_CanvasMatrix * Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_ProjectionMatrix.Inverse();
+}
+
+void UICanvas::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+{
+	auto topLeft = Vector2(0.0f, 0.0f);
+	auto bottomRight = Vector2((float)m_Dimensions.x, (float)m_Dimensions.y);
+
+	Matrix4X4 matLocalInverse = GetTransform()->GetLocalTransformMatrix().Inverse();
+
+	Vector4 mousePosVec4 = Vector4(relativeMousePos.x, relativeMousePos.y, 0.0f, 1.0f);
+	Vector2 localMousePos = (matLocalInverse * mousePosVec4).xy();
+
+	//Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
+
+	if (CheckPointInRect(localMousePos, { topLeft, bottomRight }))
+	{
+		//Utilities::Debug::LogInfo("IN CANVAS!");
+		std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos, gameContext); });
+	}
 }

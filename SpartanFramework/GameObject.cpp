@@ -233,6 +233,17 @@ void GameObject::RootDraw(const GameContext & gameContext)
 	PostDraw(gameContext);
 }
 
+void GameObject::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+{
+	Matrix4X4 matLocalInverse = GetTransform()->GetLocalTransformMatrix().Inverse();
+
+	Vector4 mousePosVec4 = Vector4(relativeMousePos.x, relativeMousePos.y, 0.0f, 1.0f);
+	Vector2 localMousePos = (matLocalInverse * mousePosVec4).xy();
+
+	Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
+	std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos, gameContext); });
+}
+
 void GameObject::SetParent(GameObject *pParent)
 {
 	if (m_pParentObject->m_pParentObject)

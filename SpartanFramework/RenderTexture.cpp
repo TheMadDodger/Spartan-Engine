@@ -151,7 +151,7 @@ void RenderTexture::Initialize()
 	}
 
 	// Initialize the framebuffer
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GLFrameBufferID, 0);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, m_GLTextureID, 0);
 	Utilities::Debug::LogGLError(glGetError());
 
 	GLenum DrawBuffers[1] = { GL_COLOR_ATTACHMENT0 };

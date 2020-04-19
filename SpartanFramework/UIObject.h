@@ -5,12 +5,18 @@ class UICanvas;
 
 class UIObject : public GameObject
 {
-	UIObject();
+public:
+	UIObject(const char* name = "UIObject", size_t layerID = 0);
 	~UIObject();
+
+	UICanvas* GetCanvas();
+
+//protected:
+	//virtual void HandleMouse(const Vector2& relativeMousePos) override = 0;
 
 private:
 	void OnParentUpdated(GameObject* pNewParent) override;
 
 protected:
-	UICanvas* m_pCanvas;
+	UICanvas* m_pParentCanvas;
 };

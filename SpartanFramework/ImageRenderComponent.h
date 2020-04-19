@@ -1,8 +1,8 @@
 #pragma once
-#include "BaseComponent.h"
+#include "UIComponent.h"
 #include <string>
 
-class ImageRenderComponent : public BaseComponent
+class ImageRenderComponent : public UIComponent
 {
 public:
 	ImageRenderComponent();

@@ -45,6 +45,7 @@ protected:
 
 private:
 	friend class MeshRenderComponent;
+	friend class UIComponent;
 	ShaderData *m_pShader;
 	GLint m_TextureCounter;
 

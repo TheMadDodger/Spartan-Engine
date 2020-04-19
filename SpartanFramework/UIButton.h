@@ -1,11 +1,11 @@
 #pragma once
-#include "GameObject.h"
 #include "Event.h"
+#include "UIObject.h"
 
 class TextureData;
 class ImageRenderComponent;
 
-class UIButton : public GameObject
+class UIButton : public UIObject
 {
 public:
 	UIButton();
@@ -38,6 +38,7 @@ private:
 	virtual void Initialize(const GameContext &gameContext) override;
 	virtual void Update(const GameContext &gameContext) override;
 	virtual void Draw(const GameContext &gameContext) override;
+	virtual void UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext) override;
 
 protected:
 	enum ButtonState
@@ -50,6 +51,7 @@ protected:
 	bool m_WasClickedThisFrame;
 	bool m_MouseClicked;
 	bool m_MouseOver;
+	bool m_WasMouseOverLastFrame;
 	bool m_Selected;
 	bool m_ButtonDisabled = false;
 	int m_ButtonID = -1;

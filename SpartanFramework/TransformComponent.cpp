@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "GameScene.h"
 #include "Layers.h"
+#include "UICanvas.h"
 
 TransformComponent::TransformComponent() : m_TansformMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Transform")
 {
@@ -40,9 +41,8 @@ void TransformComponent::UpdateTransform()
 	// Apply parent transform if object has a parent
 	auto pParent = GetGameObject()->GetParent();
 
-	if (GetGameObject()->GetLayer().IsUILayer) m_UseCamera = false;
-
-	if (pParent)// && pUI == nullptr)
+	bool isCanvas = dynamic_cast<UICanvas*>(pParent) != nullptr;
+	if (pParent && !isCanvas)
 	{
 		auto parentWorldTransformMatrix = pParent->GetTransform()->GetWorldMatrix();
 		m_WorldTansformMatrix = m_TansformMatrix * parentWorldTransformMatrix;

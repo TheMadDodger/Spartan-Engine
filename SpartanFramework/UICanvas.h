@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "UIObject.h"
 
 class RenderTexture;
 class Material;
@@ -10,7 +10,7 @@ enum CanvasRenderMode
 	WorldSpace,
 };
 
-class UICanvas : public GameObject
+class UICanvas : public UIObject
 {
 public:
 	UICanvas();
@@ -29,11 +29,12 @@ private:
 	void Update(const GameContext& gameContext) override;
 	void Draw(const GameContext& gameContext) override;
 	void PostDraw(const GameContext& gameContext) override;
+	void OnParentUpdated(GameObject* pNewParent) override;
+	void UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext) override;
 
 	void CreateCanvasQuad();
 	void DestroyGLData();
 	void DrawCanvasMesh();
-	void FindParentCanvas();
 	void CalculateMatrices();
 
 private:
@@ -45,7 +46,6 @@ private:
 	Matrix4X4 m_UIProjectionMatrix;
 	Matrix4X4 m_CanvasProjectionMatrix;
 	CanvasRenderMode m_RenderMode;
-	UICanvas* m_pParentCanvas;
 	GameObject* m_pLastParrent;
 
 private:

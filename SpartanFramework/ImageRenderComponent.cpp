@@ -3,8 +3,9 @@
 #include "ContentManager.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "UIRenderMaterial.h"
 
-ImageRenderComponent::ImageRenderComponent() : m_AssetFile(""), BaseComponent("Image"), m_pImage(nullptr)
+ImageRenderComponent::ImageRenderComponent() : m_AssetFile(""), UIComponent("Image"), m_pImage(nullptr)
 {
 }
 
@@ -54,12 +55,15 @@ void ImageRenderComponent::Update(const GameContext &gameContext)
 void ImageRenderComponent::Draw(const GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	if (m_pImage)
+	/*if (m_pImage)
 	{
 		if (m_Color == Color::White())
 			gameContext.pRenderer->RenderTexture(m_pImage);
 		else
 			gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
-	}
+	}*/
+
+	m_pUIRenderer->SetUITexture(m_pImage);
+	m_pUIRenderer->SetAllignment(Origin::TopLeft);
 }
 
