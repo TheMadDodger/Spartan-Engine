@@ -137,9 +137,6 @@
     <ClInclude Include="TransformComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h">
-      <Filter>EnginePrefabs</Filter>
-    </ClInclude>
     <ClInclude Include="GameTime.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -272,6 +269,9 @@
     <ClInclude Include="UIComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -352,9 +352,6 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Core Components</Filter>
-    </ClCompile>
-    <ClCompile Include="UIButton.cpp">
-      <Filter>EnginePrefabs</Filter>
     </ClCompile>
     <ClCompile Include="GameTime.cpp">
       <Filter>Core</Filter>
@@ -457,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="UIComponent.cpp">
       <Filter>Core Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

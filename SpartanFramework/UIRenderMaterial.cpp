@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UIRenderMaterial.h"
 
-UIRenderMaterial::UIRenderMaterial(ShaderData* pShader) : Material(pShader), m_pTexture(nullptr), m_Allignment(Origin::Center)
+UIRenderMaterial::UIRenderMaterial(ShaderData* pShader) : Material(pShader), m_pTexture(nullptr), m_CenterOffsets()
 {
 }
 
@@ -19,41 +19,9 @@ void UIRenderMaterial::SetWorldProjection(const Matrix4X4& worldProjection)
     m_WorldProjection = worldProjection;
 }
 
-void UIRenderMaterial::SetAllignment(const Origin& allignment)
+void UIRenderMaterial::SetOffsets(const Vector4& offsets)
 {
-	m_Allignment = allignment;
-    Vector2 halfDimensions = m_pTexture->GetDimensions();
-    halfDimensions = halfDimensions / 2.0f;
-
-	switch (m_Allignment)
-	{
-    case Math::TopLeft:
-        m_CenterOffsets = Vector4(0.0f, 0.0f, halfDimensions.x * 2.0f, halfDimensions.y * 2.0f);
-        break;
-    case Math::TopMiddle:
-        m_CenterOffsets = Vector4(-halfDimensions.x, 0.0f, halfDimensions.x, halfDimensions.y * 2.0f);
-        break;
-    case Math::TopRight:
-        m_CenterOffsets = Vector4(-halfDimensions.x * 2.0f, 0.0f, 0.0f, halfDimensions.y * 2.0f);
-        break;
-    case Math::LeftCenter:
-        m_CenterOffsets = Vector4(0.0f, -halfDimensions.y, halfDimensions.x * 2.0f, halfDimensions.y);
-        break;
-    case Math::Center:
-        m_CenterOffsets = Vector4(-halfDimensions.x, -halfDimensions.y, halfDimensions.x, halfDimensions.y);
-        break;
-    case Math::RightCenter:
-        m_CenterOffsets = Vector4(halfDimensions.x * 2.0f, -halfDimensions.y, 0.0f, halfDimensions.y * 2.0f);
-        break;
-    case Math::BottomLeft:
-        break;
-    case Math::BottomMiddle:
-        break;
-    case Math::BottomRight:
-        break;
-    default:
-        break;
-	}
+    m_CenterOffsets = offsets;
 }
 
 void UIRenderMaterial::SetShaderVars(BaseComponent*)

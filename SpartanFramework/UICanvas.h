@@ -25,12 +25,13 @@ public:
 	const Matrix4X4& GetUIProjectionMatrix();
 
 private:
+	void RootDraw(const GameContext& gameContext) override;
 	void Initialize(const GameContext& gameContext) override;
 	void Update(const GameContext& gameContext) override;
 	void Draw(const GameContext& gameContext) override;
 	void PostDraw(const GameContext& gameContext) override;
 	void OnParentUpdated(GameObject* pNewParent) override;
-	void UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext) override;
+	void UIHandleMouse(const Vector2& relativeMousePos) override;
 
 	void CreateCanvasQuad();
 	void DestroyGLData();

@@ -1058,3 +1058,35 @@ Vector4 Math::Vector4::operator*(const Vector4& other)
 	result.w = w * other.w;
 	return result;
 }
+
+Vector4 Math::CalculateOffsets(const Origin& allignment, const Vector2& dimensions)
+{
+	Vector2 halfDimensions = dimensions;
+	halfDimensions = halfDimensions / 2.0f;
+
+	switch (allignment)
+	{
+	case Math::BottomLeft:
+		return Vector4(0.0f, 0.0f, dimensions.x, dimensions.y);
+	case Math::TopLeft:
+		return Vector4(0.0f, -dimensions.y, dimensions.x, 0.0f);
+	case Math::BottomRight:
+		return Vector4(-dimensions.x, 0.0f, 0.0f, dimensions.y);
+	case Math::TopRight:
+		return Vector4(-dimensions.x, -dimensions.y, 0.0f, 0.0f);
+
+	case Math::Center:
+		return Vector4(-halfDimensions.x, -halfDimensions.y, halfDimensions.x, halfDimensions.y);
+
+	case Math::RightCenter:
+		return Vector4(-dimensions.x, -halfDimensions.y, 0.0f, halfDimensions.y);
+	case Math::LeftCenter:
+		return Vector4(0.0f, -halfDimensions.y, dimensions.x, halfDimensions.y);
+	case Math::TopMiddle:
+		return Vector4(-halfDimensions.x, -dimensions.y, halfDimensions.x, 0.0f);
+	case Math::BottomMiddle:
+		return Vector4(-halfDimensions.x, 0.0f, halfDimensions.x, dimensions.y);
+	}
+
+	return Vector4();
+}

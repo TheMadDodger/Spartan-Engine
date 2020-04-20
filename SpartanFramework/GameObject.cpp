@@ -56,21 +56,9 @@ void GameObject::RemoveChild(GameObject *pChild)
 void GameObject::SetDirty(bool dirty)
 {
 	m_IsDirty = dirty;
-	for (size_t i = 0; i < m_pChildren.size(); i++)
-	{
-		m_pChildren[i]->SetDirty(dirty);
-	}
+	if (!dirty || m_pParentObject == nullptr) return;
+	m_pParentObject->SetDirty();
 }
-
-/*BaseComponent *GameObject::AddComponent(BaseComponent *pComponent)
-{
-	if (pComponent != nullptr)
-	{
-		m_pComponents.push_back(pComponent);
-		pComponent->SetGameObject(this);
-	}
-	return pComponent;
-}*/
 
 GameScene *GameObject::GetGameScene() const
 {
@@ -214,15 +202,12 @@ void GameObject::RootUpdate(const GameContext &gameContext)
 void GameObject::RootDraw(const GameContext & gameContext)
 {
 	// User defined Draw()
-	glPushMatrix();
-	m_pTransform->ApplyTransform();
 	Draw(gameContext);
 
 	for (auto pComponent : m_pComponents)
 	{
 		pComponent->RootDraw(gameContext);
 	}
-	glPopMatrix();
 
 	for (auto pChild : m_pChildren)
 	{
@@ -233,15 +218,20 @@ void GameObject::RootDraw(const GameContext & gameContext)
 	PostDraw(gameContext);
 }
 
-void GameObject::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+void GameObject::UIHandleMouse(const Vector2& relativeMousePos)
 {
 	Matrix4X4 matLocalInverse = GetTransform()->GetLocalTransformMatrix().Inverse();
 
 	Vector4 mousePosVec4 = Vector4(relativeMousePos.x, relativeMousePos.y, 0.0f, 1.0f);
 	Vector2 localMousePos = (matLocalInverse * mousePosVec4).xy();
 
-	Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
-	std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos, gameContext); });
+	//Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
+	PassUIMouseInputToChildren(localMousePos);
+}
+
+void GameObject::PassUIMouseInputToChildren(const Vector2& localMousePos)
+{
+	std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos); });
 }
 
 void GameObject::SetParent(GameObject *pParent)

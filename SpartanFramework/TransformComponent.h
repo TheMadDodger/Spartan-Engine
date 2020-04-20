@@ -22,7 +22,6 @@ public:
 	void Translate(float x, float y, bool updateTransform = false);
 	void Rotate(const Vector3 &rotation, bool updateTransform = false);
 	void SetScale(const Vector3 &scale, bool updateTransform = false);
-	bool UseCamera();
 
 	const Vector3 GetPositionInScreenSpace();
 
@@ -43,6 +42,5 @@ private:
 	Matrix4X4 m_LocalTansformMatrix;
 	Matrix4X4 m_WorldTansformMatrix;
 	Vector3 m_WorldPosition;
-	bool m_UseCamera = true;
 };
 

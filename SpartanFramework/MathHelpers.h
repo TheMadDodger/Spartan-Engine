@@ -500,4 +500,6 @@ namespace Math
 
 		return currentIndex;
 	}
+
+	Vector4 CalculateOffsets(const Origin& allignment, const Vector2& dimensions);
 }

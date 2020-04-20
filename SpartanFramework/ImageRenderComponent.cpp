@@ -5,7 +5,7 @@
 #include "TransformComponent.h"
 #include "UIRenderMaterial.h"
 
-ImageRenderComponent::ImageRenderComponent() : m_AssetFile(""), UIComponent("Image"), m_pImage(nullptr)
+ImageRenderComponent::ImageRenderComponent() : UIComponent("Image"), m_pImage(nullptr), m_Offsets()
 {
 }
 
@@ -16,6 +16,13 @@ ImageRenderComponent::~ImageRenderComponent()
 void ImageRenderComponent::SetTexture(TextureData *pTexture)
 {
 	m_pImage = pTexture;
+	GetGameObject()->SetDirty();
+}
+
+void ImageRenderComponent::SetColor(const Color& color)
+{
+	m_Color = color;
+	GetGameObject()->SetDirty();
 }
 
 TextureData *ImageRenderComponent::GetTexture()
@@ -23,47 +30,15 @@ TextureData *ImageRenderComponent::GetTexture()
 	return m_pImage;
 }
 
-void ImageRenderComponent::SetColor(const Color & color)
+void ImageRenderComponent::Update(const GameContext &)
 {
-	m_Color = color;
+	if (m_pImage == nullptr) return;
+	m_Offsets = Math::CalculateOffsets(GetOrigin(), m_pImage->GetDimensions());
 }
 
-void ImageRenderComponent::Initialize(const GameContext &gameContext)
+void ImageRenderComponent::Draw(const GameContext &)
 {
-	UNREFERENCED_PARAMETER(gameContext);
-	if (!m_pImage && m_AssetFile != "")
-	{
-		m_pImage = ContentManager::GetInstance()->Load<TextureData>(m_AssetFile);
-	}
-}
-
-void ImageRenderComponent::Update(const GameContext &gameContext)
-{
-	if (!m_pImage)
-	{
-		if(ContentManager::FileExists(m_AssetFile))
-			m_pImage = ContentManager::GetInstance()->Load<TextureData>(m_AssetFile);
-	}
-	/*else if (m_pImage->GetFile() != m_AssetFile)
-	{
-		m_pImage = nullptr;
-	}*/
-
-	UNREFERENCED_PARAMETER(gameContext);
-}
-
-void ImageRenderComponent::Draw(const GameContext &gameContext)
-{
-	UNREFERENCED_PARAMETER(gameContext);
-	/*if (m_pImage)
-	{
-		if (m_Color == Color::White())
-			gameContext.pRenderer->RenderTexture(m_pImage);
-		else
-			gameContext.pRenderer->RenderTexture(m_pImage, m_Color);
-	}*/
-
 	m_pUIRenderer->SetUITexture(m_pImage);
-	m_pUIRenderer->SetAllignment(Origin::TopLeft);
+	m_pUIRenderer->SetOffsets(m_Offsets);
 }
 

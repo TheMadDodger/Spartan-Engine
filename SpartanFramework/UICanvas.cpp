@@ -58,6 +58,27 @@ const Matrix4X4& UICanvas::GetUIProjectionMatrix()
 	return m_UIProjectionMatrix;
 }
 
+void UICanvas::RootDraw(const GameContext& gameContext)
+{
+	// User defined Draw()
+	Draw(gameContext);
+
+	for (auto pComponent : m_pComponents)
+	{
+		pComponent->RootDraw(gameContext);
+	}
+
+	for (auto pChild : m_pChildren)
+	{
+		if (pChild->IsEnabled())
+			pChild->RootDraw(gameContext);
+	}
+
+	PostDraw(gameContext);
+
+	SetDirty(false);
+}
+
 void UICanvas::Initialize(const GameContext& gameContext)
 {
 	m_pRenderTexture = RenderTexture::CreateRenderTexture(m_Dimensions.x, m_Dimensions.y, false);
@@ -71,7 +92,7 @@ void UICanvas::Update(const GameContext& gameContext)
 	if (m_pParentCanvas == nullptr)
 	{
 		auto mousePos = gameContext.pInput->GetMouseScreenPosition();
-		UIHandleMouse(mousePos, gameContext);
+		UIHandleMouse(mousePos);
 	}
 }
 
@@ -84,7 +105,7 @@ void UICanvas::Draw(const GameContext& gameContext)
 
 void UICanvas::PostDraw(const GameContext& gameContext)
 {
-	m_pRenderTexture->StopUse();
+	if (IsDirty()) m_pRenderTexture->StopUse();
 	m_pCanvasRenderer->Use();
 	m_pCanvasRenderer->SetMatrix4("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
 	m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
@@ -166,7 +187,7 @@ void UICanvas::CalculateMatrices()
 	m_CanvasProjectionMatrix =  m_CanvasMatrix * Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_ProjectionMatrix.Inverse();
 }
 
-void UICanvas::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+void UICanvas::UIHandleMouse(const Vector2& relativeMousePos)
 {
 	auto topLeft = Vector2(0.0f, 0.0f);
 	auto bottomRight = Vector2((float)m_Dimensions.x, (float)m_Dimensions.y);
@@ -181,6 +202,6 @@ void UICanvas::UIHandleMouse(const Vector2& relativeMousePos, const GameContext&
 	if (CheckPointInRect(localMousePos, { topLeft, bottomRight }))
 	{
 		//Utilities::Debug::LogInfo("IN CANVAS!");
-		std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos, gameContext); });
+		PassUIMouseInputToChildren(localMousePos);
 	}
 }

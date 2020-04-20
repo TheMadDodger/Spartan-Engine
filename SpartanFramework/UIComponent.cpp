@@ -9,7 +9,7 @@ size_t UIComponent::m_UIVertexBufferID = 0;
 bool UIComponent::m_DoesVertexBufferExist = false;
 int UIComponent::m_InstanceCount = 0;
 
-UIComponent::UIComponent(const char* name) : BaseComponent(name), m_pUIRenderer(nullptr)
+UIComponent::UIComponent(const char* name) : BaseComponent(name), m_pUIRenderer(nullptr), m_Origin(Origin::BottomLeft)
 {
 	if (!m_DoesVertexBufferExist)
 	{
@@ -44,6 +44,19 @@ UIComponent::~UIComponent()
 UIObject* UIComponent::GetGameObject()
 {
 	return static_cast<UIObject*>(BaseComponent::GetGameObject());
+}
+
+void UIComponent::SetOrigin(const Origin& origin)
+{
+	if (m_Origin != origin)
+		GetGameObject()->SetDirty();
+
+	m_Origin = origin;
+}
+
+const Origin& UIComponent::GetOrigin()
+{
+	return m_Origin;
 }
 
 void UIComponent::RootUpdate(const GameContext& gameContext)

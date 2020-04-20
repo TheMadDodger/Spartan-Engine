@@ -54,6 +54,8 @@ protected:
 
 private:
 	friend class GameObject;
+	friend class UIObject;
+	friend class UICanvas;
 	void SetGameObject(GameObject *pObject);
 	GameObject *m_pGameObject = nullptr;
 	bool m_bInitialized = false;

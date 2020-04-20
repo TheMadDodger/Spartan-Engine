@@ -51,10 +51,6 @@ void TransformComponent::UpdateTransform()
 
 		auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 		m_TansformMatrix = m_TansformMatrix * parentTransformMatrix;
-
-		// We don't need to apply the camera transform again
-		// That was already applied to our parent
-		// So we can just return
 		return;
 	}
 
@@ -125,6 +121,7 @@ void TransformComponent::Translate(const Vector3 &position, bool updateTransform
 	}
 
 	if (updateTransform) UpdateTransform();
+	GetGameObject()->SetDirty();
 }
 
 void TransformComponent::Translate(const Vector2 &position, bool updateTransform)
@@ -153,6 +150,7 @@ void TransformComponent::Rotate(const Vector3 &rotation, bool updateTransform)
 	}
 
 	if (updateTransform) UpdateTransform();
+	GetGameObject()->SetDirty();
 }
 
 void TransformComponent::SetScale(const Vector3 &scale, bool updateTransform)
@@ -165,11 +163,7 @@ void TransformComponent::SetScale(const Vector3 &scale, bool updateTransform)
 	Scale = scale;
 
 	if (updateTransform) UpdateTransform();
-}
-
-bool TransformComponent::UseCamera()
-{
-	return m_UseCamera;
+	GetGameObject()->SetDirty();
 }
 
 const Vector3 TransformComponent::GetPositionInScreenSpace()

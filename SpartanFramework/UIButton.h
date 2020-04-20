@@ -26,6 +26,7 @@ public:
 	void SetTextures(TextureData *pIdleTexture, TextureData *pMouseOverTexture, TextureData *pMouseClicktexture, TextureData *pSelectedTexture);
 
 	Event<UIButton*> ButtonClicked;
+	Event<UIButton*> ButtonReleased;
 	Event<UIButton*> MouseOver;
 	Event<UIButton*> MouseLeave;
 
@@ -38,7 +39,7 @@ private:
 	virtual void Initialize(const GameContext &gameContext) override;
 	virtual void Update(const GameContext &gameContext) override;
 	virtual void Draw(const GameContext &gameContext) override;
-	virtual void UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext) override;
+	virtual void UIHandleMouse(const Vector2& relativeMousePos) override;
 
 protected:
 	enum ButtonState
@@ -53,6 +54,7 @@ protected:
 	bool m_MouseOver;
 	bool m_WasMouseOverLastFrame;
 	bool m_Selected;
+	bool m_WasSelected;
 	bool m_ButtonDisabled = false;
 	int m_ButtonID = -1;
 

@@ -11,7 +11,7 @@ public:
 
 	void SetUITexture(TextureData* pTexture);
 	void SetWorldProjection(const Matrix4X4& worldProjection);
-	void SetAllignment(const Origin& allignment);
+	void SetOffsets(const Vector4 &offsets);
 
 private:
 	void SetShaderVars(BaseComponent *);
@@ -19,7 +19,6 @@ private:
 private:
 	friend class UIComponent;
 	TextureData* m_pTexture;
-	Origin m_Allignment;
 	Vector4 m_CenterOffsets;
 	Matrix4X4 m_WorldProjection;
 };

@@ -7,23 +7,23 @@ class ImageRenderComponent : public UIComponent
 public:
 	ImageRenderComponent();
 	~ImageRenderComponent();
-
+	
+	// Setters
 	void SetTexture(TextureData *pTexture);
-	TextureData *GetTexture();
 	void SetColor(const Color &color);
-	std::string m_AssetFile = "";
 
-	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	// Getters
+	TextureData* GetTexture();
 
 private:
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
-	void Draw(const GameContext &gameContext) override;
+	void Update(const GameContext &) override;
+	void Draw(const GameContext &) override;
 
 	COMPONENT_EDITOR(ImageRenderComponent)
 
 private:
-	//const char* m_AssetFile = nullptr;
 	TextureData *m_pImage = nullptr;
+	Vector4 m_Offsets;
+	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
 };
 

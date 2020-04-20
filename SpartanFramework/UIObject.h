@@ -11,11 +11,9 @@ public:
 
 	UICanvas* GetCanvas();
 
-//protected:
-	//virtual void HandleMouse(const Vector2& relativeMousePos) override = 0;
-
 private:
 	void OnParentUpdated(GameObject* pNewParent) override;
+	virtual void RootDraw(const GameContext& gameContext) override;
 
 protected:
 	UICanvas* m_pParentCanvas;

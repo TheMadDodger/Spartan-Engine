@@ -5,7 +5,8 @@
 #include "Components.h"
 #include "Framework.h"
 
-UIButton::UIButton() : m_Size(10.f, 10.f)
+UIButton::UIButton() : m_Size(10.f, 10.f), m_WasClickedThisFrame(false), m_MouseClicked(false), m_MouseOver(false), m_WasMouseOverLastFrame(false), m_Selected(false),
+m_WasSelected(false), m_ButtonDisabled(false)
 {
 	m_pImageRenderer = CreateDefaultComponent<ImageRenderComponent>();
 
@@ -82,6 +83,9 @@ void UIButton::OnMouseClick()
 void UIButton::Initialize(const GameContext &)
 {
 	m_WasClickedThisFrame = false;
+
+	m_pCurrentTexture = m_pIdleTexture;
+	m_pImageRenderer->SetTexture(m_pCurrentTexture);
 }
 
 void UIButton::Update(const GameContext &gameContext)
@@ -111,10 +115,12 @@ void UIButton::Update(const GameContext &gameContext)
 	if (m_Selected)
 	{
 		m_pCurrentTexture = m_pSelectedTexture;
-	}
-	else if (m_MouseClicked)
-	{
-		m_pCurrentTexture = m_pClickTexture;
+
+		if (!m_WasSelected)
+		{
+			m_WasSelected = true;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
+		}
 	}
 	else if (m_MouseOver)
 	{
@@ -124,6 +130,30 @@ void UIButton::Update(const GameContext &gameContext)
 		{
 			OnMouseLeave();
 			m_WasMouseOverLastFrame = false;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
+		}
+
+		if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
+		{
+			m_pCurrentTexture = m_pClickTexture;
+
+			if (!m_WasClickedThisFrame)
+			{
+				m_MouseClicked = true;
+				m_WasClickedThisFrame = true;
+				ButtonClicked(this);
+				m_pImageRenderer->SetTexture(m_pCurrentTexture);
+			}
+		}
+		else
+		{
+			if (m_WasClickedThisFrame)
+			{
+				ButtonReleased(this);
+				m_WasClickedThisFrame = false;
+				m_MouseClicked = false;
+				m_pImageRenderer->SetTexture(m_pCurrentTexture);
+			}
 		}
 	}
 	else
@@ -134,10 +164,15 @@ void UIButton::Update(const GameContext &gameContext)
 		{
 			OnMouseOver();
 			m_WasMouseOverLastFrame = true;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
+		}
+
+		if (m_WasSelected)
+		{
+			m_WasSelected = false;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
 		}
 	}
-
-	m_pImageRenderer->SetTexture(m_pCurrentTexture);
 
 	m_MouseOver = false;
 }
@@ -146,10 +181,13 @@ void UIButton::Draw(const GameContext &)
 {
 }
 
-void UIButton::UIHandleMouse(const Vector2& relativeMousePos, const GameContext& gameContext)
+void UIButton::UIHandleMouse(const Vector2& relativeMousePos)
 {
-	auto topLeft = Vector2(0.0f, 0.0f);
-	auto bottomRight = Vector2((float)m_pCurrentTexture->GetDimensions().x, (float)m_pCurrentTexture->GetDimensions().y);
+	const Origin& origin = m_pImageRenderer->GetOrigin();
+	Vector4 offsets = Math::CalculateOffsets(origin, m_pCurrentTexture->GetDimensions());
+	
+	auto bottomLeft = Vector2(offsets.x, offsets.y);
+	auto topRight = Vector2(offsets.z, offsets.w);
 
 	Matrix4X4 matLocalInverse = GetTransform()->GetLocalTransformMatrix().Inverse();
 
@@ -158,36 +196,10 @@ void UIButton::UIHandleMouse(const Vector2& relativeMousePos, const GameContext&
 
 	//Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
 
-	if (CheckPointInRect(localMousePos, { topLeft, bottomRight }))
+	if (CheckPointInRect(localMousePos, { bottomLeft, topRight }))
 	{
-		if (m_ButtonDisabled)
-		{
-			m_MouseClicked = false;
-			m_MouseOver = false;
-			m_WasClickedThisFrame = false;
-			m_pCurrentTexture = m_pIdleTexture;
-			m_pImageRenderer->SetTexture(m_pCurrentTexture);
-			return;
-		}
-
-		Utilities::Debug::LogInfo("IN BUTTON!");
-		if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
-		{
-			if (!m_WasClickedThisFrame)
-			{
-				m_MouseClicked = true;
-				m_WasClickedThisFrame = true;
-				ButtonClicked(this);
-			}
-		}
-		else
-		{
-			m_WasClickedThisFrame = false;
-			m_MouseClicked = false;
-		}
-
+		//Utilities::Debug::LogInfo("IN BUTTON!");
 		m_MouseOver = true;
-		
-		//std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos); });
+		PassUIMouseInputToChildren(localMousePos);
 	}
 }

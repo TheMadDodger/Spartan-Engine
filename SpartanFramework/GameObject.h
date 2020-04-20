@@ -93,10 +93,10 @@ public:
 
 protected:
 	friend class GameScene;
-	void RootInitialize(const GameContext &gameContext);
-	void RootPostInitialize(const GameContext &gameContext);
-	void RootUpdate(const GameContext &gameContext);
-	void RootDraw(const GameContext &gameContext);
+	virtual void RootInitialize(const GameContext &gameContext);
+	virtual void RootPostInitialize(const GameContext &gameContext);
+	virtual void RootUpdate(const GameContext &gameContext);
+	virtual void RootDraw(const GameContext &gameContext);
 
 	virtual void Construct() {};
 	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
@@ -105,7 +105,8 @@ protected:
 	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 	virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
-	virtual void UIHandleMouse(const Vector2& relativeMousePos, const GameContext&);
+	virtual void UIHandleMouse(const Vector2& relativeMousePos);
+	void PassUIMouseInputToChildren(const Vector2& localMousePos);
 
 	virtual void OnDestroy() {};
 	virtual void OnCreated() {};
@@ -136,6 +137,7 @@ private:
 private:
 	friend class LevelEditor;
 	friend class GameScene;
+	friend class UIObject;
 	friend class UICanvas;
 	TransformComponent *m_pTransform = nullptr;
 	std::vector<BaseComponent*> m_pComponents;
