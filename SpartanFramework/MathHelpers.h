@@ -22,18 +22,18 @@ namespace Math
 		float Magnitude() { return Length(); }
 		float Normalize();
 
-		Vector2 operator+(const Vector2 &other);
-		bool operator==(const Vector2 &other);
-		bool operator!=(const Vector2 &other);
+		Vector2 operator+(const Vector2 &other) const;
+		bool operator==(const Vector2 &other) const;
+		bool operator!=(const Vector2 &other) const;
 		void operator+=(const Vector2 &other);
-		Vector2 operator-(const Vector2 &other);
-		Vector2 operator*(const Vector2 &other);
-		Vector2 operator*(const IntVector2 &other);
-		Vector2 operator*(float factor);
+		Vector2 operator-(const Vector2 &other) const;
+		Vector2 operator*(const Vector2 &other) const;
+		Vector2 operator*(const IntVector2 &other) const;
+		Vector2 operator*(float factor) const;
 		void operator*=(float factor);
-		Vector2 operator/(float factor);
-		Vector2 operator/(const Vector2 &other);
-		Vector2 Normalized();
+		Vector2 operator/(float factor) const;
+		Vector2 operator/(const Vector2 &other) const;
+		Vector2 Normalized() const;
 
 		// Static methods
 		static Vector2 Zero() { return Vector2(); }

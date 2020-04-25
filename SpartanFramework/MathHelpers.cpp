@@ -11,7 +11,7 @@ float Vector2::Length()
 	return sqrt((x * x) + (y * y));
 }
 
-Vector2 Vector2::operator+(const Vector2 &other)
+Vector2 Vector2::operator+(const Vector2 &other) const
 {
 	Vector2 result;
 	result.x = x + other.x;
@@ -19,12 +19,12 @@ Vector2 Vector2::operator+(const Vector2 &other)
 	return result;
 }
 
-bool Math::Vector2::operator==(const Vector2 & other)
+bool Math::Vector2::operator==(const Vector2 & other) const
 {
 	return x == other.x && y == other.y;
 }
 
-bool Math::Vector2::operator!=(const Vector2 & other)
+bool Math::Vector2::operator!=(const Vector2 & other) const
 {
 	return x != other.x || y != other.y;
 }
@@ -35,7 +35,7 @@ void Math::Vector2::operator+=(const Vector2 &other)
 	y += other.y;
 }
 
-Vector2 Vector2::operator-(const Vector2 &other)
+Vector2 Vector2::operator-(const Vector2 &other) const
 {
 	Vector2 result;
 	result.x = x - other.x;
@@ -43,7 +43,7 @@ Vector2 Vector2::operator-(const Vector2 &other)
 	return result;
 }
 
-Vector2 Vector2::operator*(const Vector2 & other)
+Vector2 Vector2::operator*(const Vector2 & other) const
 {
 	Vector2 result;
 	result.x = x * other.x;
@@ -51,7 +51,7 @@ Vector2 Vector2::operator*(const Vector2 & other)
 	return result;
 }
 
-Vector2 Vector2::operator*(const IntVector2 &other)
+Vector2 Vector2::operator*(const IntVector2 &other) const
 {
 	Vector2 result;
 	result.x = x * (float)other.x;
@@ -59,7 +59,7 @@ Vector2 Vector2::operator*(const IntVector2 &other)
 	return result;
 }
 
-Vector2 Vector2::operator*(float factor)
+Vector2 Vector2::operator*(float factor) const
 {
 	Vector2 result;
 	result.x = x * factor;
@@ -73,7 +73,7 @@ void Math::Vector2::operator*=(float factor)
 	y *= factor;
 }
 
-Vector2 Math::Vector2::operator/(float factor)
+Vector2 Math::Vector2::operator/(float factor) const
 {
 	Vector2 result;
 	result.x = x / factor;
@@ -81,7 +81,7 @@ Vector2 Math::Vector2::operator/(float factor)
 	return result;
 }
 
-Vector2 Math::Vector2::operator/(const Vector2 & other)
+Vector2 Math::Vector2::operator/(const Vector2 & other) const
 {
 	Vector2 result;
 	result.x = x / other.x;
@@ -98,7 +98,7 @@ float Vector2::Normalize()
 	return length;
 }
 
-Vector2 Vector2::Normalized()
+Vector2 Vector2::Normalized() const
 {
 	Vector2 result;
 	result.x = x;

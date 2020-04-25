@@ -1,24 +1,30 @@
 #pragma once
 #include "Material.h"
 
-class TextureData;
-
-class UIRenderMaterial : public Material
+namespace SpartanEngine
 {
-public:
-	UIRenderMaterial(ShaderData* pShader);
-	virtual ~UIRenderMaterial();
+	namespace UI
+	{
+		class TextureData;
 
-	void SetUITexture(TextureData* pTexture);
-	void SetWorldProjection(const Matrix4X4& worldProjection);
-	void SetOffsets(const Vector4 &offsets);
+		class UIRenderMaterial : public Material
+		{
+		public:
+			UIRenderMaterial(ShaderData* pShader);
+			virtual ~UIRenderMaterial();
 
-private:
-	void SetShaderVars(BaseComponent *);
+			void SetUITexture(TextureData* pTexture);
+			void SetWorldProjection(const Matrix4X4& worldProjection);
+			void SetOffsets(const Vector4& offsets);
 
-private:
-	friend class UIComponent;
-	TextureData* m_pTexture;
-	Vector4 m_CenterOffsets;
-	Matrix4X4 m_WorldProjection;
-};
+		private:
+			void SetShaderVars(BaseComponent*);
+
+		private:
+			friend class UIComponent;
+			TextureData* m_pTexture;
+			Vector4 m_CenterOffsets;
+			Matrix4X4 m_WorldProjection;
+		};
+	}
+}

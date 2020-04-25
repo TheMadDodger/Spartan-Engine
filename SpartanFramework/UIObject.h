@@ -1,20 +1,40 @@
 #pragma once
 #include "GameObject.h"
 
-class UICanvas;
-
-class UIObject : public GameObject
+namespace SpartanEngine
 {
-public:
-	UIObject(const char* name = "UIObject", size_t layerID = 0);
-	~UIObject();
+	namespace UI
+	{
+		class UICanvas;
+		class Constraints;
 
-	UICanvas* GetCanvas();
+		class UIObject : public GameObject
+		{
+		public:
+			UIObject(const char* name = "UIObject", size_t layerID = 0);
+			~UIObject();
 
-private:
-	void OnParentUpdated(GameObject* pNewParent) override;
-	virtual void RootDraw(const GameContext& gameContext) override;
+			UICanvas* GetParentCanvas() const;
+			void SetSize(float width, float height);
 
-protected:
-	UICanvas* m_pParentCanvas;
-};
+			Constraints* GetConstraints() const;
+
+		protected:
+			virtual void OnResize(const Vector2& newDimensions) = 0;
+
+		private:
+			void OnParentUpdated(GameObject* pNewParent) override;
+			virtual void RootUpdate(const GameContext& gameContext) override;
+			virtual void RootDraw(const GameContext& gameContext) override;
+
+		protected:
+			UICanvas* m_pParentCanvas;
+			Vector2 m_Dimensions;
+			Vector2 m_OldDimensions;
+
+		private:
+			friend class Constraints;
+			Constraints* m_pConstraints;
+		};
+	}
+}

@@ -67,7 +67,7 @@ void UIComponent::RootUpdate(const GameContext& gameContext)
 	}
 
 	UIObject* pObject = GetGameObject();
-	UICanvas* pCanvas = pObject->GetCanvas();
+	UICanvas* pCanvas = pObject->GetParentCanvas();
 	Matrix4X4 uiProjection = pCanvas->GetUIProjectionMatrix();
 	Matrix4X4 world = pObject->GetTransform()->GetWorldMatrix();
 	m_UIMatrix = world * uiProjection;

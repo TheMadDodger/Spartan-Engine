@@ -34,6 +34,9 @@
     <Filter Include="Core\Rendering">
       <UniqueIdentifier>{7463af22-446d-41df-999f-fe972a51f6a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Constraints">
+      <UniqueIdentifier>{878c197f-b277-441f-8791-a6409a595736}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -236,9 +239,6 @@
     <ClInclude Include="ModelLoader.h">
       <Filter>Content Management</Filter>
     </ClInclude>
-    <ClInclude Include="UICanvas.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="UIObject.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -270,6 +270,21 @@
       <Filter>Core Components</Filter>
     </ClInclude>
     <ClInclude Include="UIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseUIConstraint.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="CenterConstraint.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Constraints.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
       <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
@@ -422,9 +437,6 @@
     <ClCompile Include="VertexHelpers.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="UICanvas.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="UIObject.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -456,6 +468,18 @@
       <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseUIConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="CenterConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="Constraints.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
