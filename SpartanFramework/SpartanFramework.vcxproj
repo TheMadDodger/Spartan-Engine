@@ -169,12 +169,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AspectConstraint.h" />
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
     <ClInclude Include="Gradient.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PixelConstraint.h" />
+    <ClInclude Include="RelativeConstraint.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="ScreenRect.h" />
     <ClInclude Include="SEObject.h" />
@@ -211,6 +214,7 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="Constraints.h" />
+    <ClInclude Include="UIConstraints.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
     <ClInclude Include="ColliderComponent.h" />
@@ -255,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="AspectConstraint.cpp" />
     <ClCompile Include="AStarPathFinding.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />
     <ClCompile Include="AIBehaviourTree.cpp" />
@@ -274,6 +279,8 @@
     <ClCompile Include="MeshRenderComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
+    <ClCompile Include="PixelConstraint.cpp" />
+    <ClCompile Include="RelativeConstraint.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="ScreenRect.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />

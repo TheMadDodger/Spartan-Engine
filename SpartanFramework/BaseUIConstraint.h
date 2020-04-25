@@ -16,12 +16,14 @@ namespace SpartanEngine
 			virtual void UpdateConstraint(UIObject* pUIObject) = 0;
 			float FetchResult();
 
+		protected:
 			enum class Axis
 			{
 				X,
 				Y,
 			};
 
+		private:
 			void SetAxis(const Axis& axis);
 
 		protected:

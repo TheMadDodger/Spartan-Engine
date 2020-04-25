@@ -275,9 +275,6 @@
     <ClInclude Include="UI.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Constraints.h">
-      <Filter>UI\Constraints</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -286,6 +283,21 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Constraints.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="UIConstraints.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelConstraint.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="RelativeConstraint.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
+    <ClInclude Include="AspectConstraint.h">
+      <Filter>UI\Constraints</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -470,14 +482,23 @@
     <ClCompile Include="CenterConstraint.cpp">
       <Filter>UI\Constraints</Filter>
     </ClCompile>
-    <ClCompile Include="Constraints.cpp">
-      <Filter>UI\Constraints</Filter>
-    </ClCompile>
     <ClCompile Include="Canvas.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Constraints.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="RelativeConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="AspectConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

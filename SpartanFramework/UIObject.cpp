@@ -30,6 +30,11 @@ namespace SpartanEngine
 			m_Dimensions = Vector2(width, height);
 		}
 
+		const Vector2& UIObject::GetSize() const
+		{
+			return m_Dimensions;
+		}
+
 		Constraints* UIObject::GetConstraints() const
 		{
 			return m_pConstraints;
