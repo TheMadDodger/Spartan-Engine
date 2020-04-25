@@ -2,113 +2,115 @@
 #include "GameObject.h"
 #include "Layers.h"
 
-class BasicCamera;
-
-const int Box2DVelocityIterations = 6; // How many velocity iterations should Box2D per game tick perform?
-const int Box2DPositionIterations = 2; // How many position iterations should Box2D per game tick perform?
-const int FixedUpdateSpeed = 60; // Used for Box2D ticks
-
-class GameScene : SEObject
+namespace SpartanEngine
 {
-public:
-	GameScene(const std::string &name);
-	virtual ~GameScene();
+	class BasicCamera;
 
-	void SetActiveCamera(CameraComponent *pCamera);
-	CameraComponent *GetActiveCamera() { return m_pActiveCamera; }
+	const int Box2DVelocityIterations = 6; // How many velocity iterations should Box2D per game tick perform?
+	const int Box2DPositionIterations = 2; // How many position iterations should Box2D per game tick perform?
+	const int FixedUpdateSpeed = 60; // Used for Box2D ticks
 
-	b2World *GetPhysicsWorld() const { return m_pPhysicsWorld; }
-
-	const std::string &GetName() const { return m_SceneName; }
-
-	void DontDestroyOnLoad(GameObject *pObject);
-
-	std::vector<GameObject*> GetChildren() { return m_pChildren; }
-	GameObject *GetChild(unsigned int ID) { return m_pChildren[ID]; }
-
-	void Destroy(GameObject *gameObject);
-
-	template<class T>
-	T *Instantiate(GameObject* pParent = nullptr)
+	class GameScene : SEObject
 	{
-		T* pT = new T();
-		GameObject* pObject = dynamic_cast<GameObject*>(pT);
-		if (pObject == nullptr)
-		{
-			Utilities::Debug::LogError("Can not instantiate a class that does not derive from GameObject!");
-			return nullptr;
-		}
+	public:
+		GameScene(const std::string& name);
+		virtual ~GameScene();
 
-		pObject->m_pScene = this;
-		if (pParent != nullptr)
+		void SetActiveCamera(CameraComponent* pCamera);
+		CameraComponent* GetActiveCamera() { return m_pActiveCamera; }
+
+		b2World* GetPhysicsWorld() const { return m_pPhysicsWorld; }
+
+		const std::string& GetName() const { return m_SceneName; }
+
+		void DontDestroyOnLoad(GameObject* pObject);
+
+		std::vector<GameObject*> GetChildren() { return m_pChildren; }
+		GameObject* GetChild(unsigned int ID) { return m_pChildren[ID]; }
+
+		void Destroy(GameObject* gameObject);
+
+		template<class T>
+		T* Instantiate(GameObject* pParent = nullptr)
 		{
-			pParent->AddChild(pObject);
+			T* pT = new T();
+			GameObject* pObject = dynamic_cast<GameObject*>(pT);
+			if (pObject == nullptr)
+			{
+				Utilities::Debug::LogError("Can not instantiate a class that does not derive from GameObject!");
+				return nullptr;
+			}
+
+			pObject->m_pScene = this;
+			if (pParent != nullptr)
+			{
+				pParent->AddChild(pObject);
+				return pT;
+			}
+
+			AddChild(pObject);
+			UpdateLayers(pObject, -1, pObject->GetLayer().LayerID);
 			return pT;
 		}
 
-		AddChild(pObject);
-		UpdateLayers(pObject, -1, pObject->GetLayer().LayerID);
-		return pT;
-	}
+		GameObject* Instantiate(GameObject* pObject, GameObject* pParent = nullptr);
 
-	GameObject* Instantiate(GameObject* pObject, GameObject* pParent = nullptr);
+		void SetEnabled(bool enabled);
 
-	void SetEnabled(bool enabled);
-	
 
-protected:
-	friend class BaseGame;
-	friend class SceneManager;
+	protected:
+		friend class BaseGame;
+		friend class SceneManager;
 
-	virtual void PreInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void PreInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void Initialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void PostInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
-	virtual void GameStart(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void GameStart(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
-	virtual void PreUpdate(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void PostUpdate(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void PreUpdate(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void Update(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void PostUpdate(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
-	virtual void PreDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-	
-	virtual void OnActive() { };
-	virtual void OnDeActive() { };
+		virtual void PreDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void Draw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
+		virtual void PostDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 
-	virtual void Cleanup() {};
+		virtual void OnActive() { };
+		virtual void OnDeActive() { };
 
-private:
-	void RootInitialize(const GameContext &gameContext);
-	void RootUpdate(const GameContext &gameContext);
-	void RootDraw(const GameContext &gameContext);
-	void RenderLayer(const GameContext& gameContext, std::list<GameObject*> pObjectsOnLayer);
+		virtual void Cleanup() {};
 
-	void LoadPersistent();
+	private:
+		void RootInitialize(const GameContext& gameContext);
+		void RootUpdate(const GameContext& gameContext);
+		void RootDraw(const GameContext& gameContext);
+		void RenderLayer(const GameContext& gameContext, std::list<GameObject*> pObjectsOnLayer);
 
-	void RootOnActive();
-	void RootOnDeActive();
+		void LoadPersistent();
 
-	void RootCleanup();
+		void RootOnActive();
+		void RootOnDeActive();
 
-	void UpdateLayers(GameObject* pObject, int oldLayer, int newLayer);
+		void RootCleanup();
 
-	void AddChild(GameObject* pObject);
-	void RemoveChild(GameObject* pObject);
+		void UpdateLayers(GameObject* pObject, int oldLayer, int newLayer);
 
-private:
-	friend class SceneManager;
-	friend class GameObject;
+		void AddChild(GameObject* pObject);
+		void RemoveChild(GameObject* pObject);
 
-	std::vector<GameObject*> m_pChildren;
-	std::vector<std::list<GameObject*>> m_pLayers;
-	std::vector<GameObject*> m_pPersistentChildren;
-	std::string m_SceneName = "";
-	BasicCamera *m_pDefaultCamera = nullptr;
-	CameraComponent *m_pActiveCamera = nullptr;
-	b2World *m_pPhysicsWorld = nullptr;
-	b2Vec2 m_Gravity;
-	bool m_bEnabled = false;
-};
+	private:
+		friend class SceneManager;
+		friend class GameObject;
 
+		std::vector<GameObject*> m_pChildren;
+		std::vector<std::list<GameObject*>> m_pLayers;
+		std::vector<GameObject*> m_pPersistentChildren;
+		std::string m_SceneName = "";
+		BasicCamera* m_pDefaultCamera = nullptr;
+		CameraComponent* m_pActiveCamera = nullptr;
+		b2World* m_pPhysicsWorld = nullptr;
+		b2Vec2 m_Gravity;
+		bool m_bEnabled = false;
+	};
+}

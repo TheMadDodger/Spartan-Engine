@@ -3,29 +3,31 @@
 #include "Colliders.h"
 #include "PhysicsMaterial.h"
 
-class ColliderComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	ColliderComponent();
-	virtual ~ColliderComponent();
+	class ColliderComponent : public BaseComponent
+	{
+	public:
+		ColliderComponent();
+		virtual ~ColliderComponent();
 
-	void SetCollider(Collider* newCollider);
-	void UpdateCollider(Collider *newCollider);
+		void SetCollider(Collider* newCollider);
+		void UpdateCollider(Collider* newCollider);
 
-	PhysicsMaterial m_PhysicsMaterial;
+		PhysicsMaterial m_PhysicsMaterial;
 
-protected:
-	void Initialize(const GameContext &gameContext) override;
-	void Draw(const GameContext &gameContext) override;
+	protected:
+		void Initialize(const GameContext& gameContext) override;
+		void Draw(const GameContext& gameContext) override;
 
-private:
-	COMPONENT_EDITOR(ColliderComponent)
+	private:
+		COMPONENT_EDITOR(ColliderComponent)
 
-private:
-	friend class RigidBodyComponent;
+	private:
+		friend class RigidBodyComponent;
 
-	Collider *m_pCollider = nullptr;
-	b2FixtureDef m_FixtureDef;
-	b2Fixture *m_pFixture = nullptr;
-};
-
+		Collider* m_pCollider = nullptr;
+		b2FixtureDef m_FixtureDef;
+		b2Fixture* m_pFixture = nullptr;
+	};
+}

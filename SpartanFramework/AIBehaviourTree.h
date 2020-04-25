@@ -1,21 +1,24 @@
 #pragma once
 
-class Blackboard;
-class BTNode;
-
-class AIBehaviourTree : public BaseAIBehaviour
+namespace SpartanEngine
 {
-public:
-	AIBehaviourTree(BTNode *pRootNode);
-	virtual ~AIBehaviourTree();
+	class Blackboard;
+	class BTNode;
 
-	Blackboard *GetBlackboard();
+	class AIBehaviourTree : public BaseAIBehaviour
+	{
+	public:
+		AIBehaviourTree(BTNode* pRootNode);
+		virtual ~AIBehaviourTree();
 
-private:
-	virtual void Initialize() override;
-	virtual void Tick(float deltaTime) override;
+		Blackboard* GetBlackboard();
 
-private:
-	Blackboard *m_pBlackboard;
-	BTNode *m_pRootNode;
-};
+	private:
+		virtual void Initialize() override;
+		virtual void Tick(float deltaTime) override;
+
+	private:
+		Blackboard* m_pBlackboard;
+		BTNode* m_pRootNode;
+	};
+}

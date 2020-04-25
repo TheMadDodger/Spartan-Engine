@@ -1,15 +1,17 @@
 #pragma once
 #include "ContentManager.h"
 
-class FontLoader : public ContentLoader<FontData>
+namespace SpartanEngine
 {
-public:
-	FontLoader();
-	~FontLoader();
+	class FontLoader : public ContentLoader<FontData>
+	{
+	public:
+		FontLoader();
+		~FontLoader();
 
-	FontData *LoadContent(const std::string &file) override;
+		FontData* LoadContent(const std::string& file) override;
 
-private:
-	int FindFontSize(std::string &file);
-};
-
+	private:
+		int FindFontSize(std::string& file);
+	};
+}

@@ -2,32 +2,38 @@
 #include "BaseComponent.h"
 #include "UIObject.h"
 
-class UIRenderMaterial;
-
-class UIComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	UIComponent(const char* name);
-	~UIComponent();
+	namespace UI
+	{
+		class UIRenderMaterial;
+	}
 
-	UIObject* GetGameObject();
-	void SetOrigin(const Origin& origin);
-	const Origin& GetOrigin();
+	class UIComponent : public BaseComponent
+	{
+	public:
+		UIComponent(const char* name);
+		~UIComponent();
 
-protected:
-	virtual void RootUpdate(const GameContext& gameContext) override;
-	virtual void RootDraw(const GameContext& gameContext) override;
+		UI::UIObject* GetGameObject();
+		void SetOrigin(const Origin& origin);
+		const Origin& GetOrigin();
 
-private:
-	void Render();
+	protected:
+		virtual void RootUpdate(const GameContext& gameContext) override;
+		virtual void RootDraw(const GameContext& gameContext) override;
 
-protected:
-	UIRenderMaterial* m_pUIRenderer;
+	private:
+		void Render();
 
-private:
-	Matrix4X4 m_UIMatrix;
-	Origin m_Origin;
-	static size_t m_UIVertexBufferID;
-	static bool m_DoesVertexBufferExist;
-	static int m_InstanceCount;
-};
+	protected:
+		UI::UIRenderMaterial* m_pUIRenderer;
+
+	private:
+		Matrix4X4 m_UIMatrix;
+		Origin m_Origin;
+		static size_t m_UIVertexBufferID;
+		static bool m_DoesVertexBufferExist;
+		static int m_InstanceCount;
+	};
+}

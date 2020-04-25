@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CenterConstraint.h"
 #include "UIObject.h"
-#include "UICanvas.h"
+#include "Canvas.h"
 
 namespace SpartanEngine
 {
@@ -17,7 +17,7 @@ namespace SpartanEngine
 
 		void CenterConstraint::UpdateConstraint(UIObject* pUIObject)
 		{
-			UICanvas* pCanvas = pUIObject->GetParentCanvas();
+			Canvas* pCanvas = pUIObject->GetParentCanvas();
 			//pCanvas->Get
 		}
 	}

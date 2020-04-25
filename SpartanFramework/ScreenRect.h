@@ -1,24 +1,26 @@
 #pragma once
 #include "SEObject.h"
 
-class Mesh;
-class Material;
-class Renderer;
-class RenderTexture;
-
-class ScreenRect : public SEObject
+namespace SpartanEngine
 {
-private:
-	ScreenRect();
-	~ScreenRect();
+	class Mesh;
+	class Material;
+	class Renderer;
+	class RenderTexture;
 
-private:
-	void RenderScreen(Renderer* pRenderer);
-	void DrawScreenMesh();
+	class ScreenRect : public SEObject
+	{
+	private:
+		ScreenRect();
+		~ScreenRect();
 
-private:
-	friend class Renderer;
-	Material* m_pScreenRenderMaterial;
-	GLuint m_ScreenQuadVertexbufferID;
-};
+	private:
+		void RenderScreen(Renderer* pRenderer);
+		void DrawScreenMesh();
 
+	private:
+		friend class Renderer;
+		Material* m_pScreenRenderMaterial;
+		GLuint m_ScreenQuadVertexbufferID;
+	};
+}

@@ -1,25 +1,27 @@
 #pragma once
 #include "BaseComponent.h"
 
-class Skeleton;
-class SkinnedQuad;
-
-class SkinnedMeshComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	SkinnedMeshComponent();
-	virtual ~SkinnedMeshComponent();
+	class Skeleton;
+	class SkinnedQuad;
 
-	Skeleton* m_pSkeleton;
+	class SkinnedMeshComponent : public BaseComponent
+	{
+	public:
+		SkinnedMeshComponent();
+		virtual ~SkinnedMeshComponent();
 
-private:
-	virtual void Initialize(const GameContext &gameContext);
-	virtual void Update(const GameContext &gameContext);
-	virtual void Draw(const GameContext &gameContext);
+		Skeleton* m_pSkeleton;
 
-	COMPONENT_EDITOR(SkinnedMeshComponent)
+	private:
+		virtual void Initialize(const GameContext& gameContext);
+		virtual void Update(const GameContext& gameContext);
+		virtual void Draw(const GameContext& gameContext);
 
-private:
-	vector<SkinnedQuad*> m_Quads;
-};
+		COMPONENT_EDITOR(SkinnedMeshComponent)
 
+	private:
+		vector<SkinnedQuad*> m_Quads;
+	};
+}

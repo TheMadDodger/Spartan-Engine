@@ -189,7 +189,6 @@
     <ClInclude Include="BehaviourTreeNodes.h" />
     <ClInclude Include="Blackboard.h" />
     <ClInclude Include="Bone.h" />
-    <ClInclude Include="FastNoise.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="GridComponent.h" />
     <ClInclude Include="GUID.h" />
@@ -265,7 +264,6 @@
     <ClCompile Include="CenterConstraint.cpp" />
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
-    <ClCompile Include="FastNoise.cpp" />
     <ClCompile Include="Gradient.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridComponent.cpp" />

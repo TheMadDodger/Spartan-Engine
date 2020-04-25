@@ -1,21 +1,24 @@
 #pragma once
 #include "SEObject.h"
 
-class AIComponent;
-
-class BaseAIBehaviour : SEObject
+namespace SpartanEngine
 {
-public:
-	BaseAIBehaviour();
-	virtual ~BaseAIBehaviour();
+	class AIComponent;
 
-	AIComponent *GetAIOwner();
+	class BaseAIBehaviour : SEObject
+	{
+	public:
+		BaseAIBehaviour();
+		virtual ~BaseAIBehaviour();
 
-	void SetOwner(AIComponent *pOwner);
+		AIComponent* GetAIOwner();
 
-	virtual void Initialize() = 0;
-	virtual void Tick(float deltaTime) = 0;
+		void SetOwner(AIComponent* pOwner);
 
-private:
-	AIComponent *m_pAIOwner;
-};
+		virtual void Initialize() = 0;
+		virtual void Tick(float deltaTime) = 0;
+
+	private:
+		AIComponent* m_pAIOwner;
+	};
+}

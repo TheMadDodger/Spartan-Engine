@@ -1,10 +1,13 @@
 #pragma once
-class SEObject
+namespace SpartanEngine
 {
-public:
-	SEObject() {}
-	~SEObject() {}
+	class SEObject
+	{
+	public:
+		SEObject() {}
+		~SEObject() {}
 
-private:
+	private:
 
-};
+	};
+}

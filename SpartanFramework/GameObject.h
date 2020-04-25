@@ -3,156 +3,168 @@
 #include "BaseComponent.h"
 #include "SEObject.h"
 
-class TransformComponent;
-class GameScene;
-struct LayerData;
-
-class GameObject : public SEObject
+namespace SpartanEngine
 {
-public:
-	GameObject(const char *name = "EmptyGameObject", size_t layerID = 0);
-	virtual ~GameObject();
-
-	const vector<BaseComponent*> &GetAllComponents() { return m_pComponents; }
-
-	template <typename T>
-	vector<T*> GetComponents()
+	namespace UI
 	{
-		vector<BaseComponent*> pComponents;
-		for (auto pComponent : m_pComponents)
-		{
-			if (typeid(pComponent) == typeid(T))
-			{
-				pComponents.push_back(pComponent);
-			}
-		}
-		return pComponents;
+		class UIObject;
+		class Canvas;
 	}
+}
 
-	vector<BaseComponent*> &GetComponents() { return m_pComponents; }
+namespace SpartanEngine
+{
+	class TransformComponent;
+	class GameScene;
+	struct LayerData;
 
-	template <typename T>
-	T *GetComponent()
+	class GameObject : public SEObject
 	{
-		for (auto pComponent : m_pComponents)
+	public:
+		GameObject(const char* name = "EmptyGameObject", size_t layerID = 0);
+		virtual ~GameObject();
+
+		const vector<BaseComponent*>& GetAllComponents() { return m_pComponents; }
+
+		template <typename T>
+		vector<T*> GetComponents()
 		{
-			T *pComp = dynamic_cast<T*>(pComponent);
-			if(pComp != nullptr)
+			vector<BaseComponent*> pComponents;
+			for (auto pComponent : m_pComponents)
 			{
-				return pComp;
+				if (typeid(pComponent) == typeid(T))
+				{
+					pComponents.push_back(pComponent);
+				}
 			}
+			return pComponents;
 		}
 
-		return nullptr;
-	}
+		vector<BaseComponent*>& GetComponents() { return m_pComponents; }
 
-	TransformComponent *GetTransform() const { return m_pTransform; }
-	//BaseComponent *AddComponent(BaseComponent *pComponent);
-
-	template <typename T>
-	T *CreateRuntimeComponent()
-	{
-		T* pT = new T();
-		BaseComponent* pComponent = dynamic_cast<BaseComponent*>(pT);
-		if (pComponent == nullptr)
+		template <typename T>
+		T* GetComponent()
 		{
-			Utilities::Debug::LogError("Can not create component because it does not derive from BaseComponent!");
+			for (auto pComponent : m_pComponents)
+			{
+				T* pComp = dynamic_cast<T*>(pComponent);
+				if (pComp != nullptr)
+				{
+					return pComp;
+				}
+			}
+
 			return nullptr;
 		}
-		pComponent->m_pGameObject = this;
-		m_pComponents.push_back(pComponent);
-		pComponent->RootAwake();
-		return pT;
-	}
 
-	GameScene *GetGameScene() const;
-	GameObject *GetChild(size_t index);
-	const vector<GameObject*> &GetChildren();
+		TransformComponent* GetTransform() const { return m_pTransform; }
+		//BaseComponent *AddComponent(BaseComponent *pComponent);
 
-	GameObject *GetParent() { return m_pParentObject; }
-	void SetParent(GameObject* pParent);
+		template <typename T>
+		T* CreateRuntimeComponent()
+		{
+			T* pT = new T();
+			BaseComponent* pComponent = dynamic_cast<BaseComponent*>(pT);
+			if (pComponent == nullptr)
+			{
+				Utilities::Debug::LogError("Can not create component because it does not derive from BaseComponent!");
+				return nullptr;
+			}
+			pComponent->m_pGameObject = this;
+			m_pComponents.push_back(pComponent);
+			pComponent->RootAwake();
+			return pT;
+		}
 
-	const std::string &GetTag();
-	void SetTag(const std::string &tag);
+		GameScene* GetGameScene() const;
+		GameObject* GetChild(size_t index);
+		const vector<GameObject*>& GetChildren();
 
-	bool IsEnabled();
-	void SetEnabled(bool enabled);
+		GameObject* GetParent() { return m_pParentObject; }
+		void SetParent(GameObject* pParent);
 
-	char *GetName() { return m_Name; }
+		const std::string& GetTag();
+		void SetTag(const std::string& tag);
 
-	void SetName(const char *name);
+		bool IsEnabled();
+		void SetEnabled(bool enabled);
 
-	void Select(bool bSelected) { m_Selected = bSelected; }
-	bool IsSelected() { return m_Selected; }
+		char* GetName() { return m_Name; }
 
-	const LayerData& GetLayer() const;
-	void SetLayer(int layerID);
+		void SetName(const char* name);
 
-	bool IsDirty();
-	void SetDirty();
+		void Select(bool bSelected) { m_Selected = bSelected; }
+		bool IsSelected() { return m_Selected; }
 
-protected:
-	friend class GameScene;
-	virtual void RootInitialize(const GameContext &gameContext);
-	virtual void RootPostInitialize(const GameContext &gameContext);
-	virtual void RootUpdate(const GameContext &gameContext);
-	virtual void RootDraw(const GameContext &gameContext);
+		const LayerData& GetLayer() const;
+		void SetLayer(int layerID);
 
-	virtual void Construct() {};
-	virtual void Initialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
-	virtual void PostInitialize(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
-	virtual void Update(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
-	virtual void Draw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
-	virtual void PostDraw(const GameContext &gameContext) { UNREFERENCED_PARAMETER(gameContext); }
-	virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
-	virtual void UIHandleMouse(const Vector2& relativeMousePos);
-	void PassUIMouseInputToChildren(const Vector2& localMousePos);
+		bool IsDirty();
+		void SetDirty();
 
-	virtual void OnDestroy() {};
-	virtual void OnCreated() {};
-	virtual void OnEnable() {};
-	virtual void OnDisable() {};
+	protected:
+		friend class GameScene;
+		virtual void RootInitialize(const GameContext& gameContext);
+		virtual void RootPostInitialize(const GameContext& gameContext);
+		virtual void RootUpdate(const GameContext& gameContext);
+		virtual void RootDraw(const GameContext& gameContext);
 
-	template<class T>
-	T *CreateDefaultComponent()
-	{
-		T* pComp = new T();
-		BaseComponent *pComponent = dynamic_cast<BaseComponent*>(pComp);
-		if (pComponent == nullptr)
-			throw new exception("ERROR: Class must be derived from BaseComponent!!!");
+		virtual void Construct() {};
+		virtual void Initialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void PostInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void Update(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void Draw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void PostDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
+		virtual void UIHandleMouse(const Vector2& relativeMousePos);
+		void PassUIMouseInputToChildren(const Vector2& localMousePos);
 
-		pComponent->m_pGameObject = this;
-		m_pComponents.push_back(pComponent);
-		pComponent->SetGameObject(this);
-		pComponent->RootAwake();
-		return pComp;
-	}
+		virtual void OnDestroy() {};
+		virtual void OnCreated() {};
+		virtual void OnEnable() {};
+		virtual void OnDisable() {};
 
-private:
-	void AddChild(GameObject* pChild);
-	void RemoveChild(GameObject* pChild);
+		template<class T>
+		T* CreateDefaultComponent()
+		{
+			T* pComp = new T();
+			BaseComponent* pComponent = dynamic_cast<BaseComponent*>(pComp);
+			if (pComponent == nullptr)
+				throw new exception("ERROR: Class must be derived from BaseComponent!!!");
 
-	void SetDirty(bool dirty);
+			pComponent->m_pGameObject = this;
+			m_pComponents.push_back(pComponent);
+			pComponent->SetGameObject(this);
+			pComponent->RootAwake();
+			return pComp;
+		}
 
-private:
-	friend class LevelEditor;
-	friend class GameScene;
-	friend class UIObject;
-	friend class UICanvas;
-	TransformComponent *m_pTransform = nullptr;
-	std::vector<BaseComponent*> m_pComponents;
-	GameScene *m_pScene = nullptr;
-	vector<GameObject*> m_pChildren;
-	GameObject *m_pParentObject = nullptr;
-	bool m_bInitialized = false;
-	bool m_Enabled = true;
-	std::string m_Tag;
+	private:
+		void AddChild(GameObject* pChild);
+		void RemoveChild(GameObject* pChild);
 
-	bool m_Persistent = false;
+		void SetDirty(bool dirty);
 
-	char m_Name[200];
-	char m_PrefabName[200] = "";
-	bool m_Selected = false;
-	size_t m_LayerID;
-	bool m_IsDirty;
-};
+	private:
+		friend class LevelEditor;
+		friend class GameScene;
+		friend class SpartanEngine::UI::UIObject;
+		friend class SpartanEngine::UI::Canvas;
+		TransformComponent* m_pTransform = nullptr;
+		std::vector<BaseComponent*> m_pComponents;
+		GameScene* m_pScene = nullptr;
+		vector<GameObject*> m_pChildren;
+		GameObject* m_pParentObject = nullptr;
+		bool m_bInitialized = false;
+		bool m_Enabled = true;
+		std::string m_Tag;
+
+		bool m_Persistent = false;
+
+		char m_Name[200];
+		char m_PrefabName[200] = "";
+		bool m_Selected = false;
+		size_t m_LayerID;
+		bool m_IsDirty;
+	};
+}

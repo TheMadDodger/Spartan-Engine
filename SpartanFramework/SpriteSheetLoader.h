@@ -2,20 +2,22 @@
 #include "ContentLoader.h"
 #include "ContentManager.h"
 
-enum SpriteSheetBlockID : BYTE
+namespace SpartanEngine
 {
-	SEnd = 0,
-	SGeneral = 1,
-	SAnimationClips = 2,
-	SFrames = 3,
-};
+	enum SpriteSheetBlockID : BYTE
+	{
+		SEnd = 0,
+		SGeneral = 1,
+		SAnimationClips = 2,
+		SFrames = 3,
+	};
 
-class SpriteSheetLoader : public ContentLoader<SpriteSheetData>
-{
-public:
-	SpriteSheetLoader();
-	~SpriteSheetLoader();
+	class SpriteSheetLoader : public ContentLoader<SpriteSheetData>
+	{
+	public:
+		SpriteSheetLoader();
+		~SpriteSheetLoader();
 
-	SpriteSheetData *LoadContent(const std::string& file) override;
-};
-
+		SpriteSheetData* LoadContent(const std::string& file) override;
+	};
+}

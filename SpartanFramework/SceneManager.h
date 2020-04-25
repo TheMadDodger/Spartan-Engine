@@ -1,44 +1,46 @@
 #pragma once
 #include "Manager.h"
 
-class GameScene;
-
-enum LoadSceneFlags : int
+namespace SpartanEngine
 {
-	NoFlags = 0,
-	UnloadLoadedScene = 0x01,
-	EnableNewSceneAfterLoad = 0x02,
-};
+	class GameScene;
 
-class SceneManager : Manager
-{
-public: // Methods
-	GameScene * GetCurrentScene() const;
-	void AddScene(GameScene *pScene);
-	void LoadScene(int sceneIndex, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
-	void LoadScene(const std::string &sceneName, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
-	void LoadSceneNextFrame(const std::string &sceneName);
+	enum LoadSceneFlags : int
+	{
+		NoFlags = 0,
+		UnloadLoadedScene = 0x01,
+		EnableNewSceneAfterLoad = 0x02,
+	};
 
-public: // Singleton
-	static SceneManager *GetInstance();
-	static void Destroy();
+	class SceneManager : Manager
+	{
+	public: // Methods
+		GameScene* GetCurrentScene() const;
+		void AddScene(GameScene* pScene);
+		void LoadScene(int sceneIndex, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
+		void LoadScene(const std::string& sceneName, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
+		void LoadSceneNextFrame(const std::string& sceneName);
 
-private:
-	void Initialize(const GameContext &gameContext);
-	void Update(const GameContext &gameContext);
-	void Draw(const GameContext &gameContext);
+	public: // Singleton
+		static SceneManager* GetInstance();
+		static void Destroy();
 
-	std::vector<GameScene*> m_pScenes;
-	std::vector<int> m_AdditiveScenes;
-	int m_CurrentScene = 0;
-	static SceneManager *m_pSceneManager;
-	bool m_SceneHasInitialized = false;
-	std::string m_ToLoadNextFrame = "";
+	private:
+		void Initialize(const GameContext& gameContext);
+		void Update(const GameContext& gameContext);
+		void Draw(const GameContext& gameContext);
 
-private:
-	friend class BaseGame;
-	friend class GameTool;
-	SceneManager();
-	~SceneManager();
-};
+		std::vector<GameScene*> m_pScenes;
+		std::vector<int> m_AdditiveScenes;
+		int m_CurrentScene = 0;
+		static SceneManager* m_pSceneManager;
+		bool m_SceneHasInitialized = false;
+		std::string m_ToLoadNextFrame = "";
 
+	private:
+		friend class BaseGame;
+		friend class GameTool;
+		SceneManager();
+		~SceneManager();
+	};
+}

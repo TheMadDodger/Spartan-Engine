@@ -1,12 +1,15 @@
 #pragma once
 #include "SEObject.h"
 
-class Manager
+namespace SpartanEngine
 {
-public:
-	Manager() {}
-	~Manager() {}
+	class Manager
+	{
+	public:
+		Manager() {}
+		~Manager() {}
 
-private:
+	private:
 
-};
+	};
+}

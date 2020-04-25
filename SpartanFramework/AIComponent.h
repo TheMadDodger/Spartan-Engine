@@ -1,22 +1,25 @@
 #pragma once
 #include "BaseComponent.h"
 
-class BaseAIBehaviour;
-
-class AIComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	AIComponent();
-	virtual ~AIComponent();
+	class BaseAIBehaviour;
 
-	void SetBehaviour(BaseAIBehaviour* pBehaviour);
+	class AIComponent : public BaseComponent
+	{
+	public:
+		AIComponent();
+		virtual ~AIComponent();
 
-private:
-	virtual void Initialize(const GameContext &) override;
-	virtual void Update(const GameContext &gameContext) override;
+		void SetBehaviour(BaseAIBehaviour* pBehaviour);
 
-	COMPONENT_EDITOR(AIComponent)
+	private:
+		virtual void Initialize(const GameContext&) override;
+		virtual void Update(const GameContext& gameContext) override;
 
-private:
-	BaseAIBehaviour *m_pAIBehaviour;
-};
+		COMPONENT_EDITOR(AIComponent)
+
+	private:
+		BaseAIBehaviour* m_pAIBehaviour;
+	};
+}

@@ -5,94 +5,97 @@
 #include "GameScene.h"
 #include "Skeleton.h"
 
-Bone::Bone(float length, float rotation) :
-	m_Length(length), m_Rotation(rotation), GameObject("Bone")
+namespace SpartanEngine
 {
-}
-
-Bone::~Bone()
-{
-	if (!GetGameScene())
+	Bone::Bone(float length, float rotation) :
+		m_Length(length), m_Rotation(rotation), GameObject("Bone")
 	{
-		for (auto pChild : m_ChildBones)
-		{
-			delete pChild;
-		}
-		m_ChildBones.clear();
 	}
-}
 
-Bone *Bone::AddChildBone(Bone *bone)
-{
-	if (!bone) return nullptr;
+	Bone::~Bone()
+	{
+		if (!GetGameScene())
+		{
+			for (auto pChild : m_ChildBones)
+			{
+				delete pChild;
+			}
+			m_ChildBones.clear();
+		}
+	}
 
-	bone->m_pParentBone = this;
-	m_pOwner->AddBone(bone);
+	Bone* Bone::AddChildBone(Bone* bone)
+	{
+		if (!bone) return nullptr;
 
-	return bone;
-}
+		bone->m_pParentBone = this;
+		m_pOwner->AddBone(bone);
 
-const Matrix4X4 &Bone::GetBindPose() const
-{
-	return m_BindingPose;
-}
+		return bone;
+	}
 
-void Bone::Initialize(const GameContext &)
-{
-}
+	const Matrix4X4& Bone::GetBindPose() const
+	{
+		return m_BindingPose;
+	}
 
-void Bone::Update(const GameContext &)
-{
-}
+	void Bone::Initialize(const GameContext&)
+	{
+	}
 
-void Bone::Draw(const GameContext &gameContext)
-{
-	gameContext.pRenderer->DrawLine(Vector2::Zero(), Vector2(m_Length, 0.f), Color::White());
-}
+	void Bone::Update(const GameContext&)
+	{
+	}
 
-void Bone::InitializeBone(bool usePhysics)
-{
-	if (GetParent())
-		SetParent(nullptr);
+	void Bone::Draw(const GameContext& gameContext)
+	{
+		gameContext.pRenderer->DrawLine(Vector2::Zero(), Vector2(m_Length, 0.f), Color::White());
+	}
+
+	void Bone::InitializeBone(bool usePhysics)
+	{
+		if (GetParent())
+			SetParent(nullptr);
 		//GetParent()->RemoveChild(this);
 
 	//if (GetGameScene())
 		//GetGameScene()->RemoveChild(this);
 
 	// Initialize transform
-	GetTransform()->Rotate(Vector3(0.f, 0.f, m_Rotation));
+		GetTransform()->Rotate(Vector3(0.f, 0.f, m_Rotation));
 
-	if (m_pParentBone)
-		GetTransform()->Translate(Math::LengthDir(m_pParentBone->m_Length, m_pParentBone->GetTransform()->Rotation.z));
-
-	if (usePhysics)
-	{
-		//SceneManager::GetInstance()->GetCurrentScene()->AddChild(this);
-
-		// Do physics stuff
-	}
-	else
-	{
-		// Check if has bone parent
 		if (m_pParentBone)
+			GetTransform()->Translate(Math::LengthDir(m_pParentBone->m_Length, m_pParentBone->GetTransform()->Rotation.z));
+
+		if (usePhysics)
 		{
-			// Attach to this bone as child
-			SetParent(m_pParentBone);
-			//m_pParentBone->AddChild(this);
+			//SceneManager::GetInstance()->GetCurrentScene()->AddChild(this);
+
+			// Do physics stuff
 		}
 		else
 		{
-			// Attach to scene
-			//SceneManager::GetInstance()->GetCurrentScene()->AddChild(this);
+			// Check if has bone parent
+			if (m_pParentBone)
+			{
+				// Attach to this bone as child
+				SetParent(m_pParentBone);
+				//m_pParentBone->AddChild(this);
+			}
+			else
+			{
+				// Attach to scene
+				//SceneManager::GetInstance()->GetCurrentScene()->AddChild(this);
+			}
 		}
+
+		GetTransform()->BuildTransform();
+
+		CalculateBindPose();
 	}
 
-	GetTransform()->BuildTransform();
-
-	CalculateBindPose();
-}
-
-void Bone::CalculateBindPose()
-{
-	m_BindingPose = GetTransform()->GetWorldMatrix().Inverse();
+	void Bone::CalculateBindPose()
+	{
+		m_BindingPose = GetTransform()->GetWorldMatrix().Inverse();
+	}
 }

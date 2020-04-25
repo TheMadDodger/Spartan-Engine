@@ -1,20 +1,22 @@
 #pragma once
 #include "SEObject.h"
 
-class Bone;
-
-class Skeleton : SEObject
+namespace SpartanEngine
 {
-public:
-	Skeleton(bool usesPhysics = false);
-	~Skeleton();
+	class Bone;
 
-	Bone *AddBone(Bone *bone);
-	void Initialize();
-	Bone *GetBone(unsigned int index) const;
+	class Skeleton : SEObject
+	{
+	public:
+		Skeleton(bool usesPhysics = false);
+		~Skeleton();
 
-private:
-	bool m_UsesPhysics;
-	std::vector<Bone*> m_Bones;
-};
+		Bone* AddBone(Bone* bone);
+		void Initialize();
+		Bone* GetBone(unsigned int index) const;
 
+	private:
+		bool m_UsesPhysics;
+		std::vector<Bone*> m_Bones;
+	};
+}

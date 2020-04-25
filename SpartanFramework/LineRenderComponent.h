@@ -1,22 +1,24 @@
 #pragma once
 #include "BaseComponent.h"
 
-class LineRenderComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	LineRenderComponent();
-	virtual ~LineRenderComponent();
+	class LineRenderComponent : public BaseComponent
+	{
+	public:
+		LineRenderComponent();
+		virtual ~LineRenderComponent();
 
-	void SetColor(Color color);
+		void SetColor(Color color);
 
-	void SetStartAndEnd(Vector2 startPos, Vector2 endPos);
+		void SetStartAndEnd(Vector2 startPos, Vector2 endPos);
 
-	Vector2 m_StartPos;
-	Vector2 m_EndPos;
-	Color m_Color;
+		Vector2 m_StartPos;
+		Vector2 m_EndPos;
+		Color m_Color;
 
-private:
-	void Draw(const GameContext &gameContext) override;
-	COMPONENT_EDITOR(LineRenderComponent)
-};
-
+	private:
+		void Draw(const GameContext& gameContext) override;
+		COMPONENT_EDITOR(LineRenderComponent)
+	};
+}

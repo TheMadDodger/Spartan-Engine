@@ -3,10 +3,10 @@
 
 namespace SpartanEngine
 {
+	class TextureData;
+
 	namespace UI
 	{
-		class TextureData;
-
 		class UIRenderMaterial : public Material
 		{
 		public:

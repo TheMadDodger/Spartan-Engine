@@ -1,12 +1,15 @@
 #pragma once
 #include "ContentLoader.h"
 #include "ContentManager.h"
-class TextureLoader : public ContentLoader<TextureData>
+
+namespace SpartanEngine
 {
-public:
-	TextureLoader();
-	~TextureLoader();
+	class TextureLoader : public ContentLoader<TextureData>
+	{
+	public:
+		TextureLoader();
+		~TextureLoader();
 
-	TextureData *LoadContent(const std::string& file) override;
-};
-
+		TextureData* LoadContent(const std::string& file) override;
+	};
+}

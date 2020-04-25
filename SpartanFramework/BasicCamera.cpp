@@ -2,31 +2,34 @@
 #include "BasicCamera.h"
 #include "CameraComponent.h"
 
-BasicCamera::BasicCamera()
+namespace SpartanEngine
 {
-	m_pCam = CreateDefaultComponent<CameraComponent>();
-}
+	BasicCamera::BasicCamera()
+	{
+		m_pCam = CreateDefaultComponent<CameraComponent>();
+	}
 
-BasicCamera::~BasicCamera()
-{
-}
+	BasicCamera::~BasicCamera()
+	{
+	}
 
-void BasicCamera::Initialize(const GameContext &gameContext)
-{
-	UNREFERENCED_PARAMETER(gameContext);
-}
+	void BasicCamera::Initialize(const GameContext& gameContext)
+	{
+		UNREFERENCED_PARAMETER(gameContext);
+	}
 
-void BasicCamera::Update(const GameContext &gameContext)
-{
-	UNREFERENCED_PARAMETER(gameContext);
-}
+	void BasicCamera::Update(const GameContext& gameContext)
+	{
+		UNREFERENCED_PARAMETER(gameContext);
+	}
 
-void BasicCamera::Draw(const GameContext &gameContext)
-{
-	UNREFERENCED_PARAMETER(gameContext);
-}
+	void BasicCamera::Draw(const GameContext& gameContext)
+	{
+		UNREFERENCED_PARAMETER(gameContext);
+	}
 
-CameraComponent* BasicCamera::GetCameraComponent()
-{
-	return m_pCam;
+	CameraComponent* BasicCamera::GetCameraComponent()
+	{
+		return m_pCam;
+	}
 }

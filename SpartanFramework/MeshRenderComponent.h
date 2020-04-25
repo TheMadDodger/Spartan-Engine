@@ -1,30 +1,32 @@
 #pragma once
 #include "BaseComponent.h"
 
-class Mesh;
-class Material;
-
-class MeshRenderComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	MeshRenderComponent();
-	virtual ~MeshRenderComponent();
+	class Mesh;
+	class Material;
 
-	void SetMesh(Mesh *pMesh);
-	void SetMaterial(size_t materialID);
+	class MeshRenderComponent : public BaseComponent
+	{
+	public:
+		MeshRenderComponent();
+		virtual ~MeshRenderComponent();
 
-private:
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
-	void Draw(const GameContext &gameContext) override;
+		void SetMesh(Mesh* pMesh);
+		void SetMaterial(size_t materialID);
 
-	COMPONENT_EDITOR(MeshRenderComponent)
+	private:
+		void Initialize(const GameContext& gameContext) override;
+		void Update(const GameContext& gameContext) override;
+		void Draw(const GameContext& gameContext) override;
 
-private:
-	Mesh *m_pMesh;
-	size_t m_MaterialID;
-	GLuint gVBO;
-	GLuint gIBO;
-	GLuint gVertexPos2DLocation;
-};
+		COMPONENT_EDITOR(MeshRenderComponent)
 
+	private:
+		Mesh* m_pMesh;
+		size_t m_MaterialID;
+		GLuint gVBO;
+		GLuint gIBO;
+		GLuint gVertexPos2DLocation;
+	};
+}

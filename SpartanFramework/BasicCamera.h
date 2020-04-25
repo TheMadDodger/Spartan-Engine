@@ -1,21 +1,23 @@
 #pragma once
 #include "GameObject.h"
 
-class CameraComponent;
-
-class BasicCamera : public GameObject
+namespace SpartanEngine
 {
-public:
-	BasicCamera();
-	~BasicCamera();
+	class CameraComponent;
 
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
-	void Draw(const GameContext &gameContext) override;
+	class BasicCamera : public GameObject
+	{
+	public:
+		BasicCamera();
+		~BasicCamera();
 
-	CameraComponent* GetCameraComponent();
+		void Initialize(const GameContext& gameContext) override;
+		void Update(const GameContext& gameContext) override;
+		void Draw(const GameContext& gameContext) override;
 
-private:
-	CameraComponent* m_pCam;
-};
+		CameraComponent* GetCameraComponent();
 
+	private:
+		CameraComponent* m_pCam;
+	};
+}

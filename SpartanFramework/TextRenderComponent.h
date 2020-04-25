@@ -1,35 +1,37 @@
 #pragma once
 #include "UIComponent.h"
 
-class TextRenderComponent : public UIComponent
+namespace SpartanEngine
 {
-public:
-	TextRenderComponent();
-	virtual ~TextRenderComponent();
+	class TextRenderComponent : public UIComponent
+	{
+	public:
+		TextRenderComponent();
+		virtual ~TextRenderComponent();
 
-	void SetText(const std::string &text);
-	void SetColor(const Color &col);
-	void SetFont(FontData *pFont);
-	FontData *GetFont();
-	TextureData *GetTextureData();
-	const std::string &GetText();
-	const Color &GetColor() const;
+		void SetText(const std::string& text);
+		void SetColor(const Color& col);
+		void SetFont(FontData* pFont);
+		FontData* GetFont();
+		TextureData* GetTextureData();
+		const std::string& GetText();
+		const Color& GetColor() const;
 
-	void SetMaxWidth(Uint32 maxWidth);
+		void SetMaxWidth(Uint32 maxWidth);
 
-	std::string m_FontFile;
+		std::string m_FontFile;
 
-	COMPONENT_EDITOR(TextRenderComponent)
+		COMPONENT_EDITOR(TextRenderComponent)
 
-protected:
-	void Draw(const GameContext &gameContext) override;
+	protected:
+		void Draw(const GameContext& gameContext) override;
 
-private:
-	std::string m_Text;
-	TextureData *m_pTextTexture = nullptr;
-	FontData *m_pFont;
-	Color m_Color;
-	bool m_FontSet = false;
-	Uint32 m_MaxWidth = 0;
-};
-
+	private:
+		std::string m_Text;
+		TextureData* m_pTextTexture = nullptr;
+		FontData* m_pFont;
+		Color m_Color;
+		bool m_FontSet = false;
+		Uint32 m_MaxWidth = 0;
+	};
+}

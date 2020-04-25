@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "UIObject.h"
-#include "UICanvas.h"
+#include "Canvas.h"
 #include "Layers.h"
-#include "UIConstraints.h"
+#include "Constraints.h"
 #include "TransformComponent.h"
 
 namespace SpartanEngine
@@ -10,7 +10,7 @@ namespace SpartanEngine
 	namespace UI
 	{
 		UIObject::UIObject(const char* name, size_t layerID) : m_pParentCanvas(nullptr), GameObject(name, layerID),
-			m_Dimensions(0.0f, 0.0f), m_OldDimensions(m_Dimensions), m_pConstraints(new UIConstraints())
+			m_Dimensions(0.0f, 0.0f), m_OldDimensions(m_Dimensions), m_pConstraints(new Constraints())
 		{
 		}
 
@@ -20,7 +20,7 @@ namespace SpartanEngine
 			m_pConstraints = nullptr;
 		}
 
-		UICanvas* UIObject::GetParentCanvas() const
+		Canvas* UIObject::GetParentCanvas() const
 		{
 			return m_pParentCanvas;
 		}
@@ -30,7 +30,7 @@ namespace SpartanEngine
 			m_Dimensions = Vector2(width, height);
 		}
 
-		UIConstraints* UIObject::GetConstraints() const
+		Constraints* UIObject::GetConstraints() const
 		{
 			return m_pConstraints;
 		}
@@ -40,7 +40,7 @@ namespace SpartanEngine
 			GameObject* pParent = pNewParent;
 			while (pParent != nullptr)
 			{
-				UICanvas* pCanvas = dynamic_cast<UICanvas*>(pParent);
+				Canvas* pCanvas = dynamic_cast<Canvas*>(pParent);
 				if (pCanvas != nullptr)
 				{
 					m_pParentCanvas = pCanvas;

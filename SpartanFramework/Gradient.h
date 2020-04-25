@@ -1,41 +1,43 @@
 #pragma once
 #include "SEObject.h"
 
-class TextureData;
-
-struct GradientKey
+namespace SpartanEngine
 {
-	GradientKey(const Math::Color& color, float percentage) : Color(color), Percentage(Math::Clamp<float>(0.0f, 100.0f, percentage)) {}
+	class TextureData;
 
-	Math::Color Color;
-	float Percentage;
-};
+	struct GradientKey
+	{
+		GradientKey(const Math::Color& color, float percentage) : Color(color), Percentage(Math::Clamp<float>(0.0f, 100.0f, percentage)) {}
 
-class Gradient : public SEObject
-{
-public:
-	Gradient(size_t resolution, size_t layers = 1);
-	virtual ~Gradient();
+		Math::Color Color;
+		float Percentage;
+	};
 
-	void BuildTexture();
-	TextureData* GetTexture() const;
+	class Gradient : public SEObject
+	{
+	public:
+		Gradient(size_t resolution, size_t layers = 1);
+		virtual ~Gradient();
 
-	void SetKey(const Math::Color& color, float percentage, size_t layer = 0);
-	void RemoveKey(float percentage, size_t layer = 1);
-	void MoveKey(float fromPercentage, float toPercentage, size_t layer = 0);
-	void ClearKeys();
+		void BuildTexture();
+		TextureData* GetTexture() const;
 
-	Color GetColor(float percentage, size_t layer = 0);
+		void SetKey(const Math::Color& color, float percentage, size_t layer = 0);
+		void RemoveKey(float percentage, size_t layer = 1);
+		void MoveKey(float fromPercentage, float toPercentage, size_t layer = 0);
+		void ClearKeys();
 
-private:
-	float* GenerateGradientData();
-	void CreateTextureData(float* pData);
-	void CreateDefaultKeys();
+		Color GetColor(float percentage, size_t layer = 0);
 
-private:
-	size_t m_Resolution;
-	size_t m_Layers;
-	TextureData* m_pTexture;
-	std::vector<std::vector<GradientKey>> m_GradientKeys;
-};
+	private:
+		float* GenerateGradientData();
+		void CreateTextureData(float* pData);
+		void CreateDefaultKeys();
 
+	private:
+		size_t m_Resolution;
+		size_t m_Layers;
+		TextureData* m_pTexture;
+		std::vector<std::vector<GradientKey>> m_GradientKeys;
+	};
+}

@@ -1,22 +1,25 @@
 #pragma once
-class SoundManager : Manager
+
+namespace SpartanEngine
 {
-public:
-	SoundManager();
-	~SoundManager();
+	class SoundManager : Manager
+	{
+	public:
+		SoundManager();
+		~SoundManager();
 
-	void Initialize();
-	void Update();
-	
-	int PlaySound(AudioData *pSound, int loop = 0);
-	void StopSound(int channel);
-	void StopAllSounds();
-	int ChannelsAvailable();
+		void Initialize();
+		void Update();
 
-private:
-	void CleanUp();
+		int PlaySound(AudioData* pSound, int loop = 0);
+		void StopSound(int channel);
+		void StopAllSounds();
+		int ChannelsAvailable();
 
-private:
-	vector<AudioData*> m_Channels;
-};
+	private:
+		void CleanUp();
 
+	private:
+		vector<AudioData*> m_Channels;
+	};
+}

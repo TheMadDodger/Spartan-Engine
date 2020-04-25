@@ -2,57 +2,57 @@
 #include "BaseComponent.h"
 #include "MathHelpers.h"
 
-class SpriteSheetData;
-
-using namespace Math;
-
-enum AnimationPlayerStatus
+namespace SpartanEngine
 {
-	SReverse,
-	SIdle,
-	SPlay,
-};
+	class SpriteSheetData;
 
-class SpriteSheetComponent : public BaseComponent
-{
-public:
-	SpriteSheetComponent();
-	~SpriteSheetComponent();
-	//SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
-	//SpriteSheetComponent(const std::string &file, const Vector2 &origin);
+	enum AnimationPlayerStatus
+	{
+		SReverse,
+		SIdle,
+		SPlay,
+	};
 
-	void SetSpriteSheet(SpriteSheetData *pSpriteSheet);
+	class SpriteSheetComponent : public BaseComponent
+	{
+	public:
+		SpriteSheetComponent();
+		~SpriteSheetComponent();
+		//SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
+		//SpriteSheetComponent(const std::string &file, const Vector2 &origin);
 
-protected:
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
-	void Draw(const GameContext &gameContext) override;
+		void SetSpriteSheet(SpriteSheetData* pSpriteSheet);
 
-public: // Animation Calls
-	void Play(const std::string &clipName, bool loop = false);
-	void SetSpeed(int speed);
-	void Reverse();
-	void Pause();
+	protected:
+		void Initialize(const GameContext& gameContext) override;
+		void Update(const GameContext& gameContext) override;
+		void Draw(const GameContext& gameContext) override;
 
-private:
-	COMPONENT_EDITOR(SpriteSheetComponent)
+	public: // Animation Calls
+		void Play(const std::string& clipName, bool loop = false);
+		void SetSpeed(int speed);
+		void Reverse();
+		void Pause();
 
-	void CalculateOrigin(const Math::Origin &origin, const FrameData &frame);
+	private:
+		COMPONENT_EDITOR(SpriteSheetComponent)
 
-private:
-	SpriteSheetData *m_pSpriteSheet;
-	Vector2 m_Origin;
-	Math::Origin m_OriginType;
-	bool m_CalculateOrigin = false;
-	const std::string m_File;
+			void CalculateOrigin(const Math::Origin& origin, const FrameData& frame);
 
-private: // Animation Player Parameters
-	int m_FramesPerSecond;
-	AnimationClip m_CurrentAnimationClip;
-	int m_CurrentFrame;
-	bool m_Loop;
-	AnimationPlayerStatus m_Status;
+	private:
+		SpriteSheetData* m_pSpriteSheet;
+		Vector2 m_Origin;
+		Math::Origin m_OriginType;
+		bool m_CalculateOrigin = false;
+		const std::string m_File;
 
-	float m_Timer = 0.0f;
-};
+	private: // Animation Player Parameters
+		int m_FramesPerSecond;
+		AnimationClip m_CurrentAnimationClip;
+		int m_CurrentFrame;
+		bool m_Loop;
+		AnimationPlayerStatus m_Status;
 
+		float m_Timer = 0.0f;
+	};
+}

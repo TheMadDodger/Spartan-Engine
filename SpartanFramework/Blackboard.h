@@ -1,69 +1,72 @@
 #pragma once
 #include "SEObject.h"
 
-class BlackboardValueBase : SEObject
+namespace SpartanEngine
 {
-public:
-	explicit BlackboardValueBase() {}
-	virtual ~BlackboardValueBase() {}
-};
-
-template<typename T>
-class BlackboardValue : public BlackboardValueBase
-{
-public:
-	BlackboardValue(T value) : Data(value) {}
-	T Data;
-};
-
-class Blackboard : SEObject
-{
-public:
-	Blackboard() {};
-	~Blackboard()
+	class BlackboardValueBase : SEObject
 	{
-		map<std::string, BlackboardValueBase*>::iterator it;
-		for (it = m_pValues.begin(); it != m_pValues.end(); ++it)
+	public:
+		explicit BlackboardValueBase() {}
+		virtual ~BlackboardValueBase() {}
+	};
+
+	template<typename T>
+	class BlackboardValue : public BlackboardValueBase
+	{
+	public:
+		BlackboardValue(T value) : Data(value) {}
+		T Data;
+	};
+
+	class Blackboard : SEObject
+	{
+	public:
+		Blackboard() {};
+		~Blackboard()
 		{
-			delete it->second;
+			map<std::string, BlackboardValueBase*>::iterator it;
+			for (it = m_pValues.begin(); it != m_pValues.end(); ++it)
+			{
+				delete it->second;
+			}
+			m_pValues.clear();
 		}
-		m_pValues.clear();
-	}
 
-	template<typename T>
-	void Add(T value, const std::string &name)
-	{
-		auto pValue = new BlackboardValue<T>(value);
-		m_pValues[name] = pValue;
-	}
+		template<typename T>
+		void Add(T value, const std::string& name)
+		{
+			auto pValue = new BlackboardValue<T>(value);
+			m_pValues[name] = pValue;
+		}
 
-	template<typename T>
-	bool Get(const std::string &name, T &data)
-	{
-		if (m_pValues.count(name) <= 0)
+		template<typename T>
+		bool Get(const std::string& name, T& data)
+		{
+			if (m_pValues.count(name) <= 0)
+				return false;
+
+			auto pValue = dynamic_cast<BlackboardValue<T>*>(m_pValues[name]);
+			if (pValue)
+			{
+				data = pValue->Data;
+				return true;
+			}
 			return false;
-
-		auto pValue = dynamic_cast<BlackboardValue<T>*>(m_pValues[name]);
-		if (pValue)
-		{
-			data = pValue->Data;
-			return true;
 		}
-		return false;
-	}
 
-	template<typename T>
-	void Set(T value, const std::string &name)
-	{
-		if (m_pValues.count(name) <= 0)
-			return;
-
-		auto pValue = dynamic_cast<BlackboardValue<T>*>(m_pValues[name]);
-		if (pValue)
+		template<typename T>
+		void Set(T value, const std::string& name)
 		{
-			pValue->Data = value;
-		}
-	}
+			if (m_pValues.count(name) <= 0)
+				return;
 
-	std::map<std::string, BlackboardValueBase*> m_pValues;
-};
+			auto pValue = dynamic_cast<BlackboardValue<T>*>(m_pValues[name]);
+			if (pValue)
+			{
+				pValue->Data = value;
+			}
+		}
+
+		std::map<std::string, BlackboardValueBase*> m_pValues;
+	};
+}

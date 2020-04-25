@@ -3,156 +3,159 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-SceneManager *SceneManager::m_pSceneManager = nullptr;
-
-GameScene *SceneManager::GetCurrentScene() const
+namespace SpartanEngine
 {
-	if (m_pScenes.empty())
-		return nullptr;
-	
-	return m_pScenes[m_CurrentScene];
-}
+	SceneManager* SceneManager::m_pSceneManager = nullptr;
 
-void SceneManager::AddScene(GameScene *pScene)
-{
-	if (pScene != nullptr)
+	GameScene* SceneManager::GetCurrentScene() const
 	{
-		m_pScenes.push_back(pScene);
+		if (m_pScenes.empty())
+			return nullptr;
+
+		return m_pScenes[m_CurrentScene];
 	}
-}
 
-void SceneManager::LoadScene(int sceneIndex, int flags)
-{
-	// Check if out of array
-	if ((size_t)sceneIndex < m_pScenes.size())
+	void SceneManager::AddScene(GameScene* pScene)
 	{
-		// Make a copy of the vector containing all the persistent objects
-		std::vector<GameObject*> persistentObjects = m_pScenes[m_CurrentScene]->m_pPersistentChildren;
-
-		// Call the RootOnDeActive() event
-		m_pScenes[m_CurrentScene]->RootOnDeActive();
-		// Clear the current scene
-		m_pScenes[m_CurrentScene]->RootCleanup();
-
-		// Update m_CurrentScene
-		m_CurrentScene = sceneIndex;
-		m_SceneHasInitialized = false;
-			
-		// Pass through persistent objects
-		m_pScenes[m_CurrentScene]->m_pPersistentChildren = persistentObjects;
-
-		// Enable the scene
-		m_pScenes[m_CurrentScene]->SetEnabled(true);
-	}
-	else
-	{
-		Utilities::Debug::LogWarning("Scene with index " + to_string(sceneIndex) + " is out of bounds!");
-	}
-}
-
-void SceneManager::LoadScene(const std::string &sceneName, int flags)
-{
-	// Find the index of this scene
-	int index = 0;
-	auto it = find_if(m_pScenes.begin(), m_pScenes.end(), [sceneName, &index](GameScene *pScene)
-	{
-		if (pScene->GetName() == sceneName)
+		if (pScene != nullptr)
 		{
-			return true;
+			m_pScenes.push_back(pScene);
+		}
+	}
+
+	void SceneManager::LoadScene(int sceneIndex, int flags)
+	{
+		// Check if out of array
+		if ((size_t)sceneIndex < m_pScenes.size())
+		{
+			// Make a copy of the vector containing all the persistent objects
+			std::vector<GameObject*> persistentObjects = m_pScenes[m_CurrentScene]->m_pPersistentChildren;
+
+			// Call the RootOnDeActive() event
+			m_pScenes[m_CurrentScene]->RootOnDeActive();
+			// Clear the current scene
+			m_pScenes[m_CurrentScene]->RootCleanup();
+
+			// Update m_CurrentScene
+			m_CurrentScene = sceneIndex;
+			m_SceneHasInitialized = false;
+
+			// Pass through persistent objects
+			m_pScenes[m_CurrentScene]->m_pPersistentChildren = persistentObjects;
+
+			// Enable the scene
+			m_pScenes[m_CurrentScene]->SetEnabled(true);
 		}
 		else
 		{
-			++index;
-			return false;
+			Utilities::Debug::LogWarning("Scene with index " + to_string(sceneIndex) + " is out of bounds!");
 		}
-	});
-
-	if (it == m_pScenes.end())
-	{
-		Utilities::Debug::LogWarning("Scene with name " + sceneName + " does not exist!");
-		return;
 	}
 
-	LoadScene(index, flags);
-}
+	void SceneManager::LoadScene(const std::string& sceneName, int flags)
+	{
+		// Find the index of this scene
+		int index = 0;
+		auto it = find_if(m_pScenes.begin(), m_pScenes.end(), [sceneName, &index](GameScene* pScene)
+		{
+			if (pScene->GetName() == sceneName)
+			{
+				return true;
+			}
+			else
+			{
+				++index;
+				return false;
+			}
+		});
 
-void SceneManager::LoadSceneNextFrame(const std::string &sceneName)
-{
-	m_ToLoadNextFrame = sceneName;
-}
+		if (it == m_pScenes.end())
+		{
+			Utilities::Debug::LogWarning("Scene with name " + sceneName + " does not exist!");
+			return;
+		}
 
-SceneManager *SceneManager::GetInstance()
-{
-	if (m_pSceneManager)
+		LoadScene(index, flags);
+	}
+
+	void SceneManager::LoadSceneNextFrame(const std::string& sceneName)
+	{
+		m_ToLoadNextFrame = sceneName;
+	}
+
+	SceneManager* SceneManager::GetInstance()
+	{
+		if (m_pSceneManager)
+			return m_pSceneManager;
+
+		m_pSceneManager = new SceneManager();
 		return m_pSceneManager;
-
-	m_pSceneManager = new SceneManager();
-	return m_pSceneManager;
-}
-
-void SceneManager::Destroy()
-{
-	delete m_pSceneManager;
-	m_pSceneManager = nullptr;
-}
-
-void SceneManager::Initialize(const GameContext &gameContext)
-{
-	if (m_pScenes.empty())
-	{
-		Utilities::Debug::LogError("There must be at least 1 scene added to the SceneManager!");
-		return;
 	}
 
-	m_pScenes[m_CurrentScene]->RootInitialize(gameContext);
-	m_pScenes[m_CurrentScene]->LoadPersistent();
-	m_SceneHasInitialized = true;
-
-	m_pScenes[m_CurrentScene]->GameStart(gameContext);
-}
-
-void SceneManager::Update(const GameContext &gameContext)
-{
-	if (m_ToLoadNextFrame != "")
+	void SceneManager::Destroy()
 	{
-		LoadScene(m_ToLoadNextFrame);
-		m_ToLoadNextFrame = "";
+		delete m_pSceneManager;
+		m_pSceneManager = nullptr;
 	}
 
-	// Check if the current scene has been initialized if not do that
-	if (!m_SceneHasInitialized)
-		Initialize(gameContext);
-
-	m_pScenes[m_CurrentScene]->RootUpdate(gameContext);
-
-	for(int i : m_AdditiveScenes)
+	void SceneManager::Initialize(const GameContext& gameContext)
 	{
-		m_pScenes[i]->RootUpdate(gameContext);
-	}
-}
+		if (m_pScenes.empty())
+		{
+			Utilities::Debug::LogError("There must be at least 1 scene added to the SceneManager!");
+			return;
+		}
 
-void SceneManager::Draw(const GameContext &gameContext)
-{
-	if (!m_SceneHasInitialized) return; // Safety check
+		m_pScenes[m_CurrentScene]->RootInitialize(gameContext);
+		m_pScenes[m_CurrentScene]->LoadPersistent();
+		m_SceneHasInitialized = true;
 
-	m_pScenes[m_CurrentScene]->RootDraw(gameContext);
-
-	for (int i : m_AdditiveScenes)
-	{
-		m_pScenes[i]->RootDraw(gameContext);
-	}
-}
-
-SceneManager::SceneManager()
-{
-}
-
-SceneManager::~SceneManager()
-{
-	for (auto pScene : m_pScenes)
-	{
-		delete pScene;
+		m_pScenes[m_CurrentScene]->GameStart(gameContext);
 	}
 
-	m_pScenes.clear();
+	void SceneManager::Update(const GameContext& gameContext)
+	{
+		if (m_ToLoadNextFrame != "")
+		{
+			LoadScene(m_ToLoadNextFrame);
+			m_ToLoadNextFrame = "";
+		}
+
+		// Check if the current scene has been initialized if not do that
+		if (!m_SceneHasInitialized)
+			Initialize(gameContext);
+
+		m_pScenes[m_CurrentScene]->RootUpdate(gameContext);
+
+		for (int i : m_AdditiveScenes)
+		{
+			m_pScenes[i]->RootUpdate(gameContext);
+		}
+	}
+
+	void SceneManager::Draw(const GameContext& gameContext)
+	{
+		if (!m_SceneHasInitialized) return; // Safety check
+
+		m_pScenes[m_CurrentScene]->RootDraw(gameContext);
+
+		for (int i : m_AdditiveScenes)
+		{
+			m_pScenes[i]->RootDraw(gameContext);
+		}
+	}
+
+	SceneManager::SceneManager()
+	{
+	}
+
+	SceneManager::~SceneManager()
+	{
+		for (auto pScene : m_pScenes)
+		{
+			delete pScene;
+		}
+
+		m_pScenes.clear();
+	}
 }

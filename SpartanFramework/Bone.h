@@ -1,33 +1,37 @@
 #pragma once
 #include "GameObject.h"
-class Skeleton;
 
-class Bone : public GameObject
+namespace SpartanEngine
 {
-public:
-	Bone(float length, float rotation);
-	virtual ~Bone();
+	class Skeleton;
 
-	Bone *AddChildBone(Bone *bone);
+	class Bone : public GameObject
+	{
+	public:
+		Bone(float length, float rotation);
+		virtual ~Bone();
 
-	const Matrix4X4 &GetBindPose() const;
+		Bone* AddChildBone(Bone* bone);
 
-private:
-	virtual void Initialize(const GameContext &gameContext);
-	virtual void Update(const GameContext &gameContext);
-	virtual void Draw(const GameContext &gameContext);
+		const Matrix4X4& GetBindPose() const;
 
-private:
-	friend class Skeleton;
-	void InitializeBone(bool usePhysics);
-	void CalculateBindPose();
+	private:
+		virtual void Initialize(const GameContext& gameContext);
+		virtual void Update(const GameContext& gameContext);
+		virtual void Draw(const GameContext& gameContext);
 
-private:
-	Skeleton *m_pOwner;
-	Bone *m_pParentBone;
-	std::vector<Bone*> m_ChildBones;
+	private:
+		friend class Skeleton;
+		void InitializeBone(bool usePhysics);
+		void CalculateBindPose();
 
-	Matrix4X4 m_BindingPose;
-	float m_Length;
-	float m_Rotation;
-};
+	private:
+		Skeleton* m_pOwner;
+		Bone* m_pParentBone;
+		std::vector<Bone*> m_ChildBones;
+
+		Matrix4X4 m_BindingPose;
+		float m_Length;
+		float m_Rotation;
+	};
+}

@@ -1,129 +1,132 @@
 #pragma once
 #include "Node.h"
 
-enum class BTNodeResult
+namespace SpartanEngine
 {
-	BTNotStarted,
-	BTInProgress,
-	BTSucces,
-	BTFailed,
-	BTAbort,
-};
+	enum class BTNodeResult
+	{
+		BTNotStarted,
+		BTInProgress,
+		BTSucces,
+		BTFailed,
+		BTAbort,
+	};
 
-class BTNode : Node
-{
-public:
-	BTNode();
-	virtual ~BTNode();
+	class BTNode : Node
+	{
+	public:
+		BTNode();
+		virtual ~BTNode();
 
-	virtual void ExecuteNode() = 0;
-	BTNodeResult RootExecuteNode();
+		virtual void ExecuteNode() = 0;
+		BTNodeResult RootExecuteNode();
 
-	virtual void TickNode(float) {};
-	virtual BTNodeResult RootTickNode(float deltaTime);
+		virtual void TickNode(float) {};
+		virtual BTNodeResult RootTickNode(float deltaTime);
 
-	AIBehaviourTree *GetBehaviourTree();
-	const BTNodeResult &GetNodeState() const;
+		AIBehaviourTree* GetBehaviourTree();
+		const BTNodeResult& GetNodeState() const;
 
-	bool HasExecuted();
-	void FullReset();
+		bool HasExecuted();
+		void FullReset();
 
-protected:
-	void RootResetNode();
-	virtual void ResetNode() {};
+	protected:
+		void RootResetNode();
+		virtual void ResetNode() {};
 
-protected:
-	// The current task being executed
-	int m_CurrentNode = -1;
-	BTNode *m_pCurrentNode;
+	protected:
+		// The current task being executed
+		int m_CurrentNode = -1;
+		BTNode* m_pCurrentNode;
 
-	// Execute only gets called once on the first tick
-	bool m_bExecuted = false;
+		// Execute only gets called once on the first tick
+		bool m_bExecuted = false;
 
-	// Attached nodes
-	vector<BTNode*> m_pNodes;
+		// Attached nodes
+		vector<BTNode*> m_pNodes;
 
-	// The behaviour tree that owns this node
-	AIBehaviourTree *m_pOwnerTree;
+		// The behaviour tree that owns this node
+		AIBehaviourTree* m_pOwnerTree;
 
-	// The state of the node
-	BTNodeResult m_NodeState = BTNodeResult::BTNotStarted;
+		// The state of the node
+		BTNodeResult m_NodeState = BTNodeResult::BTNotStarted;
 
-private:
-	friend class AIBehaviourTree;
-	void SetBehaviourTree(AIBehaviourTree *pBehaviourTree);
-};
+	private:
+		friend class AIBehaviourTree;
+		void SetBehaviourTree(AIBehaviourTree* pBehaviourTree);
+	};
 
-class BTTaskNode : public BTNode
-{
-public:
-	BTTaskNode() {};
-	virtual ~BTTaskNode() {};
+	class BTTaskNode : public BTNode
+	{
+	public:
+		BTTaskNode() {};
+		virtual ~BTTaskNode() {};
 
-private:
-	virtual void RootExecuteTask(Blackboard *pBlackboard);
-	
-	virtual void ExecuteNode() override;
+	private:
+		virtual void RootExecuteTask(Blackboard* pBlackboard);
 
-	virtual void TickNode(float deltaTime) override;
+		virtual void ExecuteNode() override;
 
-	virtual BTNodeResult ExecuteTask(Blackboard *) = 0;
-	virtual void TickTask(float, Blackboard *) {};
+		virtual void TickNode(float deltaTime) override;
 
-	// Events
-	virtual void OnTaskAborted() {};
-	virtual void OnTaskFinished() {};
+		virtual BTNodeResult ExecuteTask(Blackboard*) = 0;
+		virtual void TickTask(float, Blackboard*) {};
 
-protected:
-	void FinishTask(const BTNodeResult &result);
+		// Events
+		virtual void OnTaskAborted() {};
+		virtual void OnTaskFinished() {};
 
-private:
-	friend class BTTreeNode;
-};
+	protected:
+		void FinishTask(const BTNodeResult& result);
 
-class BTTreeNode : public BTNode
-{
-public:
-	BTTreeNode() {};
-	virtual ~BTTreeNode() {};
+	private:
+		friend class BTTreeNode;
+	};
 
-	void AddNode(BTNode *pNode);
+	class BTTreeNode : public BTNode
+	{
+	public:
+		BTTreeNode() {};
+		virtual ~BTTreeNode() {};
 
-protected:
-	const BTNodeResult &GetCurrentNodeState() const;
+		void AddNode(BTNode* pNode);
 
-	bool NextNode();
-};
+	protected:
+		const BTNodeResult& GetCurrentNodeState() const;
 
-class BTTreeRootNode : public BTTreeNode
-{
-public:
-	BTTreeRootNode() {};
-	virtual ~BTTreeRootNode() {};
+		bool NextNode();
+	};
 
-private:
-	virtual void ExecuteNode() {};
-	virtual void TickNode(float deltaTime) override;
-};
+	class BTTreeRootNode : public BTTreeNode
+	{
+	public:
+		BTTreeRootNode() {};
+		virtual ~BTTreeRootNode() {};
 
-class BTTreeSelectorNode : public BTTreeNode
-{
-public:
-	BTTreeSelectorNode() {};
-	virtual ~BTTreeSelectorNode() {};
+	private:
+		virtual void ExecuteNode() {};
+		virtual void TickNode(float deltaTime) override;
+	};
 
-private:
-	virtual void ExecuteNode() {};
-	virtual void TickNode(float deltaTime) override;
-};
+	class BTTreeSelectorNode : public BTTreeNode
+	{
+	public:
+		BTTreeSelectorNode() {};
+		virtual ~BTTreeSelectorNode() {};
 
-class BTTreeSequenceNode : public BTTreeNode
-{
-public:
-	BTTreeSequenceNode() {};
-	virtual ~BTTreeSequenceNode() {};
+	private:
+		virtual void ExecuteNode() {};
+		virtual void TickNode(float deltaTime) override;
+	};
 
-private:
-	virtual void ExecuteNode() {};
-	virtual void TickNode(float deltaTime) override;
-};
+	class BTTreeSequenceNode : public BTTreeNode
+	{
+	public:
+		BTTreeSequenceNode() {};
+		virtual ~BTTreeSequenceNode() {};
+
+	private:
+		virtual void ExecuteNode() {};
+		virtual void TickNode(float deltaTime) override;
+	};
+}

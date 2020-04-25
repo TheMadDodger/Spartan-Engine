@@ -1,15 +1,18 @@
 #pragma once
-class ShaderLoader : public ContentLoader<ShaderData>
+
+namespace SpartanEngine
 {
-public:
-	ShaderLoader();
-	virtual ~ShaderLoader();
+	class ShaderLoader : public ContentLoader<ShaderData>
+	{
+	public:
+		ShaderLoader();
+		virtual ~ShaderLoader();
 
-	ShaderData *LoadContent(const std::string& file) override;
+		ShaderData* LoadContent(const std::string& file) override;
 
-private:
-	bool GetCompiledShader(unsigned int &shaderID, unsigned int shader_type, const std::string& path, std::string &source);
-	bool PreProcessShader(const std::string& path, std::string& source);
-	GLuint GetShaderType(const std::string& line, std::string& path, std::string& rootPath);
-};
-
+	private:
+		bool GetCompiledShader(unsigned int& shaderID, unsigned int shader_type, const std::string& path, std::string& source);
+		bool PreProcessShader(const std::string& path, std::string& source);
+		GLuint GetShaderType(const std::string& line, std::string& path, std::string& rootPath);
+	};
+}

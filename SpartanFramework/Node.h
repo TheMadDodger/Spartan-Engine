@@ -1,12 +1,15 @@
 #pragma once
 #include "SEObject.h"
 
-class Node : SEObject
+namespace SpartanEngine
 {
-public:
-	Node() {}
-	~Node() {}
+	class Node : SEObject
+	{
+	public:
+		Node() {}
+		~Node() {}
 
-private:
+	private:
 
-};
+	};
+}

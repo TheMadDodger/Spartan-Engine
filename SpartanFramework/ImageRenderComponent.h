@@ -2,28 +2,30 @@
 #include "UIComponent.h"
 #include <string>
 
-class ImageRenderComponent : public UIComponent
+namespace SpartanEngine
 {
-public:
-	ImageRenderComponent();
-	~ImageRenderComponent();
-	
-	// Setters
-	void SetTexture(TextureData *pTexture);
-	void SetColor(const Color &color);
+	class ImageRenderComponent : public UIComponent
+	{
+	public:
+		ImageRenderComponent();
+		~ImageRenderComponent();
 
-	// Getters
-	TextureData* GetTexture();
+		// Setters
+		void SetTexture(TextureData* pTexture);
+		void SetColor(const Color& color);
 
-private:
-	void Update(const GameContext &) override;
-	void Draw(const GameContext &) override;
+		// Getters
+		TextureData* GetTexture();
 
-	COMPONENT_EDITOR(ImageRenderComponent)
+	private:
+		void Update(const GameContext&) override;
+		void Draw(const GameContext&) override;
 
-private:
-	TextureData *m_pImage = nullptr;
-	Vector4 m_Offsets;
-	Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
-};
+		COMPONENT_EDITOR(ImageRenderComponent)
 
+	private:
+		TextureData* m_pImage = nullptr;
+		Vector4 m_Offsets;
+		Color m_Color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+	};
+}

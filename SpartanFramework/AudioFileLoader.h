@@ -2,13 +2,15 @@
 #include "ContentLoader.h"
 #include "ContentManager.h"
 
-class AudioFileLoader : public ContentLoader<AudioData>
+namespace SpartanEngine
 {
-public:
-	AudioFileLoader();
-	~AudioFileLoader();
+	class AudioFileLoader : public ContentLoader<AudioData>
+	{
+	public:
+		AudioFileLoader();
+		~AudioFileLoader();
 
-private:
-	AudioData *LoadContent(const std::string& file) override;
-};
-
+	private:
+		AudioData* LoadContent(const std::string& file) override;
+	};
+}

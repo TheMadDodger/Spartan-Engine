@@ -2,45 +2,47 @@
 #include "Material.h"
 #include "Manager.h"
 
-class MaterialManager : Manager
+namespace SpartanEngine
 {
-public:
-	static void Cleanup();
-
-	template<typename T>
-	static unsigned int CreateMaterial(const std::string& shaderPath)
+	class MaterialManager : Manager
 	{
-		ShaderData* pShader = ContentManager::GetInstance()->Load<ShaderData>(shaderPath);
-		T* pMaterial = new T(pShader);
+	public:
+		static void Cleanup();
 
-		Material* pNewMaterial = dynamic_cast<Material*>(pMaterial);
-
-		if (pNewMaterial == nullptr)
+		template<typename T>
+		static unsigned int CreateMaterial(const std::string& shaderPath)
 		{
-			delete pMaterial;
-			Utilities::Debug::LogError("Error when trying to create material!");
-			return 0;
+			ShaderData* pShader = ContentManager::GetInstance()->Load<ShaderData>(shaderPath);
+			T* pMaterial = new T(pShader);
+
+			Material* pNewMaterial = dynamic_cast<Material*>(pMaterial);
+
+			if (pNewMaterial == nullptr)
+			{
+				delete pMaterial;
+				Utilities::Debug::LogError("Error when trying to create material!");
+				return 0;
+			}
+
+			m_pMaterials.push_back(pNewMaterial);
+
+			return m_pMaterials.size() - 1;
 		}
 
-		m_pMaterials.push_back(pNewMaterial);
+		static Material* GetMaterial(size_t id);
 
-		return m_pMaterials.size() - 1;
-	}
+		template<class T>
+		static T* GetMaterial(size_t id)
+		{
+			Material* pMat = GetMaterial(id);
+			return (T*)pMat;
+		}
 
-	static Material* GetMaterial(size_t id);
+	private:
+		static std::vector<Material*> m_pMaterials;
 
-	template<class T>
-	static T* GetMaterial(size_t id)
-	{
-		Material *pMat = GetMaterial(id);
-		return (T*)pMat;
-	}
-
-private:
-	static std::vector<Material*> m_pMaterials;
-
-private:
-	MaterialManager();
-	~MaterialManager();
-};
-
+	private:
+		MaterialManager();
+		~MaterialManager();
+	};
+}

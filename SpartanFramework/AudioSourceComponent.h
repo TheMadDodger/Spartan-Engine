@@ -1,70 +1,72 @@
 #pragma once
 #include "BaseComponent.h"
 
-class AudioData;
-
-enum DecayType
+namespace SpartanEngine
 {
-	Linear,
-	Exponential,
-	Logarithmic,
-};
+	class AudioData;
 
-struct AudioSourceSettings
-{
-	AudioSourceSettings(float minDecayDistance, float maxDecayDistance,
-		DecayType decayType = DecayType::Exponential, float maxVolume = MIX_MAX_VOLUME) :
-		MinDecayDistance(minDecayDistance), MaxDecayDistance(maxDecayDistance), MaxVolume(maxVolume), DistanceDecayType(decayType) {}
+	enum DecayType
+	{
+		Linear,
+		Exponential,
+		Logarithmic,
+	};
 
-	//AudioSourceSettings(float minDecayDistance, float maxDecayDistance, float linearDecayStep, float maxVolume = MIX_MAX_VOLUME) :
-		//MinDecayDistance(minDecayDistance), MaxDecayDistance(maxDecayDistance), LinearDecayStep(linearDecayStep), MaxVolume(maxVolume), DistanceDecayType(DecayType::Linear) {}
+	struct AudioSourceSettings
+	{
+		AudioSourceSettings(float minDecayDistance, float maxDecayDistance,
+			DecayType decayType = DecayType::Exponential, float maxVolume = MIX_MAX_VOLUME) :
+			MinDecayDistance(minDecayDistance), MaxDecayDistance(maxDecayDistance), MaxVolume(maxVolume), DistanceDecayType(decayType) {}
 
-	AudioSourceSettings() {};
+		//AudioSourceSettings(float minDecayDistance, float maxDecayDistance, float linearDecayStep, float maxVolume = MIX_MAX_VOLUME) :
+			//MinDecayDistance(minDecayDistance), MaxDecayDistance(maxDecayDistance), LinearDecayStep(linearDecayStep), MaxVolume(maxVolume), DistanceDecayType(DecayType::Linear) {}
 
-	float MinDecayDistance;
-	float MaxDecayDistance;
-	int Exponent = 2;
-	//float LinearDecayStep;
-	float MaxVolume = MIX_MAX_VOLUME;
-	float MinVolume = 0.0f;
+		AudioSourceSettings() {};
 
-	bool IsConstant = false;
+		float MinDecayDistance;
+		float MaxDecayDistance;
+		int Exponent = 2;
+		//float LinearDecayStep;
+		float MaxVolume = MIX_MAX_VOLUME;
+		float MinVolume = 0.0f;
 
-	DecayType DistanceDecayType = DecayType::Exponential;
-};
+		bool IsConstant = false;
 
-class AudioSourceComponent : public BaseComponent
-{
-public:
-	AudioSourceComponent();
-	~AudioSourceComponent();
+		DecayType DistanceDecayType = DecayType::Exponential;
+	};
 
-	void SetSettings(const AudioSourceSettings &settings);
-	AudioSourceSettings &GetSettings();
+	class AudioSourceComponent : public BaseComponent
+	{
+	public:
+		AudioSourceComponent();
+		~AudioSourceComponent();
 
-	void Play(const GameContext &gameContext);
+		void SetSettings(const AudioSourceSettings& settings);
+		AudioSourceSettings& GetSettings();
 
-	AudioSourceSettings m_Settings;
+		void Play(const GameContext& gameContext);
 
-protected:
-	void Initialize(const GameContext &gameContext) override;
-	void Update(const GameContext &gameContext) override;
+		AudioSourceSettings m_Settings;
 
-private:
-	float InterpolateVolume(Vector3 &listenPosition);
-	float LinInterpolate(float value);
-	float ExpInterpolate(float value);
-	float LogInterpolate(float value);
+	protected:
+		void Initialize(const GameContext& gameContext) override;
+		void Update(const GameContext& gameContext) override;
 
-	void ConstantSource(const GameContext &gameContext);
+	private:
+		float InterpolateVolume(Vector3& listenPosition);
+		float LinInterpolate(float value);
+		float ExpInterpolate(float value);
+		float LogInterpolate(float value);
 
-	COMPONENT_EDITOR(AudioSourceComponent)
+		void ConstantSource(const GameContext& gameContext);
 
-private:
-	const char* m_AudioFile;
-	AudioData *m_pAudioData;
+		COMPONENT_EDITOR(AudioSourceComponent)
 
-	bool m_bIsPlaying = false;
-	int m_PlayingChannel = -1;
-};
+	private:
+		const char* m_AudioFile;
+		AudioData* m_pAudioData;
 
+		bool m_bIsPlaying = false;
+		int m_PlayingChannel = -1;
+	};
+}

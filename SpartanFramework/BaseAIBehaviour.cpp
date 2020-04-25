@@ -1,20 +1,23 @@
 #include "stdafx.h"
 #include "BaseAIBehaviour.h"
 
-BaseAIBehaviour::BaseAIBehaviour()
+namespace SpartanEngine
 {
-}
+	BaseAIBehaviour::BaseAIBehaviour()
+	{
+	}
 
-BaseAIBehaviour::~BaseAIBehaviour()
-{
-}
+	BaseAIBehaviour::~BaseAIBehaviour()
+	{
+	}
 
-AIComponent *BaseAIBehaviour::GetAIOwner()
-{
-	return m_pAIOwner;
-}
+	AIComponent* BaseAIBehaviour::GetAIOwner()
+	{
+		return m_pAIOwner;
+	}
 
-void BaseAIBehaviour::SetOwner(AIComponent *pOwner)
-{
-	m_pAIOwner = pOwner;
+	void BaseAIBehaviour::SetOwner(AIComponent* pOwner)
+	{
+		m_pAIOwner = pOwner;
+	}
 }

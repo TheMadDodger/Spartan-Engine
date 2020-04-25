@@ -2,11 +2,11 @@
 #include "Event.h"
 #include "UIObject.h"
 
-class TextureData;
-class ImageRenderComponent;
-
 namespace SpartanEngine
 {
+	class TextureData;
+	class ImageRenderComponent;
+
 	namespace UI
 	{
 		class UIButton : public UIObject

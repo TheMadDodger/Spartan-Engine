@@ -1,35 +1,38 @@
 #pragma once
 #include "SEObject.h"
 
-template<typename T>
-class Singleton : Manager
+namespace SpartanEngine
 {
-public:
-	static T *GetInstance()
+	template<typename T>
+	class Singleton : Manager
 	{
-		if (!m_pInstance)
+	public:
+		static T* GetInstance()
 		{
-			m_pInstance = new T();
-			m_pInstance->OnInstanceCreated();
+			if (!m_pInstance)
+			{
+				m_pInstance = new T();
+				m_pInstance->OnInstanceCreated();
+			}
+			return m_pInstance;
 		}
-		return m_pInstance;
-	}
 
-	static void Destroy()
-	{
-		if (m_pInstance)
+		static void Destroy()
 		{
-			delete m_pInstance;
-			m_pInstance = nullptr;
+			if (m_pInstance)
+			{
+				delete m_pInstance;
+				m_pInstance = nullptr;
+			}
 		}
-	}
 
-protected:
-	virtual void OnInstanceCreated() {}
+	protected:
+		virtual void OnInstanceCreated() {}
 
-private:
-	static T *m_pInstance;
-};
+	private:
+		static T* m_pInstance;
+	};
 
-template<typename T>
-T * Singleton<T>::m_pInstance = nullptr;
+	template<typename T>
+	T* Singleton<T>::m_pInstance = nullptr;
+}

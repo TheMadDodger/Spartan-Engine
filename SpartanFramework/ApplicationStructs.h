@@ -1,31 +1,35 @@
 #pragma once
-class Renderer;
-class GameTime;
-class CameraComponent;
-class InputManager;
-class SoundManager;
-//class ParticleManager;
 
-struct WindowSettings
+namespace SpartanEngine
 {
-	WindowSettings() {}
-	int Width = 800;
-	int Height = 600;
-};
+	class Renderer;
+	class GameTime;
+	class CameraComponent;
+	class InputManager;
+	class SoundManager;
+	//class ParticleManager;
 
-struct GameSettings
-{
-	WindowSettings Window;
-	std::string AppName;
-	bool EnableVSync = false;
-	bool Fullscreen = false;
-};
+	struct WindowSettings
+	{
+		WindowSettings() {}
+		int Width = 800;
+		int Height = 600;
+	};
 
-struct GameContext
-{
-	Renderer *pRenderer = nullptr;
-	GameTime *pTime = nullptr;
-	InputManager *pInput = nullptr;
-	SoundManager *pSound = nullptr;
-	//ParticleManager *pParticleManager = nullptr;
-};
+	struct GameSettings
+	{
+		WindowSettings Window;
+		std::string AppName;
+		bool EnableVSync = false;
+		bool Fullscreen = false;
+	};
+
+	struct GameContext
+	{
+		Renderer* pRenderer = nullptr;
+		GameTime* pTime = nullptr;
+		InputManager* pInput = nullptr;
+		SoundManager* pSound = nullptr;
+		//ParticleManager *pParticleManager = nullptr;
+	};
+}

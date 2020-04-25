@@ -2,7 +2,7 @@
 #include "Constraints.h"
 #include "BaseUIConstraint.h"
 #include "UIObject.h"
-#include "UICanvas.h"
+#include "Canvas.h"
 #include "TransformComponent.h"
 
 namespace SpartanEngine

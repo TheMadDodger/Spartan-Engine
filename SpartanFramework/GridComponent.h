@@ -1,24 +1,27 @@
 #pragma once
 #include "BaseComponent.h"
 
-class BaseGrid;
-
-class GridComponent : public BaseComponent
+namespace SpartanEngine
 {
-public:
-	GridComponent();
-	virtual ~GridComponent();
-	
-	void SetGrid(BaseGrid* pGrid);
-	BaseGrid *GetGrid();
+	class BaseGrid;
 
-private:
-	COMPONENT_EDITOR(GridComponent)
+	class GridComponent : public BaseComponent
+	{
+	public:
+		GridComponent();
+		virtual ~GridComponent();
 
-	virtual void Initialize(const GameContext &gameContext);
-	virtual void Update(const GameContext &gameContext);
-	virtual void Draw(const GameContext &gameContext);
+		void SetGrid(BaseGrid* pGrid);
+		BaseGrid* GetGrid();
 
-private:
-	BaseGrid *m_pGrid;
-};
+	private:
+		COMPONENT_EDITOR(GridComponent)
+
+			virtual void Initialize(const GameContext& gameContext);
+		virtual void Update(const GameContext& gameContext);
+		virtual void Draw(const GameContext& gameContext);
+
+	private:
+		BaseGrid* m_pGrid;
+	};
+}

@@ -5,7 +5,7 @@ namespace SpartanEngine
 {
 	namespace UI
 	{
-		class UICanvas;
+		class Canvas;
 		class Constraints;
 
 		class UIObject : public GameObject
@@ -14,7 +14,7 @@ namespace SpartanEngine
 			UIObject(const char* name = "UIObject", size_t layerID = 0);
 			~UIObject();
 
-			UICanvas* GetParentCanvas() const;
+			Canvas* GetParentCanvas() const;
 			void SetSize(float width, float height);
 
 			Constraints* GetConstraints() const;
@@ -28,7 +28,7 @@ namespace SpartanEngine
 			virtual void RootDraw(const GameContext& gameContext) override;
 
 		protected:
-			UICanvas* m_pParentCanvas;
+			Canvas* m_pParentCanvas;
 			Vector2 m_Dimensions;
 			Vector2 m_OldDimensions;
 
