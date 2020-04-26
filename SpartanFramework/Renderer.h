@@ -45,6 +45,8 @@ namespace SpartanEngine
 
 		UI::UIRenderMaterial* GetUIRenderer();
 
+		void ChangeWindow();
+
 	public:
 		// Primitive Rendering
 		void DrawSolidRect(const Vector2& topLeft, const Vector2& bottomRight, const Math::Color& color);
@@ -72,5 +74,6 @@ namespace SpartanEngine
 
 	private: // Internal private functions
 		const Vector2 CalculateOrigin(const Math::Origin& origin, SDL_Surface* pImage);
+		void HandleWindowResizing(int width, int height);
 	};
 }

@@ -37,6 +37,18 @@ namespace SpartanEngine
 		m_pChildren.clear();
 	}
 
+	void GameObject::SetFullDirty()
+	{
+		bool hasChildren = false;
+		for (auto pChild : GetChildren())
+		{
+			pChild->SetFullDirty();
+			hasChildren = true;
+		}
+		if (hasChildren) return;
+		SetDirty();
+	}
+
 	void GameObject::AddChild(GameObject* pChild)
 	{
 		m_pChildren.push_back(pChild);

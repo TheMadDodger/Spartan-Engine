@@ -16,12 +16,20 @@ namespace SpartanEngine
 		int Height = 600;
 	};
 
+	enum FullscreenMode
+	{
+		Exclusive = SDL_WINDOW_FULLSCREEN,
+		Borderless = SDL_WINDOW_FULLSCREEN_DESKTOP,
+	};
+
 	struct GameSettings
 	{
 		WindowSettings Window;
 		std::string AppName;
 		bool EnableVSync = false;
 		bool Fullscreen = false;
+		FullscreenMode FullscreenMode = FullscreenMode::Exclusive;
+		bool ResizableWindow = false;
 	};
 
 	struct GameContext

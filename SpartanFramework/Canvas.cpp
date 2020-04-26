@@ -12,7 +12,7 @@ namespace SpartanEngine
 	{
 		Material* Canvas::m_pCanvasRenderer = nullptr;
 
-		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr)
+		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr), m_ResizeToScreen(nullptr)
 		{
 			if (m_pCanvasRenderer == nullptr)
 			{
@@ -47,6 +47,11 @@ namespace SpartanEngine
 			return m_UIProjectionMatrix;
 		}
 
+		void Canvas::AutoResizeToScreen(bool enable)
+		{
+			m_ResizeToScreen = enable;
+		}
+
 		void Canvas::RootDraw(const GameContext& gameContext)
 		{
 			// User defined Draw()
@@ -70,12 +75,22 @@ namespace SpartanEngine
 
 		void Canvas::Initialize(const GameContext& gameContext)
 		{
+			if (m_ResizeToScreen)
+			{
+				AutoResizeToScreenControl();
+			}
+
 			m_pRenderTexture = RenderTexture::CreateRenderTexture(m_Dimensions.x, m_Dimensions.y, false);
 			CreateCanvasQuad();
 		}
 
 		void Canvas::Update(const GameContext& gameContext)
 		{
+			if (m_ResizeToScreen)
+			{
+				AutoResizeToScreenControl();
+			}
+
 			CalculateMatrices();
 
 			if (m_pParentCanvas == nullptr)
@@ -95,6 +110,8 @@ namespace SpartanEngine
 		void Canvas::PostDraw(const GameContext& gameContext)
 		{
 			if (IsDirty()) m_pRenderTexture->StopUse();
+			else if (m_pParentCanvas != nullptr) return;
+
 			m_pCanvasRenderer->Use();
 			m_pCanvasRenderer->SetMatrix4("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
 			m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
@@ -162,18 +179,25 @@ namespace SpartanEngine
 
 		void Canvas::CalculateMatrices()
 		{
-			if (m_pParentCanvas)
-			{
-				//m_pParentCanvas->m_CanvasProjectionMatrix
-				return;
-			}
-
 			IntVector2 renderWindow = RenderTexture::GetDefaultRenderTexture()->GetDimensions();
 			Vector3 gameWindow = Vector3((float)renderWindow.x, (float)renderWindow.y, 2.0f);
+
+			if (m_pParentCanvas)
+			{
+				Vector2 parentSize = m_pParentCanvas->GetSize();
+				gameWindow = Vector3(parentSize.x, parentSize.y, 2.0f);
+			}
+
 			m_CanvasMatrix = (Matrix4X4)GetTransform()->GetLocalTransformMatrix();
 			auto view = Vector3(gameWindow.x, gameWindow.y, 2.0f);
 			m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
 			m_CanvasProjectionMatrix = m_CanvasMatrix * Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_ProjectionMatrix.Inverse();
+		}
+
+		void Canvas::AutoResizeToScreenControl()
+		{
+			IntVector2 renderWindow = RenderTexture::GetDefaultRenderTexture()->GetDimensions();
+			SetSize((float)renderWindow.x, (float)renderWindow.y);
 		}
 
 		void Canvas::UIHandleMouse(const Vector2& relativeMousePos)
@@ -206,6 +230,7 @@ namespace SpartanEngine
 
 			Vector3 canvasSize = Vector3((float)newDimensions.x, (float)newDimensions.y, 2.0f);
 			m_UIProjectionMatrix = Matrix4X4::CreateTranslationMatrix(canvasSize / -2.0f) * Matrix4X4::CreateScalingMatrix(canvasSize / 2.0f).Inverse();
+			SetFullDirty();
 		}
 	}
 }

@@ -139,6 +139,8 @@ namespace SpartanEngine
 			return pComp;
 		}
 
+		void SetFullDirty();
+
 	private:
 		void AddChild(GameObject* pChild);
 		void RemoveChild(GameObject* pChild);

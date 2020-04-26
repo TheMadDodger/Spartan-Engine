@@ -29,6 +29,8 @@ namespace SpartanEngine
 
 			const Matrix4X4& GetUIProjectionMatrix();
 
+			void AutoResizeToScreen(bool enable);
+
 		private:
 			void RootDraw(const GameContext& gameContext) override;
 			void Initialize(const GameContext& gameContext) override;
@@ -43,6 +45,7 @@ namespace SpartanEngine
 			void DestroyGLData();
 			void DrawCanvasMesh();
 			void CalculateMatrices();
+			void AutoResizeToScreenControl();
 
 		private:
 			RenderTexture* m_pRenderTexture;
@@ -56,6 +59,7 @@ namespace SpartanEngine
 
 		private:
 			static Material* m_pCanvasRenderer;
+			bool m_ResizeToScreen;
 		};
 	}
 }

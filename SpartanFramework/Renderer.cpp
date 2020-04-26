@@ -27,10 +27,12 @@ namespace SpartanEngine
 
 		SDL_FreeSurface(m_pWindowSurface);
 		SDL_DestroyRenderer(m_pSDLRenderer);
+		SDL_GL_DeleteContext(m_pSDLContext);
 		SDL_DestroyWindow(m_pWindow);
 		m_pWindowSurface = nullptr;
 		m_pSDLRenderer = nullptr;
 		m_pWindow = nullptr;
+		m_pSDLContext = nullptr;
 	}
 
 	void Renderer::Initialize(const GameContext& gameContext)
@@ -41,21 +43,13 @@ namespace SpartanEngine
 
 		// Open a window
 		m_pWindow = SDL_CreateWindow(BaseGame::GetGame()->GetGameSettings().AppName.data(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			gameSettings.Window.Width, gameSettings.Window.Height, BaseGame::GetGame()->GetGameSettings().Fullscreen ? (SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN) : SDL_WINDOW_OPENGL);
+			gameSettings.Window.Width, gameSettings.Window.Height, (gameSettings.ResizableWindow ? SDL_WINDOW_RESIZABLE : 0) | (gameSettings.Fullscreen ? (SDL_WINDOW_OPENGL | gameSettings.FullscreenMode) : SDL_WINDOW_OPENGL));
 
 		if (m_pWindow == NULL)
 		{
 			std::cout << "Could not create window: " << SDL_GetError() << std::endl;
 			return;
 		}
-
-		// Create renderer
-		//m_pSDLRenderer = SDL_CreateRenderer(m_pWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
-		/*if (m_pSDLRenderer == nullptr)
-		{
-			std::cerr << "Could not ceate SDL Renderer: " << SDL_GetError() << std::endl;
-			return;
-		}*/
 
 		// Create OpenGL context 
 		m_pSDLContext = SDL_GL_CreateContext(m_pWindow);
@@ -73,9 +67,10 @@ namespace SpartanEngine
 			/* Problem: glewInit failed, something is seriously wrong. */
 			fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		}
+
 		fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-		if (BaseGame::GetGame()->GetGameSettings().EnableVSync)
+		if (gameSettings.EnableVSync)
 		{
 			if (SDL_GL_SetSwapInterval(1) < 0)
 			{
@@ -90,21 +85,6 @@ namespace SpartanEngine
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-		//// Set the Projection matrix to the identity matrix
-		//glMatrixMode(GL_PROJECTION);
-		//glLoadIdentity();
-
-		//// Set up a two-dimensional orthographic viewing region.
-		//gluOrtho2D(0, BaseGame::GetGame()->GetGameSettings().Window.Width, 0, BaseGame::GetGame()->GetGameSettings().Window.Height); // y from bottom to top
-
-		//// Set the viewport to the client window area
-		//// The viewport is the rectangular region of the window where the image is drawn.
-		//glViewport(0, 0, int(BaseGame::GetGame()->GetGameSettings().Window.Width), int(BaseGame::GetGame()->GetGameSettings().Window.Height));
-
-		//// Set the Modelview matrix to the identity matrix
-		//glMatrixMode(GL_MODELVIEW);
-		//glLoadIdentity();
-
 		//// Enable color blending and use alpha blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -117,8 +97,6 @@ namespace SpartanEngine
 		// Create render texture
 		RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
 		RenderTexture::UseDefaultRenderTexture();
-
-
 	}
 
 	void Renderer::CreateScreenAndMaterials()
@@ -332,6 +310,28 @@ namespace SpartanEngine
 	UI::UIRenderMaterial* Renderer::GetUIRenderer()
 	{
 		return m_pUIRenderer;
+	}
+
+	void Renderer::ChangeWindow()
+	{
+		GameSettings gameSettings = BaseGame::GetGame()->GetGameSettings();
+
+		if (gameSettings.EnableVSync)
+		{
+			if (SDL_GL_SetSwapInterval(1) < 0)
+			{
+				std::cerr << "Could not set SDL GL Swap interval: " << SDL_GetError() << std::endl;
+				return;
+			}
+		}
+		else
+		{
+			SDL_GL_SetSwapInterval(0);
+		}
+
+		SDL_SetWindowSize(m_pWindow, gameSettings.Window.Width, gameSettings.Window.Height);
+		SDL_SetWindowFullscreen(m_pWindow, gameSettings.Fullscreen ? gameSettings.FullscreenMode : 0);
+		HandleWindowResizing(gameSettings.Window.Width, gameSettings.Window.Height);
 	}
 
 	void Renderer::DrawSolidRect(const Vector2& topLeft, const Vector2& bottomRight, const Math::Color& color)
@@ -604,5 +604,11 @@ namespace SpartanEngine
 		}
 
 		return calculatedOrigin;
+	}
+
+	void Renderer::HandleWindowResizing(int width, int height)
+	{
+		// Resize render texture
+		RenderTexture::m_pDefaultTexture->Resize(width, height);
 	}
 }

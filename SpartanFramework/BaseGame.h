@@ -24,6 +24,8 @@ namespace SpartanEngine
 		virtual bool RootGameUpdate();
 		virtual void RootGamePaint();
 
+		void ApplySettings(const GameSettings& newSettings);
+
 		virtual void Initialize(const GameContext& gameContext) = 0;
 		virtual void GameUpdate(const GameContext& gameContext) = 0;
 		virtual void GamePaint(const GameContext& gameContext) = 0;
@@ -31,8 +33,8 @@ namespace SpartanEngine
 
 		void QuitGame() { m_bQuitGame = true; }
 
-		GameSettings& GetGameSettings() { return m_GameSettings; }
-		const GameContext& GetGameContext() { return m_GameContext; }
+		const GameSettings& GetGameSettings() const { return m_GameSettings; }
+		const GameContext& GetGameContext() const { return m_GameContext; }
 
 		static BaseGame* GetGame() { return m_pGame; }
 
@@ -48,6 +50,8 @@ namespace SpartanEngine
 		friend class TextureLoader;
 		static BaseGame* m_pGame;
 		static void SetGame(BaseGame* pGame) { m_pGame = pGame; }
+
+		void HandleWindowEvent(SDL_Event* event);
 
 	private:
 		friend class GameTool;

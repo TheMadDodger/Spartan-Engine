@@ -159,6 +159,9 @@ namespace SpartanEngine
 			case SDL_MOUSEWHEEL:
 				m_GameContext.pInput->HandleMouseScrollEvent(&windowEvent.wheel);
 				break;
+			case SDL_WINDOWEVENT:
+				HandleWindowEvent(&windowEvent);
+				break;
 			default:
 				break;
 			}
@@ -202,4 +205,72 @@ namespace SpartanEngine
 		// End the frame timer
 		m_GameContext.pTime->EndFrame();
 	}
+
+	void BaseGame::ApplySettings(const GameSettings& newSettings)
+	{
+		m_GameSettings = newSettings;
+		m_GameContext.pRenderer->ChangeWindow();
+	}
+
+	void BaseGame::HandleWindowEvent(SDL_Event* event)
+	{
+        switch (event->window.event) {
+        case SDL_WINDOWEVENT_SHOWN:
+            SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " shown");
+            break;
+        case SDL_WINDOWEVENT_HIDDEN:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " hidden");
+            break;
+        case SDL_WINDOWEVENT_EXPOSED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " exposed");
+            break;
+        case SDL_WINDOWEVENT_MOVED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " moved to " + to_string(event->window.data1) + "," + to_string(event->window.data2));
+            break;
+        case SDL_WINDOWEVENT_RESIZED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " resized to " + to_string(event->window.data1) + "," + to_string(event->window.data2));
+			m_GameSettings.Window.Width = event->window.data1;
+			m_GameSettings.Window.Height = event->window.data2;
+			m_GameContext.pRenderer->HandleWindowResizing(m_GameSettings.Window.Width, m_GameSettings.Window.Height);
+            break;
+        case SDL_WINDOWEVENT_SIZE_CHANGED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " size changed to " + to_string(event->window.data1) + "," + to_string(event->window.data2));
+            break;
+        case SDL_WINDOWEVENT_MINIMIZED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " minimized");
+            break;
+        case SDL_WINDOWEVENT_MAXIMIZED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " maximized");
+            break;
+        case SDL_WINDOWEVENT_RESTORED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " restored");
+            break;
+        case SDL_WINDOWEVENT_ENTER:
+			SpartanEngine::Utilities::Debug::LogInfo("Mouse entered window " + to_string(event->window.windowID));
+            break;
+        case SDL_WINDOWEVENT_LEAVE:
+			SpartanEngine::Utilities::Debug::LogInfo("Mouse left window " + to_string(event->window.windowID));
+            break;
+        case SDL_WINDOWEVENT_FOCUS_GAINED:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " gained keyboard focus");
+            break;
+        case SDL_WINDOWEVENT_FOCUS_LOST:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " lost keyboard focus");
+            break;
+        case SDL_WINDOWEVENT_CLOSE:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " closed");
+            break;
+#if SDL_VERSION_ATLEAST(2, 0, 5)
+        case SDL_WINDOWEVENT_TAKE_FOCUS:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " is offered a focus");
+            break;
+        case SDL_WINDOWEVENT_HIT_TEST:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " has a special hit test");
+            break;
+#endif
+        default:
+			SpartanEngine::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " got unknown event " + to_string(event->window.event));
+            break;
+        }
+    }
 }

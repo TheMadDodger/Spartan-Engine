@@ -12,7 +12,7 @@ namespace SpartanEngine
 		void AspectConstraint::UpdateConstraint(UIObject* pUIObject)
 		{
 			const Vector2& size = pUIObject->GetSize();
-			m_Result = m_Axis == Axis::X ? size.x * m_Ratio : size.y * m_Ratio;
+			m_Result = m_Axis == Axis::X ? size.y * m_Ratio : size.x * m_Ratio;
 		}
 	}
 }
