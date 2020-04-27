@@ -27,6 +27,7 @@ namespace SpartanEngine
 	{
 	public:
 		TextureData(const std::string& file, const Vector2& origin) : Content(file), m_Origin(origin) {}
+		TextureData(const GLuint &textureID, const Vector2& dimensions) : Content(""), m_Origin(), m_TextureID(textureID), m_Dimensions(dimensions) {}
 
 		SDL_Surface* GetImage() { return m_pImage; };
 		SDL_Texture* GetTexture() { return m_pTexture; };

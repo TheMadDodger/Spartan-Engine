@@ -21,7 +21,7 @@ namespace SpartanEngine
 			Constraints* GetConstraints() const;
 
 		protected:
-			virtual void OnResize(const Vector2& newDimensions) = 0;
+			virtual void OnResize(const Vector2&) {};
 
 		private:
 			void OnParentUpdated(GameObject* pNewParent) override;

@@ -41,6 +41,11 @@ namespace SpartanEngine
 		}
 	}
 
+	size_t MeshRenderComponent::GetMaterial()
+	{
+		return m_MaterialID;
+	}
+
 	void MeshRenderComponent::Initialize(const GameContext&)
 	{
 	}

@@ -141,6 +141,11 @@ namespace SpartanEngine
 			return result;
 		}
 
+		bool Math::IntVector2::operator==(const IntVector2& other) const
+		{
+			return (x == other.x && y == other.y);
+		}
+
 		Math::Vector3::Vector3(const Vector4& vec4) : x(vec4.x), y(vec4.y), z(vec4.z) {}
 
 		float Vector3::Length()

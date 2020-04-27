@@ -22,7 +22,7 @@ void main()
 	gl_Position.x += left;
 	gl_Position.y += bottom;
 	gl_Position = WorldProjection * gl_Position;
-	out_TexCoord = vec2(0.0, 0.0);
+	out_TexCoord = vec2(0.0, 1.0);
 	EmitVertex();
 
 	// Bottom right
@@ -30,7 +30,7 @@ void main()
 	gl_Position.x += right;
 	gl_Position.y += bottom;
 	gl_Position = WorldProjection * gl_Position;
-	out_TexCoord = vec2(1.0, 0.0);
+	out_TexCoord = vec2(1.0, 1.0);
 	EmitVertex();
 
 	// Top left
@@ -38,7 +38,7 @@ void main()
 	gl_Position.x += left;
 	gl_Position.y += top;
 	gl_Position = WorldProjection * gl_Position;
-	out_TexCoord = vec2(0.0, 1.0);
+	out_TexCoord = vec2(0.0, 0.0);
 	EmitVertex();
 
 	// Top right
@@ -46,7 +46,7 @@ void main()
 	gl_Position.x += right;
 	gl_Position.y += top;
 	gl_Position = WorldProjection * gl_Position;
-	out_TexCoord = vec2(1.0, 1.0);
+	out_TexCoord = vec2(1.0, 0.0);
 	EmitVertex();
 
 	EndPrimitive();

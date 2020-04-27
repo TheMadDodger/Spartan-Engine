@@ -14,11 +14,13 @@ namespace SpartanEngine
 
 		void SetMesh(Mesh* pMesh);
 		void SetMaterial(size_t materialID);
+		size_t GetMaterial();
+
+		void Draw(const GameContext& gameContext) override;
 
 	private:
 		void Initialize(const GameContext& gameContext) override;
 		void Update(const GameContext& gameContext) override;
-		void Draw(const GameContext& gameContext) override;
 
 		COMPONENT_EDITOR(MeshRenderComponent)
 
