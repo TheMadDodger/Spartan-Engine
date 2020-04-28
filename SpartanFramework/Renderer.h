@@ -38,6 +38,7 @@ namespace SpartanEngine
 		SDL_Renderer* GetSDLRenderer() { return m_pSDLRenderer; }
 		SDL_Window* GetWindow() { return m_pWindow; }
 		SDL_Surface* GetWindowSurface() { return m_pWindowSurface; }
+		ScreenRect* GetScreenRect();
 
 		SDL_GLContext* GetGLContext() { return &m_pSDLContext; }
 

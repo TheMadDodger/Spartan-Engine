@@ -24,6 +24,8 @@ namespace SpartanEngine
 		RenderTexture::DestroyAll();
 		delete RenderTexture::m_pDefaultTexture;
 		RenderTexture::m_pDefaultTexture = nullptr;
+		delete RenderTexture::m_pUITexture;
+		RenderTexture::m_pUITexture = nullptr;
 
 		SDL_FreeSurface(m_pWindowSurface);
 		SDL_DestroyRenderer(m_pSDLRenderer);
@@ -96,6 +98,7 @@ namespace SpartanEngine
 
 		// Create render texture
 		RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
+		RenderTexture::m_pUITexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height, false);
 		RenderTexture::UseDefaultRenderTexture();
 	}
 
@@ -300,6 +303,11 @@ namespace SpartanEngine
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, transparent ? 0.0f : 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	ScreenRect* Renderer::GetScreenRect()
+	{
+		return m_pScreen;
 	}
 
 	void Renderer::RenderEnd()
@@ -610,5 +618,6 @@ namespace SpartanEngine
 	{
 		// Resize render texture
 		RenderTexture::m_pDefaultTexture->Resize(width, height);
+		RenderTexture::m_pUITexture->Resize(width, height);
 	}
 }

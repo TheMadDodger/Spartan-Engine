@@ -6,6 +6,7 @@ namespace SpartanEngine
 	std::vector<RenderTexture*> RenderTexture::m_pRenderTextures = std::vector<RenderTexture*>();
 	std::list<RenderTexture*> RenderTexture::m_pRenderTextureUsedList = std::list<RenderTexture*>();
 	RenderTexture* RenderTexture::m_pDefaultTexture = nullptr;
+	RenderTexture* RenderTexture::m_pUITexture = nullptr;
 	RenderTexture* RenderTexture::m_pCurrentlyInUse = nullptr;
 
 	RenderTexture* RenderTexture::CreateRenderTexture(int width, int height, bool hasDepthBuffer)
@@ -21,6 +22,7 @@ namespace SpartanEngine
 		for (size_t i = 0; i < m_pRenderTextures.size(); i++)
 		{
 			if (m_pRenderTextures[i] == m_pDefaultTexture) continue;
+			if (m_pRenderTextures[i] == m_pUITexture) continue;
 			delete m_pRenderTextures[i];
 		}
 		m_pRenderTextures.clear();
@@ -38,6 +40,16 @@ namespace SpartanEngine
 	RenderTexture* RenderTexture::GetDefaultRenderTexture()
 	{
 		return m_pDefaultTexture;
+	}
+
+	RenderTexture* RenderTexture::GetUIRenderTexture()
+	{
+		return m_pUITexture;
+	}
+
+	bool RenderTexture::IsInUse()
+	{
+		return m_pCurrentlyInUse == this;
 	}
 
 	void RenderTexture::StartFinalRender()

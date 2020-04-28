@@ -40,6 +40,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{a4f90dfc-2077-4177-9ae8-3c49d142af5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{c63da366-6fde-4606-80f7-d1699c06fc6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -79,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="ContentManager.h">
       <Filter>Content Management</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Encryption.h">
       <Filter>Helpers</Filter>
@@ -194,12 +194,6 @@
     <ClInclude Include="VertexHelpers.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleInput.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Commands.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
     <ClInclude Include="ShakeComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
@@ -235,9 +229,6 @@
     </ClInclude>
     <ClInclude Include="UIObject.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenRect.h">
-      <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Core\Rendering</Filter>
@@ -299,6 +290,18 @@
     <ClInclude Include="AspectConstraint.h">
       <Filter>UI\Constraints</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenRect.h">
+      <Filter>Core\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleInput.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -328,9 +331,6 @@
     </ClCompile>
     <ClCompile Include="ContentManager.cpp">
       <Filter>Content Management</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug.cpp">
-      <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="FontLoader.cpp">
       <Filter>Content Management</Filter>
@@ -410,12 +410,6 @@
     <ClCompile Include="ShaderLoader.cpp">
       <Filter>Content Management</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleInput.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="Commands.cpp">
-      <Filter>Helpers</Filter>
-    </ClCompile>
     <ClCompile Include="ShakeComponent.cpp">
       <Filter>Core Components</Filter>
     </ClCompile>
@@ -445,9 +439,6 @@
     </ClCompile>
     <ClCompile Include="UIObject.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenRect.cpp">
-      <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Core\Rendering</Filter>
@@ -499,6 +490,18 @@
     </ClCompile>
     <ClCompile Include="AspectConstraint.cpp">
       <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenRect.cpp">
+      <Filter>Core\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleInput.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Debug</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

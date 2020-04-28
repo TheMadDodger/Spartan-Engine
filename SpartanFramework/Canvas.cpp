@@ -112,11 +112,15 @@ namespace SpartanEngine
 			if (IsDirty()) m_pRenderTexture->StopUse();
 			else if (m_pParentCanvas != nullptr) return;
 
+			if (RenderTexture::GetDefaultRenderTexture()->IsInUse()) RenderTexture::GetUIRenderTexture()->Use();
+
 			m_pCanvasRenderer->Use();
 			m_pCanvasRenderer->SetMatrix4("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
 			m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
 			DrawCanvasMesh();
 			Material::Reset();
+
+			if (RenderTexture::GetUIRenderTexture()->IsInUse()) RenderTexture::GetUIRenderTexture()->StopUse();
 		}
 
 		void Canvas::OnParentUpdated(GameObject* pNewParent)

@@ -10,6 +10,9 @@ namespace SpartanEngine
 		static void DestroyAll();
 		static void UseDefaultRenderTexture();
 		static RenderTexture* GetDefaultRenderTexture();
+		static RenderTexture* GetUIRenderTexture();
+
+		bool IsInUse();
 
 	private: // Private static functions
 		static void StartFinalRender();
@@ -35,6 +38,7 @@ namespace SpartanEngine
 		static std::vector<RenderTexture*> m_pRenderTextures;
 		static std::list<RenderTexture*> m_pRenderTextureUsedList;
 		static RenderTexture* m_pDefaultTexture;
+		static RenderTexture* m_pUITexture;
 		static RenderTexture* m_pCurrentlyInUse;
 
 	private: // Instance members

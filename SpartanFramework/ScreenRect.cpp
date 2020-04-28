@@ -33,6 +33,7 @@ namespace SpartanEngine
 
 	void ScreenRect::RenderScreen(Renderer* pRenderer)
 	{
+		glDisable(GL_DEPTH_TEST);
 		// Clear background
 		RenderTexture::StartFinalRender();
 		pRenderer->ClearBackground();
@@ -44,9 +45,16 @@ namespace SpartanEngine
 		// Draw the screen mesh
 		DrawScreenMesh();
 
+		// Now render UI on top
+		Material::Reset();
+		m_pScreenRenderMaterial->Use();
+		m_pScreenRenderMaterial->SetTexture("ScreenTexture", RenderTexture::GetUIRenderTexture()->m_GLTextureID);
+		DrawScreenMesh();
+
 		// Reset render textures and materials
 		RenderTexture::EndFinalRender();
 		Material::Reset();
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	void ScreenRect::DrawScreenMesh()

@@ -10,13 +10,15 @@ namespace SpartanEngine
 
 	class ScreenRect : public SEObject
 	{
+	public:
+		void DrawScreenMesh();
+
 	private:
 		ScreenRect();
 		~ScreenRect();
 
 	private:
 		void RenderScreen(Renderer* pRenderer);
-		void DrawScreenMesh();
 
 	private:
 		friend class Renderer;
