@@ -43,6 +43,9 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{c63da366-6fde-4606-80f7-d1699c06fc6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Post Processing">
+      <UniqueIdentifier>{e2351692-c9d4-4fbb-9790-cae249328d8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -302,6 +305,12 @@
     <ClInclude Include="Debug.h">
       <Filter>Debug</Filter>
     </ClInclude>
+    <ClInclude Include="PPMaterial.h">
+      <Filter>Post Processing</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessingStack.h">
+      <Filter>Post Processing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -502,6 +511,12 @@
     </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="PPMaterial.cpp">
+      <Filter>Post Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessingStack.cpp">
+      <Filter>Post Processing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

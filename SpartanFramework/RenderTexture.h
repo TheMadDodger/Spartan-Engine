@@ -7,6 +7,7 @@ namespace SpartanEngine
 	{
 	public: // Static functions
 		static RenderTexture* CreateRenderTexture(int width, int height, bool hasDepthBuffer = true);
+		static void Destroy(RenderTexture* pTexture);
 		static void DestroyAll();
 		static void UseDefaultRenderTexture();
 		static RenderTexture* GetDefaultRenderTexture();
@@ -33,6 +34,7 @@ namespace SpartanEngine
 		void Initialize();
 		void DestroyGLData();
 		void Bind();
+		void UnBind();
 
 	private: // Static members
 		static std::vector<RenderTexture*> m_pRenderTextures;
@@ -44,6 +46,7 @@ namespace SpartanEngine
 	private: // Instance members
 		friend class Renderer;
 		friend class ScreenRect;
+		friend class PostProcessingStack;
 		IntVector2 m_Dimensions;
 		GLuint m_GLFrameBufferID;
 		GLuint m_GLDepthBufferID;

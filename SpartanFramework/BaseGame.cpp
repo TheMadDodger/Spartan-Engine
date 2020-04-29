@@ -10,6 +10,7 @@
 #ifdef _DEBUG
 #include "ConsoleInput.h"
 #endif // _DEBUG
+#include "PostProcessingStack.h"
 
 namespace SpartanEngine
 {
@@ -27,6 +28,9 @@ namespace SpartanEngine
 
 		// Clean up scenes
 		SceneManager::Destroy();
+
+		// Cleanup PP
+		PostProcessingStack::Destroy();
 
 		// Cleanup materials
 		MaterialManager::Cleanup();
@@ -93,6 +97,9 @@ namespace SpartanEngine
 
 		// Run user defined Initialize()
 		Initialize(m_GameContext);
+
+		// Initialize PP
+		PostProcessingStack::GetInstance();
 
 		// Initialise Scenes
 		SceneManager::GetInstance()->Initialize(m_GameContext);

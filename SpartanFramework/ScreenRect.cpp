@@ -4,6 +4,7 @@
 #include "Material.h"
 #include "MaterialManager.h"
 #include "RenderTexture.h"
+#include "PostProcessingStack.h"
 
 namespace SpartanEngine
 {
@@ -34,13 +35,17 @@ namespace SpartanEngine
 	void ScreenRect::RenderScreen(Renderer* pRenderer)
 	{
 		glDisable(GL_DEPTH_TEST);
+
+		// PP Stack
+		PostProcessingStack::GetInstance()->RenderPP(this, RenderTexture::GetDefaultRenderTexture());
+
 		// Clear background
 		RenderTexture::StartFinalRender();
 		pRenderer->ClearBackground();
 
 		// Set material
 		m_pScreenRenderMaterial->Use();
-		m_pScreenRenderMaterial->SetTexture("ScreenTexture", RenderTexture::GetDefaultRenderTexture()->m_GLTextureID);
+		m_pScreenRenderMaterial->SetTexture("ScreenTexture", PostProcessingStack::GetInstance()->GetFinalTexture()->m_GLTextureID);
 
 		// Draw the screen mesh
 		DrawScreenMesh();

@@ -177,6 +177,8 @@
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PixelConstraint.h" />
+    <ClInclude Include="PostProcessingStack.h" />
+    <ClInclude Include="PPMaterial.h" />
     <ClInclude Include="RelativeConstraint.h" />
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="ScreenRect.h" />
@@ -280,6 +282,8 @@
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
     <ClCompile Include="PixelConstraint.cpp" />
+    <ClCompile Include="PostProcessingStack.cpp" />
+    <ClCompile Include="PPMaterial.cpp" />
     <ClCompile Include="RelativeConstraint.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="ScreenRect.cpp" />

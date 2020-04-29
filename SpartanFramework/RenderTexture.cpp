@@ -17,6 +17,13 @@ namespace SpartanEngine
 		return m_pNewRenderTexture;
 	}
 
+	void RenderTexture::Destroy(RenderTexture* pTexture)
+	{
+		auto it = std::find(m_pRenderTextures.begin(), m_pRenderTextures.end(), pTexture);
+		m_pRenderTextures.erase(it);
+		delete pTexture;
+	}
+
 	void RenderTexture::DestroyAll()
 	{
 		for (size_t i = 0; i < m_pRenderTextures.size(); i++)
@@ -206,5 +213,10 @@ namespace SpartanEngine
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_GLFrameBufferID);
 		glViewport(0, 0, m_Dimensions.x, m_Dimensions.y);
+	}
+
+	void RenderTexture::UnBind()
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, NULL);
 	}
 }

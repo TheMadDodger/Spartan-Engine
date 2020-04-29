@@ -65,6 +65,7 @@ namespace SpartanEngine
 			IntVector2 operator-(const IntVector2& other);
 			IntVector2 operator*(const IntVector2& other);
 			bool operator==(const IntVector2& other) const;
+			bool operator!=(const IntVector2& other) const;
 
 			// Static methods
 			static IntVector2 Zero() { return IntVector2(); }
