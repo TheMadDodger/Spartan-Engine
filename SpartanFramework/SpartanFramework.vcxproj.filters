@@ -311,6 +311,9 @@
     <ClInclude Include="PostProcessingStack.h">
       <Filter>Post Processing</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -517,6 +520,9 @@
     </ClCompile>
     <ClCompile Include="PostProcessingStack.cpp">
       <Filter>Post Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

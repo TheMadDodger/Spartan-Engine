@@ -474,6 +474,11 @@ namespace SpartanEngine
 			return (r != other.r || g != other.g || b != other.b || a != other.a);;
 		}
 
+		Vector3 Math::Color::rgb()
+		{
+			return Vector3(r, g, b);
+		}
+
 		Matrix4X4 Math::Matrix4X4::operator*(const Matrix4X4& other)
 		{
 			Matrix4X4 result = Matrix4X4();
@@ -536,7 +541,7 @@ namespace SpartanEngine
 
 		Vector4 Math::Matrix4X4::operator*(const Vector3& other)
 		{
-			Vector4 result = Vector4(other, 1.0f);
+			Vector4 result;
 
 			result.x = m[0][0] * other.x + m[1][0] * other.y + m[2][0] * other.z + m[3][0] * 1.0f;
 			result.y = m[0][1] * other.x + m[1][1] * other.y + m[2][1] * other.z + m[3][1] * 1.0f;
@@ -1061,13 +1066,23 @@ namespace SpartanEngine
 			return Vector3(w.x, w.y, w.z);
 		}
 
-		Vector4 Math::Vector4::operator*(const Vector4& other)
+		Vector4 Math::Vector4::operator*(const Vector4& other) const
 		{
 			Vector4 result;
 			result.x = x * other.x;
 			result.y = y * other.y;
 			result.z = z * other.z;
 			result.w = w * other.w;
+			return result;
+		}
+
+		Vector4 Math::Vector4::operator/(float factor) const
+		{
+			Vector4 result;
+			result.x = x / factor;
+			result.y = y / factor;
+			result.z = z / factor;
+			result.w = w / factor;
 			return result;
 		}
 

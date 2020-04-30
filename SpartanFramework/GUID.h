@@ -9,9 +9,9 @@ namespace SpartanEngine
 		inline GUID GenerateGUID()
 		{
 			GUID guid = GUID();
-			guid.Data1 = Random<unsigned long>();
-			guid.Data2 = Random<unsigned short>();
-			guid.Data3 = Random<unsigned short>();
+			guid.Data1 = Rand<unsigned long>();
+			guid.Data2 = Rand<unsigned short>();
+			guid.Data3 = Rand<unsigned short>();
 
 			for (size_t i = 0; i < 8; ++i)
 			{

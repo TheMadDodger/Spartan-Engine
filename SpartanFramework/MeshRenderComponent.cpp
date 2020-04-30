@@ -16,17 +16,10 @@ namespace SpartanEngine
 
 	MeshRenderComponent::~MeshRenderComponent()
 	{
-		/*if(m_pMesh)
-			delete m_pMesh;
-
-		m_pMesh = nullptr;*/
 	}
 
 	void MeshRenderComponent::SetMesh(Mesh* pMesh)
 	{
-		if (m_pMesh)
-			delete m_pMesh;
-
 		m_pMesh = pMesh;
 	}
 
@@ -72,9 +65,6 @@ namespace SpartanEngine
 		auto world = GetGameObject()->GetTransform()->GetWorldMatrix();
 
 		Matrix4X4 worldCamProjection = world * camInverse * projection;
-
-		Vector4 test = Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-		Vector4 result = worldCamProjection * test;
 
 		/*if (!GetGameObject()->GetTransform()->UseCamera())
 			worldCamProjection = camInverse * projectionInverse * world;

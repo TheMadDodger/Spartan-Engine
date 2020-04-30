@@ -319,7 +319,14 @@ namespace SpartanEngine
 	{
 	public:
 		Model(const std::string& path) : Content(path) {}
-		~Model() {}
+		~Model()
+		{
+			for (size_t i = 0; i < m_pMeshes.size(); i++)
+			{
+				delete m_pMeshes[i];
+			}
+			m_pMeshes.clear();
+		}
 
 		void AddMesh(Mesh* pMesh) { m_pMeshes.push_back(pMesh); }
 		Mesh* GetMesh(size_t index) { return m_pMeshes[index]; }

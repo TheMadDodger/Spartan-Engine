@@ -129,7 +129,8 @@ namespace SpartanEngine
 			float z;
 			float w;
 
-			Vector4 operator*(const Vector4& other);
+			Vector4 operator*(const Vector4& other) const;
+			Vector4 operator/(float factor) const;
 
 			Vector2 xy() const { return Vector2(x, y); }
 		};
@@ -303,6 +304,7 @@ namespace SpartanEngine
 			Color operator+(const Color& other);
 			bool operator==(const Color& other);
 			bool operator!=(const Color& other);
+			Vector3 rgb();
 
 		public: // Color values
 			float r;
@@ -362,7 +364,7 @@ namespace SpartanEngine
 		}
 
 		template<typename T>
-		inline T Random()
+		inline T Rand()
 		{
 			float randomVal = (float)rand();
 			return (T)randomVal;

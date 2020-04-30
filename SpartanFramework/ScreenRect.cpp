@@ -59,6 +59,12 @@ namespace SpartanEngine
 		// Reset render textures and materials
 		RenderTexture::EndFinalRender();
 		Material::Reset();
+
+		// Clear the UI Texture
+		RenderTexture::GetUIRenderTexture()->Use();
+		pRenderer->ClearBackground(true);
+		RenderTexture::GetUIRenderTexture()->StopUse();
+
 		glEnable(GL_DEPTH_TEST);
 	}
 
