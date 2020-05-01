@@ -16,7 +16,12 @@ namespace SpartanEngine
 		{
 			if (m_pCanvasRenderer == nullptr)
 			{
+#if _DEBUG
+				size_t matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer_debug.fx");
+#else
 				size_t matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer.fx");
+#endif // _DEBUG
+				//matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer.fx");
 				m_pCanvasRenderer = MaterialManager::GetMaterial(matID);
 			}
 		}
@@ -54,18 +59,21 @@ namespace SpartanEngine
 
 		void Canvas::RootDraw(const GameContext& gameContext)
 		{
-			// User defined Draw()
-			Draw(gameContext);
-
-			for (auto pComponent : m_pComponents)
+			if (IsDirty())
 			{
-				pComponent->RootDraw(gameContext);
-			}
+				// User defined Draw()
+				Draw(gameContext);
 
-			for (auto pChild : m_pChildren)
-			{
-				if (pChild->IsEnabled())
-					pChild->RootDraw(gameContext);
+				for (auto pComponent : m_pComponents)
+				{
+					pComponent->RootDraw(gameContext);
+				}
+
+				for (auto pChild : m_pChildren)
+				{
+					if (pChild->IsEnabled())
+						pChild->RootDraw(gameContext);
+				}
 			}
 
 			PostDraw(gameContext);
@@ -102,7 +110,6 @@ namespace SpartanEngine
 
 		void Canvas::Draw(const GameContext& gameContext)
 		{
-			if (!IsDirty()) return;
 			m_pRenderTexture->Use();
 			gameContext.pRenderer->ClearBackground(true);
 		}
@@ -110,7 +117,6 @@ namespace SpartanEngine
 		void Canvas::PostDraw(const GameContext& gameContext)
 		{
 			if (IsDirty()) m_pRenderTexture->StopUse();
-			else if (m_pParentCanvas != nullptr) return;
 
 			if (RenderTexture::GetDefaultRenderTexture()->IsInUse()) RenderTexture::GetUIRenderTexture()->Use();
 
@@ -134,6 +140,7 @@ namespace SpartanEngine
 					m_pParentCanvas = pCanvas;
 					return;
 				}
+				pParent = pParent->GetParent();
 			}
 			m_pParentCanvas = nullptr;
 		}

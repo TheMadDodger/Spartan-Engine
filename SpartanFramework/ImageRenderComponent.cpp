@@ -35,7 +35,7 @@ namespace SpartanEngine
 	void ImageRenderComponent::Update(const GameContext&)
 	{
 		if (m_pImage == nullptr) return;
-		m_Offsets = Math::CalculateOffsets(GetOrigin(), m_pImage->GetDimensions());
+		m_Offsets = Math::CalculateOffsets(GetOrigin(), GetGameObject()->GetSize());
 	}
 
 	void ImageRenderComponent::Draw(const GameContext&)

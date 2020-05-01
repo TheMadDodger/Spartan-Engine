@@ -256,8 +256,10 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="TextRenderComponent.h" />
     <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIImageObject.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="UIRenderMaterial.h" />
+    <ClInclude Include="UITextObject.h" />
     <ClInclude Include="VertexHelpers.h" />
   </ItemGroup>
   <ItemGroup>
@@ -333,8 +335,10 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="TextRenderComponent.cpp" />
     <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIImageObject.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="UIRenderMaterial.cpp" />
+    <ClCompile Include="UITextObject.cpp" />
     <ClCompile Include="VertexHelpers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

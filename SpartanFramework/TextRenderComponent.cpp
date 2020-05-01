@@ -7,7 +7,7 @@
 
 namespace SpartanEngine
 {
-	TextRenderComponent::TextRenderComponent() : m_pFont(nullptr), m_Text("Hello World"), m_Color(1, 1, 1, 1), UIComponent("Text")
+	TextRenderComponent::TextRenderComponent() : m_pFont(nullptr), m_Text("Hello World"), m_Color(1, 1, 1, 1), m_HasSetSize(false), UIComponent("Text")
 	{
 	}
 
@@ -88,10 +88,16 @@ namespace SpartanEngine
 
 		m_pTextTexture = gameContext.pRenderer->RenderText(m_pFont, m_Text, color, GetOrigin(), m_MaxWidth);
 
+		if (!m_HasSetSize)
+		{
+			GetGameObject()->SetSize(m_pTextTexture->GetDimensions().x, m_pTextTexture->GetDimensions().y);
+			m_HasSetSize = true;
+		}
+
 		if (m_pTextTexture == nullptr) return;
 		m_pUIRenderer->SetUITexture(m_pTextTexture);
 
-		Vector4 offsets = Math::CalculateOffsets(GetOrigin(), m_pTextTexture->GetDimensions());
+		Vector4 offsets = Math::CalculateOffsets(GetOrigin(), GetGameObject()->GetSize());
 		m_pUIRenderer->SetOffsets(offsets);
 	}
 }

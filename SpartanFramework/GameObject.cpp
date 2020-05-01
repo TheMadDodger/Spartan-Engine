@@ -117,6 +117,16 @@ namespace SpartanEngine
 				OnDisable();
 		}
 		m_Enabled = enabled;
+
+		if (!m_Enabled)
+		{
+			SetDirty(false);
+			auto pParent = GetParent();
+			if (pParent) pParent->SetDirty();
+			return;
+		}
+
+		SetDirty();
 	}
 
 	void GameObject::SetName(const char* name)
@@ -167,6 +177,7 @@ namespace SpartanEngine
 
 		for (auto pChild : m_pChildren)
 		{
+			pChild->OnParentUpdated(this);
 			pChild->RootInitialize(gameContext);
 		}
 

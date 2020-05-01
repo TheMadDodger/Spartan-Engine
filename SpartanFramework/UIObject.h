@@ -17,6 +17,7 @@ namespace SpartanEngine
 			Canvas* GetParentCanvas() const;
 			void SetSize(float width, float height);
 			const Vector2 &GetSize() const;
+			const Vector2 &GetOriginalSize() const;
 
 			Constraints* GetConstraints() const;
 
@@ -30,6 +31,7 @@ namespace SpartanEngine
 
 		protected:
 			Canvas* m_pParentCanvas;
+			Vector2 m_OriginalDimensions;
 			Vector2 m_Dimensions;
 			Vector2 m_OldDimensions;
 

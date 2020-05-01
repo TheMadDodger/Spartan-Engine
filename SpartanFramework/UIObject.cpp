@@ -28,11 +28,17 @@ namespace SpartanEngine
 		void UIObject::SetSize(float width, float height)
 		{
 			m_Dimensions = Vector2(width, height);
+			m_OriginalDimensions = m_Dimensions;
 		}
 
 		const Vector2& UIObject::GetSize() const
 		{
 			return m_Dimensions;
+		}
+
+		const Vector2& UIObject::GetOriginalSize() const
+		{
+			return m_OriginalDimensions;
 		}
 
 		Constraints* UIObject::GetConstraints() const
@@ -51,6 +57,7 @@ namespace SpartanEngine
 					m_pParentCanvas = pCanvas;
 					return;
 				}
+				pParent = pParent->GetParent();
 			}
 			m_pParentCanvas = nullptr;
 			Utilities::Debug::LogWarning("UIObject only works when it is parrented to a UICanvas!\nThis object will not render properly!");
@@ -95,7 +102,7 @@ namespace SpartanEngine
 
 		void UIObject::RootDraw(const GameContext& gameContext)
 		{
-			if (!IsDirty()) return;
+			//if (!IsDirty()) return;
 
 			// User defined Draw()
 			Draw(gameContext);

@@ -54,12 +54,25 @@ namespace SpartanEngine
 			if (m_pHeightConstraint != nullptr) m_pHeightConstraint->SetAxis(BaseUIConstraint::Axis::Y);
 		}
 
+		void Constraints::HeightBeforeWidth(bool enable)
+		{
+			m_HeightBeforeWidth = enable;
+		}
+
+		void Constraints::YBeforeX(bool enable)
+		{
+			m_YBeforeX = enable;
+		}
+
 		void Constraints::UpdateConstraints(UIObject* pUIObject)
 		{
-			Update(pUIObject->GetTransform()->Position.x, m_pXConstraint, pUIObject);
+			if (!m_YBeforeX) Update(pUIObject->GetTransform()->Position.x, m_pXConstraint, pUIObject);
 			Update(pUIObject->GetTransform()->Position.y, m_pYConstraint, pUIObject);
-			Update(pUIObject->m_Dimensions.x, m_pWidthConstraint, pUIObject);
+			if (m_YBeforeX) Update(pUIObject->GetTransform()->Position.x, m_pXConstraint, pUIObject);
+			
+			if (!m_HeightBeforeWidth) Update(pUIObject->m_Dimensions.x, m_pWidthConstraint, pUIObject);
 			Update(pUIObject->m_Dimensions.y, m_pHeightConstraint, pUIObject);
+			if (m_HeightBeforeWidth)Update(pUIObject->m_Dimensions.x, m_pWidthConstraint, pUIObject);
 		}
 
 		void Constraints::Update(float& value, BaseUIConstraint* pConstraint, UIObject* pUIObject)

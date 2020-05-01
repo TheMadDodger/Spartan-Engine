@@ -139,6 +139,20 @@ namespace SpartanEngine
 			return pComp;
 		}
 
+		template<class T>
+		T* CreateChild()
+		{
+			T* pChild = new T();
+			GameObject* pChildObject = dynamic_cast<GameObject*>(pChild);
+			if (pChildObject == nullptr)
+				throw new exception("ERROR: Class must be derived from GameObject!!!");
+
+			m_pChildren.push_back(pChild);
+			pChild->m_pParentObject = this;
+			pChild->m_pScene = m_pScene;
+			return pChild;
+		}
+
 		void SetFullDirty();
 
 	private:

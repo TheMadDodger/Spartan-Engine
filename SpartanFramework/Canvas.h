@@ -31,11 +31,13 @@ namespace SpartanEngine
 
 			void AutoResizeToScreen(bool enable);
 
-		private:
-			void RootDraw(const GameContext& gameContext) override;
+		protected:
 			void Initialize(const GameContext& gameContext) override;
 			void Update(const GameContext& gameContext) override;
 			void Draw(const GameContext& gameContext) override;
+
+		private:
+			void RootDraw(const GameContext& gameContext) override;
 			void PostDraw(const GameContext& gameContext) override;
 			void OnParentUpdated(GameObject* pNewParent) override;
 			void UIHandleMouse(const Vector2& relativeMousePos) override;

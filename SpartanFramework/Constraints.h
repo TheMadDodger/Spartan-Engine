@@ -15,6 +15,9 @@ namespace SpartanEngine
 			void SetWidth(BaseUIConstraint* pConstraint);
 			void SetHeight(BaseUIConstraint* pConstraint);
 
+			void HeightBeforeWidth(bool enable);
+			void YBeforeX(bool enable);
+
 		private:
 			friend class UIObject;
 			Constraints();
@@ -27,6 +30,9 @@ namespace SpartanEngine
 			BaseUIConstraint* m_pYConstraint;
 			BaseUIConstraint* m_pWidthConstraint;
 			BaseUIConstraint* m_pHeightConstraint;
+
+			bool m_HeightBeforeWidth;
+			bool m_YBeforeX;
 		};
 	}
 }

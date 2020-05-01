@@ -35,6 +35,7 @@ namespace SpartanEngine
 		void SetMatrix4(const std::string& name, float* pMatrix) const;
 		void SetTexture(const std::string& name, TextureData* pTexture);
 		void SetTexture(const std::string& name, const GLuint& textureID);
+		//void ReplaceTexture(const std::string& name, const GLuint& textureID);
 
 		void SetDoubleSided(bool doubleSided);
 		void EnableWireframe(bool enabled);

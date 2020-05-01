@@ -33,5 +33,6 @@ namespace SpartanEngine
 		Color m_Color;
 		bool m_FontSet = false;
 		Uint32 m_MaxWidth = 0;
+		bool m_HasSetSize;
 	};
 }

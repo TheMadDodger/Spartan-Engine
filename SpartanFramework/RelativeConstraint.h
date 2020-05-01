@@ -8,7 +8,7 @@ namespace SpartanEngine
 		class RelativeConstraint : public BaseUIConstraint
 		{
 		public:
-			RelativeConstraint(float percentage);
+			RelativeConstraint(float percentage, bool relativeToCanvas = false);
 			virtual ~RelativeConstraint();
 
 		private:
@@ -16,6 +16,7 @@ namespace SpartanEngine
 
 		private:
 			float m_Percentage;
+			bool m_RelativeToCanvas;
 		};
 	}
 }

@@ -314,6 +314,12 @@
     <ClInclude Include="Random.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="UITextObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImageObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -523,6 +529,12 @@
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="UITextObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImageObject.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

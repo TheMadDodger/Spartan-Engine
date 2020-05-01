@@ -69,6 +69,11 @@ namespace SpartanEngine
 			m_pSelectedTexture = pSelectedTexture;
 		}
 
+		ImageRenderComponent* UIButton::GetImage()
+		{
+			return m_pImageRenderer;
+		}
+
 		void UIButton::OnMouseOver()
 		{
 			MouseOver(this);
@@ -124,6 +129,27 @@ namespace SpartanEngine
 				{
 					m_WasSelected = true;
 					m_pImageRenderer->SetTexture(m_pCurrentTexture);
+				}
+
+				if (m_MouseOver)
+				{
+					if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
+					{
+						if (!m_WasClickedThisFrame)
+						{
+							m_MouseClicked = true;
+							m_WasClickedThisFrame = true;
+							ButtonClicked(this);
+						}
+					}
+					else
+					{
+						m_WasClickedThisFrame = false;
+					}
+				}
+				else
+				{
+					m_WasClickedThisFrame = false;
 				}
 			}
 			else if (m_MouseOver)
@@ -193,7 +219,7 @@ namespace SpartanEngine
 			if (m_pCurrentTexture == nullptr) return;
 
 			const Origin& origin = m_pImageRenderer->GetOrigin();
-			Vector4 offsets = Math::CalculateOffsets(origin, m_pCurrentTexture->GetDimensions());
+			Vector4 offsets = Math::CalculateOffsets(origin, m_Size);
 
 			auto bottomLeft = Vector2(offsets.x, offsets.y);
 			auto topRight = Vector2(offsets.z, offsets.w);
@@ -202,8 +228,6 @@ namespace SpartanEngine
 
 			Vector4 mousePosVec4 = Vector4(relativeMousePos.x, relativeMousePos.y, 0.0f, 1.0f);
 			Vector2 localMousePos = (matLocalInverse * mousePosVec4).xy();
-
-			//Utilities::Debug::LogInfo("Relative: " + to_string(relativeMousePos.x) + ", " + to_string(relativeMousePos.y) + ", Local: " + to_string(localMousePos.x) + ", " + to_string(localMousePos.y));
 
 			if (CheckPointInRect(localMousePos, { bottomLeft, topRight }))
 			{
@@ -215,9 +239,7 @@ namespace SpartanEngine
 
 		void UIButton::OnResize(const Vector2& newDimensions)
 		{
-			Vector2 dimensions = m_pCurrentTexture->GetDimensions();
-			Vector2 factors = newDimensions / dimensions;
-			GetTransform()->SetScale(Vector3(factors.x, factors.y, 1.0f));
+			m_Size = newDimensions;
 		}
 	}
 }

@@ -28,6 +28,7 @@ namespace SpartanEngine
 			void SetClickBoxSize(const Vector2& size);
 
 			void SetTextures(TextureData* pIdleTexture, TextureData* pMouseOverTexture, TextureData* pMouseClicktexture, TextureData* pSelectedTexture);
+			ImageRenderComponent* GetImage();
 
 			Event<UIButton*> ButtonClicked;
 			Event<UIButton*> ButtonReleased;
