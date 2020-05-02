@@ -43,4 +43,9 @@ namespace SpartanEngine
 		m_pUIRenderer->SetUITexture(m_pImage);
 		m_pUIRenderer->SetOffsets(m_Offsets);
 	}
+
+	bool ImageRenderComponent::CanRender()
+	{
+		return m_pImage != nullptr;
+	}
 }

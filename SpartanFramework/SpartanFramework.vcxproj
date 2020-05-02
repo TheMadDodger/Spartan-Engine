@@ -213,6 +213,7 @@
     <ClInclude Include="SkinnedMeshComponent.h" />
     <ClInclude Include="SkinnedQuad.h" />
     <ClInclude Include="Tasks.h" />
+    <ClInclude Include="TextSizeConstraint.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="UIComponent.h" />
@@ -259,6 +260,8 @@
     <ClInclude Include="UIImageObject.h" />
     <ClInclude Include="UIObject.h" />
     <ClInclude Include="UIRenderMaterial.h" />
+    <ClInclude Include="UISlider.h" />
+    <ClInclude Include="UISliderMaterial.h" />
     <ClInclude Include="UITextObject.h" />
     <ClInclude Include="VertexHelpers.h" />
   </ItemGroup>
@@ -297,6 +300,7 @@
     <ClCompile Include="SkinnedMeshComponent.cpp" />
     <ClCompile Include="SkinnedQuad.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="TextSizeConstraint.cpp" />
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="Constraints.cpp" />
     <ClCompile Include="UIContainer.cpp" />
@@ -338,6 +342,8 @@
     <ClCompile Include="UIImageObject.cpp" />
     <ClCompile Include="UIObject.cpp" />
     <ClCompile Include="UIRenderMaterial.cpp" />
+    <ClCompile Include="UISlider.cpp" />
+    <ClCompile Include="UISliderMaterial.cpp" />
     <ClCompile Include="UITextObject.cpp" />
     <ClCompile Include="VertexHelpers.cpp" />
   </ItemGroup>

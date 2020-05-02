@@ -19,15 +19,19 @@ namespace SpartanEngine
 		void SetOrigin(const Origin& origin);
 		const Origin& GetOrigin();
 
+		void SetCustomMaterial(UI::UIRenderMaterial* pMaterial);
+
 	protected:
 		virtual void RootUpdate(const GameContext& gameContext) override;
 		virtual void RootDraw(const GameContext& gameContext) override;
+		virtual bool CanRender();
 
 	private:
 		void Render();
 
 	protected:
 		UI::UIRenderMaterial* m_pUIRenderer;
+		UI::UIRenderMaterial* m_pCustomMaterial;
 
 	private:
 		Matrix4X4 m_UIMatrix;

@@ -21,6 +21,8 @@ namespace SpartanEngine
 		void Update(const GameContext&) override;
 		void Draw(const GameContext&) override;
 
+		bool CanRender() override;
+
 		COMPONENT_EDITOR(ImageRenderComponent)
 
 	private:

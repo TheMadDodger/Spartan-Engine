@@ -17,7 +17,7 @@ namespace SpartanEngine
 			void SetWorldProjection(const Matrix4X4& worldProjection);
 			void SetOffsets(const Vector4& offsets);
 
-		private:
+		protected:
 			void SetShaderVars(BaseComponent*);
 
 		private:

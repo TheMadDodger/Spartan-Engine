@@ -4,3 +4,4 @@
 #include "PixelConstraint.h"
 #include "RelativeConstraint.h"
 #include "AspectConstraint.h"
+#include "TextSizeConstraint.h"

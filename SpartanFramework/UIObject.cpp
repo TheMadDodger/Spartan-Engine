@@ -81,6 +81,7 @@ namespace SpartanEngine
 			{
 				OnResize(m_Dimensions);
 				m_OldDimensions = m_Dimensions;
+				SetDirty();
 			}
 
 			for (size_t i = 0; i < m_pComponents.size(); ++i)

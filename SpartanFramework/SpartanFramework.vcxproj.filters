@@ -320,6 +320,15 @@
     <ClInclude Include="UIImageObject.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="UISlider.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UISliderMaterial.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextSizeConstraint.h">
+      <Filter>UI\Constraints</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -535,6 +544,15 @@
     </ClCompile>
     <ClCompile Include="UIImageObject.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UISlider.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UISliderMaterial.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextSizeConstraint.cpp">
+      <Filter>UI\Constraints</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

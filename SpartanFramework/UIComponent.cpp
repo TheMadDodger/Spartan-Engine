@@ -62,6 +62,16 @@ namespace SpartanEngine
 		return m_Origin;
 	}
 
+	void UIComponent::SetCustomMaterial(UI::UIRenderMaterial* pMaterial)
+	{
+		m_pCustomMaterial = pMaterial;
+	}
+
+	bool UIComponent::CanRender()
+	{
+		return true;
+	}
+
 	void UIComponent::RootUpdate(const GameContext& gameContext)
 	{
 		if (!IsInitialized())
@@ -80,8 +90,13 @@ namespace SpartanEngine
 
 	void UIComponent::RootDraw(const GameContext& gameContext)
 	{
+		if (!CanRender()) return;
+
 		// User defined Draw()
 		m_pUIRenderer = gameContext.pRenderer->GetUIRenderer();
+		if (m_pCustomMaterial) 
+			m_pUIRenderer = m_pCustomMaterial;
+
 		m_pUIRenderer->Use();
 		m_pUIRenderer->SetWorldProjection(m_UIMatrix);
 		Draw(gameContext);

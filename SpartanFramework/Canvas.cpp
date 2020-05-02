@@ -21,7 +21,7 @@ namespace SpartanEngine
 #else
 				size_t matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer.fx");
 #endif // _DEBUG
-				//matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer.fx");
+				matID = MaterialManager::CreateMaterial<Material>("./Resources/Shaders/CanvasRenderer.fx");
 				m_pCanvasRenderer = MaterialManager::GetMaterial(matID);
 			}
 		}
