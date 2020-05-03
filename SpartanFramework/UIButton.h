@@ -35,11 +35,6 @@ namespace SpartanEngine
 			Event<UIButton*> MouseOver;
 			Event<UIButton*> MouseLeave;
 
-		protected:
-			virtual void OnMouseOver();
-			virtual void OnMouseLeave();
-			virtual void OnMouseClick();
-
 		private:
 			virtual void Initialize(const GameContext& gameContext) override;
 			virtual void Update(const GameContext& gameContext) override;

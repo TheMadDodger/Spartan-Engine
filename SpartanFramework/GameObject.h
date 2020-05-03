@@ -80,7 +80,7 @@ namespace SpartanEngine
 		GameObject* GetChild(size_t index);
 		const vector<GameObject*>& GetChildren();
 
-		GameObject* GetParent() { return m_pParentObject; }
+		GameObject* GetParent() const { return m_pParentObject; }
 		void SetParent(GameObject* pParent);
 
 		const std::string& GetTag();
@@ -118,6 +118,9 @@ namespace SpartanEngine
 		virtual void OnParentUpdated(GameObject* pNewParent) { UNREFERENCED_PARAMETER(pNewParent); }
 		virtual void UIHandleMouse(const Vector2& relativeMousePos);
 		void PassUIMouseInputToChildren(const Vector2& localMousePos);
+
+		void RootOnEnable();
+		void RootOnDisable();
 
 		virtual void OnDestroy() {};
 		virtual void OnCreated() {};

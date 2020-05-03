@@ -18,6 +18,8 @@ namespace SpartanEngine
 			void HeightBeforeWidth(bool enable);
 			void YBeforeX(bool enable);
 
+			void SetEnabled(bool enable);
+
 		private:
 			friend class UIObject;
 			Constraints();
@@ -33,6 +35,7 @@ namespace SpartanEngine
 
 			bool m_HeightBeforeWidth;
 			bool m_YBeforeX;
+			bool m_Enable;
 		};
 	}
 }

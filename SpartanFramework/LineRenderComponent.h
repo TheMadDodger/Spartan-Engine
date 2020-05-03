@@ -1,9 +1,10 @@
 #pragma once
-#include "BaseComponent.h"
+#include "UIComponent.h"
+#include "LineRenderMaterial.h"
 
 namespace SpartanEngine
 {
-	class LineRenderComponent : public BaseComponent
+	class LineRenderComponent : public UIComponent
 	{
 	public:
 		LineRenderComponent();
@@ -18,7 +19,14 @@ namespace SpartanEngine
 		Color m_Color;
 
 	private:
+		void Initialize(const GameContext& gameContext) override;
 		void Draw(const GameContext& gameContext) override;
+
+		void CreateMaterial();
 		COMPONENT_EDITOR(LineRenderComponent)
+
+	private:
+		static size_t m_LineMatID;
+		static UI::LineRenderMaterial* m_pLineRenderer;
 	};
 }

@@ -10,7 +10,7 @@ namespace SpartanEngine
 	namespace UI
 	{
 		Constraints::Constraints() : m_pXConstraint(nullptr), m_pYConstraint(nullptr),
-			m_pWidthConstraint(nullptr), m_pHeightConstraint(nullptr)
+			m_pWidthConstraint(nullptr), m_pHeightConstraint(nullptr), m_Enable(true)
 		{
 		}
 
@@ -64,8 +64,15 @@ namespace SpartanEngine
 			m_YBeforeX = enable;
 		}
 
+		void Constraints::SetEnabled(bool enable)
+		{
+			m_Enable = enable;
+		}
+
 		void Constraints::UpdateConstraints(UIObject* pUIObject)
 		{
+			if (!m_Enable) return;
+
 			if (!m_YBeforeX) Update(pUIObject->GetTransform()->Position.x, m_pXConstraint, pUIObject);
 			Update(pUIObject->GetTransform()->Position.y, m_pYConstraint, pUIObject);
 			if (m_YBeforeX) Update(pUIObject->GetTransform()->Position.x, m_pXConstraint, pUIObject);

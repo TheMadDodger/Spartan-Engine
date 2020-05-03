@@ -111,12 +111,14 @@ namespace SpartanEngine
 	{
 		if (m_Enabled != enabled)
 		{
+			m_Enabled = enabled;
 			if (m_Enabled)
-				OnEnable();
+			{
+				RootOnEnable();
+			}
 			else
-				OnDisable();
+				RootOnDisable();
 		}
-		m_Enabled = enabled;
 
 		if (!m_Enabled)
 		{
@@ -257,6 +259,28 @@ namespace SpartanEngine
 	void GameObject::PassUIMouseInputToChildren(const Vector2& localMousePos)
 	{
 		std::for_each(m_pChildren.begin(), m_pChildren.end(), [&](GameObject* pChild) {pChild->UIHandleMouse(localMousePos); });
+	}
+
+	void GameObject::RootOnEnable()
+	{
+		for (size_t i = 0; i < GetChildren().size(); i++)
+		{
+			auto pChild = GetChild(i);
+			if (!pChild->IsEnabled()) continue;
+			pChild->OnEnable();
+		}
+		OnEnable();
+	}
+
+	void GameObject::RootOnDisable()
+	{
+		for (size_t i = 0; i < GetChildren().size(); i++)
+		{
+			auto pChild = GetChild(i);
+			if (!pChild->IsEnabled()) continue;
+			pChild->OnDisable();
+		}
+		OnDisable();
 	}
 
 	void GameObject::SetParent(GameObject* pParent)

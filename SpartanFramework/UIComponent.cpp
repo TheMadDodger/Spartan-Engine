@@ -79,6 +79,8 @@ namespace SpartanEngine
 			RootInitialize(gameContext);
 		}
 
+		if (!m_bEnabled) return;
+
 		SpartanEngine::UI::UIObject* pObject = GetGameObject();
 		SpartanEngine::UI::Canvas* pCanvas = pObject->GetParentCanvas();
 		Matrix4X4 uiProjection = pCanvas->GetUIProjectionMatrix();
@@ -90,6 +92,7 @@ namespace SpartanEngine
 
 	void UIComponent::RootDraw(const GameContext& gameContext)
 	{
+		if (!m_bEnabled) return;
 		if (!CanRender()) return;
 
 		// User defined Draw()

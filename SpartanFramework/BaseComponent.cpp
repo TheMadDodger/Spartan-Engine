@@ -58,12 +58,16 @@ namespace SpartanEngine
 			RootInitialize(gameContext);
 		}
 
+		if (!m_bEnabled) return;
+
 		// User defined Update()
 		Update(gameContext);
 	}
 
 	void BaseComponent::RootDraw(const GameContext& gameContext)
 	{
+		if (!m_bEnabled) return;
+
 		// User defined Draw()
 		Draw(gameContext);
 	}

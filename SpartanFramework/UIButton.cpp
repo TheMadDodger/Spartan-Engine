@@ -67,26 +67,14 @@ namespace SpartanEngine
 			m_pMouseOverTexture = pMouseOverTexture;
 			m_pClickTexture = pMouseClicktexture;
 			m_pSelectedTexture = pSelectedTexture;
+
+			m_pCurrentTexture = m_pIdleTexture;
+			m_pImageRenderer->SetTexture(m_pCurrentTexture);
 		}
 
 		ImageRenderComponent* UIButton::GetImage()
 		{
 			return m_pImageRenderer;
-		}
-
-		void UIButton::OnMouseOver()
-		{
-			MouseOver(this);
-		}
-
-		void UIButton::OnMouseLeave()
-		{
-			MouseLeave(this);
-		}
-
-		void UIButton::OnMouseClick()
-		{
-			ButtonClicked(this);
 		}
 
 		void UIButton::Initialize(const GameContext&)
@@ -121,6 +109,8 @@ namespace SpartanEngine
 				offset = m_pCurrentTexture->GetOrigin();
 			}
 
+			bool mouseDown = (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT));
+
 			if (m_Selected)
 			{
 				m_pCurrentTexture = m_pSelectedTexture;
@@ -133,7 +123,7 @@ namespace SpartanEngine
 
 				if (m_MouseOver)
 				{
-					if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
+					if (mouseDown)
 					{
 						if (!m_WasClickedThisFrame)
 						{
@@ -158,12 +148,12 @@ namespace SpartanEngine
 
 				if (m_WasMouseOverLastFrame)
 				{
-					OnMouseLeave();
+					MouseOver(this);
 					m_WasMouseOverLastFrame = false;
 					m_pImageRenderer->SetTexture(m_pCurrentTexture);
 				}
 
-				if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
+				if (mouseDown)
 				{
 					m_pCurrentTexture = m_pClickTexture;
 
@@ -192,7 +182,7 @@ namespace SpartanEngine
 
 				if (!m_WasMouseOverLastFrame)
 				{
-					OnMouseOver();
+					MouseLeave(this);
 					m_WasMouseOverLastFrame = true;
 					m_pImageRenderer->SetTexture(m_pCurrentTexture);
 				}
@@ -208,6 +198,9 @@ namespace SpartanEngine
 
 			if (m_pCurrentTexture == nullptr) return;
 			SetSize(m_pCurrentTexture->GetDimensions().x, m_pCurrentTexture->GetDimensions().y);
+
+			if (mouseDown)
+				m_WasClickedThisFrame = true;
 		}
 
 		void UIButton::Draw(const GameContext&)
@@ -217,6 +210,7 @@ namespace SpartanEngine
 		void UIButton::UIHandleMouse(const Vector2& relativeMousePos)
 		{
 			if (m_pCurrentTexture == nullptr) return;
+			if (!IsEnabled()) return;
 
 			const Origin& origin = m_pImageRenderer->GetOrigin();
 			Vector4 offsets = Math::CalculateOffsets(origin, m_Size);
@@ -231,7 +225,7 @@ namespace SpartanEngine
 
 			if (CheckPointInRect(localMousePos, { bottomLeft, topRight }))
 			{
-				//Utilities::Debug::LogInfo("IN BUTTON!");
+				Utilities::Debug::LogInfo("IN BUTTON!");
 				m_MouseOver = true;
 				PassUIMouseInputToChildren(localMousePos);
 			}

@@ -7,7 +7,9 @@
 
 namespace SpartanEngine
 {
-	TransformComponent::TransformComponent() : m_TansformMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Transform")
+	TransformComponent::TransformComponent() : m_TansformMatrix(Matrix4X4::CreateIdentityMatrix()),
+		m_LocalTansformMatrix(Matrix4X4::CreateIdentityMatrix()),
+		m_WorldTansformMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Transform")
 	{
 	}
 

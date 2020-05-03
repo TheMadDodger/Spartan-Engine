@@ -173,6 +173,7 @@
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
     <ClInclude Include="Gradient.h" />
+    <ClInclude Include="LineRenderMaterial.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="GridComponent.cpp" />
     <ClCompile Include="Layers.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
+    <ClCompile Include="LineRenderMaterial.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="MeshRenderComponent.cpp" />

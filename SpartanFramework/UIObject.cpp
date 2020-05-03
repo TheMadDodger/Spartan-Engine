@@ -123,7 +123,7 @@ namespace SpartanEngine
 
 			SetDirty(false);
 
-			Utilities::Debug::LogInfo("A UIObject was re-rendered!");
+			//Utilities::Debug::LogInfo("A UIObject was re-rendered!");
 		}
 	}
 }

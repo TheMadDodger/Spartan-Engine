@@ -329,6 +329,9 @@
     <ClInclude Include="TextSizeConstraint.h">
       <Filter>UI\Constraints</Filter>
     </ClInclude>
+    <ClInclude Include="LineRenderMaterial.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -553,6 +556,9 @@
     </ClCompile>
     <ClCompile Include="TextSizeConstraint.cpp">
       <Filter>UI\Constraints</Filter>
+    </ClCompile>
+    <ClCompile Include="LineRenderMaterial.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

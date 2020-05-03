@@ -43,7 +43,7 @@ namespace SpartanEngine
 
 		bool IsInitialized() { return m_bInitialized; }
 		bool IsEnabled() { return m_bEnabled; }
-		bool SetEnabled(bool enabled) { m_bEnabled = enabled; }
+		void SetEnabled(bool enabled) { m_bEnabled = enabled; }
 
 	protected:
 		friend class GameObject;
@@ -62,6 +62,7 @@ namespace SpartanEngine
 		static std::vector<BaseComponent*> m_pRegisteredComponents;
 		bool m_CanTickInEditor = false;
 		bool m_CanTickInGame = true;
+		bool m_bEnabled = true;
 
 	private:
 		friend class GameObject;
@@ -70,7 +71,6 @@ namespace SpartanEngine
 		void SetGameObject(GameObject* pObject);
 		GameObject* m_pGameObject = nullptr;
 		bool m_bInitialized = false;
-		bool m_bEnabled = false;
 
 		std::string m_Name;
 	};
