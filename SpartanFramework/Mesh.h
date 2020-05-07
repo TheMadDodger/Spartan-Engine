@@ -51,14 +51,20 @@ namespace SpartanEngine
 			if (m_IsMeshBuilt) return;
 
 			//Create VBO
+			glGenVertexArrays(1, &m_VertexArrayID);
 			glGenBuffers(1, &m_VertexBufferID);
+			glGenBuffers(1, &m_IndexBufferID);
+
+			glBindVertexArray(m_VertexArrayID);
+
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
 			glBufferData(GL_ARRAY_BUFFER, m_VertexSize * m_VertexCount, m_pVertices, GL_STATIC_DRAW);
 
 			//Create IBO
-			glGenBuffers(1, &m_IndexBufferID);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexCount * sizeof(GLuint), m_pIndices, GL_STATIC_DRAW);
+
+			SetupAttributes();
 
 			m_IsMeshBuilt = true;
 		}
@@ -98,10 +104,8 @@ namespace SpartanEngine
 	private:
 		friend class MeshRenderComponent;
 
-		void ApplyAttributes()
+		void SetupAttributes()
 		{
-			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
-
 			size_t offset = 0;
 			for (size_t i = 0; i < m_AttributeCount; i++)
 			{
@@ -137,25 +141,27 @@ namespace SpartanEngine
 				}
 			}
 
-			// Set index data and render
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+			glBindVertexArray(0);
 		}
 
 		void Draw()
 		{
+			glBindVertexArray(m_VertexArrayID);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
 			glDrawElements(m_PrimitiveTopoloy, m_IndexCount, GL_UNSIGNED_INT, NULL);
+			glBindVertexArray(0);
 		}
 
 		void DrawEnd()
 		{
 			// Disable attributes
-			for (size_t i = 0; i < m_AttributeCount; i++)
+			/*for (size_t i = 0; i < m_AttributeCount; i++)
 			{
 				glDisableVertexAttribArray(i);
-			}
+			}*/
 
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+			//glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
 		}
 
 	private:
@@ -164,6 +170,7 @@ namespace SpartanEngine
 		unsigned int* m_pIndices = nullptr;
 		size_t m_VertexCount;
 		size_t m_IndexCount;
+		GLuint m_VertexArrayID;
 		GLuint m_VertexBufferID;
 		GLuint m_IndexBufferID;
 		GLuint m_PrimitiveTopoloy;

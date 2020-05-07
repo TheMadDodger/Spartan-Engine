@@ -96,10 +96,10 @@ namespace SpartanEngine
 			float Magnitude() { return Length(); }
 			float Normalize();
 
-			Vector3 operator+(const Vector3& other);
-			Vector3 operator+(const Vector2& other);
-			Vector3 operator-(const Vector3& other);
-			Vector3 operator*(const Vector3& other);
+			Vector3 operator+(const Vector3& other) const;
+			Vector3 operator+(const Vector2& other) const;
+			Vector3 operator-(const Vector3& other) const;
+			Vector3 operator*(const Vector3& other) const;
 			Vector3 operator*(float factor);
 			Vector3 operator/(float factor);
 			Vector3 operator/(const Vector3& other);

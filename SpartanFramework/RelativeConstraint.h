@@ -11,6 +11,8 @@ namespace SpartanEngine
 			RelativeConstraint(float percentage, bool relativeToCanvas = false);
 			virtual ~RelativeConstraint();
 
+			void SetPercentage(float percentage);
+
 		private:
 			void UpdateConstraint(UIObject* pUIObject) override;
 

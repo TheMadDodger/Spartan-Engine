@@ -57,8 +57,8 @@ namespace SpartanEngine
             if (i == 0)
             {
                 attributes.push_back(MeshAttribute::APosition3D);
-                //attributes.push_back(MeshAttribute::ANormal);
-                vertexSize = 12;
+                attributes.push_back(MeshAttribute::ANormal);
+                vertexSize = 24;
 
                 //vertexSize += sizeof(Vector3) * 2;
             }
@@ -68,9 +68,9 @@ namespace SpartanEngine
             vertexData.push_back(mesh->mVertices[i].x);
             vertexData.push_back(mesh->mVertices[i].y);
             vertexData.push_back(mesh->mVertices[i].z);
-            //vertexData.push_back(mesh->mNormals[i].x);
-            //vertexData.push_back(mesh->mNormals[i].y);
-            //vertexData.push_back(mesh->mNormals[i].z);
+            vertexData.push_back(mesh->mNormals[i].x);
+            vertexData.push_back(mesh->mNormals[i].y);
+            vertexData.push_back(mesh->mNormals[i].z);
 
             //if (mesh->mTextureCoords[0])
             //{

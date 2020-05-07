@@ -74,7 +74,7 @@ namespace SpartanEngine
 		pMaterial->SetMatrix4("WorldViewProjection", &worldCamProjection.m[0][0]);
 		pMaterial->SetShaderVars(this);
 
-		m_pMesh->ApplyAttributes();
+		//m_pMesh->ApplyAttributes();
 		m_pMesh->Draw();
 		m_pMesh->DrawEnd();
 

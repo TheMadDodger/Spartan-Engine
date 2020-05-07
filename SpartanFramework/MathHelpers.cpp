@@ -158,7 +158,7 @@ namespace SpartanEngine
 			return sqrt((x * x) + (y * y) + (z * z));
 		}
 
-		Vector3 Vector3::operator+(const Vector3 & other)
+		Vector3 Vector3::operator+(const Vector3 & other) const
 		{
 			Vector3 result;
 			result.x = x + other.x;
@@ -167,7 +167,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Math::Vector3::operator+(const Vector2& other)
+		Vector3 Math::Vector3::operator+(const Vector2& other) const
 		{
 			Vector3 result;
 			result.x = x + other.x;
@@ -176,7 +176,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Vector3::operator-(const Vector3 & other)
+		Vector3 Vector3::operator-(const Vector3 & other) const
 		{
 			Vector3 result;
 			result.x = x - other.x;
@@ -185,7 +185,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Vector3::operator*(const Vector3 & other)
+		Vector3 Vector3::operator*(const Vector3 & other) const
 		{
 			Vector3 result;
 			result.x = x * other.x;
