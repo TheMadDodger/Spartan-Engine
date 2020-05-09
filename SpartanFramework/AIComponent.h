@@ -1,10 +1,9 @@
 #pragma once
 #include "BaseComponent.h"
+#include "BaseAIBehaviour.h"
 
 namespace SpartanEngine
 {
-	class BaseAIBehaviour;
-
 	class AIComponent : public BaseComponent
 	{
 	public:

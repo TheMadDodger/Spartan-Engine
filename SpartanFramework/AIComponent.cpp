@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "AIComponent.h"
-#include "BaseAIBehaviour.h"
 
 namespace SpartanEngine
 {

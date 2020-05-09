@@ -29,11 +29,14 @@ namespace SpartanEngine
 
 	double Math::Lehmer::GetNext(double min, double max)
 	{
-		return ((double)GetNext() / (double)(0x7FFFFFFF)) * (max - min) + min;
+		double factor = (double)GetNext() / (double)(0x7FFFFFFF);
+		if (factor > 1.0) factor -= 1.0;
+		double total = max - min;
+		return factor * total + min;
 	}
 
 	float Math::Lehmer::GetNext(float min, float max)
 	{
-		return ((float)GetNext() / (float)(0x7FFFFFFF)) * (max - min) + min;
+		return (float)GetNext((double)min, (double)max);
 	}
 }

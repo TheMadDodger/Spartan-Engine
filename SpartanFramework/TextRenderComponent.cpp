@@ -86,6 +86,8 @@ namespace SpartanEngine
 			m_pTextTexture = nullptr;
 		}
 
+		if (m_Text == "") return;
+
 		m_pTextTexture = gameContext.pRenderer->RenderText(m_pFont, m_Text, color, GetOrigin(), m_MaxWidth);
 
 		if (!m_HasSetSize)

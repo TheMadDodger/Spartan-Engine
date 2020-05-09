@@ -283,17 +283,31 @@ namespace SpartanEngine
 		OnDisable();
 	}
 
-	void GameObject::SetParent(GameObject* pParent)
+	void GameObject::SetParent(GameObject* pParent, bool keepWorldPosition)
 	{
-		if (m_pParentObject->m_pParentObject)
-			m_pParentObject->m_pParentObject->RemoveChild(this);
+		if (m_pParentObject)
+			m_pParentObject->RemoveChild(this);
 
 		if (pParent)
 		{
 			GetGameScene()->RemoveChild(this);
 			pParent->AddChild(this);
+
+			if (keepWorldPosition)
+			{
+				auto newPos = GetTransform()->GetWorldPosition() - pParent->GetTransform()->GetWorldPosition();
+				GetTransform()->Translate(newPos, true);
+			}
 		}
 		else
+		{
 			GetGameScene()->AddChild(this);
+
+			if (keepWorldPosition)
+			{
+				auto newPos = GetTransform()->GetWorldPosition();
+				GetTransform()->Translate(newPos, true);
+			}
+		}
 	}
 }

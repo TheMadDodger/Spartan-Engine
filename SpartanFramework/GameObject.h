@@ -81,7 +81,7 @@ namespace SpartanEngine
 		const vector<GameObject*>& GetChildren();
 
 		GameObject* GetParent() const { return m_pParentObject; }
-		void SetParent(GameObject* pParent);
+		void SetParent(GameObject* pParent, bool keepWorldPosition = false);
 
 		const std::string& GetTag();
 		void SetTag(const std::string& tag);
