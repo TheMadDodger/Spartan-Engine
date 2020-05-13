@@ -12,7 +12,7 @@ namespace SpartanEngine
 	{
 		Material* Canvas::m_pCanvasRenderer = nullptr;
 
-		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr), m_ResizeToScreen(nullptr)
+		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr), m_ResizeToScreen(nullptr), m_Color(Color::White())
 		{
 			if (m_pCanvasRenderer == nullptr)
 			{
@@ -55,6 +55,11 @@ namespace SpartanEngine
 		void Canvas::AutoResizeToScreen(bool enable)
 		{
 			m_ResizeToScreen = enable;
+		}
+
+		void Canvas::SetColor(const Color& color)
+		{
+			m_Color = color;
 		}
 
 		void Canvas::RootDraw(const GameContext& gameContext)
@@ -123,6 +128,7 @@ namespace SpartanEngine
 			m_pCanvasRenderer->Use();
 			m_pCanvasRenderer->SetMatrix4("CanvasProjectionMat", &m_CanvasProjectionMatrix.m[0][0]);
 			m_pCanvasRenderer->SetTexture("CanvasTexture", m_pRenderTexture->GetTextureID());
+			m_pCanvasRenderer->SetColor("Color", m_Color);
 			DrawCanvasMesh();
 			Material::Reset();
 

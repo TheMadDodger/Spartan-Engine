@@ -41,7 +41,7 @@ namespace SpartanEngine
 				return nullptr;
 			}
 
-			pObject->m_pScene = this;
+			pObject->SetScene(this);
 			if (pParent != nullptr)
 			{
 				pParent->AddChild(pObject);

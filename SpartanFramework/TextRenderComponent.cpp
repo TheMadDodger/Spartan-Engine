@@ -95,6 +95,7 @@ namespace SpartanEngine
 			GetGameObject()->SetSize(m_pTextTexture->GetDimensions().x, m_pTextTexture->GetDimensions().y);
 			m_HasSetSize = true;
 		}
+		else GetGameObject()->SetOriginalSize(m_pTextTexture->GetDimensions().x, m_pTextTexture->GetDimensions().y);
 
 		if (m_pTextTexture == nullptr) return;
 		m_pUIRenderer->SetUITexture(m_pTextTexture);

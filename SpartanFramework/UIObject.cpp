@@ -31,6 +31,13 @@ namespace SpartanEngine
 			m_OriginalDimensions = m_Dimensions;
 		}
 
+		void UIObject::SetOriginalSize(float width, float height)
+		{
+			m_OriginalDimensions = Vector2(width, height);
+
+			if (m_Dimensions == Vector2::Zero()) m_Dimensions = m_OriginalDimensions;
+		}
+
 		const Vector2& UIObject::GetSize() const
 		{
 			return m_Dimensions;

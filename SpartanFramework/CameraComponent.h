@@ -21,6 +21,9 @@ namespace SpartanEngine
 		const Matrix4X4& GetCameraProjectionMatrix() { return m_CameraProjectionMatrix; }
 		const Matrix4X4& GetCameraProjectionMatrixInverse() { return m_CameraProjectionInverseMatrix; }
 
+		const Matrix4X4& GetViewProjectionMatrix() { return m_ViewProjectionMatrix; }
+		const Matrix4X4& GetViewProjectionMatrixInverse() { return m_ViewProjectionMatrixInverse; }
+
 		const Matrix4X4& GetProjectionMatrix() { return m_ProjectionMatrix; }
 		const Matrix4X4& GetProjectionMatrixInverse() { return m_ProjectionInverseMatrix; }
 
@@ -30,6 +33,8 @@ namespace SpartanEngine
 		Vector3 ConvertWorldToScreenSpace(Vector3 worldCoord);
 
 		virtual BaseComponent* Create() { return new CameraComponent(); }
+
+		Ray ScreenPointToRay(const Vector2& screenPoint);
 
 	protected:
 		void Initialize(const GameContext& gameContext) override;
@@ -43,6 +48,9 @@ namespace SpartanEngine
 		Matrix4X4 m_CameraMatrix;
 		Matrix4X4 m_CameraInverseMatrix;
 
+		Matrix4X4 m_ViewProjectionMatrix;
+		Matrix4X4 m_ViewProjectionMatrixInverse;
+
 		Matrix4X4 m_CameraProjectionMatrix;
 		Matrix4X4 m_CameraProjectionInverseMatrix;
 
@@ -50,5 +58,9 @@ namespace SpartanEngine
 		Matrix4X4 m_ProjectionInverseMatrix;
 
 		Matrix4X4 m_ScreenMatrix;
+
+		float m_Near;
+		float m_Far;
+		float m_FOV;
 	};
 }

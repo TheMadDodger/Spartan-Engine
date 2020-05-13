@@ -194,7 +194,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Vector3::operator*(float factor)
+		Vector3 Vector3::operator*(float factor) const
 		{
 			Vector3 result;
 			result.x = x * factor;
@@ -203,7 +203,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Math::Vector3::operator/(float factor)
+		Vector3 Math::Vector3::operator/(float factor) const
 		{
 			Vector3 result;
 			result.x = x / factor;
@@ -212,7 +212,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Vector3 Math::Vector3::operator/(const Vector3& other)
+		Vector3 Math::Vector3::operator/(const Vector3& other) const
 		{
 			Vector3 result;
 			result.x = x / other.x;
@@ -547,6 +547,18 @@ namespace SpartanEngine
 			result.y = m[0][1] * other.x + m[1][1] * other.y + m[2][1] * other.z + m[3][1] * 1.0f;
 			result.z = m[0][2] * other.x + m[1][2] * other.y + m[2][2] * other.z + m[3][2] * 1.0f;
 			result.w = m[0][3] * other.x + m[1][3] * other.y + m[2][3] * other.z + m[3][3] * 1.0f;
+
+			return result;
+		}
+
+		Vector4 Matrix4X4::operator*(const Vector4& other)
+		{
+			Vector4 result;
+
+			result.x = m[0][0] * other.x + m[1][0] * other.y + m[2][0] * other.z + m[3][0] * other.w;
+			result.y = m[0][1] * other.x + m[1][1] * other.y + m[2][1] * other.z + m[3][1] * other.w;
+			result.z = m[0][2] * other.x + m[1][2] * other.y + m[2][2] * other.z + m[3][2] * other.w;
+			result.w = m[0][3] * other.x + m[1][3] * other.y + m[2][3] * other.z + m[3][3] * other.w;
 
 			return result;
 		}
@@ -1076,6 +1088,16 @@ namespace SpartanEngine
 			return result;
 		}
 
+		Vector4 Vector4::operator*(float factor) const
+		{
+			Vector4 result;
+			result.x = x * factor;
+			result.y = y * factor;
+			result.z = z * factor;
+			result.w = w * factor;
+			return result;
+		}
+
 		Vector4 Math::Vector4::operator/(float factor) const
 		{
 			Vector4 result;
@@ -1117,5 +1139,14 @@ namespace SpartanEngine
 
 			return Vector4();
 		}
-	}
+		Ray::Ray(Vector3 start, Vector3 direction)
+		{
+			Start = start;
+			Direction = direction;
+		}
+		Vector3 Ray::GetPoint(float length)
+		{
+			return Start + Direction * length;
+		}
+}
 }

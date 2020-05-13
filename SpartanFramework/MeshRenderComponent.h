@@ -25,7 +25,7 @@ namespace SpartanEngine
 		COMPONENT_EDITOR(MeshRenderComponent)
 
 	private:
-		Mesh* m_pMesh;
+		Mesh* m_pMeshToRender;
 		size_t m_MaterialID;
 		GLuint gVBO;
 		GLuint gIBO;

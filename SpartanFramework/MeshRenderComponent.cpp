@@ -10,7 +10,7 @@
 
 namespace SpartanEngine
 {
-	MeshRenderComponent::MeshRenderComponent() : m_pMesh(nullptr), m_MaterialID(0)
+	MeshRenderComponent::MeshRenderComponent() : m_pMeshToRender(nullptr), m_MaterialID(0)
 	{
 	}
 
@@ -20,7 +20,7 @@ namespace SpartanEngine
 
 	void MeshRenderComponent::SetMesh(Mesh* pMesh)
 	{
-		m_pMesh = pMesh;
+		m_pMeshToRender = pMesh;
 	}
 
 	void MeshRenderComponent::SetMaterial(size_t materialID)
@@ -49,7 +49,8 @@ namespace SpartanEngine
 
 	void MeshRenderComponent::Draw(const GameContext&)
 	{
-		if (m_pMesh == nullptr) return;
+		if (m_pMeshToRender == nullptr)
+			return;
 
 		// Set material
 		Material* pMaterial = MaterialManager::GetMaterial(m_MaterialID);
@@ -63,8 +64,9 @@ namespace SpartanEngine
 		auto camInverse = GetGameObject()->GetGameScene()->GetActiveCamera()->GetCameraMatrixInverse();
 		auto projection = GetGameObject()->GetGameScene()->GetActiveCamera()->GetProjectionMatrix();
 		auto world = GetGameObject()->GetTransform()->GetWorldMatrix();
+		auto viewProjection = GetGameObject()->GetGameScene()->GetActiveCamera()->GetViewProjectionMatrix();
 
-		Matrix4X4 worldCamProjection = world * camInverse * projection;
+		Matrix4X4 worldCamProjection = world * viewProjection;//camInverse * projection;
 
 		/*if (!GetGameObject()->GetTransform()->UseCamera())
 			worldCamProjection = camInverse * projectionInverse * world;
@@ -74,9 +76,7 @@ namespace SpartanEngine
 		pMaterial->SetMatrix4("WorldViewProjection", &worldCamProjection.m[0][0]);
 		pMaterial->SetShaderVars(this);
 
-		//m_pMesh->ApplyAttributes();
-		m_pMesh->Draw();
-		m_pMesh->DrawEnd();
+		m_pMeshToRender->Draw();
 
 		Material::Reset();
 	}

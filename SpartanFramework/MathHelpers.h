@@ -100,9 +100,9 @@ namespace SpartanEngine
 			Vector3 operator+(const Vector2& other) const;
 			Vector3 operator-(const Vector3& other) const;
 			Vector3 operator*(const Vector3& other) const;
-			Vector3 operator*(float factor);
-			Vector3 operator/(float factor);
-			Vector3 operator/(const Vector3& other);
+			Vector3 operator*(float factor) const;
+			Vector3 operator/(float factor) const;
+			Vector3 operator/(const Vector3& other) const;
 			Vector3 Normalized() const;
 			Vector2 xy() const { return Vector2(x, y); }
 			static Vector3 Rotate(const Vector3& vec, Quaternion& rotation);
@@ -130,6 +130,7 @@ namespace SpartanEngine
 			float w;
 
 			Vector4 operator*(const Vector4& other) const;
+			Vector4 operator*(float factor) const;
 			Vector4 operator/(float factor) const;
 
 			Vector2 xy() const { return Vector2(x, y); }
@@ -247,6 +248,7 @@ namespace SpartanEngine
 
 			Matrix4X4 operator*(const Matrix4X4& other);
 			Vector4 operator*(const Vector3& other);
+			Vector4 operator*(const Vector4& other);
 			Matrix4X4 operator*(float factor);
 			Matrix4X4 operator+(const Matrix4X4& other);
 
@@ -311,6 +313,17 @@ namespace SpartanEngine
 			float g;
 			float b;
 			float a;
+		};
+
+		struct Ray
+		{
+		public:
+			Ray(Vector3 start, Vector3 direction);
+			Vector3 GetPoint(float length);
+
+		public:
+			Vector3 Start;
+			Vector3 Direction;
 		};
 
 		inline float Distance(Vector2& pos1, Vector2& pos2)
@@ -389,7 +402,7 @@ namespace SpartanEngine
 
 		inline float Lerp(float a, float b, float t)
 		{
-			return (1 - t) * a + t * b;
+			return (1.0f - t) * a + t * b;
 		}
 
 		inline float InverseLerp(float a, float b, float t)

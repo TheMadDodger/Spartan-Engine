@@ -74,6 +74,15 @@ namespace SpartanEngine
 		m_pParentObject->SetDirty();
 	}
 
+	void GameObject::SetScene(SpartanEngine::GameScene* pScene)
+	{
+		m_pScene = pScene;
+		for (size_t i = 0; i < m_pChildren.size(); i++)
+		{
+			m_pChildren[i]->SetScene(pScene);
+		}
+	}
+
 	GameScene* GameObject::GetGameScene() const
 	{
 		return m_pScene;

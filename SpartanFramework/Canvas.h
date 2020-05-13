@@ -31,6 +31,8 @@ namespace SpartanEngine
 
 			void AutoResizeToScreen(bool enable);
 
+			void SetColor(const Color& color);
+
 		protected:
 			void Initialize(const GameContext& gameContext) override;
 			void Update(const GameContext& gameContext) override;
@@ -58,6 +60,7 @@ namespace SpartanEngine
 			Matrix4X4 m_CanvasProjectionMatrix;
 			CanvasRenderMode m_RenderMode;
 			GameObject* m_pLastParrent;
+			Color m_Color;
 
 		private:
 			static Material* m_pCanvasRenderer;

@@ -7,7 +7,7 @@
 
 namespace SpartanEngine
 {
-	ImageRenderComponent::ImageRenderComponent() : UIComponent("Image"), m_pImage(nullptr), m_Offsets()
+	ImageRenderComponent::ImageRenderComponent() : UIComponent("Image"), m_pImage(nullptr), m_Offsets(), m_Color(Color::White())
 	{
 	}
 
@@ -42,6 +42,7 @@ namespace SpartanEngine
 	{
 		m_pUIRenderer->SetUITexture(m_pImage);
 		m_pUIRenderer->SetOffsets(m_Offsets);
+		m_pUIRenderer->SetUIColor(m_Color);
 	}
 
 	bool ImageRenderComponent::CanRender()

@@ -163,6 +163,7 @@ namespace SpartanEngine
 		void RemoveChild(GameObject* pChild);
 
 		void SetDirty(bool dirty);
+		void SetScene(SpartanEngine::GameScene* pScene);
 
 	private:
 		friend class LevelEditor;
