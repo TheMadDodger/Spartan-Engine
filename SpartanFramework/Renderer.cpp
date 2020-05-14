@@ -153,7 +153,7 @@ namespace SpartanEngine
 
 	TextureData* Renderer::RenderText(FontData* pFont, const std::string& text, const SDL_Color& clr, const Origin& origin, Uint32 maxWidth)
 	{
-		if (text.size() <= 0) return nullptr; // If there is no text, no need to waste resources to render it
+		if (text.size() <= 0 || !pFont) return nullptr; // If there is no text, no need to waste resources to render it
 
 		SDL_Surface* pTextSurface = (maxWidth == 0) ? TTF_RenderUTF8_Blended(pFont->GetFontData(), text.data(), clr) :
 			TTF_RenderUTF8_Blended_Wrapped(pFont->GetFontData(), text.data(), clr, maxWidth);

@@ -151,8 +151,8 @@ namespace SpartanEngine
 				throw new exception("ERROR: Class must be derived from GameObject!!!");
 
 			m_pChildren.push_back(pChild);
-			pChild->m_pParentObject = this;
-			pChild->m_pScene = m_pScene;
+			pChildObject->m_pScene = m_pScene;
+			pChildObject->m_pParentObject = this;
 			return pChild;
 		}
 
