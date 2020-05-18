@@ -205,7 +205,7 @@ namespace SpartanEngine
 				gameWindow = Vector3(parentSize.x, parentSize.y, 2.0f);
 			}
 
-			m_CanvasMatrix = (Matrix4X4)GetTransform()->GetLocalTransformMatrix();
+			m_CanvasMatrix = (Matrix4X4)GetTransform()->GetWorldMatrix();
 			auto view = Vector3(gameWindow.x, gameWindow.y, 2.0f);
 			m_ProjectionMatrix = Matrix4X4::CreateScalingMatrix(view / 2.0f);
 			m_CanvasProjectionMatrix = m_CanvasMatrix * Matrix4X4::CreateTranslationMatrix(view / -2.0f) * m_ProjectionMatrix.Inverse();

@@ -11,12 +11,16 @@ namespace SpartanEngine
 			BaseUIConstraint();
 			~BaseUIConstraint();
 
+			void EnableDebug(bool enabled);
+
 		private:
 			friend class Constraints;
 			virtual void UpdateConstraint(UIObject* pUIObject) = 0;
 			float FetchResult();
 
 		protected:
+			bool m_DebugEnabled;
+
 			enum class Axis
 			{
 				X,
