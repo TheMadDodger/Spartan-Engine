@@ -92,6 +92,8 @@ namespace SpartanEngine
 
 	void UIComponent::RootDraw(const GameContext& gameContext)
 	{
+		if (!m_bInitialized) return;
+
 		if (!m_bEnabled) return;
 		if (!CanRender()) return;
 

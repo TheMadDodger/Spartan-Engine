@@ -9,7 +9,7 @@ namespace SpartanEngine
 	size_t LineRenderComponent::m_LineMatID = 0;
 	UI::LineRenderMaterial* LineRenderComponent::m_pLineRenderer = nullptr;
 
-	LineRenderComponent::LineRenderComponent() : m_Color(1.0f, 1.0f, 1.0f, 1.0f), UIComponent("Line")
+	LineRenderComponent::LineRenderComponent() : m_Color(1.0f, 1.0f, 1.0f, 1.0f), UIComponent("Line"), m_LineWidth(1.0f)
 	{
 	}
 
@@ -30,6 +30,11 @@ namespace SpartanEngine
 		GetGameObject()->SetDirty();
 	}
 
+	void LineRenderComponent::SetLineWidth(float width)
+	{
+		m_LineWidth = width;
+	}
+
 	void LineRenderComponent::Initialize(const GameContext& gameContext)
 	{
 		CreateMaterial();
@@ -41,6 +46,7 @@ namespace SpartanEngine
 		//gameContext.pRenderer->DrawLine(m_StartPos, m_EndPos, m_Color);
 		m_pLineRenderer->SetStartAndEnd(m_StartPos, m_EndPos);
 		m_pLineRenderer->SetUIColor(m_Color);
+		m_pLineRenderer->SetLineWidth(m_LineWidth);
 	}
 
 	void LineRenderComponent::CreateMaterial()

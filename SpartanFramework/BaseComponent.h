@@ -63,6 +63,7 @@ namespace SpartanEngine
 		bool m_CanTickInEditor = false;
 		bool m_CanTickInGame = true;
 		bool m_bEnabled = true;
+		bool m_bInitialized = false;
 
 	private:
 		friend class GameObject;
@@ -70,7 +71,6 @@ namespace SpartanEngine
 		friend class SpartanEngine::UI::Canvas;
 		void SetGameObject(GameObject* pObject);
 		GameObject* m_pGameObject = nullptr;
-		bool m_bInitialized = false;
 
 		std::string m_Name;
 	};

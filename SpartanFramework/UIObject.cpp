@@ -110,6 +110,8 @@ namespace SpartanEngine
 
 		void UIObject::RootDraw(const GameContext& gameContext)
 		{
+			if (!m_bInitialized) return;
+
 			//if (!IsDirty()) return;
 
 			// User defined Draw()

@@ -96,6 +96,8 @@ namespace SpartanEngine
 		//// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
 
+		glEnable(GL_LINE_SMOOTH);
+
 		// Create render texture
 		RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
 		RenderTexture::m_pUITexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height, false);

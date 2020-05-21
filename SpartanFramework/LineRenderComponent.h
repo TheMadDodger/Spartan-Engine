@@ -13,10 +13,7 @@ namespace SpartanEngine
 		void SetColor(Color color);
 
 		void SetStartAndEnd(Vector2 startPos, Vector2 endPos);
-
-		Vector2 m_StartPos;
-		Vector2 m_EndPos;
-		Color m_Color;
+		void SetLineWidth(float width);
 
 	private:
 		void Initialize(const GameContext& gameContext) override;
@@ -28,5 +25,10 @@ namespace SpartanEngine
 	private:
 		static size_t m_LineMatID;
 		static UI::LineRenderMaterial* m_pLineRenderer;
+
+		Vector2 m_StartPos;
+		Vector2 m_EndPos;
+		Color m_Color;
+		float m_LineWidth;
 	};
 }

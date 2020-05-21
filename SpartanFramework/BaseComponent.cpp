@@ -66,6 +66,7 @@ namespace SpartanEngine
 
 	void BaseComponent::RootDraw(const GameContext& gameContext)
 	{
+		if (!m_bInitialized) return;
 		if (!m_bEnabled) return;
 
 		// User defined Draw()

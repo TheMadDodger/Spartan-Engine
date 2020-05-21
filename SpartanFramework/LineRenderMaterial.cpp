@@ -7,7 +7,7 @@ namespace SpartanEngine
 {
 	namespace UI
 	{
-		LineRenderMaterial::LineRenderMaterial(ShaderData* pShader) : UIRenderMaterial(pShader)
+		LineRenderMaterial::LineRenderMaterial(ShaderData* pShader) : UIRenderMaterial(pShader), m_LineWidth(1.0f)
 		{
 		}
 
@@ -23,6 +23,11 @@ namespace SpartanEngine
 			m_LineRect.w = endPos.y;
 		}
 
+		void LineRenderMaterial::SetLineWidth(float width)
+		{
+			m_LineWidth = width;
+		}
+
 		void LineRenderMaterial::SetShaderVars(BaseComponent* pComponent)
 		{
 			UIComponent* pUIComp = (UIComponent*)pComponent;
@@ -30,6 +35,7 @@ namespace SpartanEngine
 			SetMatrix4("WorldProjection", &projection.m[0][0]);
 			SetColor("Color", m_Color);
 			SetVec4("LineRect", m_LineRect);
+			glLineWidth(m_LineWidth);
 		}
 	}
 }

@@ -237,6 +237,8 @@ namespace SpartanEngine
 
 	void GameObject::RootDraw(const GameContext& gameContext)
 	{
+		if (!m_bInitialized) return;
+
 		// User defined Draw()
 		Draw(gameContext);
 
