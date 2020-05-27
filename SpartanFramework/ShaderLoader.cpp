@@ -76,17 +76,15 @@ namespace SpartanEngine
 		GLint result;
 		glGetShaderiv(shaderID, GL_COMPILE_STATUS, &result);
 		Utilities::Debug::LogGLError(glGetError());
+		GLint length;
+		glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
+		Utilities::Debug::LogGLError(glGetError());
+		GLchar* strInfoLog = new GLchar[length + 1];
+		glGetShaderInfoLog(shaderID, length, &length, strInfoLog);
+		Utilities::Debug::LogGLError(glGetError());
 
 		if (result == GL_FALSE)
 		{
-			GLint length;
-			glGetShaderiv(shaderID, GL_INFO_LOG_LENGTH, &length);
-			Utilities::Debug::LogGLError(glGetError());
-
-			GLchar* strInfoLog = new GLchar[length + 1];
-			glGetShaderInfoLog(shaderID, length, &length, strInfoLog);
-			Utilities::Debug::LogGLError(glGetError());
-
 			std::string errorMessage = "Error compiling shader " + source + "\n";
 			errorMessage += std::string(strInfoLog);
 			Utilities::Debug::LogError(errorMessage);
@@ -94,7 +92,10 @@ namespace SpartanEngine
 			delete[] strInfoLog;
 			return false;
 		}
+		
+		if (length > 0) Utilities::Debug::LogWarning(source + "\n" + std::string(strInfoLog));
 
+		delete[] strInfoLog;
 		return true;
 	}
 

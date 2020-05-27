@@ -7,6 +7,7 @@
 #include "FontLoader.h"
 #include "ShaderLoader.h"
 #include "ModelLoader.h"
+#include "GradientLoader.h"
 
 namespace SpartanEngine
 {
@@ -40,6 +41,7 @@ namespace SpartanEngine
 		AddLoader(new FontLoader());
 		AddLoader(new ShaderLoader());
 		AddLoader(new ModelLoader());
+		AddLoader(new GradientLoader());
 	}
 
 	ContentManager::ContentManager()

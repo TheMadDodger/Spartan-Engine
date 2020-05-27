@@ -166,6 +166,7 @@ namespace SpartanEngine
 	GLuint Material::CreateUniformBuffer(const std::string& name, GLuint bufferSize)
 	{
 		GLuint uniformBlockIndex = glGetUniformBlockIndex(m_pShader->m_ShaderProgramID, name.data());
+		Utilities::Debug::LogGLError(glGetError());
 		if (uniformBlockIndex == GL_INVALID_INDEX)
 		{
 			Utilities::Debug::LogError("Material::CreateUniformBuffer > Uniform buffer block with name " + name + " not found!");

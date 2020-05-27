@@ -225,7 +225,7 @@ namespace SpartanEngine
 
 			if (CheckPointInRect(localMousePos, { bottomLeft, topRight }))
 			{
-				Utilities::Debug::LogInfo("IN BUTTON!");
+				//Utilities::Debug::LogInfo("IN BUTTON!");
 				m_MouseOver = true;
 				PassUIMouseInputToChildren(localMousePos);
 			}

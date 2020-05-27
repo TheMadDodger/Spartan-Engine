@@ -66,7 +66,7 @@ namespace SpartanEngine
 			return false;
 		}
 
-		// Use OpenGL 2.1
+		// Use OpenGL 3.1
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -108,6 +108,12 @@ namespace SpartanEngine
 		m_pConspole = new ConsoleInput();
 		m_pConspole->Initialize();
 		RegisterConsoleCommands(m_pConspole);
+
+		GLint maxUniformSize, maxUniformLocations;
+		glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &maxUniformSize);
+		glGetIntegerv(GL_MAX_UNIFORM_LOCATIONS, &maxUniformLocations);
+		Utilities::Debug::LogInfo("GL_MAX_UNIFORM_BLOCK_SIZE: " + to_string(maxUniformSize));
+		Utilities::Debug::LogInfo("GL_MAX_UNIFORM_LOCATIONS: " + to_string(maxUniformLocations));
 #endif // _DEBUG
 
 		return true;

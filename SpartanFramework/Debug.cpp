@@ -8,6 +8,7 @@ namespace SpartanEngine
 		std::string AutomaticLogger::m_NextMessagePrefix = "";
 		vector<LoggingData> AutomaticLogger::m_DataToLog = vector<LoggingData>();
 		bool Debug::m_PhysicsDebugRendering = false;
+		std::ofstream Debug::m_File = std::ofstream();
 
 		void Debug::Log(const std::string& message, const LogLevel& logLevel, bool bIncludeTimeStamp)
 		{
@@ -39,6 +40,11 @@ namespace SpartanEngine
 			if (bIncludeTimeStamp)
 				TimeStamp();
 			std::cout << "Info:	" << message << endl;
+
+			if (m_File.is_open())
+			{
+				m_File << "Info:	" << message << endl;
+			}
 			ResetConsoleColor();
 		}
 
@@ -48,6 +54,11 @@ namespace SpartanEngine
 			if (bIncludeTimeStamp)
 				TimeStamp();
 			std::cout << "Notice:	" << message << endl;
+
+			if (m_File.is_open())
+			{
+				m_File << "Notice:	" << message << endl;
+			}
 			ResetConsoleColor();
 		}
 
@@ -57,6 +68,11 @@ namespace SpartanEngine
 			if (bIncludeTimeStamp)
 				TimeStamp();
 			std::cout << "WARNING:	" << message << endl;
+
+			if (m_File.is_open())
+			{
+				m_File << "WARNING:	" << message << endl;
+			}
 			ResetConsoleColor();
 		}
 
@@ -66,6 +82,11 @@ namespace SpartanEngine
 			if (bIncludeTimeStamp)
 				TimeStamp();
 			std::cout << "ERROR:	" << message << endl;
+
+			if (m_File.is_open())
+			{
+				m_File << "ERROR:	" << message << endl;
+			}
 			ResetConsoleColor();
 
 			//TODO: Open dialoge box

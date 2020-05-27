@@ -5,24 +5,11 @@
 #include "SEObject.h"
 #include "Manager.h"
 #include "VertexHelpers.h"
+#include "Content.h"
+#include "Gradient.h"
 
 namespace SpartanEngine
 {
-	class Content : SEObject // Base Class for content
-	{
-	public:
-		Content(const std::string& file) : m_FileName(file) {}
-		virtual ~Content() {}
-		const std::string& GetFile() { return m_FileName; };
-
-		template <class T>
-		T* As() { return static_cast<T*>(this); };
-
-	protected:
-		friend class ContentManager;
-		const std::string m_FileName;
-	};
-
 	class TextureData : public Content
 	{
 	public:

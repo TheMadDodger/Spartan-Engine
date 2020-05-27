@@ -100,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,7 +172,9 @@
     <ClInclude Include="AspectConstraint.h" />
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
+    <ClInclude Include="Content.h" />
     <ClInclude Include="Gradient.h" />
+    <ClInclude Include="GradientLoader.h" />
     <ClInclude Include="LineRenderMaterial.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
@@ -278,7 +280,9 @@
     <ClCompile Include="CenterConstraint.cpp" />
     <ClCompile Include="Commands.cpp" />
     <ClCompile Include="ConsoleInput.cpp" />
+    <ClCompile Include="Content.cpp" />
     <ClCompile Include="Gradient.cpp" />
+    <ClCompile Include="GradientLoader.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridComponent.cpp" />
     <ClCompile Include="Layers.cpp" />

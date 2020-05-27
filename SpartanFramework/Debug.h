@@ -134,9 +134,21 @@ namespace SpartanEngine
 				AutomaticLogger::m_NextMessagePrefix = prefix;
 			}
 
+			static void EnableLoggingToFile(const std::string &path)
+			{
+				m_File.open(path);
+			}
+
+			static void DisableLoggingToFile()
+			{
+				if (!m_File.is_open()) return;
+				m_File.close();
+			}
+
 		private:
 			static void TimeStamp();
 			static bool m_PhysicsDebugRendering;
+			static std::ofstream m_File;
 		};
 
 		inline void SetConsoleColor(WORD color)

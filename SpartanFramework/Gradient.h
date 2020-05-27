@@ -1,5 +1,5 @@
 #pragma once
-#include "SEObject.h"
+#include "Content.h"
 
 namespace SpartanEngine
 {
@@ -13,9 +13,10 @@ namespace SpartanEngine
 		float Percentage;
 	};
 
-	class Gradient : public SEObject
+	class Gradient : public Content
 	{
 	public:
+		Gradient(size_t resolution, size_t layers, const std::string &path);
 		Gradient(size_t resolution, size_t layers = 1);
 		virtual ~Gradient();
 

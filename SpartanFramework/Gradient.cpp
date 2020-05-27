@@ -4,7 +4,13 @@
 
 namespace SpartanEngine
 {
-	Gradient::Gradient(size_t resolution, size_t layers) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers)
+	Gradient::Gradient(size_t resolution, size_t layers) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content("")
+	{
+		m_GradientKeys.resize(layers);
+		CreateDefaultKeys();
+	}
+
+	Gradient::Gradient(size_t resolution, size_t layers, const std::string &path) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content(path)
 	{
 		m_GradientKeys.resize(layers);
 		CreateDefaultKeys();
