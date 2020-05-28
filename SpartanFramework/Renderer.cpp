@@ -28,11 +28,11 @@ namespace SpartanEngine
 		RenderTexture::m_pUITexture = nullptr;
 
 		SDL_FreeSurface(m_pWindowSurface);
-		SDL_DestroyRenderer(m_pSDLRenderer);
+		//SDL_DestroyRenderer(m_pSDLRenderer);
 		SDL_GL_DeleteContext(m_pSDLContext);
 		SDL_DestroyWindow(m_pWindow);
 		m_pWindowSurface = nullptr;
-		m_pSDLRenderer = nullptr;
+		//m_pSDLRenderer = nullptr;
 		m_pWindow = nullptr;
 		m_pSDLContext = nullptr;
 	}
@@ -69,8 +69,10 @@ namespace SpartanEngine
 			/* Problem: glewInit failed, something is seriously wrong. */
 			fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
 		}
+		Utilities::Debug::LogGLError(glGetError());
 
 		fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+		Utilities::Debug::LogGLError(glGetError());
 
 		if (gameSettings.EnableVSync)
 		{
@@ -84,19 +86,25 @@ namespace SpartanEngine
 		{
 			SDL_GL_SetSwapInterval(0);
 		}
+		Utilities::Debug::LogGLError(glGetError());
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		Utilities::Debug::LogGLError(glGetError());
 
 		//// Enable color blending and use alpha blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		Utilities::Debug::LogGLError(glGetError());
 
 		// Enable depth test
 		glEnable(GL_DEPTH_TEST);
+		Utilities::Debug::LogGLError(glGetError());
 		//// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
+		Utilities::Debug::LogGLError(glGetError());
 
 		glEnable(GL_LINE_SMOOTH);
+		Utilities::Debug::LogGLError(glGetError());
 
 		// Create render texture
 		RenderTexture::m_pDefaultTexture = RenderTexture::CreateRenderTexture(gameSettings.Window.Width, gameSettings.Window.Height);
@@ -172,7 +180,6 @@ namespace SpartanEngine
 		TextureData* pTextTexture = new TextureData("", CalculateOrigin(origin, pTextSurface));
 		pTextTexture->m_pImage = pTextSurface;
 		pTextTexture->BuildTexture();
-		//RenderTexture(pTextTexture);
 
 		return pTextTexture;
 	}
@@ -304,7 +311,9 @@ namespace SpartanEngine
 	void Renderer::ClearBackground(bool transparent)
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, transparent ? 0.0f : 1.0f);
+		Utilities::Debug::LogGLError(glGetError());
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	ScreenRect* Renderer::GetScreenRect()

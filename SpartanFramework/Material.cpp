@@ -25,7 +25,9 @@ namespace SpartanEngine
 
 		m_TextureCounter = 0;
 
-		glPolygonMode(m_DoubleSided ? GL_FRONT_AND_BACK : GL_FRONT, m_Wireframe ? GL_LINE : GL_FILL);
+		//glPolygonMode(m_DoubleSided ? GL_FRONT_AND_BACK : GL_FRONT, m_Wireframe ? GL_LINE : GL_FILL);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void Material::Reset()
@@ -34,7 +36,9 @@ namespace SpartanEngine
 		Utilities::Debug::LogGLError(glGetError());
 
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		Utilities::Debug::LogGLError(glGetError());
 		glLineWidth(1.0f);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void Material::SetFloat(const std::string& name, float value) const

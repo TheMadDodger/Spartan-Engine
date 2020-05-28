@@ -52,19 +52,38 @@ namespace SpartanEngine
 
 			//Create VBO
 			glGenVertexArrays(1, &m_VertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 			glGenBuffers(1, &m_VertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glGenBuffers(1, &m_IndexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 
 			glBindVertexArray(m_VertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 
 			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBufferData(GL_ARRAY_BUFFER, m_VertexSize * m_VertexCount, m_pVertices, GL_STATIC_DRAW);
+			Utilities::Debug::LogGLError(glGetError());
 
 			//Create IBO
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_IndexCount * sizeof(GLuint), m_pIndices, GL_STATIC_DRAW);
+			Utilities::Debug::LogGLError(glGetError());
 
 			SetupAttributes();
+			Utilities::Debug::LogGLError(glGetError());
+
+			//glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+			glBindVertexArray(NULL);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			Utilities::Debug::LogGLError(glGetError());
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+			Utilities::Debug::LogGLError(glGetError());
 
 			m_IsMeshBuilt = true;
 		}
@@ -140,16 +159,17 @@ namespace SpartanEngine
 					break;
 				}
 			}
-
-			glBindVertexArray(0);
 		}
 
 		void Draw()
 		{
 			glBindVertexArray(m_VertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBufferID);
 			glDrawElements(m_PrimitiveTopoloy, m_IndexCount, GL_UNSIGNED_INT, NULL);
+			Utilities::Debug::LogGLError(glGetError());
 			glBindVertexArray(0);
+			Utilities::Debug::LogGLError(glGetError());
 		}
 
 		void DrawEnd()

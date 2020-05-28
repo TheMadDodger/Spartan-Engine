@@ -24,5 +24,6 @@ namespace SpartanEngine
 		friend class Renderer;
 		Material* m_pScreenRenderMaterial;
 		GLuint m_ScreenQuadVertexbufferID;
+		GLuint m_ScreenQuadVertexArrayID;
 	};
 }

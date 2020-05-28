@@ -31,7 +31,7 @@ namespace SpartanEngine
 		virtual ~TextureData()
 		{
 			glDeleteTextures(1, &m_TextureID);
-			SDL_FreeSurface(m_pImage);
+			if (m_pImage) SDL_FreeSurface(m_pImage);
 			m_pImage = NULL;
 		}
 

@@ -9,6 +9,7 @@
 namespace SpartanEngine
 {
 	size_t UIComponent::m_UIVertexBufferID = 0;
+	size_t UIComponent::m_UIVertexArrayID = 0;
 	bool UIComponent::m_DoesVertexBufferExist = false;
 	int UIComponent::m_InstanceCount = 0;
 
@@ -20,11 +21,36 @@ namespace SpartanEngine
 				0.0f, 0.0f, 0.0f,
 			};
 
+			glGenVertexArrays(1, &m_UIVertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
+			
+			glBindVertexArray(m_UIVertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
+
 			glGenBuffers(1, &m_UIVertexBufferID);
 			Utilities::Debug::LogGLError(glGetError());
 			glBindBuffer(GL_ARRAY_BUFFER, m_UIVertexBufferID);
 			Utilities::Debug::LogGLError(glGetError());
 			glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glVertexAttribPointer(
+				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+				3,                  // size
+				GL_FLOAT,           // type
+				GL_FALSE,           // normalized?
+				3 * sizeof(float),                  // stride
+				(void*)0            // array buffer offset
+			);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glEnableVertexAttribArray(0);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glBindVertexArray(NULL);
 			Utilities::Debug::LogGLError(glGetError());
 
 			m_DoesVertexBufferExist = true;
@@ -39,6 +65,7 @@ namespace SpartanEngine
 
 		if (m_InstanceCount == 0)
 		{
+			glDeleteVertexArrays(1, &m_UIVertexArrayID);
 			glDeleteBuffers(1, &m_UIVertexBufferID);
 			m_DoesVertexBufferExist = false;
 		}
@@ -112,28 +139,14 @@ namespace SpartanEngine
 
 	void UIComponent::Render()
 	{
-		glEnableVertexAttribArray(0);
-		Utilities::Debug::LogGLError(glGetError());
-		glBindBuffer(GL_ARRAY_BUFFER, m_UIVertexBufferID);
-		Utilities::Debug::LogGLError(glGetError());
-		glVertexAttribPointer(
-			0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,                  // size
-			GL_FLOAT,           // type
-			GL_FALSE,           // normalized?
-			0,                  // stride
-			(void*)0            // array buffer offset
-		);
+		glBindVertexArray(m_UIVertexArrayID);
 		Utilities::Debug::LogGLError(glGetError());
 
 		// Draw the point !
 		glDrawArrays(GL_POINTS, 0, 1); // 2*3 indices starting at 0 -> 2 triangles
 		Utilities::Debug::LogGLError(glGetError());
 
-		glDisableVertexAttribArray(0);
-		Utilities::Debug::LogGLError(glGetError());
-
-		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+		glBindVertexArray(NULL);
 		Utilities::Debug::LogGLError(glGetError());
 	}
 }

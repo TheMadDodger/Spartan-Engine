@@ -67,9 +67,14 @@ namespace SpartanEngine
 		}
 
 		// Use OpenGL 3.1
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		int result = SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+		if (result < 0) Utilities::Debug::LogError(SDL_GetError());
+		result = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		if (result < 0) Utilities::Debug::LogError(SDL_GetError());
+		result = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
+		if (result < 0) Utilities::Debug::LogError(SDL_GetError());
+		//result = SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+		//if (result < 0) Utilities::Debug::LogError(SDL_GetError());
 
 		// Initialize GameContext
 		m_GameContext.pRenderer = new Renderer();

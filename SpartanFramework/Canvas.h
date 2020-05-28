@@ -54,6 +54,7 @@ namespace SpartanEngine
 		private:
 			RenderTexture* m_pRenderTexture;
 			GLuint m_CanvasQuadVertexBufferID;
+			GLuint m_CanvasQuadVertexArrayID;
 			Matrix4X4 m_CanvasMatrix;
 			Matrix4X4 m_ProjectionMatrix;
 			Matrix4X4 m_UIProjectionMatrix;

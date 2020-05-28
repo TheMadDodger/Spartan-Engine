@@ -63,7 +63,9 @@ namespace SpartanEngine
 	{
 		auto gameSettings = BaseGame::GetGame()->GetGameSettings();
 		glBindFramebuffer(GL_FRAMEBUFFER, NULL);
+		Utilities::Debug::LogGLError(glGetError());
 		glViewport(0, 0, gameSettings.Window.Width, gameSettings.Window.Height);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void RenderTexture::EndFinalRender()
@@ -212,11 +214,14 @@ namespace SpartanEngine
 	void RenderTexture::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_GLFrameBufferID);
+		Utilities::Debug::LogGLError(glGetError());
 		glViewport(0, 0, m_Dimensions.x, m_Dimensions.y);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 
 	void RenderTexture::UnBind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, NULL);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 }

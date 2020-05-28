@@ -12,7 +12,7 @@ namespace SpartanEngine
 	{
 		Material* Canvas::m_pCanvasRenderer = nullptr;
 
-		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr), m_ResizeToScreen(nullptr), m_Color(Color::White())
+		Canvas::Canvas() : UIObject("Canvas"), m_pRenderTexture(nullptr), m_CanvasQuadVertexArrayID(NULL), m_CanvasQuadVertexBufferID(NULL), m_pLastParrent(nullptr), m_ResizeToScreen(nullptr), m_Color(Color::White())
 		{
 			if (m_pCanvasRenderer == nullptr)
 			{
@@ -162,36 +162,48 @@ namespace SpartanEngine
 				(float)m_Dimensions.x, (float)m_Dimensions.y, 0.0f,
 			};
 
+			glGenVertexArrays(1, &m_CanvasQuadVertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
+			glBindVertexArray(m_CanvasQuadVertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
+
 			glGenBuffers(1, &m_CanvasQuadVertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBindBuffer(GL_ARRAY_BUFFER, m_CanvasQuadVertexBufferID);
+			Utilities::Debug::LogGLError(glGetError());
 			glBufferData(GL_ARRAY_BUFFER, sizeof(g_quad_vertex_buffer_data), g_quad_vertex_buffer_data, GL_STATIC_DRAW);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glEnableVertexAttribArray(0);
+			Utilities::Debug::LogGLError(glGetError());
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+			Utilities::Debug::LogGLError(glGetError());
+
+			glBindVertexArray(NULL);
+			Utilities::Debug::LogGLError(glGetError());
+			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			Utilities::Debug::LogGLError(glGetError());
 		}
 
 		void Canvas::DestroyGLData()
 		{
+			if (m_CanvasQuadVertexArrayID != NULL) glDeleteVertexArrays(1, &m_CanvasQuadVertexArrayID);
+			m_CanvasQuadVertexArrayID = NULL;
 			if (m_CanvasQuadVertexBufferID != NULL) glDeleteBuffers(1, &m_CanvasQuadVertexBufferID);
 			m_CanvasQuadVertexBufferID = NULL;
 		}
 
 		void Canvas::DrawCanvasMesh()
 		{
-			glEnableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, m_CanvasQuadVertexBufferID);
-			glVertexAttribPointer(
-				0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
-				3,                  // size
-				GL_FLOAT,           // type
-				GL_FALSE,           // normalized?
-				0,                  // stride
-				(void*)0            // array buffer offset
-			);
+			glBindVertexArray(m_CanvasQuadVertexArrayID);
+			Utilities::Debug::LogGLError(glGetError());
 
 			// Draw the triangles !
 			glDrawArrays(GL_TRIANGLES, 0, 6); // 2*3 indices starting at 0 -> 2 triangles
+			Utilities::Debug::LogGLError(glGetError());
 
-			glDisableVertexAttribArray(0);
-
-			glBindBuffer(GL_ARRAY_BUFFER, NULL);
+			glBindVertexArray(NULL);
+			Utilities::Debug::LogGLError(glGetError());
 		}
 
 		void Canvas::CalculateMatrices()
