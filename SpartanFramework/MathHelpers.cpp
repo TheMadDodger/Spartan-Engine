@@ -221,6 +221,20 @@ namespace SpartanEngine
 			return result;
 		}
 
+		bool Math::Vector3::operator==(const Vector3& other) const
+		{
+			if (x != other.x) return false;
+			if (y != other.y) return false;
+			if (z != other.z) return false;
+			return true;
+		}
+
+		bool Math::Vector3::operator!=(const Vector3& other) const
+		{
+			bool isEqual = operator==(other);
+			return !isEqual;
+		}
+
 		float Vector3::Normalize()
 		{
 			float length = Length();

@@ -203,7 +203,52 @@ namespace SpartanEngine
 	void Material::SetUniformBuffer(GLuint bufferID, void* data, GLuint size)
 	{
 		glBindBuffer(GL_UNIFORM_BUFFER, bufferID);
+		Utilities::Debug::LogGLError(glGetError());
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, size, data);
+		Utilities::Debug::LogGLError(glGetError());
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+		Utilities::Debug::LogGLError(glGetError());
+	}
+
+	GLuint Material::CreateShaderStorageBuffer(const std::string& name, GLsizeiptr bufferSize, const void* data, GLint bindingIndex, GLenum usage)
+	{
+		GLuint ssbo;
+		glGenBuffers(1, &ssbo);
+		Utilities::Debug::LogGLError(glGetError());
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+		Utilities::Debug::LogGLError(glGetError());
+		glBufferData(GL_SHADER_STORAGE_BUFFER, bufferSize, data, usage);
+		Utilities::Debug::LogGLError(glGetError());
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingIndex, ssbo);
+		Utilities::Debug::LogGLError(glGetError());
+
+		/*GLuint blockIndex = glGetProgramResourceIndex(m_pShader->m_ShaderProgramID, GL_SHADER_STORAGE_BLOCK, name.c_str());
+		Utilities::Debug::LogGLError(glGetError());
+
+		if (blockIndex == GL_INVALID_INDEX)
+		{
+			Utilities::Debug::LogError("Material::CreateShaderStorageBuffer > Shader Storage Buffer Block with name " + name + " not found!");
+			return 0;
+		}
+
+		glShaderStorageBlockBinding(m_pShader->m_ShaderProgramID, blockIndex, bindingIndex);
+		Utilities::Debug::LogGLError(glGetError());*/
+
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, NULL);
+		Utilities::Debug::LogGLError(glGetError());
+		return ssbo;
+	}
+
+	void Material::WriteToShaderStorageBuffer(GLuint ssboID, const void* data, GLsizeiptr size)
+	{
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssboID);
+		Utilities::Debug::LogGLError(glGetError());
+		GLvoid* bufferData = glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_WRITE_ONLY);
+		Utilities::Debug::LogGLError(glGetError());
+		memcpy(bufferData, data, size);
+		glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+		Utilities::Debug::LogGLError(glGetError());
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, NULL);
+		Utilities::Debug::LogGLError(glGetError());
 	}
 }

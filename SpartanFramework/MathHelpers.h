@@ -103,6 +103,8 @@ namespace SpartanEngine
 			Vector3 operator*(float factor) const;
 			Vector3 operator/(float factor) const;
 			Vector3 operator/(const Vector3& other) const;
+			bool operator==(const Vector3& other) const;
+			bool operator!=(const Vector3& other) const;
 			Vector3 Normalized() const;
 			Vector2 xy() const { return Vector2(x, y); }
 			static Vector3 Rotate(const Vector3& vec, Quaternion& rotation);

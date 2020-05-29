@@ -41,6 +41,8 @@ namespace SpartanEngine
 
 		GLuint CreateUniformBuffer(const std::string& name, GLuint bufferSize);
 		void SetUniformBuffer(GLuint bufferID, void* data, GLuint size);
+		GLuint CreateShaderStorageBuffer(const std::string& name, GLsizeiptr bufferSize, const void* data, GLint bindingIndex, GLenum usage = GL_STREAM_DRAW);
+		void WriteToShaderStorageBuffer(GLuint ssboID, const void* data, GLsizeiptr size);
 
 	protected:
 		virtual void SetShaderVars(BaseComponent*) {};
