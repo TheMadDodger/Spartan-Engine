@@ -1,14 +1,14 @@
 #pragma once
 #include <GameScene.h>
-class BehaviourTreeTestScene : public GameScene
+class BehaviourTreeTestScene : public SpartanEngine::GameScene
 {
 public:
 	BehaviourTreeTestScene();
 	virtual ~BehaviourTreeTestScene();
 
 private:
-	virtual void Initialize(const GameContext &gameContext);
-	virtual void Update(const GameContext &gameContext);
-	virtual void Draw(const GameContext &gameContext);
+	virtual void Initialize(const SpartanEngine::GameContext &gameContext);
+	virtual void Update(const SpartanEngine::GameContext &gameContext);
+	virtual void Draw(const SpartanEngine::GameContext &gameContext);
 };
 

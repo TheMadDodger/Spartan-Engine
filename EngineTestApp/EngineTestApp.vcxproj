@@ -97,7 +97,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Debug\x86;$(LIBDIR)\GLEW\lib\Debug\x86;$(LIBDIR)\assimp\lib\Debug\x86;$(LIBDIR)\glm\lib\Debug\x86;$(LIBDIR)\Engine\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32d.lib;glm_static.lib;assimp-vc142-mtd.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;glm_static.lib;assimp-vc141-mtd.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -134,8 +134,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Release;$(LIBDIR)\GLEW\lib\Release;$(LIBDIR)\Engine\Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;libfbxsdk.lib;glew32.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\x86;$(LIBDIR)\SDL2_image\lib\x86;$(LIBDIR)\SDL2_mixer\lib\x86;$(LIBDIR)\SDL2_ttf\lib\x86;$(LIBDIR)\Box2D\lib\Release;$(LIBDIR)\assimp\lib\Release\x86;$(LIBDIR)\GLEW\lib\Release\x86;$(LIBDIR)\Engine\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;glew32.lib;assimp-vc141-mt.lib;SpartanFramework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,6 +160,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BufferTest.h" />
+    <ClInclude Include="BufferTestMaterial.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="GridTestScene.h" />
     <ClInclude Include="PlanetMaterial.h" />
@@ -174,6 +176,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BufferTest.cpp" />
+    <ClCompile Include="BufferTestMaterial.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="GridTestScene.cpp" />
     <ClCompile Include="PlanetMaterial.cpp" />

@@ -1,6 +1,6 @@
 #pragma once
 #include <GameObject.h>
-class FreeCamera : public GameObject
+class FreeCamera : public SpartanEngine::GameObject
 {
 public:
 	FreeCamera();
@@ -9,16 +9,16 @@ public:
 	float m_MaxDistance;
 
 private:
-	virtual void Initialize(const GameContext &gameContext) override;
-	virtual void Update(const GameContext &gameContext) override;
+	virtual void Initialize(const SpartanEngine::GameContext &gameContext) override;
+	virtual void Update(const SpartanEngine::GameContext &gameContext) override;
 
 private:
-	CameraComponent *m_pCameraComponent;
+	SpartanEngine::CameraComponent *m_pCameraComponent;
 	float m_CurrentZoom = 1.0f;
 	float m_DesiredZoom = 1.0f;
-	Vector3 m_FocusPos;
-	Vector2 m_MousePos;
-	Vector2 m_LastMouseDownPos;
+	SpartanEngine::Vector3 m_FocusPos;
+	SpartanEngine::Vector2 m_MousePos;
+	SpartanEngine::Vector2 m_LastMouseDownPos;
 	bool m_InputDisabled = false;
 };
 

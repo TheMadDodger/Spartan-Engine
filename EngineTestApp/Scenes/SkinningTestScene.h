@@ -1,23 +1,20 @@
 #pragma once
 #include "GameScene.h"
 
-class Skeleton;
-class Bone;
-
-class SkinningTestScene : public GameScene
-{
-public:
-	SkinningTestScene();
-	virtual ~SkinningTestScene();
-
-private:
-	virtual void Initialize(const GameContext &gameContext);
-	virtual void Update(const GameContext &gameContext);
-	virtual void Draw(const GameContext &gameContext);
-
-private:
-	Skeleton *m_pSkeleton;
-	Bone *m_pRootBone;
-	Bone *m_pChildBone;
-};
-
+//class SkinningTestScene : public SpartanEngine::GameScene
+//{
+//public:
+//	SkinningTestScene();
+//	virtual ~SkinningTestScene();
+//
+//private:
+//	virtual void Initialize(const SpartanEngine::GameContext &gameContext);
+//	virtual void Update(const SpartanEngine::GameContext &gameContext);
+//	virtual void Draw(const SpartanEngine::GameContext &gameContext);
+//
+//private:
+//	SpartanEngine::Skeleton *m_pSkeleton;
+//	SpartanEngine::Bone *m_pRootBone;
+//	SpartanEngine::Bone *m_pChildBone;
+//};
+//

@@ -1,5 +1,6 @@
 #pragma once
 #include <Material.h>
+#include <Gradient.h>
 
 enum NoiseFilterType : int
 {
@@ -14,7 +15,7 @@ struct NoiseLayer
     float Roughness;
     float Persistance;
 
-    Vector3 Center;
+    SpartanEngine::Vector3 Center;
     float MinValue;
     
     int NumLayers;
@@ -23,12 +24,10 @@ struct NoiseLayer
     float Weight;
 };
 
-class Gradient;
-
-class PlanetMaterial : public Material
+class PlanetMaterial : public SpartanEngine::Material
 {
 public:
-	PlanetMaterial(ShaderData* pShader);
+	PlanetMaterial(SpartanEngine::ShaderData* pShader);
 	virtual ~PlanetMaterial();
 
 	void Randomize(int seed);
@@ -36,7 +35,7 @@ public:
     void SetLayer(size_t index, const NoiseLayer& layer);
 
 private:
-	virtual void SetShaderVars(BaseComponent*) override;
+	virtual void SetShaderVars(SpartanEngine::BaseComponent*) override;
 
 private:
 	void UnpackLittleUint32(int value, byte buffer[]);
@@ -49,6 +48,6 @@ private:
     NoiseLayer m_NoiseLayers[MAXNOISELAYERS];
     int m_NumLayers;
     GLuint m_UniformNoiseBuffer;
-    Gradient* m_pGradient;
+    SpartanEngine::Gradient* m_pGradient;
 };
 

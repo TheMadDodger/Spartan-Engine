@@ -39,7 +39,7 @@ namespace SpartanEngine
 		void SetDoubleSided(bool doubleSided);
 		void EnableWireframe(bool enabled);
 
-		GLuint CreateUniformBuffer(const std::string& name, GLuint bufferSize);
+		GLuint CreateUniformBuffer(const std::string& name, GLuint bufferSize, GLuint bindingIndex);
 		void SetUniformBuffer(GLuint bufferID, void* data, GLuint size);
 		GLuint CreateShaderStorageBuffer(const std::string& name, GLsizeiptr bufferSize, const void* data, GLint bindingIndex, GLenum usage = GL_STREAM_DRAW);
 		void WriteToShaderStorageBuffer(GLuint ssboID, const void* data, GLsizeiptr size);
@@ -55,7 +55,6 @@ namespace SpartanEngine
 
 		bool m_DoubleSided;
 		bool m_Wireframe;
-		GLuint m_BufferBindIndex;
 		std::vector<GLuint> m_UniformBufferObjects;
 	};
 }

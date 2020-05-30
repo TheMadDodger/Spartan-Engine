@@ -4,7 +4,7 @@
 
 namespace SpartanEngine
 {
-	Material::Material(ShaderData* pShader) : m_pShader(pShader), m_DoubleSided(false), m_Wireframe(false), m_BufferBindIndex(0)
+	Material::Material(ShaderData* pShader) : m_pShader(pShader), m_DoubleSided(false), m_Wireframe(false)
 	{
 	}
 
@@ -15,7 +15,6 @@ namespace SpartanEngine
 			glDeleteBuffers(m_UniformBufferObjects.size(), &m_UniformBufferObjects[0]);
 			m_UniformBufferObjects.clear();
 		}
-		m_BufferBindIndex = 0;
 	}
 
 	void Material::Use()
@@ -167,7 +166,7 @@ namespace SpartanEngine
 		m_Wireframe = enabled;
 	}
 
-	GLuint Material::CreateUniformBuffer(const std::string& name, GLuint bufferSize)
+	GLuint Material::CreateUniformBuffer(const std::string& name, GLuint bufferSize, GLuint bindingIndex)
 	{
 		GLuint uniformBlockIndex = glGetUniformBlockIndex(m_pShader->m_ShaderProgramID, name.data());
 		Utilities::Debug::LogGLError(glGetError());
@@ -177,8 +176,9 @@ namespace SpartanEngine
 			return 0;
 		}
 
+		// Manually bind the uniform block
 		Utilities::Debug::LogGLError(glGetError());
-		glUniformBlockBinding(m_pShader->m_ShaderProgramID, uniformBlockIndex, m_BufferBindIndex);
+		glUniformBlockBinding(m_pShader->m_ShaderProgramID, uniformBlockIndex, bindingIndex);
 		Utilities::Debug::LogGLError(glGetError());
 
 		// Uniform buffer object for lights
@@ -195,8 +195,6 @@ namespace SpartanEngine
 		Utilities::Debug::LogGLError(glGetError());
 
 		m_UniformBufferObjects.push_back(bufferID);
-
-		++m_BufferBindIndex;
 		return bufferID;
 	}
 
