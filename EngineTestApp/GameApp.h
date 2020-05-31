@@ -1,8 +1,6 @@
 #pragma once
 
 #include <BaseGame.h>
-#include <gtc/matrix_transform.hpp>
-#include <gtx/matrix_transform_2d.hpp>
 
 class Blackboard;
 
@@ -18,13 +16,5 @@ public:
 	void GamePaint(const SpartanEngine::GameContext &gameContext) override;
 
 	virtual void RegisterPrefabs(std::vector<SpartanEngine::GameObject*> &) override {};
-
-private:
-	//Material *m_Material;
-
-	//glm::mat4 m_Projection;
-	//glm::mat4 m_View;
-
-	//bool m_UseGLM = true;
 };
 

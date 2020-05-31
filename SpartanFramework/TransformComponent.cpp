@@ -30,14 +30,14 @@ namespace SpartanEngine
 	void TransformComponent::UpdateTransform()
 	{
 		// Check if a rigid body is applied to this object
-		auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
-		if (pRigid)
-		{
-			Vector2 rigidPos = ToVector2(pRigid->Getb2Body()->GetPosition());
-			Position = Vector3(rigidPos.x, rigidPos.y, Position.z);
-			// TODO: Convert euler angle to Quaternion
-			//Rotation = Vector3(0, 0, pRigid->Getb2Body()->GetAngle());
-		}
+		//auto pRigid = GetGameObject()->GetComponent<RigidBody2DComponent>();
+		//if (pRigid)
+		//{
+		//	Vector2 rigidPos = ToVector2(pRigid->Getb2Body()->GetPosition());
+		//	Position = Vector3(rigidPos.x, rigidPos.y, Position.z);
+		//	// TODO: Convert euler angle to Quaternion
+		//	//Rotation = Vector3(0, 0, pRigid->Getb2Body()->GetAngle());
+		//}
 
 		// Build own transform
 		BuildTransform();
@@ -61,25 +61,6 @@ namespace SpartanEngine
 		m_WorldPosition = Position;
 	}
 
-	/// DEPRECATED!!!
-	/// USE SHADERS!!!
-	void TransformComponent::ApplyTransform()
-	{
-		/// Applies the transform to OpenGL so everything rendered after it uses its transform
-		// Extraxt all data from the Transform matrix
-		Vector3 pos = m_TansformMatrix.ExtraxtTranslation();
-		Vector3 scale = m_TansformMatrix.ExtraxtScale();
-		Quaternion rot = m_TansformMatrix.ExtraxtRotation();
-
-		// Convert rotation to Radians since OpenGL needs Radians
-		//rot.z = rot.z / (float)M_PI * 180.0f;
-
-		// Apply Transform to OpenGL
-		glTranslatef(pos.x, pos.y, 0);
-		//glRotatef(rot.z, 0, 0, 1);
-		glScalef(scale.x, scale.y, 1);
-	}
-
 	void TransformComponent::BuildTransform()
 	{
 		m_TansformMatrix = Matrix4X4::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);
@@ -87,29 +68,41 @@ namespace SpartanEngine
 		m_WorldTansformMatrix = m_TansformMatrix;
 	}
 
-	const Matrix4X4& TransformComponent::GetTransformMatrix()
+	const Matrix4X4& TransformComponent::GetTransformMatrix() const
 	{
 		return m_TansformMatrix;
 	}
 
-	const Matrix4X4& TransformComponent::GetLocalTransformMatrix()
+	const Matrix4X4& TransformComponent::GetLocalTransformMatrix() const
 	{
 		return m_LocalTansformMatrix;
 	}
 
-	const Matrix4X4& TransformComponent::GetWorldMatrix()
+	const Matrix4X4& TransformComponent::GetWorldMatrix() const
 	{
 		return m_WorldTansformMatrix;
 	}
 
-	Matrix3X3 TransformComponent::GetRotationMatrix()
+	Matrix3X3 TransformComponent::GetRotationMatrix() const
 	{
 		return Matrix3X3(m_WorldTansformMatrix);
 	}
 
-	const Vector3& TransformComponent::GetWorldPosition()
+	const Vector3& TransformComponent::GetWorldPosition() const
 	{
 		return m_WorldPosition;
+	}
+
+	void TransformComponent::SetWorldPosition(const Vector3& position)
+	{
+		auto pParent = GetGameObject()->GetParent();
+		if (!pParent)
+		{
+			Position = position;
+			return;
+		}
+		Vector3 localPosition = position - pParent->GetTransform()->Position;
+		Position = position;
 	}
 
 	void TransformComponent::Translate(const Vector3& position, bool updateTransform)
@@ -117,12 +110,11 @@ namespace SpartanEngine
 		Position = position;
 
 		// Update rigid body if there is one
-		auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
-		if (pRigid && pRigid->IsInitialized())
-		{
-
-			pRigid->Getb2Body()->SetTransform(b2Vec2(Position.x, Position.y), pRigid->Getb2Body()->GetAngle());
-		}
+		//auto pRigid = GetGameObject()->GetComponent<RigidBody2DComponent>();
+		//if (pRigid && pRigid->IsInitialized())
+		//{
+		//	pRigid->Getb2Body()->SetTransform(b2Vec2(Position.x, Position.y), pRigid->Getb2Body()->GetAngle());
+		//}
 
 		if (updateTransform) UpdateTransform();
 		GetGameObject()->SetDirty();
@@ -147,7 +139,7 @@ namespace SpartanEngine
 	{
 		Rotation = Quaternion::Euler(rotation);
 		// Update rigid body if there is one
-		auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+		auto pRigid = GetGameObject()->GetComponent<RigidBody2DComponent>();
 		if (pRigid)
 		{
 			pRigid->Getb2Body()->SetTransform(pRigid->Getb2Body()->GetPosition(), Rotation.z);

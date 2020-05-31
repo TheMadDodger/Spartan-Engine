@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "SoundManager.h"
 #include "MaterialManager.h"
+#include "PhysicsProxy.h"
 
 #ifdef _DEBUG
 #include "ConsoleInput.h"
@@ -44,6 +45,8 @@ namespace SpartanEngine
 		m_GameContext.pInput = nullptr;
 		delete m_GameContext.pSound;
 		m_GameContext.pSound = nullptr;
+		delete m_GameContext.pPhysicsProxy;
+		m_GameContext.pPhysicsProxy = nullptr;
 		//delete m_GameContext.pParticleManager;
 		//m_GameContext.pParticleManager = nullptr;
 
@@ -66,7 +69,7 @@ namespace SpartanEngine
 			return false;
 		}
 
-		// Use OpenGL 3.1
+		// Use OpenGL 4.6
 		int result = SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 		if (result < 0) Utilities::Debug::LogError(SDL_GetError());
 		result = SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
@@ -84,6 +87,8 @@ namespace SpartanEngine
 		m_GameContext.pInput = new InputManager();
 		m_GameContext.pSound = new SoundManager();
 		m_GameContext.pSound->Initialize();
+		m_GameContext.pPhysicsProxy = new PhysicsProxy();
+		m_GameContext.pPhysicsProxy->Initialize();
 		//m_GameContext.pParticleManager = new ParticleManager();
 
 		// Initialize Content Manager
@@ -132,6 +137,9 @@ namespace SpartanEngine
 
 		// Start the timer
 		m_GameContext.pTime->StartFrame();
+
+		// Step the physicsworld
+		m_GameContext.pPhysicsProxy->Step(m_GameContext);
 
 #ifdef _DEBUG
 		// Update console commands

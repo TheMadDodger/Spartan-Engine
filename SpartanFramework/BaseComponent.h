@@ -29,7 +29,7 @@ namespace SpartanEngine
 		BaseComponent(const char* name = "BaseComponent");
 		virtual ~BaseComponent();
 
-		GameObject* GetGameObject() { return m_pGameObject; }
+		GameObject* GetGameObject() const { return m_pGameObject; }
 
 		virtual BaseComponent* Create() = 0;
 		static void Register(BaseComponent* pComponent);

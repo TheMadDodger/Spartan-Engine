@@ -3,10 +3,11 @@
 #include "stdafx.h"
 #include "TransformComponent.h"
 #include "SEObject.h"
+#include "3DColliders.h"
 
 namespace SpartanEngine
 {
-	class Collider : SEObject
+	class Collider2D : SEObject
 	{
 	public:
 		virtual void DrawDebugShape(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
@@ -14,7 +15,7 @@ namespace SpartanEngine
 	protected:
 		virtual b2Shape* ApplyShape() { return nullptr; }
 
-		virtual ~Collider()
+		virtual ~Collider2D()
 		{
 			if (m_pShape)
 			{
@@ -27,16 +28,16 @@ namespace SpartanEngine
 		b2Shape* m_pShape = nullptr;
 
 	private:
-		friend class ColliderComponent;
+		friend class Collider2DComponent;
 	};
 
-	class Box : public Collider
+	class Box2D : public Collider2D
 	{
 	public:
-		Box(float width, float hieght) : Dimensions(width, hieght) {};
-		Box(const Math::Vector2& dimensions) : Dimensions(dimensions) {};
+		Box2D(float width, float hieght) : Dimensions(width, hieght) {};
+		Box2D(const Math::Vector2& dimensions) : Dimensions(dimensions) {};
 
-		virtual ~Box() {};
+		virtual ~Box2D() {};
 
 		const Math::Vector2 Dimensions;
 
@@ -63,7 +64,7 @@ namespace SpartanEngine
 		}
 	};
 
-	class Circle : public Collider
+	class Circle : public Collider2D
 	{
 	public:
 		Circle(float radius) : m_Radius(radius) {};

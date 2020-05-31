@@ -3,11 +3,11 @@
 
 namespace SpartanEngine
 {
-	class RigidBodyComponent : public BaseComponent
+	class RigidBody2DComponent : public BaseComponent
 	{
 	public:
-		RigidBodyComponent();
-		virtual ~RigidBodyComponent();
+		RigidBody2DComponent();
+		virtual ~RigidBody2DComponent();
 
 		b2Body* Getb2Body() { return m_Body; };
 
@@ -21,8 +21,8 @@ namespace SpartanEngine
 		//void Draw(const GameContext &gameContext) override;
 
 	private:
-		COMPONENT_EDITOR(RigidBodyComponent)
-
-			b2Body* m_Body = nullptr;
+		COMPONENT_EDITOR(RigidBody2DComponent)
+		
+		b2Body* m_Body = nullptr;
 	};
 }

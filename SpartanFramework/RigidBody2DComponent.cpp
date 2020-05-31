@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "RigidBodyComponent.h"
+#include "RigidBody2DComponent.h"
 #include "GameObject.h"
 #include "GameScene.h"
-#include "ColliderComponent.h"
+#include "Collider2DComponent.h"
 
 namespace SpartanEngine
 {
-	RigidBodyComponent::RigidBodyComponent() : BaseComponent("Rigidbody")
+	RigidBody2DComponent::RigidBody2DComponent() : BaseComponent("Rigidbody")
 	{
 	}
 
-	RigidBodyComponent::~RigidBodyComponent()
+	RigidBody2DComponent::~RigidBody2DComponent()
 	{
 	}
 
-	void RigidBodyComponent::Initialize(const GameContext& gameContext)
+	void RigidBody2DComponent::Initialize(const GameContext& gameContext)
 	{
 		UNREFERENCED_PARAMETER(gameContext);
 		auto physicsWorld = GetGameObject()->GetGameScene()->GetPhysicsWorld();
@@ -29,9 +29,9 @@ namespace SpartanEngine
 		Getb2Body()->SetTransform(Tob2Vec2(pos), rot.z);
 	}
 
-	void RigidBodyComponent::OnDestroy()
+	void RigidBody2DComponent::OnDestroy()
 	{
-		auto pCol = GetGameObject()->GetComponent<ColliderComponent>();
+		auto pCol = GetGameObject()->GetComponent<Collider2DComponent>();
 
 		auto physicsWorld = GetGameObject()->GetGameScene()->GetPhysicsWorld();
 

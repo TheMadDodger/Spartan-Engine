@@ -88,7 +88,7 @@ namespace SpartanEngine
 		return m_pScene;
 	}
 
-	GameObject* GameObject::GetChild(size_t index)
+	GameObject* GameObject::GetChild(size_t index) const
 	{
 		if (index < m_pChildren.size())
 			return m_pChildren[index];
@@ -96,12 +96,12 @@ namespace SpartanEngine
 		return nullptr;
 	}
 
-	const vector<GameObject*>& GameObject::GetChildren()
+	const vector<GameObject*>& GameObject::GetChildren() const
 	{
 		return m_pChildren;
 	}
 
-	const std::string& GameObject::GetTag()
+	const std::string& GameObject::GetTag() const
 	{
 		return m_Tag;
 	}
@@ -111,7 +111,7 @@ namespace SpartanEngine
 		m_Tag = tag;
 	}
 
-	bool GameObject::IsEnabled()
+	bool GameObject::IsEnabled() const
 	{
 		return m_Enabled;
 	}
@@ -159,7 +159,7 @@ namespace SpartanEngine
 		GetGameScene()->UpdateLayers(this, oldLayer, m_LayerID);
 	}
 
-	bool GameObject::IsDirty()
+	bool GameObject::IsDirty() const
 	{
 		if (m_IsDirty) return true;
 		for (size_t i = 0; i < m_pChildren.size(); i++)

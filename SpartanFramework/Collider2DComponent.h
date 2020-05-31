@@ -1,18 +1,18 @@
 #pragma once
 #include "BaseComponent.h"
-#include "Colliders.h"
+#include "2DColliders.h"
 #include "PhysicsMaterial.h"
 
 namespace SpartanEngine
 {
-	class ColliderComponent : public BaseComponent
+	class Collider2DComponent : public BaseComponent
 	{
 	public:
-		ColliderComponent();
-		virtual ~ColliderComponent();
+		Collider2DComponent();
+		virtual ~Collider2DComponent();
 
-		void SetCollider(Collider* newCollider);
-		void UpdateCollider(Collider* newCollider);
+		void SetCollider(Collider2D* newCollider);
+		void UpdateCollider(Collider2D* newCollider);
 
 		PhysicsMaterial m_PhysicsMaterial;
 
@@ -21,12 +21,12 @@ namespace SpartanEngine
 		void Draw(const GameContext& gameContext) override;
 
 	private:
-		COMPONENT_EDITOR(ColliderComponent)
+		COMPONENT_EDITOR(Collider2DComponent)
 
 	private:
-		friend class RigidBodyComponent;
+		friend class RigidBody2DComponent;
 
-		Collider* m_pCollider = nullptr;
+		Collider2D* m_pCollider = nullptr;
 		b2FixtureDef m_FixtureDef;
 		b2Fixture* m_pFixture = nullptr;
 	};

@@ -49,6 +49,9 @@
     <Filter Include="Content Management\Content">
       <UniqueIdentifier>{5cac3f1e-b12b-4274-ace9-632077d8da5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{84bc333c-a2a6-4f3e-989e-74b2b1987a6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -77,9 +80,6 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Core Components</Filter>
     </ClInclude>
-    <ClInclude Include="ColliderComponent.h">
-      <Filter>Core Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Core Components</Filter>
     </ClInclude>
@@ -90,9 +90,6 @@
       <Filter>Content Management</Filter>
     </ClInclude>
     <ClInclude Include="Encryption.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Colliders.h">
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="FontLoader.h">
@@ -121,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBodyComponent.h">
-      <Filter>Core Components</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>SceneGraph</Filter>
@@ -341,6 +335,22 @@
     <ClInclude Include="Content.h">
       <Filter>Content Management\Content</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBody2DComponent.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2DComponent.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsProxy.h" />
+    <ClInclude Include="PhysicsObjectComponent.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="2DColliders.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="3DColliders.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -363,9 +373,6 @@
       <Filter>Helpers</Filter>
     </ClCompile>
     <ClCompile Include="CameraComponent.cpp">
-      <Filter>Core Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderComponent.cpp">
       <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="ContentManager.cpp">
@@ -394,9 +401,6 @@
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBodyComponent.cpp">
-      <Filter>Core Components</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
       <Filter>SceneGraph</Filter>
@@ -574,6 +578,19 @@
     </ClCompile>
     <ClCompile Include="Content.cpp">
       <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody2DComponent.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2DComponent.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsProxy.cpp" />
+    <ClCompile Include="PhysicsObjectComponent.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="3DColliders.cpp">
+      <Filter>Physics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

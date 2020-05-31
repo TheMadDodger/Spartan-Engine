@@ -1,5 +1,4 @@
 #pragma once
-
 namespace SpartanEngine
 {
 	class Renderer;
@@ -7,6 +6,7 @@ namespace SpartanEngine
 	class CameraComponent;
 	class InputManager;
 	class SoundManager;
+	class PhysicsProxy;
 	//class ParticleManager;
 
 	struct WindowSettings
@@ -38,6 +38,7 @@ namespace SpartanEngine
 		GameTime* pTime = nullptr;
 		InputManager* pInput = nullptr;
 		SoundManager* pSound = nullptr;
+		PhysicsProxy* pPhysicsProxy = nullptr;
 		//ParticleManager *pParticleManager = nullptr;
 	};
 }

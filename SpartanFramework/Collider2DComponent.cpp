@@ -1,17 +1,17 @@
 #include "stdafx.h"
-#include "ColliderComponent.h"
-#include "RigidBodyComponent.h"
+#include "Collider2DComponent.h"
+#include "RigidBody2DComponent.h"
 #include "GameObject.h"
 #include "GameScene.h"
 
 namespace SpartanEngine
 {
-	ColliderComponent::ColliderComponent() :
-		m_pCollider(nullptr), BaseComponent("Collider"), m_PhysicsMaterial(PhysicsMaterial())
+	Collider2DComponent::Collider2DComponent() :
+		m_pCollider(nullptr), BaseComponent("Collider 2D"), m_PhysicsMaterial(PhysicsMaterial())
 	{
 	}
 
-	ColliderComponent::~ColliderComponent()
+	Collider2DComponent::~Collider2DComponent()
 	{
 		if (m_pCollider)
 		{
@@ -20,12 +20,12 @@ namespace SpartanEngine
 		}
 	}
 
-	void ColliderComponent::SetCollider(Collider* newCollider)
+	void Collider2DComponent::SetCollider(Collider2D* newCollider)
 	{
 		m_pCollider = newCollider;
 	}
 
-	void ColliderComponent::UpdateCollider(Collider* newCollider)
+	void Collider2DComponent::UpdateCollider(Collider2D* newCollider)
 	{
 		if (m_pCollider)
 		{
@@ -41,17 +41,17 @@ namespace SpartanEngine
 		m_FixtureDef.restitution = m_PhysicsMaterial.Restitution;
 		m_FixtureDef.filter = m_PhysicsMaterial.Filter;
 
-		auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+		auto pRigid = GetGameObject()->GetComponent<RigidBody2DComponent>();
 		pRigid->Getb2Body()->DestroyFixture(m_pFixture);
 		m_pFixture = pRigid->Getb2Body()->CreateFixture(&m_FixtureDef);
 	}
 
-	void ColliderComponent::Initialize(const GameContext& gameContext)
+	void Collider2DComponent::Initialize(const GameContext& gameContext)
 	{
 		if (!m_pCollider) return;
 
 		UNREFERENCED_PARAMETER(gameContext);
-		auto pRigid = GetGameObject()->GetComponent<RigidBodyComponent>();
+		auto pRigid = GetGameObject()->GetComponent<RigidBody2DComponent>();
 		if (!pRigid)
 		{
 			Utilities::Debug::LogError("ColliderComponent::Initialize > ColliderComponent needs a RigidBodyComponent in order to function!");
@@ -67,7 +67,7 @@ namespace SpartanEngine
 		m_pFixture = pRigid->Getb2Body()->CreateFixture(&m_FixtureDef);
 	}
 
-	void ColliderComponent::Draw(const GameContext& gameContext)
+	void Collider2DComponent::Draw(const GameContext& gameContext)
 	{
 		if (!m_pCollider) return;
 		if (Utilities::Debug::CanRenderDebug())

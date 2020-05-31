@@ -100,7 +100,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,7 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\glm\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)bin\bullet\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -169,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="3DColliders.h" />
     <ClInclude Include="AspectConstraint.h" />
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
@@ -179,12 +181,14 @@
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PhysicsProxy.h" />
     <ClInclude Include="PixelConstraint.h" />
     <ClInclude Include="PostProcessingStack.h" />
     <ClInclude Include="PPMaterial.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="RelativeConstraint.h" />
     <ClInclude Include="RenderTexture.h" />
+    <ClInclude Include="PhysicsObjectComponent.h" />
     <ClInclude Include="ScreenRect.h" />
     <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
@@ -224,8 +228,8 @@
     <ClInclude Include="UIConstraints.h" />
     <ClInclude Include="UIContainer.h" />
     <ClInclude Include="FontLoader.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="Colliders.h" />
+    <ClInclude Include="Collider2DComponent.h" />
+    <ClInclude Include="2DColliders.h" />
     <ClInclude Include="BinaryContainer.h" />
     <ClInclude Include="AudioSourceComponent.h" />
     <ClInclude Include="AudioFileLoader.h" />
@@ -251,7 +255,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpriteSheetLoader.h" />
     <ClInclude Include="SpriteSheetComponent.h" />
-    <ClInclude Include="RigidBodyComponent.h" />
+    <ClInclude Include="RigidBody2DComponent.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleComponent.h" />
     <ClInclude Include="stdafx.h" />
@@ -269,6 +273,7 @@
     <ClInclude Include="VertexHelpers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="3DColliders.cpp" />
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AspectConstraint.cpp" />
     <ClCompile Include="AStarPathFinding.cpp" />
@@ -293,12 +298,14 @@
     <ClCompile Include="MeshRenderComponent.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
+    <ClCompile Include="PhysicsProxy.cpp" />
     <ClCompile Include="PixelConstraint.cpp" />
     <ClCompile Include="PostProcessingStack.cpp" />
     <ClCompile Include="PPMaterial.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RelativeConstraint.cpp" />
     <ClCompile Include="RenderTexture.cpp" />
+    <ClCompile Include="PhysicsObjectComponent.cpp" />
     <ClCompile Include="ScreenRect.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />
@@ -311,7 +318,7 @@
     <ClCompile Include="Constraints.cpp" />
     <ClCompile Include="UIContainer.cpp" />
     <ClCompile Include="FontLoader.cpp" />
-    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="Collider2DComponent.cpp" />
     <ClCompile Include="BinaryContainer.cpp" />
     <ClCompile Include="AudioSourceComponent.cpp" />
     <ClCompile Include="AudioFileLoader.cpp" />
@@ -330,7 +337,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="RigidBodyComponent.cpp" />
+    <ClCompile Include="RigidBody2DComponent.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="ParticleComponent.cpp" />
     <ClCompile Include="SpriteSheetLoader.cpp" />

@@ -9,15 +9,13 @@ namespace SpartanEngine
 		TransformComponent();
 		~TransformComponent();
 
-		/// DEPRECATED!!!
-		/// USE SHADERS!!!
-		void ApplyTransform();
 		void BuildTransform();
-		const Matrix4X4& GetTransformMatrix();
-		const Matrix4X4& GetLocalTransformMatrix();
-		const Matrix4X4& GetWorldMatrix();
-		Matrix3X3 GetRotationMatrix();
-		const Vector3& GetWorldPosition();
+		const Matrix4X4& GetTransformMatrix() const;
+		const Matrix4X4& GetLocalTransformMatrix() const;
+		const Matrix4X4& GetWorldMatrix() const;
+		Matrix3X3 GetRotationMatrix() const;
+		const Vector3& GetWorldPosition() const;
+		void SetWorldPosition(const Vector3& position);
 
 		void Translate(const Vector3& position, bool updateTransform = false);
 		void Translate(const Vector2& position, bool updateTransform = false);

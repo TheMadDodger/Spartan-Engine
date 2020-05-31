@@ -1153,14 +1153,36 @@ namespace SpartanEngine
 
 			return Vector4();
 		}
+
 		Ray::Ray(Vector3 start, Vector3 direction)
 		{
 			Start = start;
 			Direction = direction;
 		}
+
 		Vector3 Ray::GetPoint(float length)
 		{
 			return Start + Direction * length;
 		}
-}
+
+		btVector3 TobtVector3(const Vector3& vec3)
+		{
+			return btVector3((btScalar)vec3.x, (btScalar)vec3.y, (btScalar)vec3.z);
+		}
+
+		Vector3 btToVector3(const btVector3& vec3)
+		{
+			return Vector3((float)vec3.getX(), (float)vec3.getY(), (float)vec3.getZ());
+		}
+
+		btQuaternion TobtQuaternion(const Quaternion& quaternion)
+		{
+			return btQuaternion((btScalar)quaternion.x, (btScalar)quaternion.y, (btScalar)quaternion.z, (btScalar)quaternion.w);
+		}
+
+		Quaternion btToQuaternion(const btQuaternion& quaternion)
+		{
+			return Quaternion((float)quaternion.getX(), (float)quaternion.getY(), (float)quaternion.getZ(), (float)quaternion.getW());
+		}
+	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <btBulletDynamicsCommon.h>
 
 namespace SpartanEngine
 {
@@ -523,5 +524,11 @@ namespace SpartanEngine
 		}
 
 		Vector4 CalculateOffsets(const Origin& allignment, const Vector2& dimensions);
+
+		btVector3 TobtVector3(const Vector3& vec3);
+		Vector3 btToVector3(const btVector3& vec3);
+
+		btQuaternion TobtQuaternion(const Quaternion& quaternion);
+		Quaternion btToQuaternion(const btQuaternion& quaternion);
 	}
 }

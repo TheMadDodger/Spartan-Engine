@@ -27,7 +27,7 @@ namespace SpartanEngine
 		const vector<BaseComponent*>& GetAllComponents() { return m_pComponents; }
 
 		template <typename T>
-		vector<T*> GetComponents()
+		vector<T*> GetComponents() const
 		{
 			vector<BaseComponent*> pComponents;
 			for (auto pComponent : m_pComponents)
@@ -40,10 +40,10 @@ namespace SpartanEngine
 			return pComponents;
 		}
 
-		vector<BaseComponent*>& GetComponents() { return m_pComponents; }
+		const vector<BaseComponent*>& GetComponents() const { return m_pComponents; }
 
 		template <typename T>
-		T* GetComponent()
+		T* GetComponent() const
 		{
 			for (auto pComponent : m_pComponents)
 			{
@@ -77,29 +77,29 @@ namespace SpartanEngine
 		}
 
 		GameScene* GetGameScene() const;
-		GameObject* GetChild(size_t index);
-		const vector<GameObject*>& GetChildren();
+		GameObject* GetChild(size_t index) const;
+		const vector<GameObject*>& GetChildren() const;
 
 		GameObject* GetParent() const { return m_pParentObject; }
 		void SetParent(GameObject* pParent, bool keepWorldPosition = false);
 
-		const std::string& GetTag();
+		const std::string& GetTag() const;
 		void SetTag(const std::string& tag);
 
-		bool IsEnabled();
+		bool IsEnabled() const;
 		void SetEnabled(bool enabled);
 
-		char* GetName() { return m_Name; }
+		const char* GetName() const { return m_Name; }
 
 		void SetName(const char* name);
 
 		void Select(bool bSelected) { m_Selected = bSelected; }
-		bool IsSelected() { return m_Selected; }
+		bool IsSelected() const { return m_Selected; }
 
 		const LayerData& GetLayer() const;
 		void SetLayer(int layerID);
 
-		bool IsDirty();
+		bool IsDirty() const;
 		void SetDirty();
 
 	protected:

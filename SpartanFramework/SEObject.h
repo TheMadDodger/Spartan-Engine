@@ -5,7 +5,7 @@ namespace SpartanEngine
 	{
 	public:
 		SEObject() {}
-		~SEObject() {}
+		virtual ~SEObject() {}
 
 	private:
 
