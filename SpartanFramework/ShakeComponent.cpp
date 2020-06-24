@@ -19,7 +19,7 @@ namespace SpartanEngine
 		m_ShakeTimer = time;
 		m_ShakeStartTime = time;
 
-		m_OriginalPosition = GetGameObject()->GetTransform()->Position;
+		m_OriginalPosition = GetGameObject()->GetTransform()->GetLocalPosition();
 	}
 
 	void ShakeComponent::SetShakeMode(const ShakeMode& mode)

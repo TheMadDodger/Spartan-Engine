@@ -12,7 +12,7 @@ namespace SpartanEngine
 		{
 		public:
 			UIObject(const char* name = "UIObject", size_t layerID = 0);
-			~UIObject();
+			virtual ~UIObject();
 
 			Canvas* GetParentCanvas() const;
 			void SetSize(float width, float height);

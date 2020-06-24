@@ -169,11 +169,11 @@ namespace SpartanEngine
 			float Normalize();
 			Quaternion Normalized() const;
 			Quaternion Conjugate() const;
-			Quaternion operator*(const Quaternion& other);
-			Quaternion operator*(const Vector3& other);
-			Quaternion operator-(const Quaternion& other);
-			Quaternion operator+(const Quaternion& other);
-			Quaternion operator*(float f);
+			Quaternion operator*(const Quaternion& other) const;
+			Quaternion operator*(const Vector3& other) const;
+			Quaternion operator-(const Quaternion& other) const;
+			Quaternion operator+(const Quaternion& other) const;
+			Quaternion operator*(float f) const;
 			Quaternion Multiply(const Quaternion& other) const;
 			Quaternion Multiply(const Vector3& vec) const;
 			static Quaternion Lerp(Quaternion quaternion1, Quaternion quaternion2, float amount);
@@ -338,7 +338,7 @@ namespace SpartanEngine
 			return p12.Length();
 		}
 
-		inline float Distance(Vector3& pos1, Vector3& pos2)
+		inline float Distance(const Vector3& pos1, const Vector3& pos2)
 		{
 			// Calculate Vector2 from end point to begin point
 			auto p12 = pos2 - pos1;

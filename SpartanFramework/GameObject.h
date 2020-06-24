@@ -112,6 +112,7 @@ namespace SpartanEngine
 		virtual void Construct() {};
 		virtual void Initialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 		virtual void PostInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
+		virtual void BeginUpdate(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 		virtual void Update(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 		virtual void Draw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }
 		virtual void PostDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); }

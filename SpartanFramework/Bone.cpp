@@ -65,7 +65,7 @@ namespace SpartanEngine
 		GetTransform()->Rotate(Vector3(0.f, 0.f, m_Rotation));
 
 		if (m_pParentBone)
-			GetTransform()->Translate(Math::LengthDir(m_pParentBone->m_Length, m_pParentBone->GetTransform()->Rotation.z));
+			GetTransform()->Translate(Math::LengthDir(m_pParentBone->m_Length, m_pParentBone->GetTransform()->GetLocalRotation().z));
 
 		if (usePhysics)
 		{

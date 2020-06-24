@@ -218,6 +218,8 @@ namespace SpartanEngine
 			RootInitialize(gameContext);
 		}
 
+		BeginUpdate(gameContext);
+
 		for (size_t i = 0; i < m_pComponents.size(); ++i)
 		{
 			auto pComponent = m_pComponents[i];

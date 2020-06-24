@@ -78,11 +78,11 @@ namespace SpartanEngine
 				RootInitialize(gameContext);
 			}
 
-			Vector2 lastPosition = GetTransform()->Position.xy();
+			Vector2 lastPosition = GetTransform()->GetLocalPosition().xy();
 
 			m_pConstraints->UpdateConstraints(this);
 
-			if (lastPosition != GetTransform()->Position.xy()) SetDirty();
+			if (lastPosition != GetTransform()->GetLocalPosition().xy()) SetDirty();
 
 			if (m_Dimensions != m_OldDimensions)
 			{

@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "Layers.h"
 #include "Canvas.h"
+#include "PhysicsObjectComponent.h"
 
 namespace SpartanEngine
 {
@@ -55,10 +56,47 @@ namespace SpartanEngine
 
 			auto parentTransformMatrix = pParent->GetTransform()->GetTransformMatrix();
 			m_TansformMatrix = m_TansformMatrix * parentTransformMatrix;
+
+			if (m_TransformChanged)
+			{
+				auto pPhysicsObject = GetGameObject()->GetComponent<PhysicsObjectComponent>();
+				if (pPhysicsObject)
+				{
+					pPhysicsObject->UpdateTransform(m_WorldPosition, Rotation, Scale);
+				}
+				m_TransformChanged = false;
+			}
+
 			return;
 		}
 
 		m_WorldPosition = Position;
+
+		if (m_TransformChanged)
+		{
+			auto pPhysicsObject = GetGameObject()->GetComponent<PhysicsObjectComponent>();
+			if (pPhysicsObject)
+			{
+				pPhysicsObject->UpdateTransform(m_WorldPosition, Rotation, Scale);
+			}
+			m_TransformChanged = false;
+		}
+	}
+
+	void TransformComponent::UpdateAllTransforms()
+	{
+		auto pParent = GetGameObject()->GetParent();
+		if (pParent) pParent->GetTransform()->UpdateAllTransforms();
+		UpdateTransform();
+	}
+
+	void TransformComponent::TransformChanged()
+	{
+		m_TransformChanged = true;
+		const std::vector<SpartanEngine::GameObject*>& pChildren = GetGameObject()->GetChildren();
+
+		std::for_each(pChildren.begin(), pChildren.end(), [](SpartanEngine::GameObject* pObject)
+		{pObject->GetTransform()->TransformChanged(); });
 	}
 
 	void TransformComponent::BuildTransform()
@@ -101,8 +139,25 @@ namespace SpartanEngine
 			Position = position;
 			return;
 		}
-		Vector3 localPosition = position - pParent->GetTransform()->Position;
+		Vector3 localPosition = position - pParent->GetTransform()->GetWorldPosition();
 		Position = position;
+
+		TransformChanged();
+	}
+
+	const Vector3& TransformComponent::GetLocalPosition() const
+	{
+		return Position;
+	}
+
+	const Quaternion& TransformComponent::GetLocalRotation() const
+	{
+		return Rotation;
+	}
+
+	const Vector3& TransformComponent::GetLocalScale() const
+	{
+		return Scale;
 	}
 
 	void TransformComponent::Translate(const Vector3& position, bool updateTransform)
@@ -115,6 +170,7 @@ namespace SpartanEngine
 		//{
 		//	pRigid->Getb2Body()->SetTransform(b2Vec2(Position.x, Position.y), pRigid->Getb2Body()->GetAngle());
 		//}
+		TransformChanged();
 
 		if (updateTransform) UpdateTransform();
 		GetGameObject()->SetDirty();
@@ -145,6 +201,8 @@ namespace SpartanEngine
 			pRigid->Getb2Body()->SetTransform(pRigid->Getb2Body()->GetPosition(), Rotation.z);
 		}
 
+		TransformChanged();
+
 		if (updateTransform) UpdateTransform();
 		GetGameObject()->SetDirty();
 	}
@@ -157,6 +215,17 @@ namespace SpartanEngine
 			return;
 		}
 		Scale = scale;
+
+		TransformChanged();
+
+		if (updateTransform) UpdateTransform();
+		GetGameObject()->SetDirty();
+	}
+
+	void TransformComponent::SetRotation(const Quaternion& rotation, bool updateTransform)
+	{
+		Rotation = rotation;
+		TransformChanged();
 
 		if (updateTransform) UpdateTransform();
 		GetGameObject()->SetDirty();

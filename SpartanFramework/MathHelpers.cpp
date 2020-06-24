@@ -924,7 +924,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Quaternion Math::Quaternion::operator*(const Quaternion& other)
+		Quaternion Math::Quaternion::operator*(const Quaternion& other) const
 		{
 			Quaternion result = Quaternion();
 			result.w = w * other.w - x * other.x - y * other.y - z * other.z;
@@ -934,7 +934,7 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Quaternion Math::Quaternion::operator*(const Vector3& other)
+		Quaternion Math::Quaternion::operator*(const Vector3& other) const
 		{
 			Quaternion result = Quaternion();
 			result.w = -x * other.x - y * other.y - z * other.z;
@@ -944,17 +944,17 @@ namespace SpartanEngine
 			return result;
 		}
 
-		Quaternion Math::Quaternion::operator-(const Quaternion &other)
+		Quaternion Math::Quaternion::operator-(const Quaternion &other) const
 		{
 			return Quaternion(x - other.x, y - other.y, z - other.z, w - other.w);
 		}
 
-		Quaternion Math::Quaternion::operator+(const Quaternion& other)
+		Quaternion Math::Quaternion::operator+(const Quaternion& other) const
 		{
 			return Quaternion(x + other.x, y + other.y, z + other.z, w + other.w);
 		}
 
-		Quaternion Math::Quaternion::operator*(float f)
+		Quaternion Math::Quaternion::operator*(float f) const
 		{
 			return Quaternion(x * f, y * f, z * f, w * f);
 		}

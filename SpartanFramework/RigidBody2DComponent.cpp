@@ -23,8 +23,8 @@ namespace SpartanEngine
 		bodyDef.type = m_BodyType;
 		m_Body = physicsWorld->CreateBody(&bodyDef);
 
-		auto pos = GetGameObject()->GetTransform()->Position;
-		auto rot = GetGameObject()->GetTransform()->Rotation;
+		auto pos = GetGameObject()->GetTransform()->GetLocalPosition();
+		auto rot = GetGameObject()->GetTransform()->GetLocalRotation();
 
 		Getb2Body()->SetTransform(Tob2Vec2(pos), rot.z);
 	}
