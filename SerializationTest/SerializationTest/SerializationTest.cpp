@@ -1,12 +1,9 @@
 // SerializationTest.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include "stdafx.h"
 #include "SerializableAsset.h"
 #include "Serializer.h"
-#include <string>
 
 
 int main()
@@ -31,10 +28,14 @@ int main()
     asset->Serialize(output);
     output.close();
 
+    std::cin.get();
 
-    //std::ifstream input("test", std::ios::binary);
-    //asset->Deserialize(input);
-    //std::cin.get();
+    TestAsset* newAsset = new TestAsset(newGuid);
+    std::ifstream input("test", std::ios::binary);
+    newAsset->Deserialize(input);
+    input.close();
+
+    std::cin.get();
 
     delete asset;
 }

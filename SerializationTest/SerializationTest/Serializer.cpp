@@ -1,28 +1,34 @@
+#include "stdafx.h"
 #include "Serializer.h"
 
-std::map<const std::type_info&, BaseSerializer> Serializer::m_Serializers = std::map<const std::type_info&, BaseSerializer>();
+std::vector<BaseSerializer*> Serializer::m_Serializers;
 
 void Serializer::LoadSerializers()
 {
 	m_Serializers.clear();
-	m_Serializers[typeid(float)] =				TypeSerializer<float>();
-	m_Serializers[typeid(int)] =				TypeSerializer<int>();
-	m_Serializers[typeid(unsigned int)] =		TypeSerializer<unsigned int>();
-	m_Serializers[typeid(double)] =				TypeSerializer<double>();
-	m_Serializers[typeid(size_t)] =				TypeSerializer<size_t>();
-	m_Serializers[typeid(bool)] =				TypeSerializer<bool>();
-	m_Serializers[typeid(long)] =				TypeSerializer<long>();
-	m_Serializers[typeid(unsigned long)] =		TypeSerializer<unsigned long>();
-	m_Serializers[typeid(long)] =				TypeSerializer<short>();
-	m_Serializers[typeid(unsigned long)] =		TypeSerializer<unsigned short>();
-	m_Serializers[typeid(char)] =				TypeSerializer<char>();
-	m_Serializers[typeid(unsigned char)] =		TypeSerializer<unsigned char>();
-	m_Serializers[typeid(GUID)] =				GUIDSerializer();
+	m_Serializers.push_back(new	TypeSerializer<GUID>());
+	m_Serializers.push_back(new	TypeSerializer<size_t>());
+	m_Serializers.push_back(new	TypeSerializer<float>());
+	m_Serializers.push_back(new	TypeSerializer<int>());
+	m_Serializers.push_back(new	TypeSerializer<unsigned int>());
+	m_Serializers.push_back(new	TypeSerializer<double>());
+	m_Serializers.push_back(new	TypeSerializer<bool>());
+	m_Serializers.push_back(new	TypeSerializer<long>());
+	m_Serializers.push_back(new	TypeSerializer<unsigned long>());
+	m_Serializers.push_back(new	TypeSerializer<short>());
+	m_Serializers.push_back(new	TypeSerializer<unsigned short>());
+	m_Serializers.push_back(new	TypeSerializer<char>());
+	m_Serializers.push_back(new	TypeSerializer<unsigned char>());
 }
 
 BaseSerializer* Serializer::GetSerializer(const std::type_info& type)
 {
-	auto it = m_Serializers.find(type);
+	auto it = std::find_if(m_Serializers.begin(), m_Serializers.end(), [&](BaseSerializer *serializer)
+	{
+		return serializer->GetSerializedType() == type;
+	});
+
 	if (it == m_Serializers.end()) return nullptr;
-	return &m_Serializers[type];
+	BaseSerializer* serializer = *it;
+	return serializer;
 }

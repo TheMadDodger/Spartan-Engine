@@ -1,17 +1,24 @@
+#include "stdafx.h"
 #include "SerializableAsset.h"
-#include <vector>
-#include <xlocale>
-#include <sstream>
-#include <algorithm>
 #include "Serializer.h"
 
-void SerializedAsset::Serialize(std::ostream& os)
+void SerializedAsset::Serialize(std::ofstream& os)
 {
 	PrepareData();
 
-	std::for_each(m_SerializedData.begin(), m_SerializedData.end(), [&](std::any& data)
+	std::for_each(m_SerializedData.begin(), m_SerializedData.end(), [&](SerializedParam& data)
 	{
-		os << Serialize(data);
+		Serialize(data, os);
+	});
+}
+
+void SerializedAsset::Deserialize(std::ifstream& os)
+{
+	PrepareData();
+
+	std::for_each(m_SerializedData.begin(), m_SerializedData.end(), [&](SerializedParam& data)
+	{
+		Deserialize(data, os);
 	});
 }
 
@@ -22,35 +29,48 @@ const GUID& SerializedAsset::GetGUID()
 
 void SerializedAsset::PrepareData()
 {
+	if (m_SerializedData.size() > 0) return;
+
 	m_SerializedData.clear();
 	size_t hashCode = GetClassType().hash_code();
-	m_SerializedData.push_back(hashCode);
-	m_SerializedData.push_back(m_GUID);
+
+	SerializedParam param;
+	param.m_MemberPointer = nullptr;
+	param.m_Serialized = hashCode;
+	m_SerializedData.push_back(param);
+	param.m_MemberPointer = &m_GUID;
+	param.m_Serialized = m_GUID;
+	m_SerializedData.push_back(param);
 	DefineSerializedParams(m_SerializedData);
 }
 
-std::string SerializedAsset::Serialize(std::any& data)
+void SerializedAsset::Serialize(SerializedParam& data, std::ofstream& fileStream)
 {
-	BaseSerializer *serializer = Serializer::GetSerializer(data.type());
-	if (serializer == nullptr) return "";
-	return serializer->Serialize(data);
+	BaseSerializer *serializer = Serializer::GetSerializer(data.m_Serialized.type());
+	if (serializer == nullptr) return;
+	serializer->Serialize(data.m_Serialized, fileStream);
 }
 
-void TestAsset::Deserialize(std::istream& is)
+void SerializedAsset::Deserialize(SerializedParam& data, std::ifstream& fileStream)
 {
-	GUID guid;
-	is >> guid.Data4;
-	is >> guid.Data3;
-	is >> guid.Data2;
-	is >> guid.Data1;
-	size_t hashCode;
-	is >> hashCode;
+	BaseSerializer* serializer = Serializer::GetSerializer(data.m_Serialized.type());
+	if (serializer == nullptr) return;
+	serializer->Deserialize(data.m_Serialized, fileStream);
 }
 
-void TestAsset::DefineSerializedParams(std::vector<std::any>& params)
+void TestAsset::DefineSerializedParams(std::vector<SerializedParam>& params)
 {
-	params.push_back(m_TestData1);
-	params.push_back(m_TestData2);
-	params.push_back(m_TestData3);
-	params.push_back(m_TestData4);
+	SerializedParam param;
+	param.m_MemberPointer = &m_TestData1;
+	param.m_Serialized = m_TestData1;
+	params.push_back(param);
+	param.m_MemberPointer = &m_TestData2;
+	param.m_Serialized = m_TestData2;
+	params.push_back(param);
+	param.m_MemberPointer = &m_TestData3;
+	param.m_Serialized = m_TestData3;
+	params.push_back(param);
+	param.m_MemberPointer = &m_TestData4;
+	param.m_Serialized = m_TestData4;
+	params.push_back(param);
 }

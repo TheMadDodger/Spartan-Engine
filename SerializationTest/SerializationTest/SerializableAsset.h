@@ -4,6 +4,13 @@
 #include <any>
 #include <vector>
 
+struct SerializedParam
+{
+public:
+	std::any m_Serialized;
+	void* m_MemberPointer;
+};
+
 class SerializedAsset
 {
 public:
@@ -12,20 +19,22 @@ public:
 
 	virtual const std::type_info& GetClassType() = 0;
 
-	void Serialize(std::ostream& os);
+	void Serialize(std::ofstream& os);
+	void Deserialize(std::ifstream& os);
 
 	const GUID& GetGUID();
 
 protected:
-	virtual void DefineSerializedParams(std::vector<std::any> &params) = 0;
+	virtual void DefineSerializedParams(std::vector<SerializedParam> &params) = 0;
 
 private:
 	void PrepareData();
-	std::string Serialize(std::any& data);
+	void Serialize(SerializedParam& data, std::ofstream& fileStream);
+	void Deserialize(SerializedParam& data, std::ifstream& fileStream);
 
 private:
 	GUID m_GUID;
-	std::vector<std::any> m_SerializedData;
+	std::vector<SerializedParam> m_SerializedData;
 };
 
 template<class T>
@@ -47,13 +56,11 @@ private:
 class TestAsset : public Asset<TestAsset>
 {
 public:
-	TestAsset(const GUID& guid) : Asset(guid) {}
+	TestAsset(const GUID& guid) : Asset(guid), m_TestData1(500.0f), m_TestData2(true), m_TestData3(25), m_TestData4('X') {}
 	virtual ~TestAsset() {}
 
-	void Deserialize(std::istream& is);
-
 private:
-	void DefineSerializedParams(std::vector<std::any>& params) override;
+	void DefineSerializedParams(std::vector<SerializedParam>& params) override;
 
 private:
 	float m_TestData1;
