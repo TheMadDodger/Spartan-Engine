@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "SerializableAsset.h"
 #include "Serializer.h"
+#include "AssetFactory.h"
+
+SerializedAsset::SerializedAsset(const GUID& guid) : m_GUID(guid)
+{
+	AssetFactory::AddAsset(this);
+}
 
 void SerializedAsset::Serialize(std::ofstream& os)
 {
@@ -16,9 +22,11 @@ void SerializedAsset::Deserialize(std::ifstream& os)
 {
 	PrepareData();
 
+	int index = 0;
 	std::for_each(m_SerializedData.begin(), m_SerializedData.end(), [&](SerializedParam& data)
 	{
-		Deserialize(data, os);
+		if (index > 1) Deserialize(data, os); // First 2 pieces of data are class hash and GUID these are already deserialized
+		++index;
 	});
 }
 
@@ -29,16 +37,14 @@ const GUID& SerializedAsset::GetGUID()
 
 void SerializedAsset::PrepareData()
 {
-	if (m_SerializedData.size() > 0) return;
-
 	m_SerializedData.clear();
-	size_t hashCode = GetClassType().hash_code();
+	size_t hashCode = AssetFactory::GetAssetHash(GetClassType());
 
 	SerializedParam param;
-	param.m_MemberPointer = nullptr;
+	param.m_MemberPointer = NULL;
 	param.m_Serialized = hashCode;
 	m_SerializedData.push_back(param);
-	param.m_MemberPointer = &m_GUID;
+	param.m_MemberPointer = NULL;
 	param.m_Serialized = m_GUID;
 	m_SerializedData.push_back(param);
 	DefineSerializedParams(m_SerializedData);
@@ -55,7 +61,7 @@ void SerializedAsset::Deserialize(SerializedParam& data, std::ifstream& fileStre
 {
 	BaseSerializer* serializer = Serializer::GetSerializer(data.m_Serialized.type());
 	if (serializer == nullptr) return;
-	serializer->Deserialize(data.m_Serialized, fileStream);
+	serializer->Deserialize(data.m_Serialized, data.m_MemberPointer, fileStream);
 }
 
 void TestAsset::DefineSerializedParams(std::vector<SerializedParam>& params)

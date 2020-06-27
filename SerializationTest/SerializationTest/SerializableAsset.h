@@ -14,7 +14,7 @@ public:
 class SerializedAsset
 {
 public:
-	SerializedAsset(const GUID& guid) : m_GUID(guid) {}
+	SerializedAsset(const GUID& guid);
 	virtual ~SerializedAsset() {}
 
 	virtual const std::type_info& GetClassType() = 0;
@@ -26,6 +26,7 @@ public:
 
 protected:
 	virtual void DefineSerializedParams(std::vector<SerializedParam> &params) = 0;
+	virtual SerializedAsset* Create(const GUID& guid) = 0;
 
 private:
 	void PrepareData();
@@ -33,7 +34,8 @@ private:
 	void Deserialize(SerializedParam& data, std::ifstream& fileStream);
 
 private:
-	GUID m_GUID;
+	friend class AssetFactory;
+	const GUID m_GUID;
 	std::vector<SerializedParam> m_SerializedData;
 };
 
@@ -50,7 +52,10 @@ public:
 	}
 
 private:
-
+	virtual SerializedAsset* Create(const GUID& guid) override
+	{
+		return new T(guid);
+	}
 };
 
 class TestAsset : public Asset<TestAsset>
@@ -62,7 +67,7 @@ public:
 private:
 	void DefineSerializedParams(std::vector<SerializedParam>& params) override;
 
-private:
+public:
 	float m_TestData1;
 	bool m_TestData2;
 	int m_TestData3;
