@@ -52,6 +52,9 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{84bc333c-a2a6-4f3e-989e-74b2b1987a6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Serialization">
+      <UniqueIdentifier>{9df1f762-714d-45d3-9586-90297a7c11b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -351,6 +354,27 @@
     <ClInclude Include="3DColliders.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Serializer.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializedAssetReference.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetDatabase.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIDComparer.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -591,6 +615,21 @@
     </ClCompile>
     <ClCompile Include="3DColliders.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializer.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetDatabase.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIDComparer.cpp">
+      <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

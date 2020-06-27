@@ -40,6 +40,7 @@ namespace SpartanEngine
 
 		virtual void RegisterLayers(LayerManager*) {};
 		virtual void RegisterPrefabs(std::vector<GameObject*>& prefabs) = 0;
+		virtual void RegisterAssets() {}
 
 #ifdef _DEBUG
 	protected:

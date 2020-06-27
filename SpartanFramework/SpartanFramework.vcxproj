@@ -102,6 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +120,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +140,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,6 +162,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -172,11 +176,14 @@
   <ItemGroup>
     <ClInclude Include="3DColliders.h" />
     <ClInclude Include="AspectConstraint.h" />
+    <ClInclude Include="AssetDatabase.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
     <ClInclude Include="Content.h" />
     <ClInclude Include="Gradient.h" />
     <ClInclude Include="GradientLoader.h" />
+    <ClInclude Include="GUIDComparer.h" />
     <ClInclude Include="LineRenderMaterial.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
@@ -213,6 +220,10 @@
     <ClInclude Include="MeshRenderComponent.h" />
     <ClInclude Include="PathFindingNodes.h" />
     <ClInclude Include="PhysicsMaterial.h" />
+    <ClInclude Include="Asset.h" />
+    <ClInclude Include="Serialization.h" />
+    <ClInclude Include="SerializedAssetReference.h" />
+    <ClInclude Include="Serializer.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShakeComponent.h" />
     <ClInclude Include="Singleton.h" />
@@ -276,6 +287,8 @@
     <ClCompile Include="3DColliders.cpp" />
     <ClCompile Include="AIComponent.cpp" />
     <ClCompile Include="AspectConstraint.cpp" />
+    <ClCompile Include="AssetDatabase.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AStarPathFinding.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />
     <ClCompile Include="AIBehaviourTree.cpp" />
@@ -290,6 +303,7 @@
     <ClCompile Include="GradientLoader.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="GridComponent.cpp" />
+    <ClCompile Include="GUIDComparer.cpp" />
     <ClCompile Include="Layers.cpp" />
     <ClCompile Include="LineRenderComponent.cpp" />
     <ClCompile Include="LineRenderMaterial.cpp" />
@@ -307,6 +321,8 @@
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="PhysicsObjectComponent.cpp" />
     <ClCompile Include="ScreenRect.cpp" />
+    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="Serializer.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
