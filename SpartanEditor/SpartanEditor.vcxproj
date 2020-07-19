@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -59,28 +59,40 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Macros.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Macros.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Macros.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Macros.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(solutiondir)bin\Editor\$(Configuration)\$(platform)</OutDir>
+    <IntDir>$(Configuration)\$(platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(solutiondir)bin\Editor\$(Configuration)\$(platform)</OutDir>
+    <IntDir>$(Configuration)\$(platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(solutiondir)bin\Editor\$(Configuration)\$(platform)</OutDir>
+    <IntDir>$(Configuration)\$(platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(solutiondir)bin\Editor\$(Configuration)\$(platform)</OutDir>
+    <IntDir>$(Configuration)\$(platform)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,8 +102,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)SpartanFramework</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,7 +121,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)SpartanFramework</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,7 +141,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)SpartanFramework</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,7 +163,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(LIBDIR)\SDL2\include;$(LIBDIR)\SDL2_image\include;$(LIBDIR)\SDL2_mixer\include;$(LIBDIR)\SDL2_ttf\include;$(LIBDIR)\Box2D\include;$(SOLUTIONDIR)SpartanFramework;$(SolutionDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\assimp\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\GLEW\include;$(solutiondir)SpartanFramework</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="BehaviorTreeEditor.h" />
     <ClInclude Include="EditorWindow.h" />
+    <ClInclude Include="SceneWindow.h" />
     <ClInclude Include="SkeletonObject.h" />
     <ClInclude Include="ComponentParameters.h" />
     <ClInclude Include="EditorObject.h" />
@@ -176,12 +193,14 @@
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="SkeletonEditorComponent.h" />
+    <ClInclude Include="EditorApp.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BehaviorTreeEditor.cpp" />
     <ClCompile Include="EditorWindow.cpp" />
+    <ClCompile Include="SceneWindow.cpp" />
     <ClCompile Include="SkeletonObject.cpp" />
     <ClCompile Include="ComponentParameters.cpp" />
     <ClCompile Include="EditorObject.cpp" />
@@ -193,8 +212,9 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="SkeletonEditorComponent.cpp" />
-    <ClCompile Include="SpartanEditor.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="GameApp.cpp" />
+    <ClCompile Include="EditorApp.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

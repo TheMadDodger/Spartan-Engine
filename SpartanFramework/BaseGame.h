@@ -54,12 +54,12 @@ namespace Spartan
 
 		void HandleWindowEvent(SDL_Event* event);
 
-	private:
-		friend class GameTool;
+	protected:
 		GameSettings m_GameSettings;
 		GameContext m_GameContext;
 		std::vector<GameObject*> m_pPrefabs;
 
+	private:
 #ifdef _DEBUG
 		ConsoleInput* m_pConspole;
 #endif

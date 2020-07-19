@@ -52,12 +52,12 @@
 //	Utilities::BinaryContainer::Write<int>(1);
 //
 //	// 1: General information about the spritesheet
-//	Utilities::BinaryContainer::Write<BYTE>(1);
+//	Utilities::BinaryContainer::Write<char>(1);
 //	Utilities::BinaryContainer::WriteString("mario.png");
 //	Utilities::BinaryContainer::Write<int>(2);
 //
 //	// 2: Animation Clips
-//	Utilities::BinaryContainer::Write<BYTE>(2);
+//	Utilities::BinaryContainer::Write<char>(2);
 //	Utilities::BinaryContainer::Write<int>(0);
 //	Utilities::BinaryContainer::WriteString("idle");
 //	Utilities::BinaryContainer::Write<int>(1);
@@ -69,7 +69,7 @@
 //	Utilities::BinaryContainer::Write<int>(15);
 //
 //	// 3: Frames
-//	Utilities::BinaryContainer::Write<BYTE>(3);
+//	Utilities::BinaryContainer::Write<char>(3);
 //
 //	Utilities::BinaryContainer::Write<int>(4);
 //	// Idle has only 1 frame
@@ -90,7 +90,7 @@
 //	Utilities::BinaryContainer::Write<int>(1);
 //	Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //
-//	Utilities::BinaryContainer::Write<BYTE>(0);
+//	Utilities::BinaryContainer::Write<char>(0);
 //	Utilities::BinaryContainer::Close();*/
 //
 //	//string path = "./Resources/Spritesheets/mario.bin";

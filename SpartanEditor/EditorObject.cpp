@@ -9,14 +9,14 @@ EditorObject::~EditorObject()
 {
 }
 
-void EditorObject::Initialize(const GameContext & gameContext)
+void EditorObject::Initialize(const Spartan::GameContext& gameContext)
 {
 }
 
-void EditorObject::Update(const GameContext & gameContext)
+void EditorObject::Update(const Spartan::GameContext& gameContext)
 {
 }
 
-void EditorObject::Draw(const GameContext & gameContext)
+void EditorObject::Draw(const Spartan::GameContext & gameContext)
 {
 }

@@ -69,33 +69,33 @@ private:
 
 	virtual void MakeImGui()
 	{
-		if (typeid(T) == typeid(float))
-		{
-			ImGui::InputFloat(GetName().data(), (float*)&Data);
-		}
-		else if(typeid(T) == typeid(int))
-		{
-			ImGui::InputInt(GetName().data(), (int*)&Data);
-		}
-		else if (typeid(T) == typeid(Vector2))
-		{
-			ImGui::InputFloat2(GetName().data(), (float*)&Data);
-		}
-		else if (typeid(T) == typeid(Vector3))
-		{
-			ImGui::InputFloat3(GetName().data(), (float*)&Data);
-		}
-		else if (typeid(T) == typeid(Color))
-		{
-			if (ImGui::ColorEdit4(GetName().data(), (float*)&Data))
-			{
-				ImGui::ColorPicker4(GetName().data(), (float*)&Data);
-			}
-		}
-		else
-		{
-			// Unsuported type!
-		}
+		//if (typeid(T) == typeid(float))
+		//{
+		//	ImGui::InputFloat(GetName().data(), (float*)&Data);
+		//}
+		//else if(typeid(T) == typeid(int))
+		//{
+		//	ImGui::InputInt(GetName().data(), (int*)&Data);
+		//}
+		//else if (typeid(T) == typeid(Spartan::Vector2))
+		//{
+		//	ImGui::InputFloat2(GetName().data(), (float*)&Data);
+		//}
+		//else if (typeid(T) == typeid(Spartan::Vector3))
+		//{
+		//	ImGui::InputFloat3(GetName().data(), (float*)&Data);
+		//}
+		//else if (typeid(T) == typeid(Color))
+		//{
+		//	if (ImGui::ColorEdit4(GetName().data(), (float*)&Data))
+		//	{
+		//		ImGui::ColorPicker4(GetName().data(), (float*)&Data);
+		//	}
+		//}
+		//else
+		//{
+		//	// Unsuported type!
+		//}
 	}
 };
 
@@ -112,7 +112,7 @@ public:
 		m_pParams.clear();
 	};
 
-	virtual BaseComponentParameters *Create(BaseComponent *pComponent) = 0;
+	virtual BaseComponentParameters *Create(Spartan::BaseComponent *pComponent) = 0;
 	virtual void LoadParams() = 0;
 	virtual const std::type_info &GetType() { return typeid(this); };
 	void AddParam(ComponentParamBase *pParam) { m_pParams.push_back(pParam); }
@@ -144,7 +144,7 @@ public:
 		}*/
 	}
 
-	BaseComponentParameters *Create(BaseComponent *pComponent) override
+	BaseComponentParameters *Create(Spartan::BaseComponent *pComponent) override
 	{
 		auto pObj = new ComponentParameters<T>(dynamic_cast<T*>(pComponent));
 		m_BuildParamsFunc(pObj);
@@ -175,9 +175,9 @@ protected:
 
 struct ComponentConnection
 {
-	ComponentConnection(BaseComponent *pComp, BaseComponentParameters *pParam) : pComponent(pComp), pParams(pParam) {}
+	ComponentConnection(Spartan::BaseComponent *pComp, BaseComponentParameters *pParam) : pComponent(pComp), pParams(pParam) {}
 
-	BaseComponent *pComponent;
+	Spartan::BaseComponent *pComponent;
 	BaseComponentParameters *pParams;
 };
 
@@ -205,7 +205,7 @@ public:
 			m_pRegisteredTemplates.push_back(pTemplate);
 	}
 
-	BaseComponentParameters *Find(BaseComponent *pComponent)
+	BaseComponentParameters *Find(Spartan::BaseComponent *pComponent)
 	{
 		auto it = std::find_if(m_ConnectedComponents.begin(), m_ConnectedComponents.end(), [&](const ComponentConnection &pComp)
 		{
@@ -220,7 +220,7 @@ public:
 		return conn.pParams;
 	}
 
-	BaseComponentParameters *Create(BaseComponent *pComponent)
+	BaseComponentParameters *Create(Spartan::BaseComponent *pComponent)
 	{
 		auto pParam = Find(pComponent);
 		if (pParam)
@@ -278,10 +278,10 @@ private:
 	std::vector<ComponentConnection> m_ConnectedComponents;
 };
 
-class TransformParams : public ComponentParameters<TransformComponent>
+class TransformParams : public ComponentParameters<Spartan::TransformComponent>
 {
 public:
-	TransformParams(TransformComponent *pComp) : ComponentParameters<TransformComponent>(pComp) {}
+	TransformParams(Spartan::TransformComponent *pComp) : ComponentParameters<Spartan::TransformComponent>(pComp) {}
 	virtual ~TransformParams() {}
 
 public:

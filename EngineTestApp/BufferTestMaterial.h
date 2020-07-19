@@ -11,7 +11,7 @@ public:
 
 private:
 	virtual void SetShaderVars(Spartan::BaseComponent*) override;
-	void UnpackLittleUint32(int value, byte buffer[]);
+	void UnpackLittleUint32(int value, char buffer[]);
 
 private:
 	static const int Source[];

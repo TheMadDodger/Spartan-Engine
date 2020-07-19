@@ -82,9 +82,9 @@ void PlanetMaterial::Randomize(int seed)
     if (seed != 0)
     {
         // Shuffle the array using the given seed
-        // Unpack the seed into 4 bytes then perform a bitwise XOR operation
-        // with each byte
-        byte *F = new byte[4];
+        // Unpack the seed into 4 chars then perform a bitwise XOR operation
+        // with each char
+        char *F = new char[4];
         UnpackLittleUint32(seed, F);
 
         for (int i = 0; i < RandomSize; i++)
@@ -119,15 +119,15 @@ void PlanetMaterial::SetLayer(size_t index, const NoiseLayer& layer)
 }
 
 /// <summary>
-/// Unpack the given integer (int32) to an array of 4 bytes  in little endian format.
+/// Unpack the given integer (int32) to an array of 4 chars  in little endian format.
 /// If the length of the buffer is too smal, it wil be resized.
 /// </summary>
 /// <param name="value">The value.</param>
 /// <param name="buffer">The output buffer.</param>
-void PlanetMaterial::UnpackLittleUint32(int value, byte buffer[])
+void PlanetMaterial::UnpackLittleUint32(int value, char buffer[])
 {
-    buffer[0] = (byte)(value & 0x00ff);
-    buffer[1] = (byte)((value & 0xff00) >> 8);
-    buffer[2] = (byte)((value & 0x00ff0000) >> 16);
-    buffer[3] = (byte)((value & 0xff000000) >> 24);
+    buffer[0] = (char)(value & 0x00ff);
+    buffer[1] = (char)((value & 0xff00) >> 8);
+    buffer[2] = (char)((value & 0x00ff0000) >> 16);
+    buffer[3] = (char)((value & 0xff000000) >> 24);
 }

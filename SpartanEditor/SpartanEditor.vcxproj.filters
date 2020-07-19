@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ImGUI">
       <UniqueIdentifier>{c2daad27-7093-4635-89b4-d4a840f3fd2d}</UniqueIdentifier>
     </Filter>
@@ -19,14 +15,14 @@
     <Filter Include="EditorWindows">
       <UniqueIdentifier>{316bf0e2-acec-4479-a9d0-810d93bad89f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CoreEditor">
+      <UniqueIdentifier>{84125641-667e-49bf-a170-41c342e7d2a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editor">
+      <UniqueIdentifier>{7956b8a9-68c6-4d3e-8ef6-36eb9d757088}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -75,14 +71,20 @@
     <ClInclude Include="EditorWindow.h">
       <Filter>EditorWindows</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorApp.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpartanEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GameApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -124,6 +126,18 @@
     </ClCompile>
     <ClCompile Include="BehaviorTreeEditor.cpp">
       <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorApp.cpp">
+      <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWindow.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

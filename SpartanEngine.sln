@@ -6,8 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpartanFramework", "SpartanFramework\SpartanFramework.vcxproj", "{519A2200-27E5-4AB9-A32B-50C86B5D2AEC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTestApp", "EngineTestApp\EngineTestApp.vcxproj", "{9514C807-AA7E-4249-BA03-917B752201EB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{519A2200-27E5-4AB9-A32B-50C86B5D2AEC} = {519A2200-27E5-4AB9-A32B-50C86B5D2AEC}
+		{AA36EB9F-DD44-4B2F-A0EC-2C571115C7B4} = {AA36EB9F-DD44-4B2F-A0EC-2C571115C7B4}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpartanEditor", "SpartanEditor\SpartanEditor.vcxproj", "{AA36EB9F-DD44-4B2F-A0EC-2C571115C7B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{519A2200-27E5-4AB9-A32B-50C86B5D2AEC} = {519A2200-27E5-4AB9-A32B-50C86B5D2AEC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

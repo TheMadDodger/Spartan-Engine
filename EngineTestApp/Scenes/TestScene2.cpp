@@ -61,12 +61,12 @@
 //	Spartan::Utilities::BinaryContainer::Write<int>(1);
 //
 //	// 1: General information about the spritesheet
-//	Spartan::Utilities::BinaryContainer::Write<BYTE>(1);
+//	Spartan::Utilities::BinaryContainer::Write<char>(1);
 //	Spartan::Utilities::BinaryContainer::WriteString("mario.png");
 //	Spartan::Utilities::BinaryContainer::Write<int>(2);
 //
 //	// 2: Animation Clips
-//	Spartan::Utilities::BinaryContainer::Write<BYTE>(2);
+//	Spartan::Utilities::BinaryContainer::Write<char>(2);
 //	Spartan::Utilities::BinaryContainer::Write<int>(0);
 //	Spartan::Utilities::BinaryContainer::WriteString("idle");
 //	Spartan::Utilities::BinaryContainer::Write<int>(1);
@@ -78,7 +78,7 @@
 //	Spartan::Utilities::BinaryContainer::Write<int>(15);
 //
 //	// 3: Frames
-//	Spartan::Utilities::BinaryContainer::Write<BYTE>(3);
+//	Spartan::Utilities::BinaryContainer::Write<char>(3);
 //
 //	Spartan::Utilities::BinaryContainer::Write<int>(4);
 //	// Idle has only 1 frame
@@ -99,7 +99,7 @@
 //	Spartan::Utilities::BinaryContainer::Write<int>(1);
 //	Spartan::Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //
-//	Spartan::Utilities::BinaryContainer::Write<BYTE>(0);
+//	Spartan::Utilities::BinaryContainer::Write<char>(0);
 //	Spartan::Utilities::BinaryContainer::Close();
 //
 //	m_pGroundBox = Instantiate<Spartan::GameObject>();
