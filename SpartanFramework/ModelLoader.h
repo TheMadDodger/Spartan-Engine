@@ -2,7 +2,7 @@
 #include "ContentLoader.h"
 #include "Mesh.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class ModelLoader : public ContentLoader<Model>
 	{

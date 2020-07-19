@@ -5,7 +5,7 @@
 
 struct SDL_Window;
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class GameObject;
 	class LayerManager;

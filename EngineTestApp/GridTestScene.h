@@ -3,23 +3,23 @@
 //
 //class FreeCamera;
 //
-//class GridTestScene : public SpartanEngine::GameScene
+//class GridTestScene : public Spartan::GameScene
 //{
 //public:
 //	GridTestScene();
 //	virtual ~GridTestScene();
 //
 //private:
-//	virtual void Initialize(const SpartanEngine::GameContext &gameContext);
-//	virtual void PostInitialize(const SpartanEngine::GameContext &gameContext);
-//	virtual void Update(const SpartanEngine::GameContext &gameContext);
-//	virtual void Draw(const SpartanEngine::GameContext &gameContext);
+//	virtual void Initialize(const Spartan::GameContext &gameContext);
+//	virtual void PostInitialize(const Spartan::GameContext &gameContext);
+//	virtual void Update(const Spartan::GameContext &gameContext);
+//	virtual void Draw(const Spartan::GameContext &gameContext);
 //
 //private:
 //	FreeCamera *m_pCamera;
-//	SpartanEngine::GridComponent *m_pGrid;
-//	SpartanEngine::AStarPathFinding *m_pAStarPathFinding;
-//	SpartanEngine::BaseGridNode *m_pStartNode;
-//	SpartanEngine::BaseGridNode *m_pEndNode;
+//	Spartan::GridComponent *m_pGrid;
+//	Spartan::AStarPathFinding *m_pAStarPathFinding;
+//	Spartan::BaseGridNode *m_pStartNode;
+//	Spartan::BaseGridNode *m_pEndNode;
 //};
 

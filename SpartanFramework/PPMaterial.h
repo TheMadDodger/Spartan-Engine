@@ -2,7 +2,7 @@
 #include "Material.h"
 #include "RenderTexture.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class PPMaterial : public Material
 	{

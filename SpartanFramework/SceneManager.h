@@ -1,7 +1,7 @@
 #pragma once
 #include "Manager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class GameScene;
 

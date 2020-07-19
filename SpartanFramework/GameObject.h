@@ -3,7 +3,7 @@
 #include "BaseComponent.h"
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{
@@ -12,7 +12,7 @@ namespace SpartanEngine
 	}
 }
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class TransformComponent;
 	class GameScene;
@@ -164,13 +164,13 @@ namespace SpartanEngine
 		void RemoveChild(GameObject* pChild);
 
 		void SetDirty(bool dirty);
-		void SetScene(SpartanEngine::GameScene* pScene);
+		void SetScene(Spartan::GameScene* pScene);
 
 	private:
 		friend class LevelEditor;
 		friend class GameScene;
-		friend class SpartanEngine::UI::UIObject;
-		friend class SpartanEngine::UI::Canvas;
+		friend class Spartan::UI::UIObject;
+		friend class Spartan::UI::Canvas;
 		TransformComponent* m_pTransform = nullptr;
 		std::vector<BaseComponent*> m_pComponents;
 		GameScene* m_pScene = nullptr;

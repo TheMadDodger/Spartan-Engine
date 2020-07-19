@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Layers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	const std::string DefaultLayerNames::Default = "Default";
 	const std::string DefaultLayerNames::Background = "Background";

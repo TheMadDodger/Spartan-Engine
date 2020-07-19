@@ -15,7 +15,7 @@
 //	m_pBlackboard = nullptr;
 //}
 //
-//void TestScene::Initialize(const SpartanEngine::GameContext &gameContext)
+//void TestScene::Initialize(const Spartan::GameContext &gameContext)
 //{
 //	/*m_pObject = Instantiate<GameObject>();
 //	m_pObject->GetTransform()->Translate(BaseGame::GetGame()->GetGameSettings().Window.Width / 2.0f, BaseGame::GetGame()->GetGameSettings().Window.Height / 2.0f);
@@ -143,7 +143,7 @@
 //	pParticleComp->m_Settings.PartSettings.RandomAngularSpeedBetween2Constants(-100.0f, 100.0f);
 //	pParticleComp->m_Settings.PartSettings.SetEndAngularSpeed(0.0f);*/
 //
-//	m_pBlackboard = new SpartanEngine::Blackboard();
+//	m_pBlackboard = new Spartan::Blackboard();
 //	m_pBlackboard->Add<float>(5.f, "somerandomfloat");
 //
 //	float data;
@@ -154,7 +154,7 @@
 //	m_pBlackboard->Get<float>("somerandomfloat", data);
 //}
 //
-//void TestScene::PostInitialize(const SpartanEngine::GameContext &gameContext)
+//void TestScene::PostInitialize(const Spartan::GameContext &gameContext)
 //{
 //	UNREFERENCED_PARAMETER(gameContext);
 //	// Since its rigidbody isnt initialized during scene Initialize yet, we translate it in the PostInitialize

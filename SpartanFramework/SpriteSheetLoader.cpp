@@ -2,7 +2,7 @@
 #include "SpriteSheetLoader.h"
 #include "BinaryContainer.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SpriteSheetLoader::SpriteSheetLoader()
 	{

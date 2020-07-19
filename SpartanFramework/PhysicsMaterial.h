@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	struct PhysicsMaterial
 	{

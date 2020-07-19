@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Content.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Content::Content(const std::string& file) : m_FileName(file) {}
 	Content::~Content() {}

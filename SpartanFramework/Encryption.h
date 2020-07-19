@@ -1,7 +1,7 @@
 #pragma once
 #include "MathHelpers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Utilities
 	{

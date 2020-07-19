@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "3DColliders.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Collider3D::Collider3D(btCollisionShape* pShape) : m_pCollisionShape(pShape) {}
 

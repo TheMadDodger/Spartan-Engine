@@ -1,7 +1,7 @@
 #pragma once
 #include "ContentManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class FontLoader : public ContentLoader<FontData>
 	{

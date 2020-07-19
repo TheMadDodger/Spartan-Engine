@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TextureLoader.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	TextureLoader::TextureLoader() {}
 	TextureLoader::~TextureLoader() {}

@@ -2,7 +2,7 @@
 #include "ContentLoader.h"
 #include "Gradient.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class GradientLoader : public ContentLoader<Gradient>
 	{

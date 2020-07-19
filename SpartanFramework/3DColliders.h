@@ -2,7 +2,7 @@
 
 class btCollisionShape;
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class Collider3D
 	{

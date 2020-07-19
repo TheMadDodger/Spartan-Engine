@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BinaryContainer.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Utilities
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "UIComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class TextRenderComponent : public UIComponent
 	{

@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Layers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class BasicCamera;
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <any>
 
-namespace SpartanEngine
+namespace Spartan
 {
 	struct BaseSerializer
 	{

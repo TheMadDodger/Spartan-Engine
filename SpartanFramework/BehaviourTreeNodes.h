@@ -1,7 +1,7 @@
 #pragma once
 #include "Node.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	enum class BTNodeResult
 	{

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AIComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	AIComponent::AIComponent() : m_pAIBehaviour(nullptr)
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class RigidBody2DComponent : public BaseComponent
 	{

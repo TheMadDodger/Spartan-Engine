@@ -2,7 +2,7 @@
 #include "UIComponent.h"
 #include <string>
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class ImageRenderComponent : public UIComponent
 	{

@@ -4,17 +4,17 @@
 
 class Blackboard;
 
-class GameApp : public SpartanEngine::BaseGame
+class GameApp : public Spartan::BaseGame
 {
 public:
-	GameApp(const SpartanEngine::GameSettings &settings);
+	GameApp(const Spartan::GameSettings &settings);
 	~GameApp();
 
 	// User defined application methods
-	void Initialize(const SpartanEngine::GameContext &gameContext) override;
-	void GameUpdate(const SpartanEngine::GameContext &gameContext) override;
-	void GamePaint(const SpartanEngine::GameContext &gameContext) override;
+	void Initialize(const Spartan::GameContext &gameContext) override;
+	void GameUpdate(const Spartan::GameContext &gameContext) override;
+	void GamePaint(const Spartan::GameContext &gameContext) override;
 
-	virtual void RegisterPrefabs(std::vector<SpartanEngine::GameObject*> &) override {};
+	virtual void RegisterPrefabs(std::vector<Spartan::GameObject*> &) override {};
 };
 

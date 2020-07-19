@@ -5,7 +5,7 @@
 #include "SEObject.h"
 #include "3DColliders.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class Collider2D : SEObject
 	{

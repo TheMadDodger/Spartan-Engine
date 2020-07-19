@@ -9,7 +9,7 @@
 #define H4 (H/4)
 #define Y(sample) (((sample)*H)/4/0x7fff)
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SoundManager::SoundManager()
 	{

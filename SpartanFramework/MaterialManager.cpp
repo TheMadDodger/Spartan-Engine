@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MaterialManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	std::vector<Material*> MaterialManager::m_pMaterials = std::vector<Material*>();
 

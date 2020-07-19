@@ -2,7 +2,7 @@
 #include "Grid.h"
 #include "Node.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class IAStarPathNode : Node
 	{

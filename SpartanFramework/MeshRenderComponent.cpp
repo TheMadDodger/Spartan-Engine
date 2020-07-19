@@ -8,7 +8,7 @@
 #include "CameraComponent.h"
 #include "Material.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	MeshRenderComponent::MeshRenderComponent() : m_pMeshToRender(nullptr), m_MaterialID(0)
 	{

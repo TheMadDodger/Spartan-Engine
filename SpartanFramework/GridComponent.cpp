@@ -4,7 +4,7 @@
 #include "TransformComponent.h"
 #include "Grid.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	GridComponent::GridComponent() : m_pGrid(nullptr)
 	{

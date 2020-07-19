@@ -2,7 +2,7 @@
 #include "ModelLoader.h"
 #include <filesystem>
 
-namespace SpartanEngine
+namespace Spartan
 {
     ModelLoader::ModelLoader()
     {

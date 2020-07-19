@@ -2,7 +2,7 @@
 #include "Event.h"
 #include "UIObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class TextureData;
 	class ImageRenderComponent;

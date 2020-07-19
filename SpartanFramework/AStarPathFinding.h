@@ -2,7 +2,7 @@
 #include "Grid.h"
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class IAStarPathNode;
 

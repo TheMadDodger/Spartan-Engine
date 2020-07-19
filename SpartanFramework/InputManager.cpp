@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "InputManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	InputManager::InputManager() : m_InputActions(vector<InputAction>()) {}
 

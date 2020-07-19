@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AssetManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	std::hash<std::string> AssetManager::m_AssetHasher;
 

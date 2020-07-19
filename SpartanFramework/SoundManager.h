@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class SoundManager : Manager
 	{

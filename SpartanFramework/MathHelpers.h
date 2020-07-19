@@ -1,7 +1,7 @@
 #pragma once
 #include <btBulletDynamicsCommon.h>
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Math
 	{

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RenderTexture.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	std::vector<RenderTexture*> RenderTexture::m_pRenderTextures = std::vector<RenderTexture*>();
 	std::list<RenderTexture*> RenderTexture::m_pRenderTextureUsedList = std::list<RenderTexture*>();

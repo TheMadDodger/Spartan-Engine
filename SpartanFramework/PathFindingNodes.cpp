@@ -2,7 +2,7 @@
 #include "PathFindingNodes.h"
 #include "AStarPathFinding.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Color AStar2DGridNode::GetNodeColor()
 	{

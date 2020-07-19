@@ -2,7 +2,7 @@
 #include "Gradient.h"
 #include "ContentManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Gradient::Gradient(size_t resolution, size_t layers) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content("")
 	{

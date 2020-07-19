@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SpartanEngine
+namespace Spartan
 {
     struct GUIDComparer
     {

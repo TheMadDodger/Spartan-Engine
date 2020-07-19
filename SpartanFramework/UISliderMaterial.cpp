@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UISliderMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{
@@ -13,7 +13,7 @@ namespace SpartanEngine
 		{
 		}
 
-		void UISliderMaterial::SetColor(const SpartanEngine::Color& color)
+		void UISliderMaterial::SetColor(const Spartan::Color& color)
 		{
 			m_Color = color;
 		}

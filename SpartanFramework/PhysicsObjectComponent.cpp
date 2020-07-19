@@ -4,7 +4,7 @@
 #include "TransformComponent.h"
 #include "PhysicsProxy.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	PhysicsObjectComponent::PhysicsObjectComponent() : m_Mass(1.0f), m_pCollisionObject(nullptr),
 		m_pCollider(nullptr), m_LocalInertia(0.0f, 0.0f, 0.0f), m_Friction(0.0f) {}
@@ -39,7 +39,7 @@ namespace SpartanEngine
 			m_pCollisionObject->setMassProps((btScalar)m_Mass, m_LocalInertia);
 	}
 
-	void PhysicsObjectComponent::ApplyForce(const SpartanEngine::Vector3& force, const SpartanEngine::Vector3& relativePos)
+	void PhysicsObjectComponent::ApplyForce(const Spartan::Vector3& force, const Spartan::Vector3& relativePos)
 	{
 		if (!m_pCollisionObject) return;
 		m_pCollisionObject->applyForce(TobtVector3(force), TobtVector3(relativePos));
@@ -50,7 +50,7 @@ namespace SpartanEngine
 		if (m_pCollisionObject) m_pCollisionObject->clearForces();
 	}
 
-	void PhysicsObjectComponent::SetGravity(const SpartanEngine::Vector3& gravity)
+	void PhysicsObjectComponent::SetGravity(const Spartan::Vector3& gravity)
 	{
 		if (!m_pCollisionObject) return;
 		m_pCollisionObject->setGravity(TobtVector3(gravity));
@@ -74,7 +74,7 @@ namespace SpartanEngine
 		return btToVector3(m_pCollisionObject->getLinearVelocity());
 	}
 
-	void PhysicsObjectComponent::UpdateTransform(const SpartanEngine::Vector3& position, const SpartanEngine::Quaternion& rotation, const SpartanEngine::Vector3& scale)
+	void PhysicsObjectComponent::UpdateTransform(const Spartan::Vector3& position, const Spartan::Quaternion& rotation, const Spartan::Vector3& scale)
 	{
 		if (!m_pCollisionObject) return;
 		btTransform worldTrans = btTransform(TobtQuaternion(rotation), TobtVector3(position));

@@ -1,7 +1,7 @@
 #pragma once
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 #ifdef _DEBUG
 	class BaseParser : SEObject

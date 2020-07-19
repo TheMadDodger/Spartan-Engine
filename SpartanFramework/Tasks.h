@@ -1,7 +1,7 @@
 #pragma once
 #include "AI.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class BTWaitTask : public BTTaskNode
 	{

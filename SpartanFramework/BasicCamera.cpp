@@ -2,7 +2,7 @@
 #include "BasicCamera.h"
 #include "CameraComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	BasicCamera::BasicCamera()
 	{

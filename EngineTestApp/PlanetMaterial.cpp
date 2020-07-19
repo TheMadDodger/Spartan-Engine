@@ -24,24 +24,24 @@ const int PlanetMaterial::Source[] =
 
 const int PlanetMaterial::RandomSize = 256;
 
-PlanetMaterial::PlanetMaterial(SpartanEngine::ShaderData* pShader) : Material(pShader), m_Random(nullptr), m_NumLayers(0), m_UniformNoiseBuffer(0)
+PlanetMaterial::PlanetMaterial(Spartan::ShaderData* pShader) : Material(pShader), m_Random(nullptr), m_NumLayers(0), m_UniformNoiseBuffer(0)
 {
     Randomize(0);
     m_UniformNoiseBuffer = CreateUniformBuffer("NoiseBlock", sizeof(NoiseLayer) * MAXNOISELAYERS, 0);
 
-    m_pGradient = new SpartanEngine::Gradient(512, 2);
-    m_pGradient->SetKey(SpartanEngine::Color(242.0f / 256.0f, 209.0f / 256.0f, 107.0f / 256.0f, 1.0f), 0.0f);
-    m_pGradient->SetKey(SpartanEngine::Color::Green(), 15.0f);
-    m_pGradient->SetKey(SpartanEngine::Color(116.0f / 256.0f, 102.0f / 256.0f, 59.0f / 256.0f, 1.0f), 40.0f);
-    m_pGradient->SetKey(SpartanEngine::Color::Gray(), 90.0f);
-    m_pGradient->SetKey(SpartanEngine::Color::White(), 100.0f);
+    m_pGradient = new Spartan::Gradient(512, 2);
+    m_pGradient->SetKey(Spartan::Color(242.0f / 256.0f, 209.0f / 256.0f, 107.0f / 256.0f, 1.0f), 0.0f);
+    m_pGradient->SetKey(Spartan::Color::Green(), 15.0f);
+    m_pGradient->SetKey(Spartan::Color(116.0f / 256.0f, 102.0f / 256.0f, 59.0f / 256.0f, 1.0f), 40.0f);
+    m_pGradient->SetKey(Spartan::Color::Gray(), 90.0f);
+    m_pGradient->SetKey(Spartan::Color::White(), 100.0f);
 
 
     //(0.3f, 0.25f, 0.7f, 1.0f)
     //(0.0f, 0.8f, 0.82f, 1.0f)
-    m_pGradient->SetKey(SpartanEngine::Color::Cyan(), 0.0f, 1);
-    m_pGradient->SetKey(SpartanEngine::Color(0.13f, 0.36f, 0.63f, 1.0f), 50.f, 1);
-    m_pGradient->SetKey(SpartanEngine::Color(0.13f, 0.36f, 0.63f, 1.0f), 100.f, 1);
+    m_pGradient->SetKey(Spartan::Color::Cyan(), 0.0f, 1);
+    m_pGradient->SetKey(Spartan::Color(0.13f, 0.36f, 0.63f, 1.0f), 50.f, 1);
+    m_pGradient->SetKey(Spartan::Color(0.13f, 0.36f, 0.63f, 1.0f), 100.f, 1);
     //m_pGradient->SetKey(Color(0.3f, 0.25f, 0.7f, 1.0f), 50.f, 1);
     //m_pGradient->SetKey(Color(0.2f, 0.2f, 0.6f, 1.0f), 100.0f, 1);
     m_pGradient->BuildTexture();
@@ -54,12 +54,12 @@ PlanetMaterial::~PlanetMaterial()
     delete m_pGradient;
 }
 
-void PlanetMaterial::SetShaderVars(SpartanEngine::BaseComponent *pComponent)
+void PlanetMaterial::SetShaderVars(Spartan::BaseComponent *pComponent)
 {
 	auto pGameObject = pComponent->GetGameObject();
-	SpartanEngine::Vector3 camPos = pGameObject->GetGameScene()->GetActiveCamera()->GetGameObject()->GetTransform()->GetWorldPosition();
-	SpartanEngine::Matrix4X4 worldMatrix = pGameObject->GetTransform()->GetWorldMatrix();
-    SpartanEngine::Matrix3X3 rotationMatrix = pGameObject->GetTransform()->GetRotationMatrix();
+	Spartan::Vector3 camPos = pGameObject->GetGameScene()->GetActiveCamera()->GetGameObject()->GetTransform()->GetWorldPosition();
+	Spartan::Matrix4X4 worldMatrix = pGameObject->GetTransform()->GetWorldMatrix();
+    Spartan::Matrix3X3 rotationMatrix = pGameObject->GetTransform()->GetRotationMatrix();
 
     SetInt("NumNoiseLayers", m_NumLayers);
 	SetVec3("CameraPosition", camPos);

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BaseAIBehaviour.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	BaseAIBehaviour::BaseAIBehaviour()
 	{

@@ -15,7 +15,7 @@ struct NoiseLayer
     float Roughness;
     float Persistance;
 
-    SpartanEngine::Vector3 Center;
+    Spartan::Vector3 Center;
     float MinValue;
     
     int NumLayers;
@@ -24,10 +24,10 @@ struct NoiseLayer
     float Weight;
 };
 
-class PlanetMaterial : public SpartanEngine::Material
+class PlanetMaterial : public Spartan::Material
 {
 public:
-	PlanetMaterial(SpartanEngine::ShaderData* pShader);
+	PlanetMaterial(Spartan::ShaderData* pShader);
 	virtual ~PlanetMaterial();
 
 	void Randomize(int seed);
@@ -35,7 +35,7 @@ public:
     void SetLayer(size_t index, const NoiseLayer& layer);
 
 private:
-	virtual void SetShaderVars(SpartanEngine::BaseComponent*) override;
+	virtual void SetShaderVars(Spartan::BaseComponent*) override;
 
 private:
 	void UnpackLittleUint32(int value, byte buffer[]);
@@ -48,6 +48,6 @@ private:
     NoiseLayer m_NoiseLayers[MAXNOISELAYERS];
     int m_NumLayers;
     GLuint m_UniformNoiseBuffer;
-    SpartanEngine::Gradient* m_pGradient;
+    Spartan::Gradient* m_pGradient;
 };
 

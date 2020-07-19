@@ -1,25 +1,25 @@
 #pragma once
 #include <GameScene.h>
 
-//class TestScene2 : public SpartanEngine::GameScene
+//class TestScene2 : public Spartan::GameScene
 //{
 //public:
-//	TestScene2() : SpartanEngine::GameScene("Test Scene 2") {}
+//	TestScene2() : Spartan::GameScene("Test Scene 2") {}
 //	~TestScene2();
 //
-//	void Initialize(const SpartanEngine::GameContext &gameContext) override;
-//	void PostInitialize(const SpartanEngine::GameContext &gameContext) override;
+//	void Initialize(const Spartan::GameContext &gameContext) override;
+//	void PostInitialize(const Spartan::GameContext &gameContext) override;
 //
-//	void Update(const SpartanEngine::GameContext &gameContext) override;
-//	void Draw(const SpartanEngine::GameContext &gameContext) override;
+//	void Update(const Spartan::GameContext &gameContext) override;
+//	void Draw(const Spartan::GameContext &gameContext) override;
 //
 //private:
-//	SpartanEngine::TextureData *m_pBitmap = nullptr;
-//	SpartanEngine::GameObject *m_pObject;
-//	SpartanEngine::GameObject *m_pImage = nullptr;
-//	SpartanEngine::GameObject *m_pAudioSource = nullptr;
-//	SpartanEngine::GameObject *m_pSpriteSheetTest = nullptr;
+//	Spartan::TextureData *m_pBitmap = nullptr;
+//	Spartan::GameObject *m_pObject;
+//	Spartan::GameObject *m_pImage = nullptr;
+//	Spartan::GameObject *m_pAudioSource = nullptr;
+//	Spartan::GameObject *m_pSpriteSheetTest = nullptr;
 //
-//	SpartanEngine::GameObject *m_pGroundBox = nullptr;
+//	Spartan::GameObject *m_pGroundBox = nullptr;
 //};
 //

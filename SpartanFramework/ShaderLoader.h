@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class ShaderLoader : public ContentLoader<ShaderData>
 	{

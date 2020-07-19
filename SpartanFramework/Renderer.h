@@ -4,7 +4,7 @@
 #include "SkinnedQuad.h"
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

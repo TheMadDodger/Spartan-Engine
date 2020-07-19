@@ -2,7 +2,7 @@
 #include "Material.h"
 #include "BaseComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Material::Material(ShaderData* pShader) : m_pShader(pShader), m_DoubleSided(false), m_Wireframe(false)
 	{

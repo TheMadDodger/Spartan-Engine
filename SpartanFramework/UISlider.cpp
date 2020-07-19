@@ -2,7 +2,7 @@
 #include "UISlider.h"
 #include "MaterialManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{
@@ -56,17 +56,17 @@ namespace SpartanEngine
 			return m_pFillImage;
 		}
 
-		void UISlider::Initialize(const SpartanEngine::GameContext& gameContext)
+		void UISlider::Initialize(const Spartan::GameContext& gameContext)
 		{
 			CreateMaterial();
 			m_pFillImage->SetCustomMaterial(m_pSliderMaterial);
 		}
 
-		void UISlider::Update(const SpartanEngine::GameContext& gameContext)
+		void UISlider::Update(const Spartan::GameContext& gameContext)
 		{
 		}
 
-		void UISlider::Draw(const SpartanEngine::GameContext& gameContext)
+		void UISlider::Draw(const Spartan::GameContext& gameContext)
 		{
 			m_pSliderMaterial->SetColor(GetColor());
 			m_pSliderMaterial->SetProgress(m_Progress);

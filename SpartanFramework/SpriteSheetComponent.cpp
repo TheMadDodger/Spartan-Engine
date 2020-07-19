@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SpriteSheetComponent::SpriteSheetComponent() : m_File(""),
 		m_pSpriteSheet(nullptr), m_CalculateOrigin(true), m_OriginType(Origin::Center),

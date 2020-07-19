@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace SpartanEngine
+namespace Spartan
 {
 	AudioFileLoader::AudioFileLoader()
 	{

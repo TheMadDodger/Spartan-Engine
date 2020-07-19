@@ -5,7 +5,7 @@
 #include "Components.h"
 #include "Framework.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

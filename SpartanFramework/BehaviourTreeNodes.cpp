@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AI.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	BTNode::BTNode() : m_pOwnerTree(nullptr)
 	{

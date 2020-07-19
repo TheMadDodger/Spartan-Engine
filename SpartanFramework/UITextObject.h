@@ -2,7 +2,7 @@
 #include "UIObject.h"
 #include "TextRenderComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

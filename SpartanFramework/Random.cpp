@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Random.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Lehmer::Lehmer(uint32_t seed) : Random(seed)
 	{

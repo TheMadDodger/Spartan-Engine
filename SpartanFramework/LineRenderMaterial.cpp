@@ -3,7 +3,7 @@
 #include "UIComponent.h"
 #include "Canvas.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

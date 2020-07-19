@@ -6,7 +6,7 @@
 #define MEMBER_OFFSET(s,m) ((char *)NULL + (offsetof(s,m)))
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-namespace SpartanEngine
+namespace Spartan
 {
 	enum MeshAttribute : unsigned int
 	{

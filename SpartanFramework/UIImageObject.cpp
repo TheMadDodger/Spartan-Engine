@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "UIImageObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

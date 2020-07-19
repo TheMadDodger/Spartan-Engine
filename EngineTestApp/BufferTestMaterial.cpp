@@ -21,18 +21,18 @@ const int BufferTestMaterial::Source[] =
 
 const int BufferTestMaterial::RandomSize = 256;
 
-BufferTestMaterial::BufferTestMaterial(SpartanEngine::ShaderData* pShader) : Material(pShader)
+BufferTestMaterial::BufferTestMaterial(Spartan::ShaderData* pShader) : Material(pShader)
 {
 	m_RandomUBO = CreateUniformBuffer("RandomBlock", sizeof(int) * RandomSize, 0);
-	m_UniformBufferID = CreateUniformBuffer("TestBlock", sizeof(SpartanEngine::Color) * 12, 1);
+	m_UniformBufferID = CreateUniformBuffer("TestBlock", sizeof(Spartan::Color) * 12, 1);
 
 	for (size_t i = 0; i < 12; i++)
 	{
-		float r = SpartanEngine::RandomRange<float>(0.0f, 1.0f);
-		float g = SpartanEngine::RandomRange<float>(0.0f, 1.0f);
-		float b = SpartanEngine::RandomRange<float>(0.0f, 1.0f);
+		float r = Spartan::RandomRange<float>(0.0f, 1.0f);
+		float g = Spartan::RandomRange<float>(0.0f, 1.0f);
+		float b = Spartan::RandomRange<float>(0.0f, 1.0f);
 		float a = 1.0f;
-		m_Colors[i] = SpartanEngine::Color(r, g, b, a);
+		m_Colors[i] = Spartan::Color(r, g, b, a);
 	}
 
 	Randomize(0);
@@ -75,10 +75,10 @@ void BufferTestMaterial::Randomize(int seed)
 	}
 }
 
-void BufferTestMaterial::SetShaderVars(SpartanEngine::BaseComponent*)
+void BufferTestMaterial::SetShaderVars(Spartan::BaseComponent*)
 {
 	SetUniformBuffer(m_RandomUBO, m_Random, sizeof(int) * RandomSize);
-	SetUniformBuffer(m_UniformBufferID, m_Colors, 12 * sizeof(SpartanEngine::Color));
+	SetUniformBuffer(m_UniformBufferID, m_Colors, 12 * sizeof(Spartan::Color));
 }
 
 void BufferTestMaterial::UnpackLittleUint32(int value, byte buffer[])

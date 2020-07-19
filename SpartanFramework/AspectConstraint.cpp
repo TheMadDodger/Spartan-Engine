@@ -2,7 +2,7 @@
 #include "AspectConstraint.h"
 #include "UIObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

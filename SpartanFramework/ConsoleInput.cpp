@@ -2,7 +2,7 @@
 #include "ConsoleInput.h"
 #include "Commands.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 #ifdef _DEBUG
 	inline int ConsoleThreadFunc(void* pConsoleObject)

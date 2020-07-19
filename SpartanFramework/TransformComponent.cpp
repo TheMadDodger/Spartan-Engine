@@ -6,7 +6,7 @@
 #include "Canvas.h"
 #include "PhysicsObjectComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	TransformComponent::TransformComponent() : m_TansformMatrix(Matrix4X4::CreateIdentityMatrix()),
 		m_LocalTansformMatrix(Matrix4X4::CreateIdentityMatrix()),
@@ -93,9 +93,9 @@ namespace SpartanEngine
 	void TransformComponent::TransformChanged()
 	{
 		m_TransformChanged = true;
-		const std::vector<SpartanEngine::GameObject*>& pChildren = GetGameObject()->GetChildren();
+		const std::vector<Spartan::GameObject*>& pChildren = GetGameObject()->GetChildren();
 
-		std::for_each(pChildren.begin(), pChildren.end(), [](SpartanEngine::GameObject* pObject)
+		std::for_each(pChildren.begin(), pChildren.end(), [](Spartan::GameObject* pObject)
 		{pObject->GetTransform()->TransformChanged(); });
 	}
 

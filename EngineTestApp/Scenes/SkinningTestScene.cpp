@@ -14,11 +14,11 @@
 //	delete m_pSkeleton;
 //}
 //
-//void SkinningTestScene::Initialize(const SpartanEngine::GameContext &gameContext)
+//void SkinningTestScene::Initialize(const Spartan::GameContext &gameContext)
 //{
-//	m_pSkeleton = new SpartanEngine::Skeleton();
-//	m_pRootBone = m_pSkeleton->AddBone(new SpartanEngine::Bone(100.f, 0.f));
-//	m_pChildBone = m_pRootBone->AddChildBone(new SpartanEngine::Bone(100.f, 0.f));
+//	m_pSkeleton = new Spartan::Skeleton();
+//	m_pRootBone = m_pSkeleton->AddBone(new Spartan::Bone(100.f, 0.f));
+//	m_pChildBone = m_pRootBone->AddChildBone(new Spartan::Bone(100.f, 0.f));
 //	m_pSkeleton->Initialize();
 //
 //	auto pObject = Instantiate<GameObject>();

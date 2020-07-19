@@ -3,7 +3,7 @@
 #include "Serializer.h"
 #include "AssetManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	BaseAsset::BaseAsset(const GUID& guid) : m_GUID(guid)
 	{

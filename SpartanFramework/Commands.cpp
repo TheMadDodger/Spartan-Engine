@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Commands.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 #ifdef _DEBUG
 	std::vector<BaseParser*> Parser::m_Parsers = {

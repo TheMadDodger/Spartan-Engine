@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SceneManager* SceneManager::m_pSceneManager = nullptr;
 

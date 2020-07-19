@@ -4,7 +4,7 @@
 #include "CameraComponent.h"
 #include "Layers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	GameScene::GameScene(const std::string& name) : m_SceneName(name)
 	{

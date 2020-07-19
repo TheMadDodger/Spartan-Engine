@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PhysicsProxy.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	PhysicsProxy::PhysicsProxy() :
 		m_pCollisionConfig(nullptr), m_pCollisionDispatcher(nullptr),
@@ -10,7 +10,7 @@ namespace SpartanEngine
 	{
 	}
 
-	SpartanEngine::PhysicsProxy::~PhysicsProxy()
+	Spartan::PhysicsProxy::~PhysicsProxy()
 	{
 		if (m_pCollisionConfig) delete m_pCollisionConfig;
 		if (m_pCollisionDispatcher) delete m_pCollisionDispatcher;
@@ -25,13 +25,13 @@ namespace SpartanEngine
 		m_pDynamicsWorld = nullptr;
 	}
 
-	void SpartanEngine::PhysicsProxy::SetGravity(const Vector3& gravityVec)
+	void Spartan::PhysicsProxy::SetGravity(const Vector3& gravityVec)
 	{
 		m_GravityVector = gravityVec;
 		if (m_pDynamicsWorld) m_pDynamicsWorld->setGravity(Math::TobtVector3(m_GravityVector));
 	}
 
-	void SpartanEngine::PhysicsProxy::Initialize()
+	void Spartan::PhysicsProxy::Initialize()
 	{
 		m_pCollisionConfig = new btDefaultCollisionConfiguration();
 		m_pCollisionDispatcher = new btCollisionDispatcher(m_pCollisionConfig);

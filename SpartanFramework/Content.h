@@ -1,7 +1,7 @@
 #pragma once
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class Content : SEObject // Base Class for content
 	{

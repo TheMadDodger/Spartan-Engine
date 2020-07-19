@@ -1,7 +1,7 @@
 #pragma once
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	struct SerializedProperty
 	{
@@ -12,7 +12,7 @@ namespace SpartanEngine
 		void* m_MemberPointer;
 	};
 
-	class BaseAsset : public SpartanEngine::SEObject
+	class BaseAsset : public Spartan::SEObject
 	{
 	public:
 		BaseAsset(const GUID& guid);

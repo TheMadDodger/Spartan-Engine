@@ -10,7 +10,7 @@ virtual BaseComponent *Create() override \
 	return new comp; \
 }
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{
@@ -19,7 +19,7 @@ namespace SpartanEngine
 	}
 }
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class GameObject;
 
@@ -67,8 +67,8 @@ namespace SpartanEngine
 
 	private:
 		friend class GameObject;
-		friend class SpartanEngine::UI::UIObject;
-		friend class SpartanEngine::UI::Canvas;
+		friend class Spartan::UI::UIObject;
+		friend class Spartan::UI::Canvas;
 		void SetGameObject(GameObject* pObject);
 		GameObject* m_pGameObject = nullptr;
 

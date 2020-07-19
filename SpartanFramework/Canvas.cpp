@@ -6,7 +6,7 @@
 #include "TransformComponent.h"
 #include "InputManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

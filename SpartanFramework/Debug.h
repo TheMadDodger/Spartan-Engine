@@ -5,7 +5,7 @@
 #include "GameTime.h"
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Utilities
 	{

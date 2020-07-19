@@ -1,16 +1,16 @@
 #pragma once
 #include <Material.h>
 
-class BufferTestMaterial : public SpartanEngine::Material
+class BufferTestMaterial : public Spartan::Material
 {
 public:
-	BufferTestMaterial(SpartanEngine::ShaderData* pShader);
+	BufferTestMaterial(Spartan::ShaderData* pShader);
 	~BufferTestMaterial();
 
 	void Randomize(int seed);
 
 private:
-	virtual void SetShaderVars(SpartanEngine::BaseComponent*) override;
+	virtual void SetShaderVars(Spartan::BaseComponent*) override;
 	void UnpackLittleUint32(int value, byte buffer[]);
 
 private:
@@ -20,6 +20,6 @@ private:
 
 	GLuint m_RandomUBO;
 	GLuint m_UniformBufferID;
-	SpartanEngine::Color m_Colors[12];
+	Spartan::Color m_Colors[12];
 };
 

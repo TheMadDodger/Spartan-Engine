@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "Collider2DComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	RigidBody2DComponent::RigidBody2DComponent() : BaseComponent("Rigidbody")
 	{

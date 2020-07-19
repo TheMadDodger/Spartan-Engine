@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "FontLoader.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	FontLoader::FontLoader()
 	{

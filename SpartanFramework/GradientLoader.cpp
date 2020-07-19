@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GradientLoader.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	GradientLoader::GradientLoader()
 	{

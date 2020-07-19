@@ -5,21 +5,21 @@
 
 FreeCamera::FreeCamera() : m_MaxDistance(10.0f)
 {
-	m_pCameraComponent = CreateDefaultComponent<SpartanEngine::CameraComponent>();
+	m_pCameraComponent = CreateDefaultComponent<Spartan::CameraComponent>();
 }
 
 FreeCamera::~FreeCamera()
 {
 }
 
-void FreeCamera::Initialize(const SpartanEngine::GameContext &gameContext)
+void FreeCamera::Initialize(const Spartan::GameContext &gameContext)
 {
-	gameContext.pInput->AddInputAction(SpartanEngine::InputAction("MousePressed", SpartanEngine::InputType::Pressed, 0, SDL_BUTTON_RIGHT));
-	gameContext.pInput->AddInputAction(SpartanEngine::InputAction("MouseDown", SpartanEngine::InputType::Down, 0, SDL_BUTTON_RIGHT));
-	gameContext.pInput->AddInputAction(SpartanEngine::InputAction("RMousePressed", SpartanEngine::InputType::Pressed, 0, SDL_BUTTON_LEFT));
+	gameContext.pInput->AddInputAction(Spartan::InputAction("MousePressed", Spartan::InputType::Pressed, 0, SDL_BUTTON_RIGHT));
+	gameContext.pInput->AddInputAction(Spartan::InputAction("MouseDown", Spartan::InputType::Down, 0, SDL_BUTTON_RIGHT));
+	gameContext.pInput->AddInputAction(Spartan::InputAction("RMousePressed", Spartan::InputType::Pressed, 0, SDL_BUTTON_LEFT));
 }
 
-void FreeCamera::Update(const SpartanEngine::GameContext &gameContext)
+void FreeCamera::Update(const Spartan::GameContext &gameContext)
 {
 	if (m_FocusPos.Magnitude() >= m_MaxDistance)
 	{
@@ -29,10 +29,10 @@ void FreeCamera::Update(const SpartanEngine::GameContext &gameContext)
 	if (m_CurrentZoom < 0.5f) m_CurrentZoom = 0.5f;
 	if (m_CurrentZoom > 10.0f) m_CurrentZoom = 5.0f;
 
-	m_CurrentZoom = SpartanEngine::Lerp(m_CurrentZoom, m_DesiredZoom, 0.1f);
-	GetComponent<SpartanEngine::CameraComponent>()->Zoom(m_CurrentZoom);
+	m_CurrentZoom = Spartan::Lerp(m_CurrentZoom, m_DesiredZoom, 0.1f);
+	GetComponent<Spartan::CameraComponent>()->Zoom(m_CurrentZoom);
 
-	GetTransform()->Position = SpartanEngine::Vector3::Lerp(GetTransform()->Position, m_FocusPos, 0.01f);
+	GetTransform()->Position = Spartan::Vector3::Lerp(GetTransform()->Position, m_FocusPos, 0.01f);
 
 	if (m_InputDisabled) return;
 
@@ -52,7 +52,7 @@ void FreeCamera::Update(const SpartanEngine::GameContext &gameContext)
 
 	if (mouseWheel != 0)
 	{
-		int sign = SpartanEngine::Math::Absolute<float>(mouseWheel);
+		int sign = Spartan::Math::Absolute<float>(mouseWheel);
 		float zoomFactor;
 		if (m_DesiredZoom >= 2.5f)
 		{

@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "GameScene.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Collider2DComponent::Collider2DComponent() :
 		m_pCollider(nullptr), BaseComponent("Collider 2D"), m_PhysicsMaterial(PhysicsMaterial())

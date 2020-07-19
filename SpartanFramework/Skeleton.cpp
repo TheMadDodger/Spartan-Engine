@@ -2,7 +2,7 @@
 #include "Skeleton.h"
 #include "Bone.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Skeleton::Skeleton(bool usesPhysics) : m_UsesPhysics(usesPhysics)//, GameObject("Skeleton")
 	{

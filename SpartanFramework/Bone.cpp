@@ -5,7 +5,7 @@
 #include "GameScene.h"
 #include "Skeleton.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Bone::Bone(float length, float rotation) :
 		m_Length(length), m_Rotation(rotation), GameObject("Bone")

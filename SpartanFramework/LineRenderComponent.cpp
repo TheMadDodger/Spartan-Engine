@@ -4,7 +4,7 @@
 #include "TransformComponent.h"
 #include "MaterialManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	size_t LineRenderComponent::m_LineMatID = 0;
 	UI::LineRenderMaterial* LineRenderComponent::m_pLineRenderer = nullptr;

@@ -4,7 +4,7 @@
 #define INPUT_DEADZONE 3500
 #define MAX_STICK_MAGNITUDE 32767
 
-namespace SpartanEngine
+namespace Spartan
 {
 	enum InputType
 	{

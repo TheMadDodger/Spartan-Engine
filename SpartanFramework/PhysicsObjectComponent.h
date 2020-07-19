@@ -3,7 +3,7 @@
 #include "btBulletDynamicsCommon.h"
 #include "3DColliders.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class PhysicsObjectComponent : public BaseComponent, public btMotionState
 	{
@@ -14,15 +14,15 @@ namespace SpartanEngine
 		void SetCollider(Collider3D* pCollider);
 		void SetMass(float mass);
 
-		void ApplyForce(const SpartanEngine::Vector3& force, const SpartanEngine::Vector3& relativePos);
+		void ApplyForce(const Spartan::Vector3& force, const Spartan::Vector3& relativePos);
 		void ClearForce();
-		void SetGravity(const SpartanEngine::Vector3& gravity);
+		void SetGravity(const Spartan::Vector3& gravity);
 		void SetFriction(float friction);
 		void SetRestitution(float restitution);
 
 		Vector3 GetLinearVelocity();
 
-		void UpdateTransform(const SpartanEngine::Vector3& position, const SpartanEngine::Quaternion& rotation, const SpartanEngine::Vector3& scale);
+		void UpdateTransform(const Spartan::Vector3& position, const Spartan::Quaternion& rotation, const Spartan::Vector3& scale);
 
 		btRigidBody* GetbtRigidBody();
 		Collider3D* GetCollider();

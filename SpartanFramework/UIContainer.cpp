@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Components.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

@@ -5,7 +5,7 @@
 #include "Constraints.h"
 #include "TransformComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

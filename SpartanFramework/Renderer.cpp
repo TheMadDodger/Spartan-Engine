@@ -10,7 +10,7 @@
 #include "MaterialManager.h"
 #include "UIRenderMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	Renderer::Renderer() : m_pScreen(nullptr), m_pUIRenderer(nullptr)
 	{

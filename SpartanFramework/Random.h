@@ -2,7 +2,7 @@
 #include "SEObject.h"
 #include <cstdint>
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Math
 	{

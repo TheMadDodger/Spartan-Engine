@@ -2,7 +2,7 @@
 #include "BaseComponent.h"
 #include "GameObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	std::vector<BaseComponent*> BaseComponent::m_pRegisteredComponents = std::vector<BaseComponent*>();
 

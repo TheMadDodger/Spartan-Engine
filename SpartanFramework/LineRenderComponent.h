@@ -2,7 +2,7 @@
 #include "UIComponent.h"
 #include "LineRenderMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class LineRenderComponent : public UIComponent
 	{

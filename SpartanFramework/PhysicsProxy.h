@@ -3,7 +3,7 @@
 #include "ApplicationStructs.h"
 #include <btBulletDynamicsCommon.h>
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class PhysicsProxy : public SEObject
 	{

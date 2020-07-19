@@ -5,7 +5,7 @@
 #include "GameScene.h"
 #include "Layers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	GameObject::GameObject(const char* name, size_t layerID)
 		: m_pComponents(std::vector<BaseComponent*>()),
@@ -74,7 +74,7 @@ namespace SpartanEngine
 		m_pParentObject->SetDirty();
 	}
 
-	void GameObject::SetScene(SpartanEngine::GameScene* pScene)
+	void GameObject::SetScene(Spartan::GameScene* pScene)
 	{
 		m_pScene = pScene;
 		for (size_t i = 0; i < m_pChildren.size(); i++)

@@ -2,7 +2,7 @@
 #include "AStarPathFinding.h"
 #include "PathFindingNodes.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	vector<BaseGridNode*> AStarPathFinding::m_Path = vector<BaseGridNode*>();
 	BaseGridNode* AStarPathFinding::m_SelectedNode = nullptr;

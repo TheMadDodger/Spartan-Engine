@@ -1,6 +1,6 @@
 #pragma once
 
-namespace SpartanEngine
+namespace Spartan
 {
 	// A simple vertex with a position and UV coordinate
 	struct Vertex2DPosUV

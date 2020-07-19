@@ -2,7 +2,7 @@
 #include "ShaderLoader.h"
 #include "BinaryContainer.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	ShaderLoader::ShaderLoader()
 	{

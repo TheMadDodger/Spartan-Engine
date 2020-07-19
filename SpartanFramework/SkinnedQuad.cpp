@@ -5,7 +5,7 @@
 #include "ContentManager.h"
 #include "Components.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SkinnedQuad::SkinnedQuad(std::vector<BlendWeightData> BlendData, TextureData* pTexture, Skeleton* pSkeleton) :
 		m_pTexture(pTexture), m_pSkeleton(pSkeleton)

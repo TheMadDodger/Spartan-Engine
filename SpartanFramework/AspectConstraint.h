@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseUIConstraint.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

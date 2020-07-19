@@ -3,7 +3,7 @@
 
 class Material;
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class RenderTexture;
 

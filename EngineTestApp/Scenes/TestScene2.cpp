@@ -11,7 +11,7 @@
 //{
 //}
 //
-//void TestScene2::Initialize(const SpartanEngine::GameContext &gameContext)
+//void TestScene2::Initialize(const Spartan::GameContext &gameContext)
 //{
 //	UNREFERENCED_PARAMETER(gameContext);
 //	//m_pObject = new GameObject();
@@ -56,67 +56,67 @@
 //	//m_pAudioSource->AddComponent(pAudio);
 //	//AddChild(m_pAudioSource);
 //
-//	SpartanEngine::Utilities::BinaryContainer::OpenWrite("./Resources/Spritesheets/mario.bin");
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(0);
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::OpenWrite("./Resources/Spritesheets/mario.bin");
+//	Spartan::Utilities::BinaryContainer::Write<int>(0);
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
 //
 //	// 1: General information about the spritesheet
-//	SpartanEngine::Utilities::BinaryContainer::Write<BYTE>(1);
-//	SpartanEngine::Utilities::BinaryContainer::WriteString("mario.png");
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(2);
+//	Spartan::Utilities::BinaryContainer::Write<BYTE>(1);
+//	Spartan::Utilities::BinaryContainer::WriteString("mario.png");
+//	Spartan::Utilities::BinaryContainer::Write<int>(2);
 //
 //	// 2: Animation Clips
-//	SpartanEngine::Utilities::BinaryContainer::Write<BYTE>(2);
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(0);
-//	SpartanEngine::Utilities::BinaryContainer::WriteString("idle");
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(0);
+//	Spartan::Utilities::BinaryContainer::Write<BYTE>(2);
+//	Spartan::Utilities::BinaryContainer::Write<int>(0);
+//	Spartan::Utilities::BinaryContainer::WriteString("idle");
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::Write<int>(0);
 //
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
-//	SpartanEngine::Utilities::BinaryContainer::WriteString("walk");
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(3);
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(15);
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::WriteString("walk");
+//	Spartan::Utilities::BinaryContainer::Write<int>(3);
+//	Spartan::Utilities::BinaryContainer::Write<int>(15);
 //
 //	// 3: Frames
-//	SpartanEngine::Utilities::BinaryContainer::Write<BYTE>(3);
+//	Spartan::Utilities::BinaryContainer::Write<BYTE>(3);
 //
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(4);
+//	Spartan::Utilities::BinaryContainer::Write<int>(4);
 //	// Idle has only 1 frame
 //	SDL_Rect r{ 211, 0, 13, 16 };
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(0);
-//	SpartanEngine::Utilities::BinaryContainer::Write<SDL_Rect>(r);
+//	Spartan::Utilities::BinaryContainer::Write<int>(0);
+//	Spartan::Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //	
 //	// Walk has 4 frames
 //	r = { 241, 0, 14, 15 };
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
-//	SpartanEngine::Utilities::BinaryContainer::Write<SDL_Rect>(r);
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //
 //	r = { 272, 0, 12, 16 };
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
-//	SpartanEngine::Utilities::BinaryContainer::Write<SDL_Rect>(r);
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //
 //	r = { 300, 0, 16, 16 };
-//	SpartanEngine::Utilities::BinaryContainer::Write<int>(1);
-//	SpartanEngine::Utilities::BinaryContainer::Write<SDL_Rect>(r);
+//	Spartan::Utilities::BinaryContainer::Write<int>(1);
+//	Spartan::Utilities::BinaryContainer::Write<SDL_Rect>(r);
 //
-//	SpartanEngine::Utilities::BinaryContainer::Write<BYTE>(0);
-//	SpartanEngine::Utilities::BinaryContainer::Close();
+//	Spartan::Utilities::BinaryContainer::Write<BYTE>(0);
+//	Spartan::Utilities::BinaryContainer::Close();
 //
-//	m_pGroundBox = Instantiate<SpartanEngine::GameObject>();
-//	m_pGroundBox->CreateRuntimeComponent<SpartanEngine::RigidBodyComponent>()->m_BodyType = b2_staticBody;
-//	m_pGroundBox->CreateRuntimeComponent<SpartanEngine::ColliderComponent>()->SetCollider(new SpartanEngine::Box(500.0f, 50.0f));
+//	m_pGroundBox = Instantiate<Spartan::GameObject>();
+//	m_pGroundBox->CreateRuntimeComponent<Spartan::RigidBodyComponent>()->m_BodyType = b2_staticBody;
+//	m_pGroundBox->CreateRuntimeComponent<Spartan::ColliderComponent>()->SetCollider(new Spartan::Box(500.0f, 50.0f));
 //
-//	m_pSpriteSheetTest = Instantiate<SpartanEngine::GameObject>();
-//	m_pSpriteSheetTest->CreateRuntimeComponent<SpartanEngine::RigidBodyComponent>();
-//	m_pSpriteSheetTest->CreateRuntimeComponent<SpartanEngine::ColliderComponent>()->SetCollider(new SpartanEngine::Circle(8.0f));
+//	m_pSpriteSheetTest = Instantiate<Spartan::GameObject>();
+//	m_pSpriteSheetTest->CreateRuntimeComponent<Spartan::RigidBodyComponent>();
+//	m_pSpriteSheetTest->CreateRuntimeComponent<Spartan::ColliderComponent>()->SetCollider(new Spartan::Circle(8.0f));
 //
-//	SpartanEngine::SpriteSheetData *pSpriteSheet = SpartanEngine::ContentManager::GetInstance()->Load<SpartanEngine::SpriteSheetData>("./Resources/Spritesheets/mario.bin");
-//	m_pSpriteSheetTest->CreateRuntimeComponent<SpartanEngine::SpriteSheetComponent>()->SetSpriteSheet(pSpriteSheet);
+//	Spartan::SpriteSheetData *pSpriteSheet = Spartan::ContentManager::GetInstance()->Load<Spartan::SpriteSheetData>("./Resources/Spritesheets/mario.bin");
+//	m_pSpriteSheetTest->CreateRuntimeComponent<Spartan::SpriteSheetComponent>()->SetSpriteSheet(pSpriteSheet);
 //
-//	SpartanEngine::Utilities::Debug::EnablePhysicsDebugRendering(true);
+//	Spartan::Utilities::Debug::EnablePhysicsDebugRendering(true);
 //}
 //
-//void TestScene2::PostInitialize(const SpartanEngine::GameContext &gameContext)
+//void TestScene2::PostInitialize(const Spartan::GameContext &gameContext)
 //{
 //	UNREFERENCED_PARAMETER(gameContext);
 //	// Since its rigidbody isnt initialized during scene Initialize yet, we translate it in the PostInitialize
@@ -125,7 +125,7 @@
 //	m_pGroundBox->GetTransform()->Translate(0.0f, -100.0f);
 //}
 //
-//void TestScene2::Update(const SpartanEngine::GameContext &gameContext)
+//void TestScene2::Update(const Spartan::GameContext &gameContext)
 //{
 //	/*m_pObject->GetTransform()->Rotate(Vector3(0, 0, 0.001f) * *gameContext.pTime->GetDeltaTime());
 //	m_pImage->GetTransform()->Rotate(Vector3(0, 0, 0.001f) * *gameContext.pTime->GetDeltaTime());*/
@@ -134,19 +134,19 @@
 //
 //	if (gameContext.pInput->IsActionTriggered("Forward"))
 //	{
-//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(SpartanEngine::Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
+//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Spartan::Vector2(0.0f, 1.0f) * gameContext.pTime->GetDeltaTime());
 //	}
 //	if (gameContext.pInput->IsActionTriggered("Backward"))
 //	{
-//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(SpartanEngine::Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
+//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Spartan::Vector2(0.0f, -1.0f) * gameContext.pTime->GetDeltaTime());
 //	}
 //	if (gameContext.pInput->IsActionTriggered("Left"))
 //	{
-//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(SpartanEngine::Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Spartan::Vector2(-1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 //	}
 //	if (gameContext.pInput->IsActionTriggered("Right"))
 //	{
-//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(SpartanEngine::Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
+//		GetActiveCamera()->GetGameObject()->GetTransform()->Translate(Spartan::Vector2(1.0f, 0.0f) * gameContext.pTime->GetDeltaTime());
 //	}
 //	if (gameContext.pInput->IsActionTriggered("ZoomOut"))
 //	{
@@ -158,7 +158,7 @@
 //	}
 //	if (gameContext.pInput->IsActionTriggered("ChangeScene"))
 //	{
-//		SpartanEngine::SceneManager::GetInstance()->LoadScene(0);
+//		Spartan::SceneManager::GetInstance()->LoadScene(0);
 //	}
 //	/*if (gameContext.pInput->IsActionTriggered("Shoot"))
 //	{
@@ -168,7 +168,7 @@
 //	//m_pSpriteSheetTest->GetComponent<SpriteSheetComponent>()->Play(string("walk"));
 //}
 //
-//void TestScene2::Draw(const SpartanEngine::GameContext &gameContext)
+//void TestScene2::Draw(const Spartan::GameContext &gameContext)
 //{
 //	UNREFERENCED_PARAMETER(gameContext);
 //}

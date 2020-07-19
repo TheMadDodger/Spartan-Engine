@@ -8,7 +8,7 @@
 //#include <PathFindingNodes.h>
 //#include <InputManager.h>
 //
-//GridTestScene::GridTestScene() : SpartanEngine::GameScene("Grid Test Scene")
+//GridTestScene::GridTestScene() : Spartan::GameScene("Grid Test Scene")
 //{
 //}
 //
@@ -18,41 +18,41 @@
 //	m_pAStarPathFinding = nullptr;
 //}
 //
-//void GridTestScene::Initialize(const SpartanEngine::GameContext & gameContext)
+//void GridTestScene::Initialize(const Spartan::GameContext & gameContext)
 //{
-//	gameContext.pInput->AddInputAction(SpartanEngine::InputAction("Findpath", SpartanEngine::InputType::Pressed, 'f'));
+//	gameContext.pInput->AddInputAction(Spartan::InputAction("Findpath", Spartan::InputType::Pressed, 'f'));
 //	m_pCamera = Instantiate<FreeCamera>();
 //
-//	SpartanEngine::Grid2D *pGrid = new SpartanEngine::Grid2D(60, 60, SpartanEngine::Vector2(10.0f, 10.0f));
-//	pGrid->Generate<SpartanEngine::AStar2DGridNode>();
+//	Spartan::Grid2D *pGrid = new Spartan::Grid2D(60, 60, Spartan::Vector2(10.0f, 10.0f));
+//	pGrid->Generate<Spartan::AStar2DGridNode>();
 //
 //	for (size_t i = 0; i < 250; i++)
 //	{
-//		SpartanEngine::Vector2 randomCoord = SpartanEngine::RandomRangeVector2(SpartanEngine::Vector2::Zero(), SpartanEngine::Vector2(60.0f, 60.0f));
-//		SpartanEngine::IntVector2 randCoord;
+//		Spartan::Vector2 randomCoord = Spartan::RandomRangeVector2(Spartan::Vector2::Zero(), Spartan::Vector2(60.0f, 60.0f));
+//		Spartan::IntVector2 randCoord;
 //		randCoord.x = (int)randomCoord.x;
 //		randCoord.y = (int)randomCoord.y;
 //		auto pNode = pGrid->GetNode(randCoord);
-//		auto pPathNode = dynamic_cast<SpartanEngine::IAStarPathNode*>(pNode);
+//		auto pPathNode = dynamic_cast<Spartan::IAStarPathNode*>(pNode);
 //		pPathNode->SetMoveable(false);
 //	}
 //
-//	SpartanEngine::GameObject* pGridObject = Instantiate<SpartanEngine::GameObject>();
-//	m_pGrid = pGridObject->CreateRuntimeComponent<SpartanEngine::GridComponent>();
+//	Spartan::GameObject* pGridObject = Instantiate<Spartan::GameObject>();
+//	m_pGrid = pGridObject->CreateRuntimeComponent<Spartan::GridComponent>();
 //	m_pGrid->SetGrid(pGrid);
 //
-//	m_pAStarPathFinding = new SpartanEngine::AStarPathFinding(pGrid);
+//	m_pAStarPathFinding = new Spartan::AStarPathFinding(pGrid);
 //
 //	SetEnabled(true);
 //}
 //
-//void GridTestScene::PostInitialize(const SpartanEngine::GameContext & gameContext)
+//void GridTestScene::PostInitialize(const Spartan::GameContext & gameContext)
 //{
-//	auto pCam = m_pCamera->GetComponent<SpartanEngine::CameraComponent>();
+//	auto pCam = m_pCamera->GetComponent<Spartan::CameraComponent>();
 //	SetActiveCamera(pCam);
 //}
 //
-//void GridTestScene::Update(const SpartanEngine::GameContext &gameContext)
+//void GridTestScene::Update(const Spartan::GameContext &gameContext)
 //{
 //	/*if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_LEFT))
 //	{
@@ -75,6 +75,6 @@
 //	}*/
 //}
 //
-//void GridTestScene::Draw(const SpartanEngine::GameContext &gameContext)
+//void GridTestScene::Draw(const Spartan::GameContext &gameContext)
 //{
 //}

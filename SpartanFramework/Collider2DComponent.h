@@ -3,7 +3,7 @@
 #include "2DColliders.h"
 #include "PhysicsMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class Collider2DComponent : public BaseComponent
 	{

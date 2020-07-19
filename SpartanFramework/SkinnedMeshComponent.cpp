@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "Components.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	SkinnedMeshComponent::SkinnedMeshComponent()
 	{

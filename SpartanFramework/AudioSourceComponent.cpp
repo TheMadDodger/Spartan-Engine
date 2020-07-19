@@ -6,7 +6,7 @@
 #include "Components.h"
 #include "SoundManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	AudioSourceComponent::AudioSourceComponent() : m_AudioFile(""), m_pAudioData(nullptr), BaseComponent("Audio Source")
 	{

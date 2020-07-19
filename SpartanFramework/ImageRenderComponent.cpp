@@ -5,7 +5,7 @@
 #include "TransformComponent.h"
 #include "UIRenderMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	ImageRenderComponent::ImageRenderComponent() : UIComponent("Image"), m_pImage(nullptr), m_Offsets(), m_Color(Color::White())
 	{

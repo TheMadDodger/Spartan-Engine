@@ -2,7 +2,7 @@
 #include "BaseComponent.h"
 #include "BaseAIBehaviour.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class AIComponent : public BaseComponent
 	{

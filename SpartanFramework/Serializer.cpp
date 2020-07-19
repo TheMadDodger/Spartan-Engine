@@ -3,7 +3,7 @@
 
 #define REGISTER_DEFAULT_SERIALIZER(type) m_Serializers.push_back(new TypeSerializer<type>());
 
-namespace SpartanEngine
+namespace Spartan
 {
 	std::vector<BaseSerializer*> Serializer::m_Serializers;
 

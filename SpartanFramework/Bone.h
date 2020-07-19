@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class Skeleton;
 

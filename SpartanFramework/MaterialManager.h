@@ -2,7 +2,7 @@
 #include "Material.h"
 #include "Manager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class MaterialManager : Manager
 	{

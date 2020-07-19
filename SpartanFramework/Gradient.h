@@ -1,7 +1,7 @@
 #pragma once
 #include "Content.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class TextureData;
 

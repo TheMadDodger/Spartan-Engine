@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameTime.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	void GameTime::Start()
 	{

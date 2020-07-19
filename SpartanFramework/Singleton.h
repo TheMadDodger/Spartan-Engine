@@ -1,7 +1,7 @@
 #pragma once
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	template<typename T>
 	class Singleton : Manager

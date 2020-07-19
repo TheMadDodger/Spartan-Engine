@@ -4,7 +4,7 @@
 #include "RenderTexture.h"
 #include "ScreenRect.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class PostProcessingStack : public Singleton<PostProcessingStack>
 	{

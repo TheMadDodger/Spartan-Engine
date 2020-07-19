@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	ShakeComponent::ShakeComponent()
 	{

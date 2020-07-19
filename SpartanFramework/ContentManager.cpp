@@ -9,7 +9,7 @@
 #include "ModelLoader.h"
 #include "GradientLoader.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	ContentManager* ContentManager::m_pContentManager = nullptr;
 

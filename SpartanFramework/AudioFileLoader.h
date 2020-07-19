@@ -2,7 +2,7 @@
 #include "ContentLoader.h"
 #include "ContentManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class AudioFileLoader : public ContentLoader<AudioData>
 	{

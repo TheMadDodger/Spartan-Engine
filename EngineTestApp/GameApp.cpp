@@ -11,7 +11,7 @@
 #include <InputManager.h>
 #include "BufferTest.h"
 
-GameApp::GameApp(const SpartanEngine::GameSettings &settings) : SpartanEngine::BaseGame(settings)
+GameApp::GameApp(const Spartan::GameSettings &settings) : Spartan::BaseGame(settings)
 {
 }
 
@@ -19,10 +19,10 @@ GameApp::~GameApp()
 {
 }
 
-void GameApp::Initialize(const SpartanEngine::GameContext &gameContext)
+void GameApp::Initialize(const Spartan::GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	SpartanEngine::SceneManager::GetInstance()->AddScene(new BufferTest());
+	Spartan::SceneManager::GetInstance()->AddScene(new BufferTest());
 
 	//m_ProgramID = LoadShaders("./Resources/Shaders/triangle.vs", "./Resources/Shaders/triangle.fs");
 
@@ -40,7 +40,7 @@ void GameApp::Initialize(const SpartanEngine::GameContext &gameContext)
 	//gameContext.pInput->AddInputAction(InputAction("UseGLMToggle", InputType::Pressed, 'f'));
 }
 
-void GameApp::GameUpdate(const SpartanEngine::GameContext &gameContext)
+void GameApp::GameUpdate(const Spartan::GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 
@@ -50,7 +50,7 @@ void GameApp::GameUpdate(const SpartanEngine::GameContext &gameContext)
 	}*/
 }
 
-void GameApp::GamePaint(const SpartanEngine::GameContext &gameContext)
+void GameApp::GamePaint(const Spartan::GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
 

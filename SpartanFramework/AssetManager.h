@@ -3,7 +3,7 @@
 #include "Singleton.h"
 #include "GUIDComparer.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class AssetManager : public Singleton<AssetManager>
 	{

@@ -2,7 +2,7 @@
 #include "BaseComponent.h"
 #include "MathHelpers.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class SpriteSheetData;
 

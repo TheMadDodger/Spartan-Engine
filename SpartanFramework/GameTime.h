@@ -4,7 +4,7 @@
 
 using namespace std;
 
-namespace SpartanEngine
+namespace Spartan
 {
 	using frame = chrono::duration<int32_t, ratio<1, 60>>;
 	using ms = chrono::duration<float, milli>;

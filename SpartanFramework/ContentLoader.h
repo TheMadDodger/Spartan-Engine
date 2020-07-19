@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "SEObject.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class BaseLoader : SEObject
 	{

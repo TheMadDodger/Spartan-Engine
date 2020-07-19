@@ -6,7 +6,7 @@
 #include "UIObject.h"
 #include "TransformComponent.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	GLuint UIComponent::m_UIVertexBufferID = 0;
 	GLuint UIComponent::m_UIVertexArrayID = 0;
@@ -71,9 +71,9 @@ namespace SpartanEngine
 		}
 	}
 
-	SpartanEngine::UI::UIObject* UIComponent::GetGameObject()
+	Spartan::UI::UIObject* UIComponent::GetGameObject()
 	{
-		return static_cast<SpartanEngine::UI::UIObject*>(BaseComponent::GetGameObject());
+		return static_cast<Spartan::UI::UIObject*>(BaseComponent::GetGameObject());
 	}
 
 	void UIComponent::SetOrigin(const Origin& origin)
@@ -108,8 +108,8 @@ namespace SpartanEngine
 
 		if (!m_bEnabled) return;
 
-		SpartanEngine::UI::UIObject* pObject = GetGameObject();
-		SpartanEngine::UI::Canvas* pCanvas = pObject->GetParentCanvas();
+		Spartan::UI::UIObject* pObject = GetGameObject();
+		Spartan::UI::Canvas* pCanvas = pObject->GetParentCanvas();
 		Matrix4X4 uiProjection = pCanvas->GetUIProjectionMatrix();
 		Matrix4X4 world = pObject->GetTransform()->GetWorldMatrix();
 		m_UIMatrix = world * uiProjection;

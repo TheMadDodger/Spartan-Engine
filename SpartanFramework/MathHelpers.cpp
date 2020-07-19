@@ -2,7 +2,7 @@
 #include "MathHelpers.h"
 #include "ContentManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace Math
 	{

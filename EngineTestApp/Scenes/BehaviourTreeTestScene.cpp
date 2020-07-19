@@ -4,7 +4,7 @@
 #include <AI.h>
 #include <Tasks.h>
 
-BehaviourTreeTestScene::BehaviourTreeTestScene() : SpartanEngine::GameScene("Behaviour Tree Test Scene")
+BehaviourTreeTestScene::BehaviourTreeTestScene() : Spartan::GameScene("Behaviour Tree Test Scene")
 {
 }
 
@@ -12,29 +12,29 @@ BehaviourTreeTestScene::~BehaviourTreeTestScene()
 {
 }
 
-void BehaviourTreeTestScene::Initialize(const SpartanEngine::GameContext &)
+void BehaviourTreeTestScene::Initialize(const Spartan::GameContext &)
 {
-	SpartanEngine::GameObject *pAIObject = Instantiate<SpartanEngine::GameObject>();
+	Spartan::GameObject *pAIObject = Instantiate<Spartan::GameObject>();
 
-	SpartanEngine::BTTreeRootNode *pRootNode = new SpartanEngine::BTTreeRootNode();
+	Spartan::BTTreeRootNode *pRootNode = new Spartan::BTTreeRootNode();
 
-	SpartanEngine::BTTreeSequenceNode *pSelectorNode = new SpartanEngine::BTTreeSequenceNode();
+	Spartan::BTTreeSequenceNode *pSelectorNode = new Spartan::BTTreeSequenceNode();
 	pRootNode->AddNode(pSelectorNode);
 
-	SpartanEngine::BTTaskNode *pWaitTask = new SpartanEngine::BTWaitTask();
+	Spartan::BTTaskNode *pWaitTask = new Spartan::BTWaitTask();
 	pSelectorNode->AddNode(pWaitTask);
 
-	pWaitTask = new SpartanEngine::BTWaitTask(10.0f);
+	pWaitTask = new Spartan::BTWaitTask(10.0f);
 	pSelectorNode->AddNode(pWaitTask);
 
-	SpartanEngine::AIBehaviourTree *pBehaviourTree = new SpartanEngine::AIBehaviourTree(pRootNode);
-	pAIObject->CreateRuntimeComponent<SpartanEngine::AIComponent>()->SetBehaviour(pBehaviourTree);
+	Spartan::AIBehaviourTree *pBehaviourTree = new Spartan::AIBehaviourTree(pRootNode);
+	pAIObject->CreateRuntimeComponent<Spartan::AIComponent>()->SetBehaviour(pBehaviourTree);
 }
 
-void BehaviourTreeTestScene::Update(const SpartanEngine::GameContext &)
+void BehaviourTreeTestScene::Update(const Spartan::GameContext &)
 {
 }
 
-void BehaviourTreeTestScene::Draw(const SpartanEngine::GameContext &)
+void BehaviourTreeTestScene::Draw(const Spartan::GameContext &)
 {
 }

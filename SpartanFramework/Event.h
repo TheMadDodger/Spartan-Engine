@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	template<typename ...Args>
 	struct Event

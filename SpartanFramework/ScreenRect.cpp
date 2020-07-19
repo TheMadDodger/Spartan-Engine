@@ -6,7 +6,7 @@
 #include "RenderTexture.h"
 #include "PostProcessingStack.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	ScreenRect::ScreenRect() : m_pScreenRenderMaterial(nullptr), m_ScreenQuadVertexbufferID(NULL), m_ScreenQuadVertexArrayID(NULL)
 	{

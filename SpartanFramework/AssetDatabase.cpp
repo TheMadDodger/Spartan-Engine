@@ -2,7 +2,7 @@
 #include "AssetDatabase.h"
 #include "AssetManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	AssetDatabase::AssetDatabase()
 	{

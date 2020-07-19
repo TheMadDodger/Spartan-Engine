@@ -2,7 +2,7 @@
 #include "PostProcessingStack.h"
 #include "MaterialManager.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	PostProcessingStack::PostProcessingStack() : m_pTemporaryTexture(nullptr)
 	{

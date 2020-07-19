@@ -7,7 +7,7 @@
 #include "MathHelpers.h"
 #include "ParticleSystem.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	inline Vector2 ToVector2(const b2Vec2& vec)
 	{

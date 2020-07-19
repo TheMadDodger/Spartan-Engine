@@ -3,23 +3,23 @@
 
 class PlanetMaterial;
 
-class RenderTestScene : public SpartanEngine::GameScene
+class RenderTestScene : public Spartan::GameScene
 {
 public:
 	RenderTestScene();
 	virtual ~RenderTestScene();
 
 private:
-	virtual void Initialize(const SpartanEngine::GameContext& gameContext);
-	virtual void Update(const SpartanEngine::GameContext& gameContext);
-	virtual void Draw(const SpartanEngine::GameContext& gameContext);
+	virtual void Initialize(const Spartan::GameContext& gameContext);
+	virtual void Update(const Spartan::GameContext& gameContext);
+	virtual void Draw(const Spartan::GameContext& gameContext);
 
 private:
 	float m_DesiredZ = 0.0f;
 	float m_CameraYaw = 0.0f;
 	float m_ObjectRot = 0.0f;
 	float m_CameraPitch = 0.0f;
-	SpartanEngine::GameObject* m_pObject;
+	Spartan::GameObject* m_pObject;
 
 	PlanetMaterial* m_pMaterial;
 

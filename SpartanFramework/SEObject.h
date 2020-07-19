@@ -1,5 +1,5 @@
 #pragma once
-namespace SpartanEngine
+namespace Spartan
 {
 	class SEObject
 	{

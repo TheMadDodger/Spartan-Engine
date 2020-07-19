@@ -2,7 +2,7 @@
 //#include "GUIDTestScene.h"
 //#include <GUID.h>
 //
-//GUIDTestScene::GUIDTestScene() : SpartanEngine::GameScene("GUID Test Scene")
+//GUIDTestScene::GUIDTestScene() : Spartan::GameScene("GUID Test Scene")
 //{
 //}
 //
@@ -11,16 +11,16 @@
 //{
 //}
 //
-//void GUIDTestScene::Initialize(const SpartanEngine::GameContext & gameContext)
+//void GUIDTestScene::Initialize(const Spartan::GameContext & gameContext)
 //{
-//	GUID guid = SpartanEngine::Utilities::GenerateGUID();
+//	GUID guid = Spartan::Utilities::GenerateGUID();
 //	//Utilities::Debug::LogInfo(guid);
 //}
 //
-//void GUIDTestScene::Update(const SpartanEngine::GameContext & gameContext)
+//void GUIDTestScene::Update(const Spartan::GameContext & gameContext)
 //{
 //}
 //
-//void GUIDTestScene::Draw(const SpartanEngine::GameContext & gameContext)
+//void GUIDTestScene::Draw(const Spartan::GameContext & gameContext)
 //{
 //}

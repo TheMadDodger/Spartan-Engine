@@ -8,7 +8,7 @@
 #include "Content.h"
 #include "Gradient.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	class TextureData : public Content
 	{

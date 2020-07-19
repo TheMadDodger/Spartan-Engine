@@ -1,7 +1,7 @@
 #pragma once
 #include "UIRenderMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	namespace UI
 	{

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "PPMaterial.h"
 
-namespace SpartanEngine
+namespace Spartan
 {
 	PPMaterial::PPMaterial(ShaderData* pShader) : Material(pShader)
 	{
