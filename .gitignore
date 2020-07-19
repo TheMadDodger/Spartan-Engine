@@ -11,14 +11,13 @@
 *.userprefs
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+Debug/
+DebugPublic/
+Release/
+Releases/
 x64/
 x86/
 bld/
-[Bb]in/
 [Oo]bj/
 [Ll]og/
 
@@ -27,8 +26,6 @@ bld/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
-Debug/
-Release/
 bin/ImGUI/.github/
 bin/ImGUI/examples/.gitignore
 bin/ImGUI/examples/
@@ -38,3 +35,13 @@ SpartanEditor/Resources/
 Resources1/
 bin/Box2D/lib.rar
 EngineTestApp/Resources.rar
+
+SerializationTest/SerializationTest/x64/
+SerializationTest/x64/
+
+SpartanEditor/Debug/
+SpartanFramework/Debug/
+SpartanFramework/x64/
+
+*.obj
+*.idb
