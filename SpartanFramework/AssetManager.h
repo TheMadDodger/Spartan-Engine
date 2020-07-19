@@ -51,7 +51,7 @@ namespace SpartanEngine
 		friend class AssetDatabase;
 
 	private:
-		std::map<size_t, BaseAsset*, GUIDComparer> m_AssetTemplates;
+		std::map<size_t, BaseAsset*> m_AssetTemplates;
 		std::map<GUID, BaseAsset*, GUIDComparer> m_Assets;
 		
 		static std::hash<std::string> m_AssetHasher;

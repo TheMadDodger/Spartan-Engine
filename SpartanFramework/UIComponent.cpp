@@ -8,8 +8,8 @@
 
 namespace SpartanEngine
 {
-	size_t UIComponent::m_UIVertexBufferID = 0;
-	size_t UIComponent::m_UIVertexArrayID = 0;
+	GLuint UIComponent::m_UIVertexBufferID = 0;
+	GLuint UIComponent::m_UIVertexArrayID = 0;
 	bool UIComponent::m_DoesVertexBufferExist = false;
 	int UIComponent::m_InstanceCount = 0;
 

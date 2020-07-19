@@ -36,8 +36,8 @@ namespace SpartanEngine
 	private:
 		Matrix4X4 m_UIMatrix;
 		Origin m_Origin;
-		static size_t m_UIVertexArrayID;
-		static size_t m_UIVertexBufferID;
+		static GLuint m_UIVertexArrayID;
+		static GLuint m_UIVertexBufferID;
 		static bool m_DoesVertexBufferExist;
 		static int m_InstanceCount;
 	};
