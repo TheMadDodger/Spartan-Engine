@@ -167,7 +167,7 @@ namespace Spartan
 		void SetScene(Spartan::GameScene* pScene);
 
 	private:
-		friend class LevelEditor;
+		friend class EditorApp;
 		friend class GameScene;
 		friend class Spartan::UI::UIObject;
 		friend class Spartan::UI::Canvas;

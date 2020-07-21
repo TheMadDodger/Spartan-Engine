@@ -61,6 +61,8 @@ namespace Spartan
 			return;
 		}
 
+		SDL_GL_MakeCurrent(m_pWindow, m_pSDLContext);
+
 		// Init GLEW
 		glewExperimental = GL_TRUE;
 		GLenum err = glewInit();
@@ -90,19 +92,19 @@ namespace Spartan
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		Utilities::Debug::LogGLError(glGetError());
-
+		
 		//// Enable color blending and use alpha blending
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		Utilities::Debug::LogGLError(glGetError());
-
+		
 		// Enable depth test
 		glEnable(GL_DEPTH_TEST);
 		Utilities::Debug::LogGLError(glGetError());
 		//// Accept fragment if it closer to the camera than the former one
 		glDepthFunc(GL_LESS);
 		Utilities::Debug::LogGLError(glGetError());
-
+		
 		glEnable(GL_LINE_SMOOTH);
 		Utilities::Debug::LogGLError(glGetError());
 

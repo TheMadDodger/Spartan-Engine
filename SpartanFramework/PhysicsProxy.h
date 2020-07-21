@@ -21,6 +21,7 @@ namespace Spartan
 		void RemoveCollisionObject(btRigidBody* pCollisionObject);
 
 	private:
+		friend class EditorApp;
 		friend class BaseGame;
 		friend class PhysicsObjectComponent;
 

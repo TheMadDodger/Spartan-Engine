@@ -61,7 +61,7 @@ namespace Spartan
 		bool IsMouseButtonDown(uint8 button);
 
 	private:
-		friend class GameTool;
+		friend class EditorApp;
 		friend class BaseGame;
 		void KeyDown(SDL_KeyboardEvent* keyboardEvent);
 		void KeyUp(SDL_KeyboardEvent* keyboardEvent);

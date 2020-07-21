@@ -44,6 +44,7 @@ namespace Spartan
 		static RenderTexture* m_pCurrentlyInUse;
 
 	private: // Instance members
+		friend class EditorApp;
 		friend class Renderer;
 		friend class ScreenRect;
 		friend class PostProcessingStack;

@@ -178,19 +178,20 @@
   <ItemGroup>
     <ClInclude Include="BehaviorTreeEditor.h" />
     <ClInclude Include="EditorWindow.h" />
-    <ClInclude Include="SceneWindow.h" />
-    <ClInclude Include="SkeletonObject.h" />
-    <ClInclude Include="ComponentParameters.h" />
-    <ClInclude Include="EditorObject.h" />
-    <ClInclude Include="GameApp.h" />
-    <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
-    <ClInclude Include="imgui_impl_opengl2.h" />
+    <ClInclude Include="imgui_impl_opengl3.h" />
     <ClInclude Include="imgui_impl_sdl.h" />
     <ClInclude Include="imgui_internal.h" />
     <ClInclude Include="imstb_rectpack.h" />
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
+    <ClInclude Include="OLDAPP.h" />
+    <ClInclude Include="SceneViewCamera.h" />
+    <ClInclude Include="SceneWindow.h" />
+    <ClInclude Include="SkeletonObject.h" />
+    <ClInclude Include="ComponentParameters.h" />
+    <ClInclude Include="EditorObject.h" />
+    <ClInclude Include="imconfig.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="SkeletonEditorComponent.h" />
     <ClInclude Include="EditorApp.h" />
@@ -200,20 +201,21 @@
   <ItemGroup>
     <ClCompile Include="BehaviorTreeEditor.cpp" />
     <ClCompile Include="EditorWindow.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_demo.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_impl_sdl.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
+    <ClCompile Include="OLDAPP.cpp" />
+    <ClCompile Include="SceneViewCamera.cpp" />
     <ClCompile Include="SceneWindow.cpp" />
     <ClCompile Include="SkeletonObject.cpp" />
     <ClCompile Include="ComponentParameters.cpp" />
     <ClCompile Include="EditorObject.cpp" />
-    <ClCompile Include="imgui.cpp" />
-    <ClCompile Include="imgui_demo.cpp" />
-    <ClCompile Include="imgui_draw.cpp" />
-    <ClCompile Include="imgui_impl_opengl2.cpp" />
-    <ClCompile Include="imgui_impl_sdl.cpp" />
-    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="SkeletonEditorComponent.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="EditorApp.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -221,6 +223,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

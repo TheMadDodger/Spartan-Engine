@@ -1,16 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="ImGUI">
       <UniqueIdentifier>{c2daad27-7093-4635-89b4-d4a840f3fd2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="EditorWindows">
       <UniqueIdentifier>{316bf0e2-acec-4479-a9d0-810d93bad89f}</UniqueIdentifier>
@@ -21,49 +13,13 @@
     <Filter Include="Editor">
       <UniqueIdentifier>{7956b8a9-68c6-4d3e-8ef6-36eb9d757088}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OLD">
+      <UniqueIdentifier>{22e9d4cd-6e36-4c47-a181-00312f584d5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="imconfig.h">
       <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_sdl.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_internal.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_rectpack.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_textedit.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_truetype.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_impl_opengl2.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentParameters.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SkeletonEditorComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SkeletonObject.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BehaviorTreeEditor.h">
       <Filter>EditorWindows</Filter>
@@ -81,54 +37,57 @@
       <Filter>CoreEditor</Filter>
     </ClInclude>
     <ClInclude Include="SceneWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentParameters.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorObject.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditor.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonEditorComponent.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletonObject.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneViewCamera.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="OLDAPP.h">
+      <Filter>OLD</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_opengl3.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_sdl.h">
+      <Filter>ImGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameApp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_draw.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_sdl.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_widgets.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_opengl2.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_demo.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentParameters.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SkeletonEditorComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SkeletonObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EditorWindow.cpp">
       <Filter>EditorWindows</Filter>
     </ClCompile>
     <ClCompile Include="BehaviorTreeEditor.cpp">
       <Filter>EditorWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>CoreEditor</Filter>
@@ -137,7 +96,54 @@
       <Filter>CoreEditor</Filter>
     </ClCompile>
     <ClCompile Include="SceneWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>EditorWindows</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentParameters.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorObject.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditor.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonEditorComponent.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletonObject.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneViewCamera.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="OLDAPP.cpp">
+      <Filter>OLD</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_sdl.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini">
+      <Filter>ImGUI</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "GameApp.h"
+//#include "OLDAPP.h"
 //#include <ContentManager.h>
 //#include <SceneManager.h>
 //#include "LevelEditor.h"
@@ -92,7 +92,7 @@
 //	ComponentParameterManager::GetInstance()->Register(new ComponentParameters<Spartan::TransformComponent>(Transform<Spartan::TransformComponent>));
 //	ComponentParameterManager::GetInstance()->Register(new ComponentParameters<Spartan::ImageRenderComponent>(Image<Spartan::ImageRenderComponent>));
 //
-//	Spartan::SceneManager::GetInstance()->AddScene(new LevelEditor());
+//	//Spartan::SceneManager::GetInstance()->AddScene(new LevelEditor());
 //
 //	UNREFERENCED_PARAMETER(gameContext);
 //
@@ -101,7 +101,7 @@
 //	m_GameWindowWidth = w / 2.f;
 //	m_GameWindowHeight = h / 2.f;
 //
-//	EditorWindow::GetWindow<BehaviorTreeEditor>();
+//	//EditorWindow::GetWindow<BehaviorTreeEditor>();
 //}
 //
 //void GameTool::GameUpdate(const Spartan::GameContext &gameContext)

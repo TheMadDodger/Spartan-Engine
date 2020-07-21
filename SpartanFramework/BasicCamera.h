@@ -9,7 +9,7 @@ namespace Spartan
 	{
 	public:
 		BasicCamera();
-		~BasicCamera();
+		virtual ~BasicCamera();
 
 		void Initialize(const GameContext& gameContext) override;
 		void Update(const GameContext& gameContext) override;

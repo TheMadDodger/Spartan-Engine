@@ -45,3 +45,5 @@ SpartanFramework/x64/
 
 *.obj
 *.idb
+Build/
+EditorTestApp/Resources/

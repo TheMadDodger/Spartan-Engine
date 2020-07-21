@@ -49,12 +49,14 @@ namespace Spartan
 
 	private:
 		friend class TextureLoader;
+		friend class EditorApp;
 		static BaseGame* m_pGame;
 		static void SetGame(BaseGame* pGame) { m_pGame = pGame; }
 
 		void HandleWindowEvent(SDL_Event* event);
 
 	protected:
+		friend class EditorApp;
 		GameSettings m_GameSettings;
 		GameContext m_GameContext;
 		std::vector<GameObject*> m_pPrefabs;

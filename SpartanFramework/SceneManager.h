@@ -39,7 +39,7 @@ namespace Spartan
 
 	private:
 		friend class BaseGame;
-		friend class GameTool;
+		friend class EditorApp;
 		SceneManager();
 		~SceneManager();
 	};

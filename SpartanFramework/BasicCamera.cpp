@@ -4,7 +4,7 @@
 
 namespace Spartan
 {
-	BasicCamera::BasicCamera()
+	BasicCamera::BasicCamera() : GameObject("Camera")
 	{
 		m_pCam = CreateDefaultComponent<CameraComponent>();
 	}
@@ -16,6 +16,7 @@ namespace Spartan
 	void BasicCamera::Initialize(const GameContext& gameContext)
 	{
 		UNREFERENCED_PARAMETER(gameContext);
+		m_pCam->SetPerspective(60.0f, 0.1f, 999999999.0f);
 	}
 
 	void BasicCamera::Update(const GameContext& gameContext)
