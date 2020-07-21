@@ -41,6 +41,7 @@ void BufferTest::Initialize(const Spartan::GameContext& gameContext)
 	m_Mat2 = Spartan::MaterialManager::CreateMaterial<Spartan::Material>("./Resources/Shaders/triangle2.fx");
 
 	Spartan::GameObject* pGround = Instantiate<Spartan::GameObject>();
+	pGround->SetName("Cube");
 	Spartan::PhysicsObjectComponent *pPhysicsObject = pGround->CreateRuntimeComponent<Spartan::PhysicsObjectComponent>();
 	pPhysicsObject->SetCollider(new Spartan::Box(Spartan::Vector3(1.0f, 1.0f, 1.0f)));
 	pPhysicsObject->SetMass(0.0f);
@@ -53,6 +54,7 @@ void BufferTest::Initialize(const Spartan::GameContext& gameContext)
 	pMeshRenderer->SetMesh(pModel->GetMesh(0));
 
 	Spartan::GameObject* pSphere = Instantiate<Spartan::GameObject>();
+	pSphere->SetName("Sphere");
 	pPhysicsObject = pSphere->CreateRuntimeComponent<Spartan::PhysicsObjectComponent>();
 	pPhysicsObject->SetCollider(new Spartan::Sphere(1.0f));
 	pMeshRenderer = pSphere->CreateRuntimeComponent<Spartan::MeshRenderComponent>();

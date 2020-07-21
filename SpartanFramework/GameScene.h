@@ -27,6 +27,7 @@ namespace Spartan
 
 		std::vector<GameObject*> GetChildren() { return m_pChildren; }
 		GameObject* GetChild(unsigned int ID) { return m_pChildren[ID]; }
+		size_t GetChildCount() { return m_pChildren.size(); }
 
 		void Destroy(GameObject* gameObject);
 

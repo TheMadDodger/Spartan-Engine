@@ -81,6 +81,24 @@
     <ClInclude Include="imgui_impl_sdl.h">
       <Filter>ImGUI</Filter>
     </ClInclude>
+    <ClInclude Include="MenuBar.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="PopupManager.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWindow.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorPreferencesWindow.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGraphWindow.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Selection.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -139,6 +157,24 @@
     </ClCompile>
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuBar.cpp">
+      <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="PopupManager.cpp">
+      <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameWindow.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorPreferencesWindow.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraphWindow.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Selection.cpp">
+      <Filter>CoreEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

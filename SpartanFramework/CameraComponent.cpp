@@ -8,6 +8,7 @@ namespace Spartan
 {
 	CameraComponent::CameraComponent() : m_CameraMatrix(Matrix4X4::CreateIdentityMatrix()), m_CameraInverseMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Camera")
 	{
+		m_CanTickInEditor = true;
 	}
 
 	CameraComponent::~CameraComponent()

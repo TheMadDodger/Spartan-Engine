@@ -5,8 +5,8 @@ namespace Spartan::Editor
 	class EditorWindow
 	{
 	public:
-		EditorWindow(const std::string& windowName, float windowWidth, float windowHeight) : m_WindowName(windowName), m_WindowDimensions(windowWidth, windowHeight), m_IsOpen(true) {}
-		~EditorWindow() {}
+		EditorWindow(const std::string& windowName, float windowWidth, float windowHeight);
+		virtual ~EditorWindow();
 
 		template<typename T>
 		static EditorWindow* GetWindow()
@@ -27,13 +27,14 @@ namespace Spartan::Editor
 		void Close();
 
 	protected:
-		virtual void OnPaint() = 0;
+		virtual void OnPaint() {};
 		virtual void OnGUI() = 0;
 
 	private:
 		void RenderGUI();
 
 		static void RenderWindows();
+		static void Cleanup();
 
 	protected:
 		friend class EditorApp;
@@ -42,6 +43,7 @@ namespace Spartan::Editor
 		static std::vector<EditorWindow*> m_pActiveEditorWindows;
 		static std::vector<EditorWindow*> m_pClosingEditorWindows;
 		bool m_IsOpen;
+		bool m_Resizeable;
 	};
 
 	template<typename T>

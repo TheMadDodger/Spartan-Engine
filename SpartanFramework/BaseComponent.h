@@ -66,6 +66,7 @@ namespace Spartan
 		bool m_bInitialized = false;
 
 	private:
+		friend class EditorApp;
 		friend class GameObject;
 		friend class Spartan::UI::UIObject;
 		friend class Spartan::UI::Canvas;

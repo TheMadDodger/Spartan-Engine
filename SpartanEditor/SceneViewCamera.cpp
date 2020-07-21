@@ -6,8 +6,11 @@
 
 namespace Spartan::Editor
 {
+    SceneViewCamera* SceneViewCamera::m_pInstance;
+
     SceneViewCamera::SceneViewCamera() : BasicCamera()
     {
+        m_pInstance = this;
     }
 
     SceneViewCamera::~SceneViewCamera()
@@ -93,11 +96,9 @@ namespace Spartan::Editor
         GetTransform()->Rotation = Matrix4X4::CreateRotationMatrix(Vector3(m_Pitch, m_Yaw, 0.0f));
         
         float axis = gameContext.pInput->GetMouseWheelMovement().y;
-        if (axis != 0)
-        {
-            auto zoomSensitivity = fastMode ? m_FastZoomSensitivity : m_ZoomSensitivity;
-            GetTransform()->Position = pos + (GetTransform()->Rotation.GetForward() * movementSpeed * deltaTime);
-        }
+        auto zoomSensitivity = fastMode ? m_FastZoomSensitivity : m_ZoomSensitivity;
+        if (axis > 0) GetTransform()->Position = pos + (GetTransform()->Rotation.GetBack() * movementSpeed * deltaTime);
+        else if (axis < 0) GetTransform()->Position = pos + (GetTransform()->Rotation.GetForward() * movementSpeed * deltaTime);
         
         if (gameContext.pInput->IsMouseButtonDown(SDL_BUTTON_RIGHT))
         {
@@ -117,5 +118,15 @@ namespace Spartan::Editor
     void SceneViewCamera::StopLooking()
     {
         m_Looking = false;
+    }
+
+    SceneViewCamera* SceneViewCamera::GetSceneCamera()
+    {
+        return m_pInstance;
+    }
+
+    void SceneViewCamera::Destroy()
+    {
+        delete m_pInstance;
     }
 }

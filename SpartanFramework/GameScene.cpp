@@ -122,6 +122,7 @@ namespace Spartan
 		// Create default camera
 		m_pDefaultCamera = new BasicCamera();
 		m_pDefaultCamera->SetName("Main Camera");
+		m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f * M_PI / 180.0f, 0.1f, 99999.0f);
 		m_pDefaultCamera->RootInitialize(gameContext);
 		AddChild(m_pDefaultCamera);
 

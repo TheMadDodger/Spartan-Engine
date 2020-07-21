@@ -18,6 +18,9 @@ namespace Spartan
 
 		void RenderScene();
 
+		void EnterPlayMode();
+		void ExitPlayMode();
+
 	protected:
 		//virtual void RegisterUserWindows(std::vector<EditorWindow*>& userWindows) = 0;
 
@@ -29,9 +32,15 @@ namespace Spartan
 
 		void HandleWindowEvent(SDL_Event* event);
 
+		void CreateDefaultMainMenuBar();
+		void EditorUpdateScene();
+		void EditorUpdateObject(GameObject* pObject);
+
 	private:
 		BaseGame* m_pGame;
 		static EditorApp* m_pEditorApp;
 		bool m_IsRunning;
+		bool m_PlayModeActive;
+		bool m_PlayModePaused;
 	};
 }

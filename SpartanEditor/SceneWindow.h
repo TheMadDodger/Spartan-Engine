@@ -1,6 +1,5 @@
 #pragma once
 #include "EditorWindow.h"
-#include "SceneViewCamera.h"
 #include <RenderTexture.h>
 
 namespace Spartan::Editor
@@ -16,7 +15,6 @@ namespace Spartan::Editor
         virtual void OnGUI() override;
 
     private:
-        SceneViewCamera* m_pSceneCamera;
-        RenderTexture* m_pSceneRenderTexture;
+        RenderTexture* m_pRenderTexture;
     };
 }

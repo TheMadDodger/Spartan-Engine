@@ -8,7 +8,7 @@ class GameApp : public Spartan::BaseGame
 {
 public:
 	GameApp(const Spartan::GameSettings &settings);
-	~GameApp();
+	virtual ~GameApp();
 
 	// User defined application methods
 	void Initialize(const Spartan::GameContext &gameContext) override;

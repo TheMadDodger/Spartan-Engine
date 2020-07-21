@@ -3,16 +3,13 @@
 #include "EditorApp.h"
 #include <SceneManager.h>
 #include <GameScene.h>
-#include <RenderTexture.h>
+#include "SceneViewCamera.h"
 
 namespace Spartan::Editor
 {
-	SceneWindow::SceneWindow() : EditorWindowTemplate("Scene", 1280.0f, 720.0f), m_pSceneRenderTexture(nullptr)
+	SceneWindow::SceneWindow() : EditorWindowTemplate("Scene", 1280.0f, 720.0f)
 	{
-		m_pSceneCamera = new SceneViewCamera();
-
-		EditorApp::GetEditorApp()->InitializeGameObject(m_pSceneCamera);
-		auto settings = BaseGame::GetGame()->GetGameSettings();
+		m_pRenderTexture = RenderTexture::CreateRenderTexture(1280, 720, true);
 	}
 
 	SceneWindow::~SceneWindow()
@@ -21,18 +18,21 @@ namespace Spartan::Editor
 
 	void SceneWindow::OnPaint()
 	{
+		m_pRenderTexture->Use();
+		BaseGame::GetGame()->GetGameContext().pRenderer->ClearBackground();
 		GameScene* pCurrentScene = SceneManager::GetInstance()->GetCurrentScene();
 		if (pCurrentScene == nullptr) return;
 
 		CameraComponent* pPreviousCamera = pCurrentScene->GetActiveCamera();
-		pCurrentScene->SetActiveCamera(m_pSceneCamera->GetCameraComponent());
+		pCurrentScene->SetActiveCamera(SceneViewCamera::GetSceneCamera()->GetCameraComponent());
 		EditorApp::GetEditorApp()->RenderScene();
 		pCurrentScene->SetActiveCamera(pPreviousCamera);
+		m_pRenderTexture->StopUse();
 	}
 
 	void SceneWindow::OnGUI()
 	{
-		if (ImGui::IsWindowFocused()) EditorApp::GetEditorApp()->UpdateGameObject(m_pSceneCamera);
+		if (ImGui::IsWindowFocused()) EditorApp::GetEditorApp()->UpdateGameObject(SceneViewCamera::GetSceneCamera());
 
 		GLsizei w = (GLsizei)m_WindowDimensions.x;
 		GLsizei h = (GLsizei)m_WindowDimensions.y;
@@ -42,7 +42,7 @@ namespace Spartan::Editor
 		float width = ImGui::GetWindowWidth();
 		float height = width / aspect;
 		ImGui::GetWindowDrawList()->AddImage(
-			(void*)RenderTexture::GetDefaultRenderTexture()->GetTextureID(), ImVec2(pos.x, pos.y),
+			(void*)m_pRenderTexture->GetTextureID(), ImVec2(pos.x, pos.y),
 			ImVec2(pos.x + width, pos.y + height), ImVec2(0, 1), ImVec2(1, 0));
 	}
 }

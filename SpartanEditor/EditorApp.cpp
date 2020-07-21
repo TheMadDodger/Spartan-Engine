@@ -2,17 +2,25 @@
 #include "EditorApp.h"
 #include <SceneManager.h>
 #include "SceneWindow.h"
+#include "GameWindow.h"
 #include <InputManager.h>
 #include <SceneManager.h>
 #include <SoundManager.h>
 #include <PhysicsProxy.h>
 #include <PostProcessingStack.h>
+#include "MenuBar.h"
+#include "PopupManager.h"
+#include <GameScene.h>
+#include <GameObject.h>
+#include "SceneViewCamera.h"
+#include "EditorPreferencesWindow.h"
+#include "SceneGraphWindow.h"
 
 namespace Spartan
 {
 	EditorApp* EditorApp::m_pEditorApp = nullptr;
 
-	EditorApp::EditorApp(BaseGame* pGame) : m_pGame(pGame), m_IsRunning(false)
+	EditorApp::EditorApp(BaseGame* pGame) : m_pGame(pGame), m_IsRunning(false), m_PlayModeActive(false), m_PlayModePaused(false)
 	{
 		m_pEditorApp = this;
 	}
@@ -59,9 +67,8 @@ namespace Spartan
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		
-		//ImGui::StyleColorsDark();
-		ImGui::StyleColorsClassic();
+
+		ImGui::StyleColorsDark();
 
 		ImGui_ImplSDL2_InitForOpenGL(m_pGame->m_GameContext.pRenderer->GetWindow(), m_pGame->m_GameContext.pRenderer->GetGLContext());
 		ImGui_ImplOpenGL3_Init(glsl_version);
@@ -95,8 +102,11 @@ namespace Spartan
 		SceneManager::GetInstance()->Initialize(m_pGame->m_GameContext);
 
 		m_IsRunning = true;
+		EditorApp::GetEditorApp()->InitializeGameObject(new Editor::SceneViewCamera());
 
+		CreateDefaultMainMenuBar();
 		Editor::EditorWindow::GetWindow<Editor::SceneWindow>();
+		Editor::EditorWindow::GetWindow<Editor::GameWindow>();
 	}
 
 	void EditorApp::Tick()
@@ -109,7 +119,7 @@ namespace Spartan
 		m_pGame->m_GameContext.pTime->StartFrame();
 
 		// Step the physicsworld
-		//m_pGame->m_GameContext.pPhysicsProxy->Step(m_pGame->m_GameContext);
+		if (m_PlayModeActive && !m_PlayModePaused) m_pGame->m_GameContext.pPhysicsProxy->Step(m_pGame->m_GameContext);
 
 		// Update InputManager
 		m_pGame->m_GameContext.pInput->Update();
@@ -158,7 +168,11 @@ namespace Spartan
 		}
 
 		// Update Scenes
-		//SceneManager::GetInstance()->Update(m_pGame->m_GameContext);
+		if (m_PlayModeActive)
+		{
+			if (!m_PlayModePaused) SceneManager::GetInstance()->Update(m_pGame->m_GameContext);
+		}
+		else EditorUpdateScene();
 
 		// Update the timer
 		m_pGame->m_GameContext.pTime->Update();
@@ -169,6 +183,9 @@ namespace Spartan
 
 	void EditorApp::Cleanup()
 	{
+		Editor::EditorWindow::Cleanup();
+		Editor::SceneViewCamera::Destroy();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
 		ImGui::DestroyContext();
@@ -205,6 +222,61 @@ namespace Spartan
 		Spartan::SceneManager::GetInstance()->Draw(m_pGame->m_GameContext);
 	}
 
+	void EditorApp::EnterPlayMode()
+	{
+		if (m_PlayModeActive) return;
+
+		// TODO: Save scene
+
+		m_PlayModeActive = true;
+	}
+
+	void EditorApp::ExitPlayMode()
+	{
+		if (!m_PlayModeActive) return;
+
+		m_PlayModeActive = false;
+
+		// TODO: Reload scene
+
+	}
+
+	void EditorApp::EditorUpdateScene()
+	{
+		GameScene* pScene = SceneManager::GetInstance()->GetCurrentScene();
+		for (size_t i = 0; i < pScene->GetChildCount(); i++)
+		{
+			GameObject* pRootChild = pScene->GetChild(i);
+			if (pRootChild->m_Enabled) EditorUpdateObject(pRootChild);
+		}
+	}
+
+	void EditorApp::EditorUpdateObject(GameObject* pObject)
+	{
+		if (!pObject->m_bInitialized) // If we haven't initialised yet
+		{
+			// We initialize
+			pObject->RootInitialize(m_pGame->m_GameContext);
+		}
+
+		pObject->BeginUpdate(m_pGame->m_GameContext);
+
+		for (size_t i = 0; i < pObject->m_pComponents.size(); ++i)
+		{
+			auto pComponent = pObject->m_pComponents[i];
+			if (pComponent->m_bEnabled && pComponent->m_CanTickInEditor) pComponent->RootUpdate(m_pGame->m_GameContext);
+		}
+
+		for (size_t i = 0; i < pObject->m_pChildren.size(); ++i)
+		{
+			auto pChild = pObject->m_pChildren[i];
+			if (pChild->IsEnabled()) EditorUpdateObject(pChild);
+		}
+
+		// User defined Update()
+		pObject->Update(m_pGame->m_GameContext);
+	}
+
 	void EditorApp::Paint()
 	{
 		ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
@@ -215,33 +287,30 @@ namespace Spartan
 		ImGui_ImplSDL2_NewFrame(m_pGame->m_GameContext.pRenderer->GetWindow());
 		ImGui::NewFrame();
 
-		bool open = true;
-		ImGui::ShowDemoWindow(&open);
+		Editor::MenuBar::OnGUI();
+		Editor::PopupManager::OnGUI();
 
-		{
-			static float f = 0.0f;
-			static int counter = 0;
+		//bool open = true;
+		//ImGui::ShowDemoWindow(&open);
 
-			ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-			ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-
-			if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-				counter++;
-			ImGui::SameLine();
-			ImGui::Text("counter = %d", counter);
-
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::End();
-		}
-
-		// 3. Show another simple window.
-		ImGui::Begin("Another Window");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from another window!");
-		//if (ImGui::Button("Close Me"))
-		ImGui::End();
+		//{
+		//	static float f = 0.0f;
+		//	static int counter = 0;
+		//
+		//	ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+		//
+		//	ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		//
+		//	ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		//
+		//	if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		//		counter++;
+		//	ImGui::SameLine();
+		//	ImGui::Text("counter = %d", counter);
+		//
+		//	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		//	ImGui::End();
+		//}
 
 		//// Draw editors
 		Editor::EditorWindow::RenderWindows();
@@ -329,5 +398,25 @@ namespace Spartan
 			Spartan::Utilities::Debug::LogInfo("Window " + to_string(event->window.windowID) + " got unknown event " + to_string(event->window.event));
 			break;
 		}
+	}
+
+	void EditorApp::CreateDefaultMainMenuBar()
+	{
+		Editor::MenuBar::AddMenuItem("File/New/Scene", NULL);
+		Editor::MenuBar::AddMenuItem("File/Preferences", []() {Editor::EditorWindow::GetWindow<Editor::EditorPreferencesWindow>();});
+		Editor::MenuBar::AddMenuItem("Play/Start", [&]() {this->EnterPlayMode();});
+		Editor::MenuBar::AddMenuItem("Play/Pauze", [&]() {m_PlayModePaused = !m_PlayModePaused;});
+		Editor::MenuBar::AddMenuItem("Play/Stop", [&]() {this->ExitPlayMode();});
+
+		Editor::MenuBar::AddMenuItem("File/Exit", [&]() {
+			std::vector<std::string> buttons = { "Cancel", "Exit" };
+			std::vector<std::function<void()>> buttonFuncs = { [&]() {Editor::PopupManager::CloseCurrentPopup();}, [&]() {m_IsRunning = false;} };
+			Editor::PopupManager::OpenPopup("Exit", "Are you sure you want to exit? All unsaved changes will be lost!",
+			buttons, buttonFuncs);});
+
+		Editor::MenuBar::AddMenuItem("Window/Scene View", []() {Editor::EditorWindow::GetWindow<Editor::SceneWindow>(); });
+		Editor::MenuBar::AddMenuItem("Window/Game View", []() {Editor::EditorWindow::GetWindow<Editor::GameWindow>(); });
+		Editor::MenuBar::AddMenuItem("Window/Scene Graph", []() {Editor::EditorWindow::GetWindow<Editor::SceneGraphWindow>(); });
+		Editor::MenuBar::AddMenuItem("Window/Inspector", []() {Editor::EditorWindow::GetWindow<Editor::SceneWindow>(); });
 	}
 }

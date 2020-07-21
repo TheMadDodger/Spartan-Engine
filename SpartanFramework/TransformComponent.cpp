@@ -12,6 +12,7 @@ namespace Spartan
 		m_LocalTansformMatrix(Matrix4X4::CreateIdentityMatrix()),
 		m_WorldTansformMatrix(Matrix4X4::CreateIdentityMatrix()), BaseComponent("Transform")
 	{
+		m_CanTickInEditor = true;
 	}
 
 	TransformComponent::~TransformComponent()

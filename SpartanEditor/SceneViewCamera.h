@@ -12,6 +12,9 @@ namespace Spartan::Editor
         void StartLooking();
         void StopLooking();
 
+        static SceneViewCamera* GetSceneCamera();
+        static void Destroy();
+
     private:
         virtual void Initialize(const GameContext& gameContext) override;
         virtual void Update(const GameContext& gameContext) override;
@@ -39,5 +42,7 @@ namespace Spartan::Editor
         float m_Pitch = 0.0f;
 
         Vector2 m_LastFrameMouse;
+
+        static SceneViewCamera* m_pInstance;
     };
 }
