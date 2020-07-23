@@ -1,9 +1,11 @@
 #pragma once
 #include "stdafx.h"
+#include "SerializedObject.h"
+#include "SerializedProperty.h"
 
 #define COMPONENT_EDITOR(comp) const std::type_info &GetType() override \
 { \
-	return typeid(this); \
+	return typeid(comp); \
 } \
 virtual BaseComponent *Create() override \
 { \
@@ -23,7 +25,7 @@ namespace Spartan
 {
 	class GameObject;
 
-	class BaseComponent : SEObject
+	class BaseComponent : public Serialization::SerializedObject
 	{
 	public:
 		BaseComponent(const char* name = "BaseComponent");
@@ -37,13 +39,14 @@ namespace Spartan
 
 		const std::string& GetName() { return m_Name; }
 
-		virtual const std::type_info& GetType() { return typeid(this); }
-
 		virtual void CustomEditor() {};
 
 		bool IsInitialized() { return m_bInitialized; }
 		bool IsEnabled() { return m_bEnabled; }
 		void SetEnabled(bool enabled) { m_bEnabled = enabled; }
+
+		virtual const std::type_info& GetBaseType() { return typeid(BaseComponent); }
+		virtual const std::type_info& GetType() { return typeid(BaseComponent); }
 
 	protected:
 		friend class GameObject;
@@ -58,6 +61,8 @@ namespace Spartan
 		virtual void Update(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 		virtual void Draw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
 		virtual void OnDestroy() { }
+
+		virtual void DefineSerializedProperties(std::vector<Serialization::SerializedProperty>&) override {};
 
 		static std::vector<BaseComponent*> m_pRegisteredComponents;
 		bool m_CanTickInEditor = false;

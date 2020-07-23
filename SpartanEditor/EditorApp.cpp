@@ -15,6 +15,12 @@
 #include "SceneViewCamera.h"
 #include "EditorPreferencesWindow.h"
 #include "SceneGraphWindow.h"
+#include "InspectorWindow.h"
+#include "Editor.h"
+#include "GameObjectEditor.h"
+#include "ComponentEditor.h"
+#include "PropertyDrawer.h"
+#include "StandardPropertyDrawers.h"
 
 namespace Spartan
 {
@@ -105,8 +111,15 @@ namespace Spartan
 		EditorApp::GetEditorApp()->InitializeGameObject(new Editor::SceneViewCamera());
 
 		CreateDefaultMainMenuBar();
+		RegisterPropDrawersInternal();
+
 		Editor::EditorWindow::GetWindow<Editor::SceneWindow>();
 		Editor::EditorWindow::GetWindow<Editor::GameWindow>();
+
+		Editor::Editor::RegisterEditor<Spartan::Editor::GameObjectEditor>();
+		Editor::Editor::RegisterEditor<Spartan::Editor::ComponentEditor>();
+
+		ImGui::GetStyle().WindowRounding = 4.389f;
 	}
 
 	void EditorApp::Tick()
@@ -185,6 +198,8 @@ namespace Spartan
 	{
 		Editor::EditorWindow::Cleanup();
 		Editor::SceneViewCamera::Destroy();
+		Editor::Editor::Cleanup();
+		Editor::PropertyDrawer::Cleanup();
 
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
@@ -275,6 +290,21 @@ namespace Spartan
 
 		// User defined Update()
 		pObject->Update(m_pGame->m_GameContext);
+	}
+
+	void EditorApp::RegisterPropDrawersInternal()
+	{
+		PROPERTY_DRAWER(Editor::FloatDrawer);
+		PROPERTY_DRAWER(Editor::IntDrawer);
+		PROPERTY_DRAWER(Editor::BoolDrawer);
+		PROPERTY_DRAWER(Editor::DoubleDrawer);
+		PROPERTY_DRAWER(Editor::Vector2Drawer);
+		PROPERTY_DRAWER(Editor::Vector3Drawer);
+		PROPERTY_DRAWER(Editor::Vector4Drawer);
+		PROPERTY_DRAWER(Editor::ColorDrawer);
+		PROPERTY_DRAWER(Editor::QuaternionDrawer);
+
+		RegisterPropertyDrawers();
 	}
 
 	void EditorApp::Paint()
@@ -417,6 +447,6 @@ namespace Spartan
 		Editor::MenuBar::AddMenuItem("Window/Scene View", []() {Editor::EditorWindow::GetWindow<Editor::SceneWindow>(); });
 		Editor::MenuBar::AddMenuItem("Window/Game View", []() {Editor::EditorWindow::GetWindow<Editor::GameWindow>(); });
 		Editor::MenuBar::AddMenuItem("Window/Scene Graph", []() {Editor::EditorWindow::GetWindow<Editor::SceneGraphWindow>(); });
-		Editor::MenuBar::AddMenuItem("Window/Inspector", []() {Editor::EditorWindow::GetWindow<Editor::SceneWindow>(); });
+		Editor::MenuBar::AddMenuItem("Window/Inspector", []() {Editor::EditorWindow::GetWindow<Editor::InspectorWindow>(true); });
 	}
 }

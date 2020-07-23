@@ -18,6 +18,9 @@ namespace Spartan
 		virtual void Initialize() = 0;
 		virtual void Tick(float deltaTime) = 0;
 
+		virtual const std::type_info& GetBaseType() override { return typeid(BaseAIBehaviour); }
+		virtual const std::type_info& GetType() override { return typeid(BaseAIBehaviour); }
+
 	private:
 		AIComponent* m_pAIOwner;
 	};

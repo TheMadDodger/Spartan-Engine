@@ -1,7 +1,7 @@
 #pragma once
 #include <any>
 
-namespace Spartan
+namespace Spartan::Serialization
 {
 	struct BaseSerializer
 	{

@@ -27,6 +27,9 @@ namespace Spartan
 
 		void RegisterCommand(BaseConsoleCommand* pCommand);
 
+		virtual const std::type_info& GetBaseType() { return typeid(ConsoleInput); }
+		virtual const std::type_info& GetType() { return typeid(ConsoleInput); }
+
 	private:
 		void ProcessInput(const std::string& input);
 		void SeperateArguments(const std::string& input, std::string& command, std::vector<string>& args);

@@ -58,6 +58,8 @@ namespace Spartan
 
 		void SetEnabled(bool enabled);
 
+		virtual const std::type_info& GetBaseType() override { return typeid(GameScene); }
+		virtual const std::type_info& GetType() override { return typeid(GameScene); }
 
 	protected:
 		friend class BaseGame;

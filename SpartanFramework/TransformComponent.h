@@ -56,6 +56,8 @@ namespace Spartan
 
 		void TransformChanged();
 
+		virtual void DefineSerializedProperties(std::vector<Serialization::SerializedProperty>& params) override;
+
 	private:
 		friend class PhysicsObjectComponent;
 		Matrix4X4 m_TansformMatrix;

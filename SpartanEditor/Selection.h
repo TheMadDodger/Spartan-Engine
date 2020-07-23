@@ -8,6 +8,7 @@ namespace Spartan::Editor
 	public:
 		static void SetActiveObject(SEObject* pObject);
 		static SEObject* GetActiveObject();
+		static void Clear();
 
 	private:
 		static vector<SEObject*> m_pSelectedObjects;

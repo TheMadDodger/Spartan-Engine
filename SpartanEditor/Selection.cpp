@@ -17,6 +17,11 @@ namespace Spartan::Editor
 		return m_pSelectedObjects[0];
 	}
 
+	void Selection::Clear()
+	{
+		m_pSelectedObjects.clear();
+	}
+
 	Selection::Selection()
 	{
 	}

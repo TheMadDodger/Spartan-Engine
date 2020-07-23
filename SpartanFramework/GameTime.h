@@ -23,6 +23,9 @@ namespace Spartan
 		const int GetTotalFrames() { return m_TotalFrames; }
 		void SetTimeScale(float scale) { m_TimeScale = scale; }
 
+		virtual const std::type_info& GetBaseType() { return typeid(GameTime); }
+		virtual const std::type_info& GetType() { return typeid(GameTime); }
+
 	public: // Reference returns
 		const float* GetDeltaTimeRef() { return &m_DeltaTime; }
 		const float* GetTimeRef() { return &m_Time; }

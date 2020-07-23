@@ -16,6 +16,9 @@
     <Filter Include="OLD">
       <UniqueIdentifier>{22e9d4cd-6e36-4c47-a181-00312f584d5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PropertyDrawing">
+      <UniqueIdentifier>{f8c98c50-aae2-4c1a-9524-dfa67c534ae2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -99,6 +102,24 @@
     <ClInclude Include="Selection.h">
       <Filter>CoreEditor</Filter>
     </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyDrawer.h">
+      <Filter>PropertyDrawing</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardPropertyDrawers.h">
+      <Filter>PropertyDrawing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -175,6 +196,24 @@
     </ClCompile>
     <ClCompile Include="Selection.cpp">
       <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectEditor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentEditor.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyDrawer.cpp">
+      <Filter>PropertyDrawing</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardPropertyDrawers.cpp">
+      <Filter>PropertyDrawing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

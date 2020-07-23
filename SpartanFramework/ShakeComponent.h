@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseComponent.h"
 
+#define PROPERTY(x) Spartan::Serialization::SerializedProperty(x, &x, #x)
+
 namespace Spartan
 {
 	enum ShakeMode
@@ -20,7 +22,7 @@ namespace Spartan
 		void SetShakeMode(const ShakeMode& mode);
 
 	private:
-		virtual BaseComponent* Create() override { return new ShakeComponent(); }
+		COMPONENT_EDITOR(ShakeComponent)
 
 	private:
 		virtual void Update(const GameContext& gameContext) override;

@@ -1,0 +1,40 @@
+#pragma once
+#include <SerializedProperty.h>
+
+#define PROPERTY_DRAWER(x) Spartan::Editor::PropertyDrawer::RegisterPropertyDrawer<x>()
+
+namespace Spartan::Editor
+{
+	class PropertyDrawer
+	{
+	public:
+		PropertyDrawer();
+		virtual ~PropertyDrawer();
+		virtual void OnGUI(Serialization::SerializedProperty& prop) const;
+
+		template<class T>
+		static void RegisterPropertyDrawer()
+		{
+			m_PropertyDrawers.push_back(new T());
+		}
+
+		static void DrawProperty(Serialization::SerializedProperty& prop);
+
+	public:
+		virtual const std::type_info& GetPropertyType() const;
+
+	private:
+		static void Cleanup();
+
+	private:
+		friend class EditorApp;
+		static vector<PropertyDrawer*> m_PropertyDrawers;
+	};
+
+	template<typename PropertyType>
+	class PropertyDrawerTemplate : public PropertyDrawer
+	{
+	protected:
+		virtual const std::type_info& GetPropertyType() const override { return typeid(PropertyType); }
+	};
+}

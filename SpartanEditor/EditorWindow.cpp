@@ -5,6 +5,7 @@ namespace Spartan::Editor
 {
 	std::vector<EditorWindow*> EditorWindow::m_pActiveEditorWindows = std::vector<EditorWindow*>();
 	std::vector<EditorWindow*> EditorWindow::m_pClosingEditorWindows = std::vector<EditorWindow*>();
+	std::list<size_t> EditorWindow::m_IDs = std::list<size_t>();
 
 	EditorWindow::EditorWindow(const std::string& windowName, float windowWidth, float windowHeight) : m_WindowName(windowName), m_WindowDimensions(windowWidth, windowHeight), m_IsOpen(true), m_Resizeable(true)
 	{
@@ -26,9 +27,13 @@ namespace Spartan::Editor
 		ImGuiWindowFlags window_flags = m_Resizeable? ImGuiWindowFlags_::ImGuiWindowFlags_NoResize : 0;
 		ImGui::SetNextWindowSize(m_WindowDimensions);
 
-		ImGui::Begin(m_WindowName.c_str(), &m_IsOpen, window_flags);
-		OnGUI();
-		m_WindowDimensions = ImGui::GetWindowSize();
+		std::string windowString = m_WindowName + "##" + std::to_string(m_WindowID);
+
+		if (ImGui::Begin(windowString.c_str(), &m_IsOpen, window_flags))
+		{
+			OnGUI();
+			m_WindowDimensions = ImGui::GetWindowSize();
+		}
 		ImGui::End();
 
 		if (!m_IsOpen) Close();
@@ -40,6 +45,7 @@ namespace Spartan::Editor
 			{
 				auto it = std::find(m_pActiveEditorWindows.begin(), m_pActiveEditorWindows.end(), pWindow);
 				m_pActiveEditorWindows.erase(it);
+				m_IDs.push_back(pWindow->m_WindowID);
 				delete pWindow;
 			});
 
@@ -60,5 +66,6 @@ namespace Spartan::Editor
 
 		m_pActiveEditorWindows.clear();
 		m_pClosingEditorWindows.clear();
+		m_IDs.clear();
 	}
 }

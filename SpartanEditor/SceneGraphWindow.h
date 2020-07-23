@@ -19,6 +19,5 @@ namespace Spartan::Editor
 	private:
 		int m_I;
 		GameObject* m_CurrentRightClickedObject;
-		GameObject* m_CurrentSelectedObject;
 	};
 }

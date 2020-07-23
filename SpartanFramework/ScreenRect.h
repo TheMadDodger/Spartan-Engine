@@ -13,6 +13,9 @@ namespace Spartan
 	public:
 		void DrawScreenMesh();
 
+		virtual const std::type_info& GetBaseType() { return typeid(ScreenRect); }
+		virtual const std::type_info& GetType() { return typeid(ScreenRect); }
+
 	private:
 		ScreenRect();
 		~ScreenRect();

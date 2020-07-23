@@ -48,6 +48,9 @@ namespace Spartan
 
 		void ChangeWindow();
 
+		virtual const std::type_info& GetBaseType() { return typeid(Renderer); }
+		virtual const std::type_info& GetType() { return typeid(Renderer); }
+
 	public:
 		// Primitive Rendering
 		void DrawSolidRect(const Vector2& topLeft, const Vector2& bottomRight, const Math::Color& color);

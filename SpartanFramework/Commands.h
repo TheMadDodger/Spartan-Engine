@@ -7,7 +7,7 @@ namespace Spartan
 	class BaseParser : SEObject
 	{
 	public:
-		virtual const std::type_info& GetType() = 0;
+		virtual const std::type_info& GetBaseType() { return typeid(BaseParser); }
 	};
 
 	template<typename T>

@@ -13,6 +13,9 @@ namespace Spartan
 
 		void SetGravity(const Vector3& gravityVec);
 
+		virtual const std::type_info& GetBaseType() { return typeid(PhysicsProxy); }
+		virtual const std::type_info& GetType() { return typeid(PhysicsProxy); }
+
 	private:
 		void Initialize();
 		void Step(const GameContext& gameContext);

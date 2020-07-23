@@ -120,6 +120,9 @@ namespace Spartan
 			m_PrimitiveTopoloy = topology;
 		}
 
+		virtual const std::type_info& GetBaseType() { return typeid(Mesh); }
+		virtual const std::type_info& GetType() { return typeid(Mesh); }
+
 	private:
 		friend class MeshRenderComponent;
 

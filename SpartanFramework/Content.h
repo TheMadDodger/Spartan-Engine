@@ -13,6 +13,9 @@ namespace Spartan
 		template <class T>
 		T* As() { return static_cast<T*>(this); };
 
+		virtual const std::type_info& GetBaseType() { return typeid(Content); }
+		virtual const std::type_info& GetType() { return typeid(Content); }
+
 	protected:
 		friend class ContentManager;
 		const std::string m_FileName;

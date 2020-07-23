@@ -21,6 +21,9 @@ namespace Spartan
 			return dynamic_cast<T*>(this);
 		}
 
+		virtual const std::type_info& GetBaseType() { return typeid(Material); }
+		virtual const std::type_info& GetType() { return typeid(Material); }
+
 	public: // Set shader vars
 		void SetFloat(const std::string& name, float value) const;
 		void SetInt(const std::string& name, int value) const;

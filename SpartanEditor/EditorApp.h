@@ -24,6 +24,9 @@ namespace Spartan
 	protected:
 		//virtual void RegisterUserWindows(std::vector<EditorWindow*>& userWindows) = 0;
 
+		virtual void RegisterEditors() {};
+		virtual void RegisterPropertyDrawers() {};
+
 	private:
 		void Initialize();
 		void Tick();
@@ -35,6 +38,8 @@ namespace Spartan
 		void CreateDefaultMainMenuBar();
 		void EditorUpdateScene();
 		void EditorUpdateObject(GameObject* pObject);
+
+		void RegisterPropDrawersInternal();
 
 	private:
 		BaseGame* m_pGame;

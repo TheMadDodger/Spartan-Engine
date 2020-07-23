@@ -6,7 +6,7 @@
 
 namespace Spartan
 {
-	RigidBody2DComponent::RigidBody2DComponent() : BaseComponent("Rigidbody")
+	RigidBody2DComponent::RigidBody2DComponent() : BaseComponent("Rigidbody 2D")
 	{
 	}
 

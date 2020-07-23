@@ -32,6 +32,9 @@ namespace Spartan
 		void Update();
 		void Draw(const GameContext& gameContext);
 
+		virtual const std::type_info& GetBaseType() { return typeid(SkinnedQuad); }
+		virtual const std::type_info& GetType() { return typeid(SkinnedQuad); }
+
 	private:
 		std::vector<SkinnedVertice> m_Vertices;
 		TextureData* m_pTexture;

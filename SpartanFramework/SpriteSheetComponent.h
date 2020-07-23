@@ -37,7 +37,7 @@ namespace Spartan
 	private:
 		COMPONENT_EDITOR(SpriteSheetComponent)
 
-			void CalculateOrigin(const Math::Origin& origin, const FrameData& frame);
+		void CalculateOrigin(const Math::Origin& origin, const FrameData& frame);
 
 	private:
 		SpriteSheetData* m_pSpriteSheet;

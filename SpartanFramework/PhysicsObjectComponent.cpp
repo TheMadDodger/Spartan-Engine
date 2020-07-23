@@ -6,7 +6,7 @@
 
 namespace Spartan
 {
-	PhysicsObjectComponent::PhysicsObjectComponent() : m_Mass(1.0f), m_pCollisionObject(nullptr),
+	PhysicsObjectComponent::PhysicsObjectComponent() : BaseComponent("3D Physics Object"), m_Mass(1.0f), m_pCollisionObject(nullptr),
 		m_pCollider(nullptr), m_LocalInertia(0.0f, 0.0f, 0.0f), m_Friction(0.0f) {}
 
 	PhysicsObjectComponent::~PhysicsObjectComponent()

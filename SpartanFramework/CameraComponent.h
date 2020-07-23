@@ -32,9 +32,9 @@ namespace Spartan
 		const Vector3 GetPosition();
 		Vector3 ConvertWorldToScreenSpace(Vector3 worldCoord);
 
-		virtual BaseComponent* Create() { return new CameraComponent(); }
-
 		Ray ScreenPointToRay(const Vector2& screenPoint);
+
+		COMPONENT_EDITOR(CameraComponent)
 
 	protected:
 		void Initialize(const GameContext& gameContext) override;

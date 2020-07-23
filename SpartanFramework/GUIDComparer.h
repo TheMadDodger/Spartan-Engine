@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Spartan
+namespace Spartan::Serialization
 {
     struct GUIDComparer
     {

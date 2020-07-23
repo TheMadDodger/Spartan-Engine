@@ -2,6 +2,7 @@
 #include "SceneGraphWindow.h"
 #include <SceneManager.h>
 #include <GameScene.h>
+#include "Selection.h"
 
 namespace Spartan::Editor
 {
@@ -59,10 +60,7 @@ namespace Spartan::Editor
 				//if (m_CurrentSelectedObject != pChild)
 					//ComponentParameterManager::GetInstance()->Clear();
 
-				if (m_CurrentSelectedObject)
-					m_CurrentSelectedObject->Select(false);
-				pChild->Select(true);
-				m_CurrentSelectedObject = pChild;
+				Selection::SetActiveObject(pChild);
 			}
 			if (ImGui::IsItemClicked(1))
 			{
@@ -93,10 +91,7 @@ namespace Spartan::Editor
 			ImGui::TreeNodeEx((void*)(intptr_t)m_I, node_flags, pChild->GetName());
 			if (ImGui::IsItemClicked())
 			{
-				if (m_CurrentSelectedObject)
-					m_CurrentSelectedObject->Select(false);
-				pChild->Select(true);
-				m_CurrentSelectedObject = pChild;
+				Selection::SetActiveObject(pChild);
 			}
 			if (ImGui::IsItemClicked(1))
 			{
@@ -142,8 +137,7 @@ namespace Spartan::Editor
 				//else
 					//RemoveChild(m_CurrentRightClickedObject, true);
 	
-				if (m_CurrentRightClickedObject == m_CurrentSelectedObject)
-					m_CurrentSelectedObject = nullptr;
+				Selection::Clear();
 			}
 		}
 

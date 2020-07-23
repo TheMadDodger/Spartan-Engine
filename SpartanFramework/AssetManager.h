@@ -1,9 +1,9 @@
 #pragma once
-#include "Asset.h"
+#include "BaseAsset.h"
 #include "Singleton.h"
 #include "GUIDComparer.h"
 
-namespace Spartan
+namespace Spartan::Serialization
 {
 	class AssetManager : public Singleton<AssetManager>
 	{

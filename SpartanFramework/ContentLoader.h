@@ -4,13 +4,13 @@
 
 namespace Spartan
 {
-	class BaseLoader : SEObject
+	class BaseLoader : public SEObject
 	{
 	public:
 		BaseLoader() {}
 		virtual ~BaseLoader() {}
 
-		virtual const type_info& GetType() const = 0;
+		virtual const std::type_info& GetBaseType() { return typeid(BaseLoader); }
 		virtual void Unload() = 0;
 
 	private:
@@ -31,7 +31,7 @@ namespace Spartan
 			--m_Loaders;
 		}
 
-		virtual const type_info& GetType() const { return typeid(T); };
+		virtual const type_info& GetType() override { return typeid(T); };
 
 		T* GetContent(const std::string& file)
 		{

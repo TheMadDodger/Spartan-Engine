@@ -182,6 +182,7 @@
     <ClInclude Include="AspectConstraint.h" />
     <ClInclude Include="AssetDatabase.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="BaseAsset.h" />
     <ClInclude Include="BaseUIConstraint.h" />
     <ClInclude Include="CenterConstraint.h" />
     <ClInclude Include="Content.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="RenderTexture.h" />
     <ClInclude Include="PhysicsObjectComponent.h" />
     <ClInclude Include="ScreenRect.h" />
+    <ClInclude Include="ScriptableObject.h" />
     <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
     <ClInclude Include="Commands.h" />
@@ -224,9 +226,10 @@
     <ClInclude Include="MeshRenderComponent.h" />
     <ClInclude Include="PathFindingNodes.h" />
     <ClInclude Include="PhysicsMaterial.h" />
-    <ClInclude Include="Asset.h" />
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="SerializedAssetReference.h" />
+    <ClInclude Include="SerializedObject.h" />
+    <ClInclude Include="SerializedProperty.h" />
     <ClInclude Include="Serializer.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShakeComponent.h" />
@@ -296,6 +299,7 @@
     <ClCompile Include="AStarPathFinding.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />
     <ClCompile Include="AIBehaviourTree.cpp" />
+    <ClCompile Include="BaseAsset.cpp" />
     <ClCompile Include="BaseUIConstraint.cpp" />
     <ClCompile Include="BehaviourTreeNodes.cpp" />
     <ClCompile Include="Bone.cpp" />
@@ -325,7 +329,8 @@
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="PhysicsObjectComponent.cpp" />
     <ClCompile Include="ScreenRect.cpp" />
-    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="SerializedObject.cpp" />
+    <ClCompile Include="SerializedProperty.cpp" />
     <ClCompile Include="Serializer.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />

@@ -100,6 +100,13 @@ namespace Spartan
 		{pObject->GetTransform()->TransformChanged(); });
 	}
 
+	void TransformComponent::DefineSerializedProperties(std::vector<Serialization::SerializedProperty>& params)
+	{
+		params.push_back(PROPERTY(Position));
+		params.push_back(PROPERTY(Rotation));
+		params.push_back(PROPERTY(Scale));
+	}
+
 	void TransformComponent::BuildTransform()
 	{
 		m_TansformMatrix = Matrix4X4::CreateScaleRotationTranslationMatrix(Position, Rotation, Scale);

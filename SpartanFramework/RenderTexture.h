@@ -15,6 +15,9 @@ namespace Spartan
 
 		bool IsInUse();
 
+		virtual const std::type_info& GetBaseType() { return typeid(RenderTexture); }
+		virtual const std::type_info& GetType() { return typeid(RenderTexture); }
+
 	private: // Private static functions
 		static void StartFinalRender();
 		static void EndFinalRender();

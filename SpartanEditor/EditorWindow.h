@@ -9,16 +9,27 @@ namespace Spartan::Editor
 		virtual ~EditorWindow();
 
 		template<typename T>
-		static EditorWindow* GetWindow()
+		static EditorWindow* GetWindow(bool alwaysOpenNew = false)
 		{
-			for (size_t i = 0; i < m_pActiveEditorWindows.size(); ++i)
+			if (!alwaysOpenNew)
 			{
-				if (m_pActiveEditorWindows[i]->GetType() == typeid(T))
-					return m_pActiveEditorWindows[i];
+				for (size_t i = 0; i < m_pActiveEditorWindows.size(); ++i)
+				{
+					if (m_pActiveEditorWindows[i]->GetType() == typeid(T))
+						return m_pActiveEditorWindows[i];
+				}
 			}
 
 			auto pWindow = new T();
 			m_pActiveEditorWindows.push_back(pWindow);
+			
+			if (m_IDs.size() > 0)
+			{
+				pWindow->m_WindowID = m_IDs.front();
+				m_IDs.pop_front();
+			}
+			else pWindow->m_WindowID = m_pActiveEditorWindows.size();
+
 			return pWindow;
 		}
 
@@ -42,8 +53,10 @@ namespace Spartan::Editor
 		ImVec2 m_WindowDimensions;
 		static std::vector<EditorWindow*> m_pActiveEditorWindows;
 		static std::vector<EditorWindow*> m_pClosingEditorWindows;
+		static std::list<size_t> m_IDs;
 		bool m_IsOpen;
 		bool m_Resizeable;
+		size_t m_WindowID;
 	};
 
 	template<typename T>

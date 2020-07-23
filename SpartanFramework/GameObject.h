@@ -102,6 +102,9 @@ namespace Spartan
 		bool IsDirty() const;
 		void SetDirty();
 
+		virtual const std::type_info& GetBaseType() { return typeid(GameObject); }
+		virtual const std::type_info& GetType() { return typeid(GameObject); }
+
 	protected:
 		friend class GameScene;
 		virtual void RootInitialize(const GameContext& gameContext);

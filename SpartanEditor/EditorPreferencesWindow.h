@@ -13,6 +13,8 @@ namespace Spartan::Editor
 
 		void UpdateTheme();
 
+		void AppearanceTab();
+
 	private:
 		static int m_ThemeIndex;
 	};

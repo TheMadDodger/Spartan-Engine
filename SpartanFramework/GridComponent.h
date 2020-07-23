@@ -17,7 +17,7 @@ namespace Spartan
 	private:
 		COMPONENT_EDITOR(GridComponent)
 
-			virtual void Initialize(const GameContext& gameContext);
+		virtual void Initialize(const GameContext& gameContext);
 		virtual void Update(const GameContext& gameContext);
 		virtual void Draw(const GameContext& gameContext);
 

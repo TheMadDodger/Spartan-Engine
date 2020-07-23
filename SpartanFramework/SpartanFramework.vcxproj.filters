@@ -57,8 +57,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="ApplicationStructs.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -344,7 +342,6 @@
     <ClInclude Include="Collider2DComponent.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsProxy.h" />
     <ClInclude Include="PhysicsObjectComponent.h">
       <Filter>Physics</Filter>
     </ClInclude>
@@ -363,9 +360,6 @@
     <ClInclude Include="AssetManager.h">
       <Filter>Serialization</Filter>
     </ClInclude>
-    <ClInclude Include="Asset.h">
-      <Filter>Serialization</Filter>
-    </ClInclude>
     <ClInclude Include="SerializedAssetReference.h">
       <Filter>Serialization</Filter>
     </ClInclude>
@@ -375,9 +369,29 @@
     <ClInclude Include="GUIDComparer.h">
       <Filter>Serialization</Filter>
     </ClInclude>
+    <ClInclude Include="SerializedObject.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsProxy.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializedProperty.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptableObject.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAsset.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="AudioFileLoader.cpp">
       <Filter>Content Management</Filter>
     </ClCompile>
@@ -609,7 +623,6 @@
     <ClCompile Include="Collider2DComponent.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsProxy.cpp" />
     <ClCompile Include="PhysicsObjectComponent.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -622,13 +635,25 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
-    <ClCompile Include="Asset.cpp">
-      <Filter>Serialization</Filter>
-    </ClCompile>
     <ClCompile Include="AssetDatabase.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
     <ClCompile Include="GUIDComparer.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializedObject.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsProxy.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializedProperty.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseAsset.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>

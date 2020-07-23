@@ -2,7 +2,7 @@
 #include "AssetDatabase.h"
 #include "AssetManager.h"
 
-namespace Spartan
+namespace Spartan::Serialization
 {
 	AssetDatabase::AssetDatabase()
 	{
@@ -43,7 +43,7 @@ namespace Spartan
 
 		// TODO: Check if the GUID already exists
 		BaseAsset* deserializedAsset = assetTemplate->Create(assetGUID);
-		deserializedAsset->Deserialize(fileStream);
+		deserializedAsset->Deserialize(fileStream, 2);
 		return deserializedAsset;
 	}
 }
