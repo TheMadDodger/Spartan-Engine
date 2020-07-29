@@ -174,6 +174,83 @@ namespace Spartan
 		SetDirty(true);
 	}
 
+	void GameObject::Serialize(std::ofstream& fileStream)
+	{
+		//char m_Name[200];
+		//std::string m_Tag;
+		//size_t m_LayerID;
+		//bool m_Enabled = true;
+
+		//char m_PrefabName[200] = "";
+
+		// Serialize object data
+		fileStream.write(m_Name, 200);
+		size_t tagLength = m_Tag.length();
+		fileStream.write((const char*)&tagLength, sizeof(size_t));
+		fileStream.write(m_Tag.c_str(), tagLength);
+		fileStream.write((const char*)&m_LayerID, sizeof(size_t));
+		fileStream.write((const char*)&m_Enabled, sizeof(bool));
+
+		// Serialize children
+		size_t childCount = m_pChildren.size();
+		fileStream.write((const char*)&childCount, sizeof(size_t));
+		for (size_t i = 0; i < childCount; i++)
+		{
+			m_pChildren[i]->Serialize(fileStream);
+		}
+
+		// Serialize components
+		size_t componentCount = m_pComponents.size();
+		fileStream.write((const char*)&componentCount, sizeof(size_t));
+		for (size_t i = 0; i < componentCount; i++)
+		{
+			m_pComponents[i]->Serialize(fileStream);
+		}
+	}
+
+	void GameObject::Deserialize(std::ifstream& fileStream)
+	{
+		// Serialize object data
+		fileStream.read(m_Name, 200);
+		size_t tagLength;
+		fileStream.read((char*)&tagLength, sizeof(size_t));
+		char* tag = new char[tagLength];
+		fileStream.read(tag, tagLength);
+		m_Tag = std::string(tag);
+		fileStream.read((char*)&m_LayerID, sizeof(size_t));
+		fileStream.read((char*)&m_Enabled, sizeof(bool));
+
+		// Serialize children
+		size_t childCount;
+		fileStream.read((char*)&childCount, sizeof(size_t));
+		for (size_t i = 0; i < childCount; i++)
+		{
+			if (m_pChildren.size() <= i)
+			{
+				// Create new game object
+				AddChild(new GameObject());
+			}
+			m_pChildren[i]->Deserialize(fileStream);
+		}
+
+		// Serialize components
+		size_t componentCount = m_pComponents.size();
+		fileStream.read((char*)&componentCount, sizeof(size_t));
+		for (size_t i = 0; i < componentCount; i++)
+		{
+			if (m_pChildren.size() <= i)
+			{
+				// Create and deserialize the component
+				//BaseComponent::
+				continue;
+			}
+
+			//BaseComponent::
+
+			m_pComponents[i]->Deserialize(fileStream);
+		}
+	}
+
 	void GameObject::RootInitialize(const GameContext& gameContext)
 	{
 		if (m_bInitialized) return;

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Layers.h"
+#include "ISerializable.h"
 
 namespace Spartan
 {
@@ -10,7 +11,7 @@ namespace Spartan
 	const int Box2DPositionIterations = 2; // How many position iterations should Box2D per game tick perform?
 	const int FixedUpdateSpeed = 60; // Used for Box2D ticks
 
-	class GameScene : SEObject
+	class GameScene : public SEObject, ISerializable
 	{
 	public:
 		GameScene(const std::string& name);
@@ -60,6 +61,9 @@ namespace Spartan
 
 		virtual const std::type_info& GetBaseType() override { return typeid(GameScene); }
 		virtual const std::type_info& GetType() override { return typeid(GameScene); }
+
+		virtual void Serialize(std::ofstream& fileStream) override;
+		virtual void Deserialize(std::ifstream& fileStream) override;
 
 	protected:
 		friend class BaseGame;

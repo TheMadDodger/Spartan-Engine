@@ -42,12 +42,6 @@
     <ClInclude Include="SceneWindow.h">
       <Filter>EditorWindows</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentParameters.h">
-      <Filter>OLD</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorObject.h">
-      <Filter>OLD</Filter>
-    </ClInclude>
     <ClInclude Include="LevelEditor.h">
       <Filter>OLD</Filter>
     </ClInclude>
@@ -120,6 +114,9 @@
     <ClInclude Include="StandardPropertyDrawers.h">
       <Filter>PropertyDrawing</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentPopup.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -136,12 +133,6 @@
     </ClCompile>
     <ClCompile Include="SceneWindow.cpp">
       <Filter>EditorWindows</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentParameters.cpp">
-      <Filter>OLD</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorObject.cpp">
-      <Filter>OLD</Filter>
     </ClCompile>
     <ClCompile Include="LevelEditor.cpp">
       <Filter>OLD</Filter>
@@ -214,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="StandardPropertyDrawers.cpp">
       <Filter>PropertyDrawing</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPopup.cpp">
+      <Filter>CoreEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

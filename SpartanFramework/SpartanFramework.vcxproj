@@ -189,6 +189,7 @@
     <ClInclude Include="Gradient.h" />
     <ClInclude Include="GradientLoader.h" />
     <ClInclude Include="GUIDComparer.h" />
+    <ClInclude Include="ISerializable.h" />
     <ClInclude Include="LineRenderMaterial.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ModelLoader.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="SerializedAssetReference.h" />
     <ClInclude Include="SerializedObject.h" />
     <ClInclude Include="SerializedProperty.h" />
+    <ClInclude Include="SerializedScene.h" />
     <ClInclude Include="Serializer.h" />
     <ClInclude Include="ShaderLoader.h" />
     <ClInclude Include="ShakeComponent.h" />
@@ -331,6 +333,7 @@
     <ClCompile Include="ScreenRect.cpp" />
     <ClCompile Include="SerializedObject.cpp" />
     <ClCompile Include="SerializedProperty.cpp" />
+    <ClCompile Include="SerializedScene.cpp" />
     <ClCompile Include="Serializer.cpp" />
     <ClCompile Include="ShaderLoader.cpp" />
     <ClCompile Include="ShakeComponent.cpp" />

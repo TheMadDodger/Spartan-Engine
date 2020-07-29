@@ -7,7 +7,7 @@
 
 namespace Spartan
 {
-	TextRenderComponent::TextRenderComponent() : m_pFont(nullptr), m_Text("Hello World"), m_Color(1, 1, 1, 1), m_HasSetSize(false), UIComponent("Text")
+	TextRenderComponent::TextRenderComponent() : m_pFont(nullptr), m_Text("Hello World"), m_Color(1, 1, 1, 1), m_HasSetSize(false), UIComponent("Text Renderer")
 	{
 	}
 

@@ -14,11 +14,6 @@ namespace Spartan
 	{
 	}
 
-	void BaseComponent::Register(BaseComponent* pComponent)
-	{
-		m_pRegisteredComponents.push_back(pComponent);
-	}
-
 	BaseComponent* BaseComponent::CreateFromName(const std::string& name)
 	{
 		auto it = std::find_if(m_pRegisteredComponents.begin(), m_pRegisteredComponents.end(), [&](BaseComponent* pComp)
@@ -31,6 +26,26 @@ namespace Spartan
 		if (it == m_pRegisteredComponents.end()) return nullptr;
 		auto pComp = *it;
 		return pComp->Create();
+	}
+
+	BaseComponent* BaseComponent::CreateComponentFromFileStream()
+	{
+		return nullptr;
+	}
+
+	size_t BaseComponent::GetRegisteredComponentCount()
+	{
+		return m_pRegisteredComponents.size();
+	}
+
+	BaseComponent* BaseComponent::GetRegisteredComponent(int index)
+	{
+		return m_pRegisteredComponents[index];
+	}
+
+	std::string BaseComponent::GetComponentPath()
+	{
+		return std::string("Core/" + m_Name);
 	}
 
 	void BaseComponent::RootAwake()

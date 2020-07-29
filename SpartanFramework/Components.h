@@ -14,3 +14,6 @@
 #include "LineRenderComponent.h"
 #include "ShakeComponent.h"
 #include "MeshRenderComponent.h"
+#include "PhysicsObjectComponent.h"
+#include "AIComponent.h"
+#include "GridComponent.h"

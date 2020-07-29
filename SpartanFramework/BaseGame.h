@@ -41,6 +41,7 @@ namespace Spartan
 		virtual void RegisterLayers(LayerManager*) {};
 		virtual void RegisterPrefabs(std::vector<GameObject*>& prefabs) = 0;
 		virtual void RegisterAssets() {}
+		virtual void RegisterComponents() {};
 
 		virtual const std::type_info& GetBaseType() { return typeid(BaseGame); }
 		virtual const std::type_info& GetType() { return typeid(BaseGame); }
@@ -57,6 +58,8 @@ namespace Spartan
 		static void SetGame(BaseGame* pGame) { m_pGame = pGame; }
 
 		void HandleWindowEvent(SDL_Event* event);
+
+		void RegisterCoreComponents();
 
 	protected:
 		friend class EditorApp;

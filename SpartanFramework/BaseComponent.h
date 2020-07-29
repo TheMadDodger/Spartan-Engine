@@ -3,6 +3,8 @@
 #include "SerializedObject.h"
 #include "SerializedProperty.h"
 
+#define COMPONENT(x) Spartan::BaseComponent::Register<x>()
+
 #define COMPONENT_EDITOR(comp) const std::type_info &GetType() override \
 { \
 	return typeid(comp); \
@@ -34,7 +36,14 @@ namespace Spartan
 		GameObject* GetGameObject() const { return m_pGameObject; }
 
 		virtual BaseComponent* Create() = 0;
-		static void Register(BaseComponent* pComponent);
+		
+		template<class T>
+		static void Register()
+		{
+			BaseComponent* pComp = new T;
+			m_pRegisteredComponents.push_back(pComp);
+		}
+
 		static BaseComponent* CreateFromName(const std::string& name);
 
 		const std::string& GetName() { return m_Name; }
@@ -47,6 +56,13 @@ namespace Spartan
 
 		virtual const std::type_info& GetBaseType() { return typeid(BaseComponent); }
 		virtual const std::type_info& GetType() { return typeid(BaseComponent); }
+
+		BaseComponent* CreateComponentFromFileStream();
+
+		static size_t GetRegisteredComponentCount();
+		static BaseComponent* GetRegisteredComponent(int index);
+
+		virtual std::string GetComponentPath();
 
 	protected:
 		friend class GameObject;

@@ -19,5 +19,6 @@ namespace Spartan::Editor
 		bool m_Initialized;
 		static const int MAXNAMESIZE = 250;
 		char m_NameBuff[MAXNAMESIZE];
+		bool m_AddingComponent;
 	};
 }

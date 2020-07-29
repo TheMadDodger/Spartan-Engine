@@ -26,7 +26,7 @@ namespace Spartan
 {
 	EditorApp* EditorApp::m_pEditorApp = nullptr;
 
-	EditorApp::EditorApp(BaseGame* pGame) : m_pGame(pGame), m_IsRunning(false), m_PlayModeActive(false), m_PlayModePaused(false)
+	EditorApp::EditorApp(BaseGame* pGame) : m_pGame(pGame), m_IsRunning(false), m_PlayModeActive(false), m_PlayModePaused(false), m_pComponentWindow(nullptr)
 	{
 		m_pEditorApp = this;
 	}
@@ -34,6 +34,9 @@ namespace Spartan
 	EditorApp::~EditorApp()
 	{
 		delete m_pGame;
+		m_pGame = nullptr;
+		delete m_pComponentWindow;
+		m_pComponentWindow = nullptr;
 	}
 
 	void EditorApp::Initialize()
@@ -98,6 +101,9 @@ namespace Spartan
 		}
 
 		m_pGame->RegisterPrefabs(m_pGame->m_pPrefabs);
+		m_pGame->RegisterCoreComponents();
+		m_pGame->RegisterComponents();
+		m_pGame->RegisterAssets();
 
 		// Initialize PP
 		PostProcessingStack::GetInstance();
@@ -112,6 +118,7 @@ namespace Spartan
 
 		CreateDefaultMainMenuBar();
 		RegisterPropDrawersInternal();
+		m_pComponentWindow = new Editor::ComponentPopup();
 
 		Editor::EditorWindow::GetWindow<Editor::SceneWindow>();
 		Editor::EditorWindow::GetWindow<Editor::GameWindow>();
@@ -209,6 +216,11 @@ namespace Spartan
 	void EditorApp::Run()
 	{
 		Initialize();
+		
+		std::ofstream fStream("testscene.scene");
+		Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);
+		fStream.close();
+
 		while (m_IsRunning)
 		{
 			Tick();
@@ -317,6 +329,7 @@ namespace Spartan
 		ImGui_ImplSDL2_NewFrame(m_pGame->m_GameContext.pRenderer->GetWindow());
 		ImGui::NewFrame();
 
+		m_pComponentWindow->OnGUI();
 		Editor::MenuBar::OnGUI();
 		Editor::PopupManager::OnGUI();
 

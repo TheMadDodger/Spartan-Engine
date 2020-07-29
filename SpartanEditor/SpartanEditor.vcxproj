@@ -178,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="BehaviorTreeEditor.h" />
     <ClInclude Include="ComponentEditor.h" />
+    <ClInclude Include="ComponentPopup.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorPreferencesWindow.h" />
     <ClInclude Include="EditorWindow.h" />
@@ -200,8 +201,6 @@
     <ClInclude Include="SceneWindow.h" />
     <ClInclude Include="Selection.h" />
     <ClInclude Include="SkeletonObject.h" />
-    <ClInclude Include="ComponentParameters.h" />
-    <ClInclude Include="EditorObject.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="SkeletonEditorComponent.h" />
@@ -213,6 +212,7 @@
   <ItemGroup>
     <ClCompile Include="BehaviorTreeEditor.cpp" />
     <ClCompile Include="ComponentEditor.cpp" />
+    <ClCompile Include="ComponentPopup.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorPreferencesWindow.cpp" />
     <ClCompile Include="EditorWindow.cpp" />
@@ -234,8 +234,6 @@
     <ClCompile Include="SceneWindow.cpp" />
     <ClCompile Include="Selection.cpp" />
     <ClCompile Include="SkeletonObject.cpp" />
-    <ClCompile Include="ComponentParameters.cpp" />
-    <ClCompile Include="EditorObject.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="SkeletonEditorComponent.cpp" />
     <ClCompile Include="main.cpp" />

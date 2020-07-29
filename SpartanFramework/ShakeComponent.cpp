@@ -5,7 +5,7 @@
 
 namespace Spartan
 {
-	ShakeComponent::ShakeComponent()
+	ShakeComponent::ShakeComponent() : BaseComponent("Shaker")
 	{
 	}
 

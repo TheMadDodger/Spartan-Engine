@@ -109,6 +109,46 @@ namespace Spartan
 		m_bEnabled = enabled;
 	}
 
+	void GameScene::Serialize(std::ofstream& fileStream)
+	{
+		// Write name
+		size_t nameLength = m_SceneName.length();
+		fileStream.write((const char*)&nameLength, sizeof(size_t));
+		fileStream.write(m_SceneName.c_str(), nameLength);
+
+		// Write children
+		size_t childCount = m_pChildren.size();
+		fileStream.write((const char*)&childCount, sizeof(size_t));
+		for (size_t i = 0; i < childCount; i++)
+		{
+			m_pChildren[i]->Serialize(fileStream);
+		}
+	}
+
+	void GameScene::Deserialize(std::ifstream& fileStream)
+	{
+		// Read name
+		size_t nameLength;
+		fileStream.read((char*)&nameLength, sizeof(size_t));
+
+		char* name = new char[nameLength];
+		fileStream.read(name, nameLength);
+		m_SceneName = std::string(name);
+
+		// Read children
+		size_t childCount;
+		fileStream.read((char*)&childCount, sizeof(size_t));
+		for (size_t i = 0; i < childCount; i++)
+		{
+			if (m_pChildren.size() <= i)
+			{
+				// Create new game object
+				AddChild(new GameObject());
+			}
+			m_pChildren[i]->Deserialize(fileStream);
+		}
+	}
+
 	void GameScene::RootInitialize(const GameContext& gameContext)
 	{
 		for (size_t i = 0; i < LayerManager::GetInstance()->Size(); i++)

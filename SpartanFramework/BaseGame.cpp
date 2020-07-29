@@ -12,6 +12,7 @@
 #include "ConsoleInput.h"
 #endif // _DEBUG
 #include "PostProcessingStack.h"
+#include "Components.h"
 
 namespace Spartan
 {
@@ -104,6 +105,9 @@ namespace Spartan
 		}
 
 		RegisterPrefabs(m_pPrefabs);
+		RegisterCoreComponents();
+		RegisterComponents();
+		RegisterAssets();
 
 		// Run user defined Initialize()
 		Initialize(m_GameContext);
@@ -299,4 +303,25 @@ namespace Spartan
             break;
         }
     }
+
+	void BaseGame::RegisterCoreComponents()
+	{
+		COMPONENT(TransformComponent);
+		COMPONENT(ImageRenderComponent);
+		COMPONENT(CameraComponent);
+		COMPONENT(AudioSourceComponent);
+		COMPONENT(SpriteSheetComponent);
+		COMPONENT(RigidBody2DComponent);
+		COMPONENT(Collider2DComponent);
+		COMPONENT(TextRenderComponent);
+		//COMPONENT(ParticleComponent);
+		//COMPONENT(UIContainer);
+		COMPONENT(SkinnedMeshComponent);
+		COMPONENT(LineRenderComponent);
+		COMPONENT(ShakeComponent);
+		COMPONENT(MeshRenderComponent);
+		COMPONENT(AIComponent);
+		COMPONENT(GridComponent);
+		COMPONENT(PhysicsObjectComponent);
+	}
 }

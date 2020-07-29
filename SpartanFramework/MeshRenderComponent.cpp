@@ -10,7 +10,7 @@
 
 namespace Spartan
 {
-	MeshRenderComponent::MeshRenderComponent() : m_pMeshToRender(nullptr), m_MaterialID(0)
+	MeshRenderComponent::MeshRenderComponent() : m_pMeshToRender(nullptr), m_MaterialID(0), BaseComponent("Mesh Renderer")
 	{
 	}
 

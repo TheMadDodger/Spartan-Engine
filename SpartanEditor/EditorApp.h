@@ -1,6 +1,7 @@
 #pragma once
 #include <BaseGame.h>
 #include "EditorWindow.h"
+#include "ComponentPopup.h"
 
 namespace Spartan
 {
@@ -44,6 +45,7 @@ namespace Spartan
 	private:
 		BaseGame* m_pGame;
 		static EditorApp* m_pEditorApp;
+		Editor::ComponentPopup* m_pComponentWindow;
 		bool m_IsRunning;
 		bool m_PlayModeActive;
 		bool m_PlayModePaused;

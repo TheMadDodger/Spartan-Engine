@@ -6,7 +6,7 @@
 
 namespace Spartan
 {
-	SkinnedMeshComponent::SkinnedMeshComponent()
+	SkinnedMeshComponent::SkinnedMeshComponent() : BaseComponent("Skinned Mesh Renderer")
 	{
 	}
 

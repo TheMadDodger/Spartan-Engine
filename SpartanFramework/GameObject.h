@@ -2,6 +2,7 @@
 #include "ApplicationStructs.h"
 #include "BaseComponent.h"
 #include "SEObject.h"
+#include "ISerializable.h"
 
 namespace Spartan
 {
@@ -18,7 +19,7 @@ namespace Spartan
 	class GameScene;
 	struct LayerData;
 
-	class GameObject : public SEObject
+	class GameObject : public SEObject, ISerializable
 	{
 	public:
 		GameObject(const char* name = "EmptyGameObject", size_t layerID = 0);
@@ -76,6 +77,15 @@ namespace Spartan
 			return pT;
 		}
 
+		BaseComponent* AddComponent(BaseComponent* pComponentTemplate)
+		{
+			BaseComponent* pComp = pComponentTemplate->Create();
+			pComp->m_pGameObject = this;
+			m_pComponents.push_back(pComp);
+			pComp->RootAwake();
+			return pComp;
+		}
+
 		GameScene* GetGameScene() const;
 		GameObject* GetChild(size_t index) const;
 		const vector<GameObject*>& GetChildren() const;
@@ -104,6 +114,9 @@ namespace Spartan
 
 		virtual const std::type_info& GetBaseType() { return typeid(GameObject); }
 		virtual const std::type_info& GetType() { return typeid(GameObject); }
+
+		virtual void Serialize(std::ofstream& fileStream) override;
+		virtual void Deserialize(std::ifstream& fileStream) override;
 
 	protected:
 		friend class GameScene;
@@ -179,16 +192,16 @@ namespace Spartan
 		GameScene* m_pScene = nullptr;
 		vector<GameObject*> m_pChildren;
 		GameObject* m_pParentObject = nullptr;
+		bool m_Persistent = false;
 		bool m_bInitialized = false;
+
 		bool m_Enabled = true;
 		std::string m_Tag;
-
-		bool m_Persistent = false;
-
 		char m_Name[200];
 		char m_PrefabName[200] = "";
-		bool m_Selected = false;
 		size_t m_LayerID;
+
+		bool m_Selected = false;
 		bool m_IsDirty;
 	};
 }

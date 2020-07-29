@@ -1,8 +1,6 @@
 #pragma once
 #include "BaseComponent.h"
 
-#define PROPERTY(x) Spartan::Serialization::SerializedProperty(x, &x, #x)
-
 namespace Spartan
 {
 	enum ShakeMode

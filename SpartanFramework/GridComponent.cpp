@@ -6,7 +6,7 @@
 
 namespace Spartan
 {
-	GridComponent::GridComponent() : m_pGrid(nullptr)
+	GridComponent::GridComponent() : m_pGrid(nullptr), BaseComponent("Grid")
 	{
 	}
 

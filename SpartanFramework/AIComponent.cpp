@@ -3,7 +3,7 @@
 
 namespace Spartan
 {
-	AIComponent::AIComponent() : m_pAIBehaviour(nullptr)
+	AIComponent::AIComponent() : m_pAIBehaviour(nullptr), BaseComponent("AI Agent")
 	{
 	}
 

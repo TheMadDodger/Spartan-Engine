@@ -390,6 +390,12 @@
     <ClInclude Include="BaseAsset.h">
       <Filter>Serialization</Filter>
     </ClInclude>
+    <ClInclude Include="SerializedScene.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="ISerializable.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioFileLoader.cpp">
@@ -654,6 +660,9 @@
       <Filter>Serialization</Filter>
     </ClCompile>
     <ClCompile Include="BaseAsset.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializedScene.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>

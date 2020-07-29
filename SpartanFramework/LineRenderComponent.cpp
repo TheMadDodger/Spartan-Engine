@@ -9,7 +9,7 @@ namespace Spartan
 	size_t LineRenderComponent::m_LineMatID = 0;
 	UI::LineRenderMaterial* LineRenderComponent::m_pLineRenderer = nullptr;
 
-	LineRenderComponent::LineRenderComponent() : m_Color(1.0f, 1.0f, 1.0f, 1.0f), UIComponent("Line"), m_LineWidth(1.0f)
+	LineRenderComponent::LineRenderComponent() : m_Color(1.0f, 1.0f, 1.0f, 1.0f), UIComponent("2D Line Renderer"), m_LineWidth(1.0f)
 	{
 	}
 

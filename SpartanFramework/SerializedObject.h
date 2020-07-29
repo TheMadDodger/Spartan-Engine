@@ -2,6 +2,8 @@
 #include "SEObject.h"
 #include "SerializedProperty.h"
 
+#define PROPERTY(x) Spartan::Serialization::SerializedProperty(x, &x, #x)
+
 namespace Spartan::Serialization
 {
 	class SerializedObject : public SEObject
