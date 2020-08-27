@@ -55,6 +55,9 @@
     <Filter Include="Serialization">
       <UniqueIdentifier>{9df1f762-714d-45d3-9586-90297a7c11b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Database">
+      <UniqueIdentifier>{998518e6-6eca-4f27-94e8-ea8c7776b7f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ApplicationStructs.h">
@@ -396,6 +399,12 @@
     <ClInclude Include="ISerializable.h">
       <Filter>Serialization</Filter>
     </ClInclude>
+    <ClInclude Include="LocalDatabase.h">
+      <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="SQLCmdDefs.h">
+      <Filter>Database</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioFileLoader.cpp">
@@ -664,6 +673,9 @@
     </ClCompile>
     <ClCompile Include="SerializedScene.cpp">
       <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalDatabase.cpp">
+      <Filter>Database</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

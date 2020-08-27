@@ -99,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework;$(solutiondir)bin\sqlite\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -135,7 +135,7 @@ xcopy /e /y "$(projectdir)Resources" "$(OutDir)Resources"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework;$(solutiondir)bin\sqlite\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -172,7 +172,7 @@ xcopy /e /y "$(projectdir)Resources" "$(OutDir)Resources"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework;$(solutiondir)bin\sqlite\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -211,7 +211,7 @@ xcopy /e /y "$(projectdir)Resources" "$(OutDir)Resources"</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(solutiondir)bin\SDL2\include;$(solutiondir)bin\SDL2_image\include;$(solutiondir)bin\SDL2_mixer\include;$(solutiondir)bin\SDL2_ttf\include;$(solutiondir)bin\Box2D\include;$(solutiondir)bin\bullet\include;$(solutiondir)bin\assimp\include;$(LIBDIR)\GLEW\include;$(SOLUTIONDIR)SpartanFramework;$(solutiondir)bin\sqlite\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

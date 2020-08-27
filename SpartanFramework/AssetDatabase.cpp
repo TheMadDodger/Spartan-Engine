@@ -4,7 +4,7 @@
 
 namespace Spartan::Serialization
 {
-	AssetDatabase::AssetDatabase()
+	AssetDatabase::AssetDatabase() : m_pDatabaseInstance(nullptr)
 	{
 	}
 
@@ -22,6 +22,17 @@ namespace Spartan::Serialization
 		if (it == pInstance->m_AssetPaths.end()) return nullptr;
 		std::string path = pInstance->m_AssetPaths[guid];
 		return LoadAsset(path);
+	}
+
+	void AssetDatabase::Save()
+	{
+		AssetDatabase* pInstance = GetInstance();
+		pInstance->WriteDatabase();
+	}
+
+	void AssetDatabase::Refresh()
+	{
+
 	}
 
 	BaseAsset* AssetDatabase::LoadAsset(const std::string& relativeAssetPath)
@@ -45,5 +56,18 @@ namespace Spartan::Serialization
 		BaseAsset* deserializedAsset = assetTemplate->Create(assetGUID);
 		deserializedAsset->Deserialize(fileStream, 2);
 		return deserializedAsset;
+	}
+
+	void AssetDatabase::WriteDatabase()
+	{
+		m_pDatabaseInstance = LocalDatabase::BeginDatabase("./Resources/Assets.db");
+
+		for_each(m_AssetPaths.begin(), m_AssetPaths.end(), [&](std::pair<const GUID, std::string>& pair)
+		{
+			const GUID guid = pair.first;
+			std::string path = pair.second;
+		});
+
+		LocalDatabase::EndDatabase(m_pDatabaseInstance);
 	}
 }

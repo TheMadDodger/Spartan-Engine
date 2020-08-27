@@ -2,6 +2,7 @@
 #include "Singleton.h"
 #include "BaseAsset.h"
 #include "GUIDComparer.h"
+#include "LocalDatabase.h"
 
 namespace Spartan::Serialization
 {
@@ -14,10 +15,16 @@ namespace Spartan::Serialization
 		static BaseAsset* LoadAsset(const std::string& relativeAssetPath);
 		static BaseAsset* LoadAsset(GUID guid);
 
+		static void Save();
+		static void Refresh();
+
 	private:
 		static BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
 
+		void WriteDatabase();
+
 	private:
 		map<GUID, std::string, GUIDComparer> m_AssetPaths;
+		LocalDatabase* m_pDatabaseInstance;
 	};
 }

@@ -22,6 +22,8 @@
 #include "PropertyDrawer.h"
 #include "StandardPropertyDrawers.h"
 
+#include <LocalDatabase.h>
+
 namespace Spartan
 {
 	EditorApp* EditorApp::m_pEditorApp = nullptr;
@@ -216,6 +218,13 @@ namespace Spartan
 	void EditorApp::Run()
 	{
 		Initialize();
+
+		LocalDatabase* pInstance = LocalDatabase::BeginDatabase("test.db");
+
+		SQLCreateTableDef tableDef;
+		tableDef.Name = "TestTable";
+		pInstance->CreateTable(tableDef);
+		LocalDatabase::EndDatabase(pInstance);
 		
 		std::ofstream fStream("testscene.scene");
 		Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);

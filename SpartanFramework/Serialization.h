@@ -1,4 +1,4 @@
 #pragma once
 #include "AssetManager.h"
-#include "Asset.h"
+#include "BaseAsset.h"
 #include "Serializer.h"
