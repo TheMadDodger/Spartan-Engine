@@ -1,16 +1,15 @@
 #include "stdafx.h"
 #include "Gradient.h"
-#include "ContentManager.h"
 
 namespace Spartan
 {
-	Gradient::Gradient(size_t resolution, size_t layers) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content("")
+	Gradient::Gradient(size_t resolution, size_t layers) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content()
 	{
 		m_GradientKeys.resize(layers);
 		CreateDefaultKeys();
 	}
 
-	Gradient::Gradient(size_t resolution, size_t layers, const std::string &path) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content(path)
+	Gradient::Gradient(size_t resolution, size_t layers, const std::string &path) : m_Resolution(resolution), m_pTexture(nullptr), m_Layers(layers), Content()
 	{
 		m_GradientKeys.resize(layers);
 		CreateDefaultKeys();
@@ -130,7 +129,7 @@ namespace Spartan
 	void Gradient::CreateTextureData(float* pData)
 	{
 		if (m_pTexture != nullptr) delete m_pTexture;
-		m_pTexture = new TextureData("", Vector2::Zero());
+		m_pTexture = new TextureData();
 		m_pTexture->BuildTextureFromData(Vector2((float)m_Resolution, (float)m_Layers), pData, GL_RGBA, GL_RGBA);
 		delete[] pData;
 	}

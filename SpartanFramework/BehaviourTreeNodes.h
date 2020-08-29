@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "AIBehaviourTree.h"
 
 namespace Spartan
 {

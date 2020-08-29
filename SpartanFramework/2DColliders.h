@@ -7,7 +7,7 @@
 
 namespace Spartan
 {
-	class Collider2D : SEObject
+	class Collider2D
 	{
 	public:
 		virtual void DrawDebugShape(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };

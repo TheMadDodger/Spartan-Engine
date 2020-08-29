@@ -19,7 +19,7 @@ namespace Spartan
 		virtual void Update(const GameContext& gameContext);
 		virtual void Draw(const GameContext& gameContext);
 
-		COMPONENT_EDITOR(SkinnedMeshComponent)
+		COMPONENT(SkinnedMeshComponent);
 
 	private:
 		vector<SkinnedQuad*> m_Quads;

@@ -11,6 +11,8 @@ namespace Spartan
 		PhysicsObjectComponent();
 		~PhysicsObjectComponent();
 
+		COMPONENT(PhysicsObjectComponent);
+
 		void SetCollider(Collider3D* pCollider);
 		void SetMass(float mass);
 
@@ -35,8 +37,6 @@ namespace Spartan
 		void setWorldTransform(const btTransform& worldTrans) override;
 
 	private:
-		COMPONENT_EDITOR(PhysicsObjectComponent);
-
 		btRigidBody* m_pCollisionObject;
 		Collider3D* m_pCollider;
 

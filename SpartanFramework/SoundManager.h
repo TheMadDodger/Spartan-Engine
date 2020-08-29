@@ -1,4 +1,6 @@
 #pragma once
+#include "Manager.h"
+#include "AudioData.h"
 
 namespace Spartan
 {

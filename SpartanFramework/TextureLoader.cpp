@@ -16,7 +16,8 @@ namespace Spartan
 			return nullptr;
 		}
 
-		TextureData* pData = new TextureData(file, Vector2(pSDLImage->w / 2.0f, pSDLImage->h / 2.0f));
+		TextureData* pData = new TextureData();
+		pData->m_Origin = Vector2(pSDLImage->w / 2.0f, pSDLImage->h / 2.0f);
 		pData->m_pImage = pSDLImage;
 		pData->BuildTexture();
 

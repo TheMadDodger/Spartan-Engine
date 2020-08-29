@@ -1,17 +1,21 @@
 #pragma once
+#include "BaseAIBehaviour.h"
+#include "Blackboard.h"
 
 namespace Spartan
 {
-	class Blackboard;
 	class BTNode;
 
 	class AIBehaviourTree : public BaseAIBehaviour
 	{
 	public:
 		AIBehaviourTree(BTNode* pRootNode);
+		AIBehaviourTree();
 		virtual ~AIBehaviourTree();
 
 		Blackboard* GetBlackboard();
+
+		BASIC_OBJECT(AIBehaviourTree, BaseAIBehaviour);
 
 	private:
 		virtual void Initialize() override;

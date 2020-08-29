@@ -13,7 +13,7 @@ namespace Spartan
 		bool CommandIsWaiting = false;
 	};
 
-	class ConsoleInput : SEObject
+	class ConsoleInput
 	{
 	public:
 		ConsoleInput();

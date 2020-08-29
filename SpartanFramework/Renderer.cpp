@@ -2,13 +2,10 @@
 #include "Renderer.h"
 #include "BaseGame.h"
 #include "ContentManager.h"
-#include "Skeleton.h"
 #include "Bone.h"
 #include "Components.h"
 #include "RenderTexture.h"
-#include "ScreenRect.h"
 #include "MaterialManager.h"
-#include "UIRenderMaterial.h"
 
 namespace Spartan
 {
@@ -179,7 +176,8 @@ namespace Spartan
 			Utilities::Debug::LogWarning("Renderer::RenderText > Could not render text surface! TTF_Error: " + string(TTF_GetError()));
 			return nullptr;
 		}
-		TextureData* pTextTexture = new TextureData("", CalculateOrigin(origin, pTextSurface));
+		TextureData* pTextTexture = new TextureData();
+		pTextTexture->m_Origin = CalculateOrigin(origin, pTextSurface);
 		pTextTexture->m_pImage = pTextSurface;
 		pTextTexture->BuildTexture();
 

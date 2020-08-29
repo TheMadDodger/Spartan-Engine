@@ -1,25 +1,19 @@
 #pragma once
-
 #include "MathHelpers.h"
 #include "SkinnedQuad.h"
 #include "SEObject.h"
+#include "TextureData.h"
+#include "SpriteSheetData.h"
+#include "UIRenderMaterial.h"
+#include "FontData.h"
+#include "Skeleton.h"
+#include "ScreenRect.h"
 
 namespace Spartan
 {
-	namespace UI
-	{
-		class UIRenderMaterial;
-	}
-
-	class TextureData;
-	class SpriteSheetData;
-	class FontData;
-	class Skeleton;
-	class ScreenRect;
-
 	using namespace Math;
 
-	class Renderer : SEObject
+	class Renderer
 	{
 	public:
 		Renderer();
@@ -47,9 +41,6 @@ namespace Spartan
 		UI::UIRenderMaterial* GetUIRenderer();
 
 		void ChangeWindow();
-
-		virtual const std::type_info& GetBaseType() { return typeid(Renderer); }
-		virtual const std::type_info& GetType() { return typeid(Renderer); }
 
 	public:
 		// Primitive Rendering

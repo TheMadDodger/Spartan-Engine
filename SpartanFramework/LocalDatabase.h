@@ -6,14 +6,11 @@
 
 namespace Spartan
 {
-	class LocalDatabase : public SEObject
+	class LocalDatabase
 	{
 	public:
 		static LocalDatabase* BeginDatabase(const char* path);
 		static void EndDatabase(LocalDatabase* pInstance);
-
-		virtual const std::type_info& GetBaseType() { return typeid(LocalDatabase); };
-		virtual const std::type_info& GetType() { return typeid(LocalDatabase); };
 
 		bool CreateTable(const SQLCreateTableDef& tableDef);
 

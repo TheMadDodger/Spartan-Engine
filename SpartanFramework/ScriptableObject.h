@@ -11,12 +11,7 @@ namespace Spartan::Serialization
 		ScriptableObject(const GUID& guid) : BaseAsset(guid) {}
 		virtual ~ScriptableObject() {}
 
-		virtual const std::type_info& GetBaseType() override { return typeid(ScriptableObject); }
-
-		virtual const std::type_info& GetType() override
-		{
-			return typeid(T);
-		}
+		BASIC_OBJECT(ScriptableObject, T);
 
 	private:
 		virtual BaseAsset* Create(const GUID& guid) override

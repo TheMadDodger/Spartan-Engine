@@ -1,16 +1,19 @@
 #pragma once
 #include "SEObject.h"
+#include "ShaderData.h"
+#include "TextureData.h"
+#include "BaseComponent.h"
 
 namespace Spartan
 {
-	class ShaderData;
-	class BaseComponent;
-
 	class Material : SEObject
 	{
 	public:
 		Material(ShaderData* pShader);
-		~Material();
+		Material();
+		virtual ~Material();
+
+		BASIC_OBJECT(Material, Material);
 
 		void Use();
 		static void Reset();
@@ -21,18 +24,15 @@ namespace Spartan
 			return dynamic_cast<T*>(this);
 		}
 
-		virtual const std::type_info& GetBaseType() { return typeid(Material); }
-		virtual const std::type_info& GetType() { return typeid(Material); }
-
 	public: // Set shader vars
 		void SetFloat(const std::string& name, float value) const;
 		void SetInt(const std::string& name, int value) const;
 		void SetIntArray(const std::string& name, int size, int* value) const;
 		void SetBool(const std::string& name, bool value) const;
-		void SetVec3(const std::string& name, const Vector3& value) const;
-		void SetVec2(const std::string& name, const Vector3& value) const;
-		void SetVec4(const std::string& name, const Vector4& value) const;
-		void SetColor(const std::string& name, const Color& value) const;
+		void SetVec3(const std::string& name, const Math::Vector3& value) const;
+		void SetVec2(const std::string& name, const Math::Vector3& value) const;
+		void SetVec4(const std::string& name, const Math::Vector4& value) const;
+		void SetColor(const std::string& name, const Math::Color& value) const;
 		void SetDouble(const std::string& name, double value) const;
 		void SetMatrix3(const std::string& name, float* pMatrix) const;
 		void SetMatrix4(const std::string& name, float* pMatrix) const;

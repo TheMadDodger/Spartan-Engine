@@ -21,7 +21,7 @@ namespace Spartan
 			Utilities::Debug::LogWarning("FontLoader::LoadContent > Could not open Font file, TTF Error: " + string(TTF_GetError()));
 			return nullptr;
 		}
-		FontData* pData = new FontData(file);
+		FontData* pData = new FontData();
 		pData->m_pTTFFont = pFont;
 
 		return pData;

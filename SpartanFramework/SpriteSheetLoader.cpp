@@ -38,7 +38,7 @@ namespace Spartan
 			Utilities::Debug::LogWarning("SpriteSheetLoader::LoadContent > Minor versions don't match for this file!" + file);
 		}
 
-		pData = new SpriteSheetData(file);
+		pData = new SpriteSheetData();
 
 		while (!Utilities::BinaryContainer::ReachedEndOfFile())
 		{
@@ -51,15 +51,15 @@ namespace Spartan
 
 			case SpriteSheetBlockID::SGeneral:
 			{
-				pData->m_ImageFile = Utilities::BinaryContainer::ReadString();
+				std::string imageFilePath = Utilities::BinaryContainer::ReadString();
 				pData->m_TotalClips = Utilities::BinaryContainer::Read<int>();
 				size_t index = file.rfind('/');
-				string imagePath = file.substr(0, index) + '/' + pData->m_ImageFile;
+				string imagePath = file.substr(0, index) + '/' + imageFilePath;
 				pData->m_pImageData = ContentManager::GetInstance()->Load<TextureData>(imagePath);
 
 				if (pData->m_pImageData == nullptr)
 				{
-					Utilities::Debug::LogWarning("SpriteSheetLoader::LoadContent > Could not load " + pData->m_ImageFile + ". Please make sure this file is in the same folder as the spritesheet file!");
+					Utilities::Debug::LogWarning("SpriteSheetLoader::LoadContent > Could not load " + imageFilePath + ". Please make sure this file is in the same folder as the spritesheet file!");
 					delete pData;
 					pData = nullptr;
 					return nullptr;

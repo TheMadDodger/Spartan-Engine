@@ -22,7 +22,7 @@ namespace Spartan
 		void Initialize(const GameContext& gameContext) override;
 		void Update(const GameContext& gameContext) override;
 
-		COMPONENT_EDITOR(MeshRenderComponent)
+		COMPONENT(MeshRenderComponent);
 
 	private:
 		Mesh* m_pMeshToRender;

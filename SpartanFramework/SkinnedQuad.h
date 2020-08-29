@@ -1,5 +1,7 @@
 #pragma once
 #include "SEObject.h"
+#include "TextureData.h"
+#include "Skeleton.h"
 
 namespace Spartan
 {
@@ -17,10 +19,7 @@ namespace Spartan
 		Math::Vector2 TextureCoordinates;
 	};
 
-	class TextureData;
-	class Skeleton;
-
-	class SkinnedQuad : SEObject
+	class SkinnedQuad
 	{
 	public:
 		SkinnedQuad(std::vector<BlendWeightData> BlendData, TextureData* pTexture, Skeleton* pSkeleton);
@@ -31,9 +30,6 @@ namespace Spartan
 
 		void Update();
 		void Draw(const GameContext& gameContext);
-
-		virtual const std::type_info& GetBaseType() { return typeid(SkinnedQuad); }
-		virtual const std::type_info& GetType() { return typeid(SkinnedQuad); }
 
 	private:
 		std::vector<SkinnedVertice> m_Vertices;

@@ -3,16 +3,9 @@
 #include "SerializedObject.h"
 #include "SerializedProperty.h"
 
-#define COMPONENT(x) Spartan::BaseComponent::Register<x>()
+#define REGISTER_COMPONENT(x) Spartan::BaseComponent::Register<x>()
 
-#define COMPONENT_EDITOR(comp) const std::type_info &GetType() override \
-{ \
-	return typeid(comp); \
-} \
-virtual BaseComponent *Create() override \
-{ \
-	return new comp; \
-}
+#define COMPONENT(comp) BASIC_OBJECT(comp, BaseComponent)
 
 namespace Spartan
 {
@@ -34,8 +27,6 @@ namespace Spartan
 		virtual ~BaseComponent();
 
 		GameObject* GetGameObject() const { return m_pGameObject; }
-
-		virtual BaseComponent* Create() = 0;
 		
 		template<class T>
 		static void Register()

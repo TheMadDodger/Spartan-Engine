@@ -9,6 +9,8 @@ namespace Spartan
 		RigidBody2DComponent();
 		virtual ~RigidBody2DComponent();
 
+		COMPONENT(RigidBody2DComponent);
+
 		b2Body* Getb2Body() { return m_Body; };
 
 		Vector2 m_BodyPivot;
@@ -21,8 +23,6 @@ namespace Spartan
 		//void Draw(const GameContext &gameContext) override;
 
 	private:
-		COMPONENT_EDITOR(RigidBody2DComponent)
-		
 		b2Body* m_Body = nullptr;
 	};
 }

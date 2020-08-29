@@ -25,7 +25,7 @@ namespace Spartan
 
 		if (it == m_pRegisteredComponents.end()) return nullptr;
 		auto pComp = *it;
-		return pComp->Create();
+		return (BaseComponent*)pComp->Create();
 	}
 
 	BaseComponent* BaseComponent::CreateComponentFromFileStream()

@@ -20,7 +20,7 @@ namespace Spartan
 		void Draw(const GameContext& gameContext) override;
 
 		void CreateMaterial();
-		COMPONENT_EDITOR(LineRenderComponent)
+		COMPONENT(LineRenderComponent);
 
 	private:
 		static size_t m_LineMatID;

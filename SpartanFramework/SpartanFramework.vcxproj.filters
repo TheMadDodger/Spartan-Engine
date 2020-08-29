@@ -393,9 +393,6 @@
     <ClInclude Include="BaseAsset.h">
       <Filter>Serialization</Filter>
     </ClInclude>
-    <ClInclude Include="SerializedScene.h">
-      <Filter>Serialization</Filter>
-    </ClInclude>
     <ClInclude Include="ISerializable.h">
       <Filter>Serialization</Filter>
     </ClInclude>
@@ -404,6 +401,24 @@
     </ClInclude>
     <ClInclude Include="SQLCmdDefs.h">
       <Filter>Database</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
+      <Filter>Content Management\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioData.h">
+      <Filter>Content Management\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheetData.h">
+      <Filter>Content Management\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="FontData.h">
+      <Filter>Content Management\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderData.h">
+      <Filter>Content Management\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Content Management\Content</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -671,11 +686,29 @@
     <ClCompile Include="BaseAsset.cpp">
       <Filter>Serialization</Filter>
     </ClCompile>
-    <ClCompile Include="SerializedScene.cpp">
-      <Filter>Serialization</Filter>
-    </ClCompile>
     <ClCompile Include="LocalDatabase.cpp">
       <Filter>Database</Filter>
+    </ClCompile>
+    <ClCompile Include="SEObject.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureData.cpp">
+      <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioData.cpp">
+      <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteSheetData.cpp">
+      <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="FontData.cpp">
+      <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderData.cpp">
+      <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Content Management\Content</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

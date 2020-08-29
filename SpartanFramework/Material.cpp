@@ -1,10 +1,13 @@
 #include "stdafx.h"
 #include "Material.h"
-#include "BaseComponent.h"
 
 namespace Spartan
 {
 	Material::Material(ShaderData* pShader) : m_pShader(pShader), m_DoubleSided(false), m_Wireframe(false)
+	{
+	}
+
+	Material::Material() : m_pShader(nullptr), m_DoubleSided(false), m_Wireframe(false)
 	{
 	}
 

@@ -24,7 +24,7 @@ namespace Spartan
         }
         //directory = file.substr(0, file.find_last_of('/'));
 
-        Model* pModel = new Model(file);
+        Model* pModel = new Model();
         ProcessNode(scene->mRootNode, scene, pModel);
         return pModel;
     }

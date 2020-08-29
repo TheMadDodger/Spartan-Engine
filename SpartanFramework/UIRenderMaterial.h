@@ -1,10 +1,9 @@
 #pragma once
 #include "Material.h"
+#include "TextureData.h"
 
 namespace Spartan
 {
-	class TextureData;
-
 	namespace UI
 	{
 		class UIRenderMaterial : public Material
@@ -14,18 +13,18 @@ namespace Spartan
 			virtual ~UIRenderMaterial();
 
 			void SetUITexture(TextureData* pTexture);
-			void SetWorldProjection(const Matrix4X4& worldProjection);
-			void SetOffsets(const Vector4& offsets);
-			void SetUIColor(const Color& color);
+			void SetWorldProjection(const Math::Matrix4X4& worldProjection);
+			void SetOffsets(const Math::Vector4& offsets);
+			void SetUIColor(const Math::Color& color);
 
 		protected:
 			void SetShaderVars(BaseComponent*);
 
 		protected:
 			TextureData* m_pTexture;
-			Vector4 m_CenterOffsets;
-			Matrix4X4 m_WorldProjection;
-			Color m_Color = Color::White();
+			Math::Vector4 m_CenterOffsets;
+			Math::Matrix4X4 m_WorldProjection;
+			Math::Color m_Color = Math::Color::White();
 
 		private:
 			friend class UIComponent;

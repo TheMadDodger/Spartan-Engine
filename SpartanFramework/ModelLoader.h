@@ -1,6 +1,6 @@
 #pragma once
 #include "ContentLoader.h"
-#include "Mesh.h"
+#include "Model.h"
 
 namespace Spartan
 {

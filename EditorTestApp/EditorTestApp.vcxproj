@@ -101,8 +101,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);$(outdir)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(solutiondir)bin\sqlite\lib\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);$(outdir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;sqlite3.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>if not exist $(projectdir)Resources mkdir $(projectdir)Resources
@@ -126,8 +126,8 @@ xcopy /e /y "$(OutDir)Resources" "$(projectdir)Resources"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);$(outdir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;sqlite3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(solutiondir)bin\sqlite\lib\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);$(outdir)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>if not exist $(projectdir)Resources mkdir $(projectdir)Resources
@@ -146,7 +146,7 @@ xcopy /e /y "$(OutDir)Resources" "$(projectdir)Resources"</Command>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LIBDIR)\SDL2\lib\$(platform);$(LIBDIR)\SDL2_image\lib\$(platform);$(LIBDIR)\SDL2_mixer\lib\$(platform);$(LIBDIR)\SDL2_ttf\lib\$(platform);$(LIBDIR)\GLEW\lib\$(configuration)\$(platform);$(LIBDIR)\Box2D\lib\$(configuration)\$(platform);$(LIBDIR)\bullet\lib\$(configuration)\$(platform);$(LIBDIR)\assimp\lib\$(configuration)\$(platform);$(LIBDIR)\Engine\$(configuration)\$(platform);$(LIBDIR)\Editor\$(configuration)\$(platform);$(solutiondir)bin\sqlite\lib\$(platform);;$(solutiondir)bin\sqlite\lib\$(platform)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;Box2D.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -170,6 +170,7 @@ xcopy /e /y "$(OutDir)Resources" "$(projectdir)Resources"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories);$(solutiondir)bin\sqlite\lib\$(platform)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>if not exist $(projectdir)Resources mkdir $(projectdir)Resources

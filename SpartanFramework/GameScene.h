@@ -14,8 +14,10 @@ namespace Spartan
 	class GameScene : public SEObject, ISerializable
 	{
 	public:
-		GameScene(const std::string& name);
+		GameScene(const std::string& name = "New Scene");
 		virtual ~GameScene();
+
+		BASIC_OBJECT(GameScene, GameScene);
 
 		void SetActiveCamera(CameraComponent* pCamera);
 		CameraComponent* GetActiveCamera() { return m_pActiveCamera; }
@@ -58,9 +60,6 @@ namespace Spartan
 		GameObject* Instantiate(GameObject* pObject, GameObject* pParent = nullptr);
 
 		void SetEnabled(bool enabled);
-
-		virtual const std::type_info& GetBaseType() override { return typeid(GameScene); }
-		virtual const std::type_info& GetType() override { return typeid(GameScene); }
 
 		virtual void Serialize(std::ofstream& fileStream) override;
 		virtual void Deserialize(std::ifstream& fileStream) override;

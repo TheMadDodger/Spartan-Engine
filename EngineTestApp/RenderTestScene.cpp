@@ -8,6 +8,7 @@
 #include <ContentManager.h>
 #include "PlanetMaterial.h"
 #include <Gradient.h>
+#include <Model.h>
 
 RenderTestScene::RenderTestScene() : Spartan::GameScene("Render Test Scene")
 {

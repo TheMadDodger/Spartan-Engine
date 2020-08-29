@@ -64,15 +64,4 @@ namespace Spartan
 		}
 		m_pLoaders.clear();
 	}
-
-	void AudioData::SetVolume(int volume)
-	{
-		if (volume > MIX_MAX_VOLUME) volume = MIX_MAX_VOLUME;
-		m_Volume = volume;
-	}
-
-	int AudioData::GetVolume() const
-	{
-		return m_Volume;
-	}
 }

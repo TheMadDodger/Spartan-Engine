@@ -34,7 +34,7 @@ namespace Spartan
 
 		Ray ScreenPointToRay(const Vector2& screenPoint);
 
-		COMPONENT_EDITOR(CameraComponent)
+		COMPONENT(CameraComponent);
 
 	protected:
 		void Initialize(const GameContext& gameContext) override;

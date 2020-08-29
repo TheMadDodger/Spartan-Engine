@@ -4,7 +4,7 @@
 namespace Spartan
 {
 	template<typename T>
-	class Singleton : Manager
+	class Singleton : public Manager
 	{
 	public:
 		static T* GetInstance()

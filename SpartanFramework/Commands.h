@@ -4,10 +4,11 @@
 namespace Spartan
 {
 #ifdef _DEBUG
-	class BaseParser : SEObject
+	class BaseParser
 	{
 	public:
 		virtual const std::type_info& GetBaseType() { return typeid(BaseParser); }
+		virtual const std::type_info& GetType() = 0;
 	};
 
 	template<typename T>
@@ -94,7 +95,7 @@ namespace Spartan
 		}
 	};
 
-	class Parser : SEObject
+	class Parser
 	{
 	public:
 		template<typename T>
@@ -126,7 +127,7 @@ namespace Spartan
 		static std::vector<BaseParser*> m_Parsers;
 	};
 
-	class BaseConsoleCommand : SEObject
+	class BaseConsoleCommand
 	{
 	public:
 		BaseConsoleCommand(const std::string& command) : m_Command(command) {}

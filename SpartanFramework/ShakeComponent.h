@@ -20,7 +20,7 @@ namespace Spartan
 		void SetShakeMode(const ShakeMode& mode);
 
 	private:
-		COMPONENT_EDITOR(ShakeComponent)
+		COMPONENT(ShakeComponent);
 
 	private:
 		virtual void Update(const GameContext& gameContext) override;

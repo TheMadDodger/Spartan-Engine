@@ -4,14 +4,13 @@
 
 namespace Spartan
 {
-	class BaseLoader : public SEObject
+	class BaseLoader
 	{
 	public:
 		BaseLoader() {}
 		virtual ~BaseLoader() {}
 
-		virtual const std::type_info& GetBaseType() { return typeid(BaseLoader); }
-		virtual void Unload() = 0;
+		virtual const std::type_info& GetType() = 0;
 
 	private:
 		BaseLoader(const BaseLoader& obj) = delete;
@@ -54,11 +53,6 @@ namespace Spartan
 
 			T* pContent = LoadContent(file);
 			return pContent;
-		}
-
-		void Unload()
-		{
-
 		}
 
 	protected:

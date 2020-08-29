@@ -24,7 +24,8 @@ namespace Spartan
 				Utilities::Debug::LogError("AudioFileLoader::LoadContent > Could not load: " + file + "\nMix_Error: " + Mix_GetError());
 				return nullptr;
 			}
-			pAudioData = new AudioData(file);
+
+			pAudioData = new AudioData();
 			pAudioData->m_pChunck = pChunck;
 			pAudioData->m_IsMusic = false;
 		}
@@ -36,7 +37,8 @@ namespace Spartan
 				Utilities::Debug::LogError("AudioFileLoader::LoadContent > Could not load: " + file + "\nMix_Error: " + Mix_GetError());
 				return nullptr;
 			}
-			pAudioData = new AudioData(file);
+
+			pAudioData = new AudioData();
 			pAudioData->m_pMusic = pMusic;
 			pAudioData->m_IsMusic = true;
 		}

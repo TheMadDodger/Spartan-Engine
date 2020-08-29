@@ -14,6 +14,8 @@ namespace Spartan
 			UISlider();
 			~UISlider();
 
+			BASIC_OBJECT(UISlider, GameObject);
+
 			void SetFillColor(const Color& color);
 			void SetFillGradient(Gradient* pGradient);
 

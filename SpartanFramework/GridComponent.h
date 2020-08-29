@@ -15,7 +15,7 @@ namespace Spartan
 		BaseGrid* GetGrid();
 
 	private:
-		COMPONENT_EDITOR(GridComponent)
+		COMPONENT(GridComponent);
 
 		virtual void Initialize(const GameContext& gameContext);
 		virtual void Update(const GameContext& gameContext);

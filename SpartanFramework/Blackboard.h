@@ -18,7 +18,7 @@ namespace Spartan
 		T Data;
 	};
 
-	class Blackboard : SEObject
+	class Blackboard
 	{
 	public:
 		Blackboard() {};
@@ -66,9 +66,6 @@ namespace Spartan
 				pValue->Data = value;
 			}
 		}
-
-		virtual const std::type_info& GetBaseType() { return typeid(Blackboard); }
-		virtual const std::type_info& GetType() { return typeid(Blackboard); }
 
 	private:
 		std::map<std::string, BlackboardValueBase*> m_pValues;

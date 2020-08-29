@@ -60,7 +60,7 @@ namespace Spartan
 
 		void ConstantSource(const GameContext& gameContext);
 
-		COMPONENT_EDITOR(AudioSourceComponent)
+		COMPONENT(AudioSourceComponent);
 
 	private:
 		const char* m_AudioFile;

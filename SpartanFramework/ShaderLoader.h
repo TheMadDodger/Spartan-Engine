@@ -1,4 +1,6 @@
 #pragma once
+#include "ContentLoader.h"
+#include "ShaderData.h"
 
 namespace Spartan
 {

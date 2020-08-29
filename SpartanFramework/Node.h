@@ -3,14 +3,11 @@
 
 namespace Spartan
 {
-	class Node : SEObject
+	class Node
 	{
 	public:
 		Node() {}
 		~Node() {}
-
-		virtual const std::type_info& GetBaseType() override { return typeid(Node); }
-		virtual const std::type_info& GetType() override { return typeid(Node); }
 
 	private:
 

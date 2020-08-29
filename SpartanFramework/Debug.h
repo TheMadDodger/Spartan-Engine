@@ -17,7 +17,7 @@ namespace Spartan
 			Error, // An error will display the error in a seperate window and then close the game
 		};
 
-		class LoggingData : SEObject
+		class LoggingData
 		{
 		public:
 			LoggingData(const float* pDataToLog, float logInterval)
@@ -31,10 +31,6 @@ namespace Spartan
 
 			LoggingData(const double* pDataToLog, float logInterval)
 				: m_pdDataToLog(pDataToLog), m_LogInterval(logInterval), m_Type(DDOUBLE) {}
-
-		public:
-			virtual const std::type_info& GetBaseType() { return typeid(LoggingData); }
-			virtual const std::type_info& GetType() { return typeid(LoggingData); }
 
 		private:
 			friend class AutomaticLogger;

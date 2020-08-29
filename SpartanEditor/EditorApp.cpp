@@ -223,6 +223,15 @@ namespace Spartan
 
 		SQLCreateTableDef tableDef;
 		tableDef.Name = "TestTable";
+		tableDef.Keys.push_back(SQLTableKeyData());
+		tableDef.Keys[0].Attributes.push_back("PRIMARY KEY");
+		tableDef.Keys[0].Attributes.push_back("NOT NULL");
+		tableDef.Keys[0].Type = "CHAR(32)";
+		tableDef.Keys[0].Name = "GUID";
+		tableDef.Keys.push_back(SQLTableKeyData());
+		tableDef.Keys[1].Attributes.push_back("NOT NULL");
+		tableDef.Keys[1].Type = "TEXT";
+		tableDef.Keys[1].Name = "Path";
 		pInstance->CreateTable(tableDef);
 		LocalDatabase::EndDatabase(pInstance);
 		

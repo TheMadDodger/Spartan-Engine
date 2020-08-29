@@ -306,22 +306,22 @@ namespace Spartan
 
 	void BaseGame::RegisterCoreComponents()
 	{
-		COMPONENT(TransformComponent);
-		COMPONENT(ImageRenderComponent);
-		COMPONENT(CameraComponent);
-		COMPONENT(AudioSourceComponent);
-		COMPONENT(SpriteSheetComponent);
-		COMPONENT(RigidBody2DComponent);
-		COMPONENT(Collider2DComponent);
-		COMPONENT(TextRenderComponent);
+		REGISTER_COMPONENT(TransformComponent);
+		REGISTER_COMPONENT(ImageRenderComponent);
+		REGISTER_COMPONENT(CameraComponent);
+		REGISTER_COMPONENT(AudioSourceComponent);
+		REGISTER_COMPONENT(SpriteSheetComponent);
+		REGISTER_COMPONENT(RigidBody2DComponent);
+		REGISTER_COMPONENT(Collider2DComponent);
+		REGISTER_COMPONENT(TextRenderComponent);
 		//COMPONENT(ParticleComponent);
 		//COMPONENT(UIContainer);
-		COMPONENT(SkinnedMeshComponent);
-		COMPONENT(LineRenderComponent);
-		COMPONENT(ShakeComponent);
-		COMPONENT(MeshRenderComponent);
-		COMPONENT(AIComponent);
-		COMPONENT(GridComponent);
-		COMPONENT(PhysicsObjectComponent);
+		REGISTER_COMPONENT(SkinnedMeshComponent);
+		REGISTER_COMPONENT(LineRenderComponent);
+		REGISTER_COMPONENT(ShakeComponent);
+		REGISTER_COMPONENT(MeshRenderComponent);
+		REGISTER_COMPONENT(AIComponent);
+		REGISTER_COMPONENT(GridComponent);
+		REGISTER_COMPONENT(PhysicsObjectComponent);
 	}
 }

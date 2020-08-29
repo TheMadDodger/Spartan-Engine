@@ -12,6 +12,8 @@ namespace Spartan
 			UIImageObject();
 			virtual ~UIImageObject();
 
+			BASIC_OBJECT(UIImageObject, GameObject);
+
 			ImageRenderComponent* GetImage();
 
 		private:

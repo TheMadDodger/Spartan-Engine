@@ -1,6 +1,7 @@
 #pragma once
 #include "ContentLoader.h"
 #include "ContentManager.h"
+#include "SpriteSheetData.h"
 
 namespace Spartan
 {

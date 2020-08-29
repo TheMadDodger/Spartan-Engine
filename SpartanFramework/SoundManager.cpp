@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "SoundManager.h"
-#include "ContentManager.h"
 
 #define BUFFER 1024
 #define W 640 /* NEVER make this be less than BUFFER! */

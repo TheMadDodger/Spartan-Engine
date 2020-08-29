@@ -11,6 +11,8 @@ namespace Spartan
 		Collider2DComponent();
 		virtual ~Collider2DComponent();
 
+		COMPONENT(Collider2DComponent);
+
 		void SetCollider(Collider2D* newCollider);
 		void UpdateCollider(Collider2D* newCollider);
 
@@ -19,9 +21,6 @@ namespace Spartan
 	protected:
 		void Initialize(const GameContext& gameContext) override;
 		void Draw(const GameContext& gameContext) override;
-
-	private:
-		COMPONENT_EDITOR(Collider2DComponent)
 
 	private:
 		friend class RigidBody2DComponent;

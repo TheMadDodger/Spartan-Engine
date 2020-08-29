@@ -11,6 +11,8 @@ namespace Spartan
 		BasicCamera();
 		virtual ~BasicCamera();
 
+		BASIC_OBJECT(BasicCamera, GameObject);
+
 		void Initialize(const GameContext& gameContext) override;
 		void Update(const GameContext& gameContext) override;
 		void Draw(const GameContext& gameContext) override;

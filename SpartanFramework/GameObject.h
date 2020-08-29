@@ -25,6 +25,8 @@ namespace Spartan
 		GameObject(const char* name = "EmptyGameObject", size_t layerID = 0);
 		virtual ~GameObject();
 
+		BASIC_OBJECT(GameObject, GameObject);
+
 		const vector<BaseComponent*>& GetAllComponents() { return m_pComponents; }
 
 		template <typename T>
@@ -79,7 +81,7 @@ namespace Spartan
 
 		BaseComponent* AddComponent(BaseComponent* pComponentTemplate)
 		{
-			BaseComponent* pComp = pComponentTemplate->Create();
+			BaseComponent* pComp = (BaseComponent*)pComponentTemplate->Create();
 			pComp->m_pGameObject = this;
 			m_pComponents.push_back(pComp);
 			pComp->RootAwake();
@@ -111,9 +113,6 @@ namespace Spartan
 
 		bool IsDirty() const;
 		void SetDirty();
-
-		virtual const std::type_info& GetBaseType() { return typeid(GameObject); }
-		virtual const std::type_info& GetType() { return typeid(GameObject); }
 
 		virtual void Serialize(std::ofstream& fileStream) override;
 		virtual void Deserialize(std::ifstream& fileStream) override;

@@ -1,5 +1,6 @@
 #pragma once
 #include "ContentManager.h"
+#include "FontData.h"
 
 namespace Spartan
 {

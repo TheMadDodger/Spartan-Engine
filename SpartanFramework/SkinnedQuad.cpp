@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "SkinnedQuad.h"
-#include "Skeleton.h"
 #include "Bone.h"
 #include "ContentManager.h"
 #include "Components.h"

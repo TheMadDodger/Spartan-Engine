@@ -21,7 +21,7 @@ namespace Spartan
 
 		std::string m_FontFile;
 
-		COMPONENT_EDITOR(TextRenderComponent)
+		COMPONENT(TextRenderComponent);
 
 	protected:
 		void Draw(const GameContext& gameContext) override;

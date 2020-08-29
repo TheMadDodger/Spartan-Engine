@@ -23,7 +23,7 @@ namespace Spartan
 
 		bool CanRender() override;
 
-		COMPONENT_EDITOR(ImageRenderComponent)
+		COMPONENT(ImageRenderComponent);
 
 	private:
 		TextureData* m_pImage = nullptr;

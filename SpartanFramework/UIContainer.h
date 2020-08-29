@@ -11,6 +11,8 @@ namespace Spartan
 			UIContainer();
 			virtual ~UIContainer();
 
+			COMPONENT(UIContainer);
+
 			void SetPadding(const Vector2& padding);
 			void SetDimensions(const Vector2& dimensions);
 			void SetColor(const Color& color);
@@ -27,9 +29,7 @@ namespace Spartan
 			void Draw(const GameContext& gameContext) override;
 
 		private:
-			COMPONENT_EDITOR(UIContainer)
-
-				Vector2 m_Dimensions;
+			Vector2 m_Dimensions;
 			Vector2 m_Padding;
 
 			Color m_Color;

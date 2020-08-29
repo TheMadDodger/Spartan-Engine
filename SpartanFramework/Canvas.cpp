@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "Canvas.h"
-#include "RenderTexture.h"
-#include "Material.h"
 #include "MaterialManager.h"
 #include "TransformComponent.h"
 #include "InputManager.h"

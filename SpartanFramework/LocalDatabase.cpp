@@ -35,8 +35,9 @@ namespace Spartan
 
 	bool LocalDatabase::CreateTable(const SQLCreateTableDef& tableDef)
 	{
-		SQLCHECK_ERROR(SQLITE_COMMAND(tableDef.CreateCommand(), 0));
-		Utilities::Debug::LogNotice("SQL: Table " + tableDef.Name + " Created");
+		std::string cmd = tableDef.CreateCommand();
+		SQLCHECK_ERROR(SQLITE_COMMAND(cmd.c_str(), 0));
+		Utilities::Debug::LogInfo("SQL: Table " + tableDef.Name + " Created");
 		return true;
 	}
 

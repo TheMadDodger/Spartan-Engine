@@ -15,7 +15,7 @@ namespace Spartan
 		std::string Name;
 		std::vector<SQLTableKeyData> Keys;
 
-		const char* CreateCommand() const
+		std::string CreateCommand() const
 		{
 			std::string command = "CREATE TABLE " + Name + "(";
 
@@ -28,10 +28,11 @@ namespace Spartan
 					command += Keys[i].Attributes[j] + "	";
 				}
 
-				command += ",";
+				if (i < Keys.size() - 1) command += ",";
 			}
+			command += ");";
 
-			return command.c_str();
+			return command;
 		}
 	};
 }

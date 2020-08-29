@@ -19,7 +19,7 @@ namespace Spartan
 		ABiNormal,
 	};
 
-	class Mesh : public SEObject
+	class Mesh
 	{
 	public:
 		Mesh(size_t vertexCount, float* pVertices, size_t indexCount, unsigned int* pIndices, size_t vertexSize, size_t attributeCount, MeshAttribute* attributes, GLuint primitiveTopology = GL_TRIANGLE_FAN) :

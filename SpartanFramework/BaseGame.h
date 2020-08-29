@@ -14,7 +14,7 @@ namespace Spartan
 	class ConsoleInput;
 #endif
 
-	class BaseGame : SEObject
+	class BaseGame
 	{
 	public:
 		BaseGame(const GameSettings& settings);
@@ -42,9 +42,6 @@ namespace Spartan
 		virtual void RegisterPrefabs(std::vector<GameObject*>& prefabs) = 0;
 		virtual void RegisterAssets() {}
 		virtual void RegisterComponents() {};
-
-		virtual const std::type_info& GetBaseType() { return typeid(BaseGame); }
-		virtual const std::type_info& GetType() { return typeid(BaseGame); }
 
 #ifdef _DEBUG
 	protected:

@@ -9,6 +9,7 @@
 
 #include <PhysicsObjectComponent.h>
 #include <3DColliders.h>
+#include <Model.h>
 
 BufferTest::BufferTest() : Spartan::GameScene("Buffer Test")
 {

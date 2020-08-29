@@ -12,6 +12,8 @@ namespace Spartan
 			UITextObject();
 			virtual ~UITextObject();
 
+			BASIC_OBJECT(UITextObject, GameObject);
+
 			TextRenderComponent* GetText();
 
 		private:

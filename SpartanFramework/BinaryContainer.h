@@ -5,7 +5,7 @@ namespace Spartan
 {
 	namespace Utilities
 	{
-		class BinaryContainer : SEObject
+		class BinaryContainer
 		{
 		public:
 			// Closing

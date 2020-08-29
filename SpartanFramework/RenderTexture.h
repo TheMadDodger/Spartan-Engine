@@ -3,7 +3,7 @@
 
 namespace Spartan
 {
-	class RenderTexture : SEObject
+	class RenderTexture
 	{
 	public: // Static functions
 		static RenderTexture* CreateRenderTexture(int width, int height, bool hasDepthBuffer = true);
@@ -14,9 +14,6 @@ namespace Spartan
 		static RenderTexture* GetUIRenderTexture();
 
 		bool IsInUse();
-
-		virtual const std::type_info& GetBaseType() { return typeid(RenderTexture); }
-		virtual const std::type_info& GetType() { return typeid(RenderTexture); }
 
 	private: // Private static functions
 		static void StartFinalRender();

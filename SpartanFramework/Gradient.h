@@ -1,10 +1,9 @@
 #pragma once
 #include "Content.h"
+#include "TextureData.h"
 
 namespace Spartan
 {
-	class TextureData;
-
 	struct GradientKey
 	{
 		GradientKey(const Math::Color& color, float percentage) : Color(color), Percentage(Math::Clamp<float>(0.0f, 100.0f, percentage)) {}
@@ -17,8 +16,10 @@ namespace Spartan
 	{
 	public:
 		Gradient(size_t resolution, size_t layers, const std::string &path);
-		Gradient(size_t resolution, size_t layers = 1);
+		Gradient(size_t resolution = 512, size_t layers = 1);
 		virtual ~Gradient();
+
+		BASIC_OBJECT(Gradient, Content);
 
 		void BuildTexture();
 		TextureData* GetTexture() const;

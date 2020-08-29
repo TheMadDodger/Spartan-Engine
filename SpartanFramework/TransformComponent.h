@@ -43,7 +43,7 @@ namespace Spartan
 		// WARNING! Editing this value does not update any physics components on this object!
 		Vector3 Scale = Vector3(1.0f, 1.0f, 1.0f);
 
-		COMPONENT_EDITOR(TransformComponent)
+		COMPONENT(TransformComponent);
 
 	protected:
 		void Initialize(const GameContext& gameContext) override;

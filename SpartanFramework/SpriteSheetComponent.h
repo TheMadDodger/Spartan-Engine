@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 #include "MathHelpers.h"
+#include "SpriteSheetData.h"
 
 namespace Spartan
 {
@@ -18,8 +19,8 @@ namespace Spartan
 	public:
 		SpriteSheetComponent();
 		~SpriteSheetComponent();
-		//SpriteSheetComponent(const std::string &file, const Math::Origin &origin = Math::Origin::Center);
-		//SpriteSheetComponent(const std::string &file, const Vector2 &origin);
+		
+		COMPONENT(SpriteSheetComponent);
 
 		void SetSpriteSheet(SpriteSheetData* pSpriteSheet);
 
@@ -35,8 +36,6 @@ namespace Spartan
 		void Pause();
 
 	private:
-		COMPONENT_EDITOR(SpriteSheetComponent)
-
 		void CalculateOrigin(const Math::Origin& origin, const FrameData& frame);
 
 	private:

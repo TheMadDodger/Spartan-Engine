@@ -1,12 +1,11 @@
 #pragma once
 #include "Event.h"
 #include "UIObject.h"
+#include "TextureData.h"
+#include "ImageRenderComponent.h"
 
 namespace Spartan
 {
-	class TextureData;
-	class ImageRenderComponent;
-
 	namespace UI
 	{
 		class UIButton : public UIObject
@@ -14,6 +13,8 @@ namespace Spartan
 		public:
 			UIButton();
 			virtual ~UIButton();
+
+			BASIC_OBJECT(UIButton, GameObject);
 
 			void Select();
 			void Unselect();

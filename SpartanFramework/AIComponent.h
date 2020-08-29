@@ -16,7 +16,7 @@ namespace Spartan
 		virtual void Initialize(const GameContext&) override;
 		virtual void Update(const GameContext& gameContext) override;
 
-		COMPONENT_EDITOR(AIComponent)
+		COMPONENT(AIComponent);
 
 	private:
 		BaseAIBehaviour* m_pAIBehaviour;

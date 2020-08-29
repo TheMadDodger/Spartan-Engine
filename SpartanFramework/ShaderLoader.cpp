@@ -24,7 +24,7 @@ namespace Spartan
 			return nullptr;
 		}
 
-		ShaderData* pMat = new ShaderData(file);
+		ShaderData* pMat = new ShaderData();
 		pMat->m_ShaderProgramID = programID;
 
 		std::string line;

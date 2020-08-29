@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "AI.h"
+#include "BehaviourTreeNodes.h"
 
 namespace Spartan
 {

@@ -1,15 +1,12 @@
 #pragma once
 #include "UIObject.h"
-
-class Material;
+#include "Material.h"
+#include "RenderTexture.h"
 
 namespace Spartan
 {
-	class RenderTexture;
-
 	namespace UI
 	{
-
 		enum CanvasRenderMode
 		{
 			ScreenSpace,
@@ -21,6 +18,8 @@ namespace Spartan
 		public:
 			Canvas();
 			virtual ~Canvas();
+
+			BASIC_OBJECT(Canvas, GameObject);
 
 		public:
 			void SetRenderMode(const CanvasRenderMode& renderMode);

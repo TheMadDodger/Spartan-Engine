@@ -5,16 +5,13 @@
 
 namespace Spartan
 {
-	class PhysicsProxy : public SEObject
+	class PhysicsProxy
 	{
 	public:
 		PhysicsProxy();
 		virtual ~PhysicsProxy();
 
 		void SetGravity(const Vector3& gravityVec);
-
-		virtual const std::type_info& GetBaseType() { return typeid(PhysicsProxy); }
-		virtual const std::type_info& GetType() { return typeid(PhysicsProxy); }
 
 	private:
 		void Initialize();

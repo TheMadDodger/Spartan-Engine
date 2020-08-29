@@ -3,8 +3,12 @@
 
 namespace Spartan
 {
-	Content::Content(const std::string& file) : m_FileName(file) {}
-	Content::~Content() {}
-	const std::string& Content::GetFile() { return m_FileName; }
+	Content::Content() {}
 
+	Content::~Content() {}
+
+	const GUID& Content::GetGUID() const
+	{
+		return m_GUID;
+	}
 }

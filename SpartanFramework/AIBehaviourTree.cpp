@@ -1,9 +1,14 @@
 #include "stdafx.h"
-#include "AI.h"
+#include "AIBehaviourTree.h"
+#include "BehaviourTreeNodes.h"
 
 namespace Spartan
 {
 	AIBehaviourTree::AIBehaviourTree(BTNode* pRootNode) : m_pRootNode(pRootNode), m_pBlackboard(new Blackboard())
+	{
+	}
+
+	AIBehaviourTree::AIBehaviourTree()
 	{
 	}
 
