@@ -44,6 +44,24 @@ namespace Spartan
 		AddLoader(new GradientLoader());
 	}
 
+	Content* ContentManager::Load(const std::string& path)
+	{
+		std::filesystem::path filePath(path);
+		std::filesystem::path extension = filePath.extension();
+
+		for (BaseLoader* pLoader : m_pLoaders)
+		{
+			if (pLoader->HasExtension(extension.string()))
+			{
+				Content* pContent = pLoader->Load(path);
+				m_pContent.push_back(pContent);
+				return pContent;
+			}
+		}
+
+		return nullptr;
+	}
+
 	ContentManager::ContentManager()
 	{
 	}

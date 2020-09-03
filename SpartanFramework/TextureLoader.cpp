@@ -3,7 +3,7 @@
 
 namespace Spartan
 {
-	TextureLoader::TextureLoader() {}
+	TextureLoader::TextureLoader() : ContentLoader({ ".png", ".jpg" }) {}
 	TextureLoader::~TextureLoader() {}
 
 	TextureData* TextureLoader::LoadContent(const std::string& file)

@@ -23,6 +23,8 @@
 #include "StandardPropertyDrawers.h"
 
 #include <LocalDatabase.h>
+#include <AssetDatabase.h>
+#include "Serializer.h"
 
 namespace Spartan
 {
@@ -102,6 +104,7 @@ namespace Spartan
 			return;
 		}
 
+		Serialization::Serializer::LoadSerializers();
 		m_pGame->RegisterPrefabs(m_pGame->m_pPrefabs);
 		m_pGame->RegisterCoreComponents();
 		m_pGame->RegisterComponents();
@@ -129,6 +132,8 @@ namespace Spartan
 		Editor::Editor::RegisterEditor<Spartan::Editor::ComponentEditor>();
 
 		ImGui::GetStyle().WindowRounding = 4.389f;
+
+		AssetDatabase::DiscoverAssets();
 	}
 
 	void EditorApp::Tick()

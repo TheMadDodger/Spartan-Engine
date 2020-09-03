@@ -4,7 +4,7 @@
 
 namespace Spartan
 {
-    ModelLoader::ModelLoader()
+    ModelLoader::ModelLoader() : ContentLoader({ ".fbx", ".obj" })
     {
     }
 

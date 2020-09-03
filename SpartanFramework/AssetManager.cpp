@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "AssetManager.h"
 
-namespace Spartan::Serialization
+namespace Spartan
 {
 	std::hash<std::string> AssetManager::m_AssetHasher;
 
@@ -11,17 +11,17 @@ namespace Spartan::Serialization
 		return m_AssetHasher(name);
 	}
 
-	BaseAsset* AssetManager::CreateInstance(const std::type_info& type)
+	Content* AssetManager::CreateInstance(const std::type_info& type)
 	{
 		AssetManager* pInstance = GetInstance();
 
 		size_t assetHash = GetAssetHash(type);
 		GUID newGUID;
 		if (CoCreateGuid(&newGUID) != S_OK) return nullptr;
-		return pInstance->m_AssetTemplates[assetHash]->Create(newGUID);
+		return nullptr;//pInstance->m_AssetTemplates[assetHash]->Create();
 	}
 
-	BaseAsset* AssetManager::GetAsset(GUID guid)
+	Content* AssetManager::GetAsset(GUID guid)
 	{
 		AssetManager* pInstance = GetInstance();
 		auto it = pInstance->m_Assets.find(guid);
@@ -29,12 +29,12 @@ namespace Spartan::Serialization
 		return pInstance->m_Assets[guid];
 	}
 
-	void AssetManager::AddAsset(BaseAsset* asset)
+	void AssetManager::AddAsset(Content* asset)
 	{
-		GetInstance()->m_Assets[asset->m_GUID] = asset;
+		GetInstance()->m_Assets[asset->GetGUID()] = asset;
 	}
 
-	BaseAsset* AssetManager::GetAssetTemplate(size_t assetHash)
+	Content* AssetManager::GetAssetTemplate(size_t assetHash)
 	{
 		AssetManager* pInstance = GetInstance();
 		auto it = pInstance->m_AssetTemplates.find(assetHash);

@@ -4,7 +4,7 @@
 #include "GUIDComparer.h"
 #include "LocalDatabase.h"
 
-namespace Spartan::Serialization
+namespace Spartan
 {
 	class AssetDatabase : public Singleton<AssetDatabase>
 	{
@@ -12,19 +12,24 @@ namespace Spartan::Serialization
 		AssetDatabase();
 		virtual ~AssetDatabase();
 
-		static BaseAsset* LoadAsset(const std::string& relativeAssetPath);
-		static BaseAsset* LoadAsset(GUID guid);
+		//static Serialization::BaseAsset* LoadAsset(const std::string& relativeAssetPath);
+		static Content* LoadAsset(GUID guid);
 
 		static void Save();
 		static void Refresh();
 
+		static void DiscoverAssets();
+
 	private:
-		static BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
+		//static Serialization::BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
 
 		void WriteDatabase();
 
+		static void ProcessDirectory(const std::string& path);
+		static void ProcessFile(const std::filesystem::path& filePath);
+
 	private:
-		map<GUID, std::string, GUIDComparer> m_AssetPaths;
+		map<GUID, std::string, Serialization::GUIDComparer> m_AssetPaths;
 		LocalDatabase* m_pDatabaseInstance;
 	};
 }

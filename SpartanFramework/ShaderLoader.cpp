@@ -4,7 +4,7 @@
 
 namespace Spartan
 {
-	ShaderLoader::ShaderLoader()
+	ShaderLoader::ShaderLoader() : ContentLoader({ ".fx" })
 	{
 	}
 

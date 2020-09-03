@@ -3,7 +3,7 @@
 
 namespace Spartan
 {
-	GradientLoader::GradientLoader()
+	GradientLoader::GradientLoader() : ContentLoader({ ".grad" })
 	{
 	}
 

@@ -3,7 +3,7 @@
 
 namespace Spartan
 {
-	FontLoader::FontLoader()
+	FontLoader::FontLoader() : ContentLoader({ ".ttf" })
 	{
 	}
 

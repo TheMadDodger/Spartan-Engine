@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "SerializedObject.h"
 #include "Serializer.h"
-#include "AssetManager.h"
 #include "AssetDatabase.h"
+#include "AssetManager.h"
 
 namespace Spartan::Serialization
 {
@@ -56,7 +56,7 @@ namespace Spartan::Serialization
 	{
 		m_SerializedData.clear();
 		const std::type_info& type = GetType();
-		size_t hashCode = AssetManager::GetAssetHash(type);
+		size_t hashCode = Spartan::AssetManager::GetAssetHash(type);
 		m_SerializedData.push_back(SerializedProperty(hashCode, NULL, "HASHCODE"));
 		PrepareData(m_SerializedData);
 		DefineSerializedProperties(m_SerializedData);

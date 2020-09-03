@@ -2,8 +2,9 @@
 #include "BaseAsset.h"
 #include "Singleton.h"
 #include "GUIDComparer.h"
+#include "Content.h"
 
-namespace Spartan::Serialization
+namespace Spartan
 {
 	class AssetManager : public Singleton<AssetManager>
 	{
@@ -39,20 +40,20 @@ namespace Spartan::Serialization
 			return (T*)CreateInstance(type);
 		}
 
-		static BaseAsset* CreateInstance(const std::type_info& type);
+		static Content* CreateInstance(const std::type_info& type);
 
 	private:
-		static void AddAsset(BaseAsset* asset);
-		static BaseAsset* GetAsset(GUID guid);
-		static BaseAsset* GetAssetTemplate(size_t assetHash);
+		static void AddAsset(Content* asset);
+		static Content* GetAsset(GUID guid);
+		static Content* GetAssetTemplate(size_t assetHash);
 
 	private:
 		friend class BaseAsset;
 		friend class AssetDatabase;
 
 	private:
-		std::map<size_t, BaseAsset*> m_AssetTemplates;
-		std::map<GUID, BaseAsset*, GUIDComparer> m_Assets;
+		std::map<size_t, Content*> m_AssetTemplates;
+		std::map<GUID, Content*, Serialization::GUIDComparer> m_Assets;
 		
 		static std::hash<std::string> m_AssetHasher;
 	};

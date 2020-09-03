@@ -11,7 +11,7 @@ namespace Spartan::Serialization
 
 		virtual const std::type_info& GetClassType() = 0;
 
-		const GUID& GetGUID();
+		const GUID& GetGUID() const;
 
 		virtual BaseAsset* Create(const GUID& guid) = 0;
 

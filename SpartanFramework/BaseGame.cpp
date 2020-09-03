@@ -13,6 +13,7 @@
 #endif // _DEBUG
 #include "PostProcessingStack.h"
 #include "Components.h"
+#include "Serializer.h"
 
 namespace Spartan
 {
@@ -104,6 +105,7 @@ namespace Spartan
 			return false;
 		}
 
+		Serialization::Serializer::LoadSerializers();
 		RegisterPrefabs(m_pPrefabs);
 		RegisterCoreComponents();
 		RegisterComponents();

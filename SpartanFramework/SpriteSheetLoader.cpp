@@ -4,7 +4,7 @@
 
 namespace Spartan
 {
-	SpriteSheetLoader::SpriteSheetLoader()
+	SpriteSheetLoader::SpriteSheetLoader() : ContentLoader({ ".bin" })
 	{
 	}
 

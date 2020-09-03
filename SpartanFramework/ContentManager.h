@@ -46,6 +46,8 @@ namespace Spartan
 			return nullptr;
 		}
 
+		Content* Load(const std::string& file);
+
 		static bool FileExists(const std::string& file)
 		{
 			if (FILE* f = fopen(file.c_str(), "r")) {

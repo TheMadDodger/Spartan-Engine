@@ -5,7 +5,7 @@ using namespace std;
 
 namespace Spartan
 {
-	AudioFileLoader::AudioFileLoader()
+	AudioFileLoader::AudioFileLoader() : ContentLoader({ ".wav", ".mp3" })
 	{
 	}
 
