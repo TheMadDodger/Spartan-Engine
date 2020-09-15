@@ -1,12 +1,12 @@
 #pragma once
-#include "SEObject.h"
+#include "Content.h"
 #include "SerializedProperty.h"
 
 #define PROPERTY(x) Spartan::Serialization::SerializedProperty(x, &x, #x)
 
 namespace Spartan::Serialization
 {
-	class SerializedObject : public SEObject
+	class SerializedObject : public Content
 	{
 	public:
 		SerializedObject();

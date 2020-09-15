@@ -35,4 +35,15 @@ namespace Spartan
 			return command;
 		}
 	};
+
+	struct SQLSelectDef
+	{
+		std::string Range;
+		std::string TableName;
+	};
+
+	struct SQLSelectResult
+	{
+		vector<map<string, string>> Data;
+	};
 }

@@ -21,10 +21,15 @@
 #include "ComponentEditor.h"
 #include "PropertyDrawer.h"
 #include "StandardPropertyDrawers.h"
+#include "ContentBrowser.h"
 
 #include <LocalDatabase.h>
 #include <AssetDatabase.h>
 #include "Serializer.h"
+#include "Tumbnail.h"
+#include "TextureTumbnailGenerator.h"
+#include "FontTumbnailGenerator.h"
+#include "AudioTumbnailGenerator.h"
 
 namespace Spartan
 {
@@ -33,6 +38,7 @@ namespace Spartan
 	EditorApp::EditorApp(BaseGame* pGame) : m_pGame(pGame), m_IsRunning(false), m_PlayModeActive(false), m_PlayModePaused(false), m_pComponentWindow(nullptr)
 	{
 		m_pEditorApp = this;
+		BaseGame::m_AssetRootPath = "./../Assets";
 	}
 
 	EditorApp::~EditorApp()
@@ -134,6 +140,10 @@ namespace Spartan
 		ImGui::GetStyle().WindowRounding = 4.389f;
 
 		AssetDatabase::DiscoverAssets();
+
+		Editor::Tumbnail::AddGenerator<Editor::TextureTumbnailGenerator>();
+		Editor::Tumbnail::AddGenerator<Editor::FontTumbnailGenerator>();
+		Editor::Tumbnail::AddGenerator<Editor::AudioTumbnailGenerator>();
 	}
 
 	void EditorApp::Tick()
@@ -224,22 +234,8 @@ namespace Spartan
 	{
 		Initialize();
 
-		LocalDatabase* pInstance = LocalDatabase::BeginDatabase("test.db");
+		//AssetDatabase::DiscoverAssets();
 
-		SQLCreateTableDef tableDef;
-		tableDef.Name = "TestTable";
-		tableDef.Keys.push_back(SQLTableKeyData());
-		tableDef.Keys[0].Attributes.push_back("PRIMARY KEY");
-		tableDef.Keys[0].Attributes.push_back("NOT NULL");
-		tableDef.Keys[0].Type = "CHAR(32)";
-		tableDef.Keys[0].Name = "GUID";
-		tableDef.Keys.push_back(SQLTableKeyData());
-		tableDef.Keys[1].Attributes.push_back("NOT NULL");
-		tableDef.Keys[1].Type = "TEXT";
-		tableDef.Keys[1].Name = "Path";
-		pInstance->CreateTable(tableDef);
-		LocalDatabase::EndDatabase(pInstance);
-		
 		std::ofstream fStream("testscene.scene");
 		Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);
 		fStream.close();
@@ -356,7 +352,7 @@ namespace Spartan
 		Editor::MenuBar::OnGUI();
 		Editor::PopupManager::OnGUI();
 
-		//bool open = true;
+		bool open = true;
 		//ImGui::ShowDemoWindow(&open);
 
 		//{
@@ -484,5 +480,6 @@ namespace Spartan
 		Editor::MenuBar::AddMenuItem("Window/Game View", []() {Editor::EditorWindow::GetWindow<Editor::GameWindow>(); });
 		Editor::MenuBar::AddMenuItem("Window/Scene Graph", []() {Editor::EditorWindow::GetWindow<Editor::SceneGraphWindow>(); });
 		Editor::MenuBar::AddMenuItem("Window/Inspector", []() {Editor::EditorWindow::GetWindow<Editor::InspectorWindow>(true); });
+		Editor::MenuBar::AddMenuItem("Window/Content Browser", []() {Editor::EditorWindow::GetWindow<Editor::ContentBrowser>(); });
 	}
 }

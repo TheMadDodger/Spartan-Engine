@@ -2,7 +2,6 @@
 #include "LocalDatabase.h"
 #include "Debug.h"
 
-
 #define SQLCHECK_ERROR(rc) if(rc != SQLITE_OK) \
 { \
 	Utilities::Debug::LogWarning("SQL error: " + std::string(m_pLastError));\
@@ -41,6 +40,25 @@ namespace Spartan
 		return true;
 	}
 
+	bool LocalDatabase::ExecuteRawCommand(const std::string& cmd)
+	{
+		SQLCHECK_ERROR(SQLITE_COMMAND(cmd.c_str(), 0));
+		return true;
+	}
+
+	bool LocalDatabase::Select(const std::string& tableName, const std::string& range, const std::string& querry)
+	{
+		std::string cmd = "SELECT " + range + " FROM " + tableName + " " + querry + ";";
+		m_LastSelectResult.Data.clear();
+		SQLCHECK_ERROR(sqlite3_exec(m_pSQLite, cmd.c_str(), SQLSelectCallback, this, &m_pLastError));
+		return true;
+	}
+
+	const SQLSelectResult& LocalDatabase::GetSelectResult() const
+	{
+		return m_LastSelectResult;
+	}
+
 	LocalDatabase::LocalDatabase(const char* path) : m_Path(path), m_pLastError(NULL), m_pSQLite(nullptr)
 	{
 	}
@@ -66,6 +84,22 @@ namespace Spartan
 		for (i = 0; i < argc; i++) {
 			printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
 		}
+		printf("\n");
+		return 0;
+	}
+
+	int LocalDatabase::SQLSelectCallback(void* data, int argc, char** argv, char** azColName)
+	{
+		LocalDatabase* pDatabase = (LocalDatabase*)data;
+		pDatabase->m_LastSelectResult.Data.push_back(std::map<string, string>());
+		size_t currentIndex = pDatabase->m_LastSelectResult.Data.size() - 1;
+
+		for (int i = 0; i < argc; i++)
+		{
+			printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+			pDatabase->m_LastSelectResult.Data[currentIndex][azColName[i]] = argv[i] ? argv[i] : "NULL";
+		}
+
 		printf("\n");
 		return 0;
 	}

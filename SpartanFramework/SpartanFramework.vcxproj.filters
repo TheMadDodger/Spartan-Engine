@@ -420,6 +420,12 @@
     <ClInclude Include="Model.h">
       <Filter>Content Management\Content</Filter>
     </ClInclude>
+    <ClInclude Include="MetaData.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptableObjectLoader.h">
+      <Filter>Content Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioFileLoader.cpp">
@@ -709,6 +715,12 @@
     </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Content Management\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="MetaData.cpp">
+      <Filter>Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptableObjectLoader.cpp">
+      <Filter>Content Management</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

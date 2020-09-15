@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "AssetManager.h"
+#include "AssetDatabase.h"
 
 namespace Spartan
 {
@@ -25,7 +26,14 @@ namespace Spartan
 	{
 		AssetManager* pInstance = GetInstance();
 		auto it = pInstance->m_Assets.find(guid);
-		if (it == pInstance->m_Assets.end()) return nullptr;
+		if (it == pInstance->m_Assets.end())
+		{
+			std::string path = AssetDatabase::GetInstance()->GetAssetPath(guid);
+			Content* pAsset = ContentManager::GetInstance()->Load(BaseGame::GetAssetRootPath() + path);
+			if (!pAsset) return nullptr;
+			pInstance->m_Assets[guid] = pAsset;
+			return pAsset;
+		}
 		return pInstance->m_Assets[guid];
 	}
 

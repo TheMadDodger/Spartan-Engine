@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorWindow.h"
+
 namespace Spartan::Editor
 {
 	class EditorPreferencesWindow : public EditorWindowTemplate<EditorPreferencesWindow>
@@ -10,9 +11,7 @@ namespace Spartan::Editor
 
 	private:
 		virtual void OnGUI() override;
-
 		void UpdateTheme();
-
 		void AppearanceTab();
 
 	private:

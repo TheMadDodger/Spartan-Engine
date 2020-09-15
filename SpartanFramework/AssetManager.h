@@ -42,9 +42,10 @@ namespace Spartan
 
 		static Content* CreateInstance(const std::type_info& type);
 
+		static Content* GetAsset(GUID guid);
+
 	private:
 		static void AddAsset(Content* asset);
-		static Content* GetAsset(GUID guid);
 		static Content* GetAssetTemplate(size_t assetHash);
 
 	private:

@@ -17,6 +17,8 @@
 
 namespace Spartan
 {
+	std::string BaseGame::m_AssetRootPath = "./Resources";
+
 	BaseGame* BaseGame::m_pGame = nullptr;
 
 	BaseGame::BaseGame(const GameSettings& settings) : m_GameSettings(settings)
@@ -242,6 +244,11 @@ namespace Spartan
 	{
 		m_GameSettings = newSettings;
 		m_GameContext.pRenderer->ChangeWindow();
+	}
+
+	const std::string& BaseGame::GetAssetRootPath()
+	{
+		return m_AssetRootPath;
 	}
 
 	void BaseGame::HandleWindowEvent(SDL_Event* event)

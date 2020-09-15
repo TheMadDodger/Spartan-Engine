@@ -43,6 +43,8 @@ namespace Spartan
 		virtual void RegisterAssets() {}
 		virtual void RegisterComponents() {};
 
+		static const std::string& GetAssetRootPath();
+
 #ifdef _DEBUG
 	protected:
 		virtual void RegisterConsoleCommands(ConsoleInput*) {}
@@ -69,6 +71,7 @@ namespace Spartan
 		ConsoleInput* m_pConspole;
 #endif
 
+		static std::string m_AssetRootPath;
 		bool m_bQuitGame = false;
 	};
 }

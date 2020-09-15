@@ -195,6 +195,7 @@
     <ClInclude Include="LineRenderMaterial.h" />
     <ClInclude Include="LocalDatabase.h" />
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="MetaData.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Node.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="PhysicsObjectComponent.h" />
     <ClInclude Include="ScreenRect.h" />
     <ClInclude Include="ScriptableObject.h" />
+    <ClInclude Include="ScriptableObjectLoader.h" />
     <ClInclude Include="SEObject.h" />
     <ClInclude Include="AStarPathFinding.h" />
     <ClInclude Include="Commands.h" />
@@ -330,6 +332,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="MeshRenderComponent.cpp" />
+    <ClCompile Include="MetaData.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="PathFindingNodes.cpp" />
@@ -342,6 +345,7 @@
     <ClCompile Include="RenderTexture.cpp" />
     <ClCompile Include="PhysicsObjectComponent.cpp" />
     <ClCompile Include="ScreenRect.cpp" />
+    <ClCompile Include="ScriptableObjectLoader.cpp" />
     <ClCompile Include="SEObject.cpp" />
     <ClCompile Include="SerializedObject.cpp" />
     <ClCompile Include="SerializedProperty.cpp" />

@@ -19,6 +19,9 @@
     <Filter Include="PropertyDrawing">
       <UniqueIdentifier>{f8c98c50-aae2-4c1a-9524-dfa67c534ae2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tumbnails">
+      <UniqueIdentifier>{8010753f-f38a-411a-9a5d-5cf20fd0f43c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -117,6 +120,24 @@
     <ClInclude Include="ComponentPopup.h">
       <Filter>CoreEditor</Filter>
     </ClInclude>
+    <ClInclude Include="ContentBrowser.h">
+      <Filter>EditorWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="Tumbnail.h">
+      <Filter>Tumbnails</Filter>
+    </ClInclude>
+    <ClInclude Include="TumbnailGenerator.h">
+      <Filter>Tumbnails</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureTumbnailGenerator.h">
+      <Filter>Tumbnails</Filter>
+    </ClInclude>
+    <ClInclude Include="FontTumbnailGenerator.h">
+      <Filter>Tumbnails</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioTumbnailGenerator.h">
+      <Filter>Tumbnails</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -208,6 +229,24 @@
     </ClCompile>
     <ClCompile Include="ComponentPopup.cpp">
       <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentBrowser.cpp">
+      <Filter>EditorWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="Tumbnail.cpp">
+      <Filter>Tumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="TumbnailGenerator.cpp">
+      <Filter>Tumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureTumbnailGenerator.cpp">
+      <Filter>Tumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="FontTumbnailGenerator.cpp">
+      <Filter>Tumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioTumbnailGenerator.cpp">
+      <Filter>Tumbnails</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

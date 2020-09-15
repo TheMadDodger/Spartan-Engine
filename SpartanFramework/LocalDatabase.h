@@ -14,6 +14,12 @@ namespace Spartan
 
 		bool CreateTable(const SQLCreateTableDef& tableDef);
 
+		bool ExecuteRawCommand(const std::string& cmd);
+
+		bool Select(const std::string& tableName, const std::string& range = "*", const std::string& querry = "");
+
+		const SQLSelectResult& GetSelectResult() const;
+
 	private:
 		LocalDatabase(const char* path);
 		~LocalDatabase();
@@ -21,11 +27,13 @@ namespace Spartan
 		bool Open();
 		void Close();
 
-		static int SQLiteCallback(void* NotUsed, int argc, char** argv, char** azColName);
+		static int SQLiteCallback(void* data, int argc, char** argv, char** azColName);
+		static int SQLSelectCallback(void* data, int argc, char** argv, char** azColName);
 
 	private:
 		const char* m_Path;
 		sqlite3* m_pSQLite;
 		char* m_pLastError;
+		SQLSelectResult m_LastSelectResult;
 	};
 }
