@@ -6,14 +6,9 @@ namespace Spartan::Serialization
 	class BaseAsset : public SerializedObject
 	{
 	public:
-		BaseAsset(const GUID& guid);
+		BaseAsset();
 		virtual ~BaseAsset() {}
-
-		virtual const std::type_info& GetClassType() = 0;
-
-		const GUID& GetGUID() const;
-
-		virtual BaseAsset* Create(const GUID& guid) = 0;
+		virtual SEObject* Create() = 0;
 
 	private:
 		virtual void PrepareData(std::vector<SerializedProperty>& props) override;
@@ -21,6 +16,6 @@ namespace Spartan::Serialization
 	private:
 		friend class AssetManager;
 		friend class AssetDatabase;
-		const GUID m_GUID;
+		friend class ScriptableObjectLoader;
 	};
 }

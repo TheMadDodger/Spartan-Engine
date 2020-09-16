@@ -3,8 +3,6 @@
 #include "SerializedObject.h"
 #include "SerializedProperty.h"
 
-#define REGISTER_COMPONENT(x) Spartan::BaseComponent::Register<x>()
-
 #define COMPONENT(comp) BASIC_OBJECT(comp, BaseComponent)
 
 namespace Spartan
@@ -27,15 +25,8 @@ namespace Spartan
 		virtual ~BaseComponent();
 
 		GameObject* GetGameObject() const { return m_pGameObject; }
-		
-		template<class T>
-		static void Register()
-		{
-			BaseComponent* pComp = new T;
-			m_pRegisteredComponents.push_back(pComp);
-		}
 
-		static BaseComponent* CreateFromName(const std::string& name);
+		//static BaseComponent* CreateFromName(const std::string& name);
 
 		const std::string& GetName() { return m_Name; }
 
@@ -45,13 +36,10 @@ namespace Spartan
 		bool IsEnabled() { return m_bEnabled; }
 		void SetEnabled(bool enabled) { m_bEnabled = enabled; }
 
-		virtual const std::type_info& GetBaseType() { return typeid(BaseComponent); }
-		virtual const std::type_info& GetType() { return typeid(BaseComponent); }
-
 		BaseComponent* CreateComponentFromFileStream();
 
-		static size_t GetRegisteredComponentCount();
-		static BaseComponent* GetRegisteredComponent(int index);
+		//static size_t GetRegisteredComponentCount();
+		//static BaseComponent* GetRegisteredComponent(int index);
 
 		virtual std::string GetComponentPath();
 
@@ -70,8 +58,6 @@ namespace Spartan
 		virtual void OnDestroy() { }
 
 		virtual void DefineSerializedProperties(std::vector<Serialization::SerializedProperty>&) override {};
-
-		static std::vector<BaseComponent*> m_pRegisteredComponents;
 		bool m_CanTickInEditor = false;
 		bool m_CanTickInGame = true;
 		bool m_bEnabled = true;

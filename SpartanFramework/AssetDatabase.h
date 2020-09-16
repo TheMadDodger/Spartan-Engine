@@ -13,13 +13,13 @@ namespace Spartan
 		AssetDatabase();
 		virtual ~AssetDatabase();
 
-		//static Serialization::BaseAsset* LoadAsset(const std::string& relativeAssetPath);
-		static Content* LoadAsset(GUID guid);
-
 		static void Save();
 		static void Refresh();
 
 		static void DiscoverAssets();
+		static std::string GetAssetPath(Content* pAsset);
+
+		static void CreateAsset(Content* pAsset, const std::string& path);
 
 	private:
 		//static Serialization::BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
@@ -37,6 +37,9 @@ namespace Spartan
 
 		GUID StringToGuid(const std::string& str);
 		std::string GuidToString(GUID guid);
+
+		std::string GetAssetPath_Internal(Content* pAsset);
+		void CreateAsset_Internal(Content* pAsset, const std::string& path);
 
 	private:
 		friend class AssetManager;

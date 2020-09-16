@@ -3,6 +3,7 @@
 #include "Selection.h"
 #include "Tumbnail.h"
 #include <MetaData.h>
+#include "AssetManager.h"
 
 namespace Spartan::Editor
 {
@@ -196,7 +197,15 @@ namespace Spartan::Editor
 
             Spartan::Serialization::MetaData metaData = Spartan::Serialization::MetaData::Read(path.string());
             TextureData* pTexture = Tumbnail::GetTumbnail(metaData);
+
             ImGui::ImageButton(pTexture ? (void*)pTexture->GetID() : NULL, ImVec2((float)iconSize, (float)iconSize));
+
+            if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0))
+            {
+                Content* pAsset = AssetManager::GetAsset(metaData.m_GUID);
+                Selection::SetActiveObject(pAsset);
+            }
+
             ImGui::Text(path.filename().replace_extension().string().c_str());
 
             int mod = index % columns;

@@ -10,46 +10,13 @@ namespace Spartan
 		std::string path = BaseGame::GetAssetRootPath() + "/Assets.db";
 		m_pDatabaseInstance = LocalDatabase::BeginDatabase(path.c_str());
 
-		//SQLCreateTableDef tableDef;
-		//tableDef.Name = "Assets";
-		//tableDef.Keys.push_back(SQLTableKeyData());
-		//tableDef.Keys[0].Attributes.push_back("PRIMARY KEY");
-		//tableDef.Keys[0].Attributes.push_back("NOT NULL");
-		//tableDef.Keys[0].Type = "CHAR(32)";
-		//tableDef.Keys[0].Name = "GUID";
-		//tableDef.Keys.push_back(SQLTableKeyData());
-		//tableDef.Keys[1].Attributes.push_back("NOT NULL");
-		//tableDef.Keys[1].Type = "INT UNSIGNED";
-		//tableDef.Keys[1].Name = "HashCode";
-		//tableDef.Keys.push_back(SQLTableKeyData());
-		//tableDef.Keys[2].Attributes.push_back("NOT NULL");
-		//tableDef.Keys[2].Type = "TEXT";
-		//tableDef.Keys[2].Name = "Path";
-		//m_pDatabaseInstance->CreateTable(tableDef);
-
 		m_pDatabaseInstance->ExecuteRawCommand("CREATE TABLE Types (TypeID INTEGER PRIMARY KEY AUTOINCREMENT, Name varchar(255) NOT NULL, FullName varchar(255) NOT NULL, HashCode INT UNSIGNED);");
 		m_pDatabaseInstance->ExecuteRawCommand("CREATE TABLE Assets (GUID UNIQUEIDENTIFIER PRIMARY KEY, Name varchar(255) NOT NULL, Path TEXT NOT NULL, TypeID INT UNSIGNED, FOREIGN KEY(TypeID) REFERENCES Types(TypeID));");
-
-		//m_pDatabaseInstance->ExecuteRawCommand("INSERT INTO Types (Name, FullName, HashCode) VALUES (\'TEST\', \'SOME_TEST_TYPE\', 648176817);");
 	}
 
 	AssetDatabase::~AssetDatabase()
 	{
 		LocalDatabase::EndDatabase(m_pDatabaseInstance);
-	}
-
-	Content* AssetDatabase::LoadAsset(GUID guid)
-	{
-		return nullptr;
-
-		//Content* pAsset = AssetManager::GetAsset(guid);
-		//if (pAsset != nullptr) return pAsset;
-		//
-		//AssetDatabase* pInstance = GetInstance();
-		//auto it = pInstance->m_AssetPaths.find(guid);
-		//if (it == pInstance->m_AssetPaths.end()) return nullptr;
-		//std::string path = pInstance->m_AssetPaths[guid];
-		//return LoadAsset(path);
 	}
 
 	void AssetDatabase::Save()
@@ -76,28 +43,15 @@ namespace Spartan
 		// Save the asset database to file
 	}
 
-	//Serialization::BaseAsset* AssetDatabase::LoadAsset(const std::string& relativeAssetPath)
-	//{
-	//	std::ifstream fileStream("./Resources/Assets/" + relativeAssetPath);
-	//	Serialization::BaseAsset* pAsset = DeserializeToAsset(fileStream);
-	//	fileStream.close();
-	//	return pAsset;
-	//}
+	std::string AssetDatabase::GetAssetPath(Content* pAsset)
+	{
+		return GetInstance()->GetAssetPath_Internal(pAsset);
+	}
 
-	//Serialization::BaseAsset* AssetDatabase::DeserializeToAsset(std::ifstream& fileStream)
-	//{
-	//	size_t assetHash;
-	//	GUID assetGUID;
-	//	fileStream.read((char*)&assetHash, sizeof(size_t));
-	//	fileStream.read((char*)&assetGUID, sizeof(GUID));
-	//	Content* assetTemplate = AssetManager::GetAssetTemplate(assetHash);
-	//	if (assetTemplate == nullptr) return nullptr;
-	//
-	//	// TODO: Check if the GUID already exists
-	//	Serialization::BaseAsset* deserializedAsset = assetTemplate->Create(assetGUID);
-	//	deserializedAsset->Deserialize(fileStream, 2);
-	//	return deserializedAsset;
-	//}
+	void AssetDatabase::CreateAsset(Content* pAsset, const std::string& path)
+	{
+		GetInstance()->CreateAsset_Internal(pAsset, BaseGame::GetAssetRootPath() + "/" + path);
+	}
 
 	void AssetDatabase::WriteDatabase()
 	{
@@ -151,7 +105,7 @@ namespace Spartan
 		if (pContent == nullptr) return;
 
 		const std::type_info& type = pContent->GetType();
-		size_t hashCode = AssetManager::GetAssetHash(type);
+		size_t hashCode = SEObject::GetClassHash(type);
 
 		// Make the path relative to the asset/resource path!
 		std::string pathToFile = filePath.string();
@@ -187,7 +141,7 @@ namespace Spartan
 
 	bool AssetDatabase::AddType(const std::type_info& type)
 	{
-		size_t hashCode = AssetManager::GetAssetHash(type);
+		size_t hashCode = SEObject::GetClassHash(type);
 		if (!m_pDatabaseInstance->Select("Types", "*", "WHERE HashCode = " + to_string(hashCode))) return false; // Something went wrong
 		const SQLSelectResult& result = m_pDatabaseInstance->GetSelectResult();
 		if (result.Data.size() > 0) return true; // Type already exists!
@@ -240,5 +194,26 @@ namespace Spartan
 			guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
 
 		return std::string(guid_cstr);
+	}
+
+	std::string AssetDatabase::GetAssetPath_Internal(Content* pAsset)
+	{
+		if (!m_pDatabaseInstance->Select("Assets", "Path", "WHERE GUID = \'" + GuidToString(pAsset->GetGUID()) + "\';")) return "";
+		const SQLSelectResult& result = m_pDatabaseInstance->GetSelectResult();
+		if (result.Data.size() <= 0) return "";
+		return BaseGame::GetAssetRootPath() + result.Data[0].at("Path");
+	}
+
+	void AssetDatabase::CreateAsset_Internal(Content* pAsset, const std::string& path)
+	{
+		filesystem::path filePath = path;
+		filesystem::path filename = filePath.filename();
+		if (!ContentManager::GetInstance()->Save(pAsset, path)) return;
+		filesystem::path metaFilePath = filePath.replace_extension(".meta");
+		size_t hashCode = SEObject::GetClassHash(pAsset->GetType());
+		pAsset->m_GUID = AssetDatabase::AddAsset(pAsset->GetType(), filename.string(), path);
+		Serialization::MetaData metaData = Serialization::MetaData(hashCode, pAsset->m_GUID, path);
+		metaData.Write();
+		ContentManager::GetInstance()->Save(pAsset);
 	}
 }

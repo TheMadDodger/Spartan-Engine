@@ -57,6 +57,9 @@
     <ClInclude Include="BufferTestMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestAsset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BufferTestMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestAsset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

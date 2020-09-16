@@ -138,6 +138,9 @@
     <ClInclude Include="AudioTumbnailGenerator.h">
       <Filter>Tumbnails</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptableObjectEditor.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -247,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="AudioTumbnailGenerator.cpp">
       <Filter>Tumbnails</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptableObjectEditor.cpp">
+      <Filter>Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

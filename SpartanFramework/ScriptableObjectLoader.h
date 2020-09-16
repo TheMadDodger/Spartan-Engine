@@ -10,6 +10,8 @@ namespace Spartan
 		ScriptableObjectLoader();
 		~ScriptableObjectLoader();
 
+		virtual bool SaveContent(Serialization::BaseAsset* pAsset, const std::string& path) override;
+
 	private:
 		Serialization::BaseAsset* LoadContent(const std::string& file) override;
 	};

@@ -40,8 +40,7 @@ namespace Spartan
 
 		virtual void RegisterLayers(LayerManager*) {};
 		virtual void RegisterPrefabs(std::vector<GameObject*>& prefabs) = 0;
-		virtual void RegisterAssets() {}
-		virtual void RegisterComponents() {};
+		virtual void RegisterUserClasses() {};
 
 		static const std::string& GetAssetRootPath();
 
@@ -58,7 +57,7 @@ namespace Spartan
 
 		void HandleWindowEvent(SDL_Event* event);
 
-		void RegisterCoreComponents();
+		void RegisterCoreClasses();
 
 	protected:
 		friend class EditorApp;

@@ -16,5 +16,7 @@ public:
 	void GamePaint(const Spartan::GameContext &gameContext) override;
 
 	virtual void RegisterPrefabs(std::vector<Spartan::GameObject*> &) override {};
+
+	virtual void RegisterUserClasses() override;
 };
 

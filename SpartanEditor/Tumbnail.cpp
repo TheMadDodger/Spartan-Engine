@@ -25,6 +25,7 @@ namespace Spartan::Editor
 		if (pGenerator == nullptr) return nullptr;
 		TextureData* pTexture = pGenerator->GetTumbnail(metaData);
 		m_pTumbnails[metaData.m_GUID] = pTexture;
+		return pTexture;
 	}
 
 	void Tumbnail::AddGenerator(BaseTumbnailGenerator* pGenerator)
@@ -46,7 +47,7 @@ namespace Spartan::Editor
 		for (size_t i = 0; i < m_pGenerators.size(); i++)
 		{
 			const std::type_info& type = m_pGenerators[i]->GetAssetType();
-			size_t hash = AssetManager::GetAssetHash(type);
+			size_t hash = SEObject::GetClassHash(type);
 			if (hash != hashCode) continue;
 			return m_pGenerators[i];
 		}

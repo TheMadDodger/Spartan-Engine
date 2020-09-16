@@ -54,6 +54,9 @@ namespace Spartan
 		//delete m_GameContext.pParticleManager;
 		//m_GameContext.pParticleManager = nullptr;
 
+		// Clean up classes
+		SEObject::DestroyClassTemplates();
+
 #ifdef _DEBUG
 		delete m_pConspole;
 #endif
@@ -109,9 +112,8 @@ namespace Spartan
 
 		Serialization::Serializer::LoadSerializers();
 		RegisterPrefabs(m_pPrefabs);
-		RegisterCoreComponents();
-		RegisterComponents();
-		RegisterAssets();
+		RegisterCoreClasses();
+		RegisterUserClasses();
 
 		// Run user defined Initialize()
 		Initialize(m_GameContext);
@@ -313,24 +315,24 @@ namespace Spartan
         }
     }
 
-	void BaseGame::RegisterCoreComponents()
+	void BaseGame::RegisterCoreClasses()
 	{
-		REGISTER_COMPONENT(TransformComponent);
-		REGISTER_COMPONENT(ImageRenderComponent);
-		REGISTER_COMPONENT(CameraComponent);
-		REGISTER_COMPONENT(AudioSourceComponent);
-		REGISTER_COMPONENT(SpriteSheetComponent);
-		REGISTER_COMPONENT(RigidBody2DComponent);
-		REGISTER_COMPONENT(Collider2DComponent);
-		REGISTER_COMPONENT(TextRenderComponent);
+		REGISTER_CLASS(TransformComponent);
+		REGISTER_CLASS(ImageRenderComponent);
+		REGISTER_CLASS(CameraComponent);
+		REGISTER_CLASS(AudioSourceComponent);
+		REGISTER_CLASS(SpriteSheetComponent);
+		REGISTER_CLASS(RigidBody2DComponent);
+		REGISTER_CLASS(Collider2DComponent);
+		REGISTER_CLASS(TextRenderComponent);
 		//COMPONENT(ParticleComponent);
 		//COMPONENT(UIContainer);
-		REGISTER_COMPONENT(SkinnedMeshComponent);
-		REGISTER_COMPONENT(LineRenderComponent);
-		REGISTER_COMPONENT(ShakeComponent);
-		REGISTER_COMPONENT(MeshRenderComponent);
-		REGISTER_COMPONENT(AIComponent);
-		REGISTER_COMPONENT(GridComponent);
-		REGISTER_COMPONENT(PhysicsObjectComponent);
+		REGISTER_CLASS(SkinnedMeshComponent);
+		REGISTER_CLASS(LineRenderComponent);
+		REGISTER_CLASS(ShakeComponent);
+		REGISTER_CLASS(MeshRenderComponent);
+		REGISTER_CLASS(AIComponent);
+		REGISTER_CLASS(GridComponent);
+		REGISTER_CLASS(PhysicsObjectComponent);
 	}
 }

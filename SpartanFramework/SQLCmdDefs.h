@@ -44,6 +44,6 @@ namespace Spartan
 
 	struct SQLSelectResult
 	{
-		vector<map<string, string>> Data;
+		std::vector<std::map<std::string, std::string>> Data;
 	};
 }

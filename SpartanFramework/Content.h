@@ -16,6 +16,7 @@ namespace Spartan
 	protected:
 		friend class ContentManager;
 		friend class AssetDatabase;
+		friend class ScriptableObjectLoader;
 		GUID m_GUID;
 	};
 }

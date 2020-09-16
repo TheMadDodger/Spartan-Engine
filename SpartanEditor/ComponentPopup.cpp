@@ -66,10 +66,11 @@ namespace Spartan::Editor
 		m_pFilteredComponents.clear();
 		if (m_Filter == "") return;
 
-		size_t compCount = BaseComponent::GetRegisteredComponentCount();
+		size_t compCount = 0;
+		if (!SEObject::GetRegisteredClassCount<BaseComponent>(compCount)) return;
 		for (size_t i = 0; i < compCount; i++)
 		{
-			BaseComponent* pComp = BaseComponent::GetRegisteredComponent(i);
+			BaseComponent* pComp = SEObject::GetRegisteredClassAtIndex<BaseComponent>(i);
 			if (pComp->GetType() == typeid(TransformComponent)) continue;
 
 			if (pComp->GetName().find(m_Filter) == std::string::npos) continue;
@@ -79,10 +80,11 @@ namespace Spartan::Editor
 
 	void ComponentPopup::LoadComponents()
 	{
-		size_t compCount = BaseComponent::GetRegisteredComponentCount();
+		size_t compCount = 0;
+		if (!SEObject::GetRegisteredClassCount<BaseComponent>(compCount)) return;
 		for (size_t i = 0; i < compCount; i++)
 		{
-			BaseComponent* pComp = BaseComponent::GetRegisteredComponent(i);
+			BaseComponent* pComp = SEObject::GetRegisteredClassAtIndex<BaseComponent>(i);
 			if (pComp->GetType() == typeid(TransformComponent)) continue;
 			std::vector<std::string> disectedPath = DisectPath(pComp->GetComponentPath());
 

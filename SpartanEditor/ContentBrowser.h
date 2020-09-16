@@ -25,5 +25,4 @@ namespace Spartan::Editor
 		filesystem::path m_SelectedPath;
 		filesystem::path m_RootAssetPath;
 	};
-
 }

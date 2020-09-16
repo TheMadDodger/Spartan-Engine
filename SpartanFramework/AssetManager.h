@@ -13,31 +13,10 @@ namespace Spartan
 		virtual ~AssetManager() {}
 
 		template<class T>
-		static void RegisterAsset()
-		{
-			AssetManager* pInstance = GetInstance();
-
-			const std::type_info& type = typeid(T);
-			size_t hashCode = GetAssetHash<T>();
-			auto it = pInstance->m_AssetTemplates.find(hashCode);
-			if (it != pInstance->m_AssetTemplates.end()) return;
-			pInstance->m_AssetTemplates[hashCode] = new T(GUID());
-		}
-
-		template<class T>
-		static size_t GetAssetHash()
-		{
-			const std::type_info& type = typeid(T);
-			return GetAssetHash(type);
-		}
-
-		static size_t GetAssetHash(const std::type_info& type);
-
-		template<class T>
 		static T* CreateInstance()
 		{
 			const std::type_info& type = typeid(T);
-			return (T*)CreateInstance(type);
+			return (T*)SEObject::CreateObject<T>();
 		}
 
 		static Content* CreateInstance(const std::type_info& type);
@@ -46,16 +25,13 @@ namespace Spartan
 
 	private:
 		static void AddAsset(Content* asset);
-		static Content* GetAssetTemplate(size_t assetHash);
 
 	private:
 		friend class BaseAsset;
 		friend class AssetDatabase;
+		friend class ScriptableObjectLoader;
 
 	private:
-		std::map<size_t, Content*> m_AssetTemplates;
 		std::map<GUID, Content*, Serialization::GUIDComparer> m_Assets;
-		
-		static std::hash<std::string> m_AssetHasher;
 	};
 }

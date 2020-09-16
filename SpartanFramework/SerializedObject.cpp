@@ -6,7 +6,7 @@
 
 namespace Spartan::Serialization
 {
-	SerializedObject::SerializedObject()
+	SerializedObject::SerializedObject() : m_IsDirty(false)
 	{
 	}
 
@@ -18,6 +18,16 @@ namespace Spartan::Serialization
 	{
 		m_SerializedData.clear();
 		DefineSerializedProperties(m_SerializedData);
+	}
+
+	void SerializedObject::SetDirty()
+	{
+		m_IsDirty = true;
+	}
+
+	bool SerializedObject::IsDirty()
+	{
+		return m_IsDirty;
 	}
 
 	void SerializedObject::Serialize(std::ofstream& os)
@@ -56,8 +66,9 @@ namespace Spartan::Serialization
 	{
 		m_SerializedData.clear();
 		const std::type_info& type = GetType();
-		size_t hashCode = Spartan::AssetManager::GetAssetHash(type);
+		size_t hashCode = Spartan::SEObject::GetClassHash(type);
 		m_SerializedData.push_back(SerializedProperty(hashCode, NULL, "HASHCODE"));
+		m_SerializedData.push_back(SerializedProperty(hashCode, &m_GUID, "GUID"));
 		PrepareData(m_SerializedData);
 		DefineSerializedProperties(m_SerializedData);
 	}

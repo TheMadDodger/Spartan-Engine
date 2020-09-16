@@ -1,5 +1,4 @@
 #pragma once
-#include "SEObject.h"
 
 namespace Spartan
 {

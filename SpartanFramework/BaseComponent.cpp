@@ -4,8 +4,6 @@
 
 namespace Spartan
 {
-	std::vector<BaseComponent*> BaseComponent::m_pRegisteredComponents = std::vector<BaseComponent*>();
-
 	BaseComponent::BaseComponent(const char* name) : m_Name(name)
 	{
 	}
@@ -14,34 +12,34 @@ namespace Spartan
 	{
 	}
 
-	BaseComponent* BaseComponent::CreateFromName(const std::string& name)
-	{
-		auto it = std::find_if(m_pRegisteredComponents.begin(), m_pRegisteredComponents.end(), [&](BaseComponent* pComp)
-		{
-			if (pComp->GetName() == name)
-				return true;
-			return false;
-		});
-
-		if (it == m_pRegisteredComponents.end()) return nullptr;
-		auto pComp = *it;
-		return (BaseComponent*)pComp->Create();
-	}
+	//BaseComponent* BaseComponent::CreateFromName(const std::string& name)
+	//{
+	//	auto it = std::find_if(m_pRegisteredComponents.begin(), m_pRegisteredComponents.end(), [&](BaseComponent* pComp)
+	//	{
+	//		if (pComp->GetName() == name)
+	//			return true;
+	//		return false;
+	//	});
+	//
+	//	if (it == m_pRegisteredComponents.end()) return nullptr;
+	//	auto pComp = *it;
+	//	return (BaseComponent*)pComp->Create();
+	//}
 
 	BaseComponent* BaseComponent::CreateComponentFromFileStream()
 	{
 		return nullptr;
 	}
 
-	size_t BaseComponent::GetRegisteredComponentCount()
-	{
-		return m_pRegisteredComponents.size();
-	}
-
-	BaseComponent* BaseComponent::GetRegisteredComponent(int index)
-	{
-		return m_pRegisteredComponents[index];
-	}
+	//size_t BaseComponent::GetRegisteredComponentCount()
+	//{
+	//	return m_pRegisteredComponents.size();
+	//}
+	//
+	//BaseComponent* BaseComponent::GetRegisteredComponent(int index)
+	//{
+	//	return m_pRegisteredComponents[index];
+	//}
 
 	std::string BaseComponent::GetComponentPath()
 	{

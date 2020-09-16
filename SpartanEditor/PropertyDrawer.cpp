@@ -13,12 +13,12 @@ namespace Spartan::Editor
 	{
 	}
 
-	void PropertyDrawer::OnGUI(Serialization::SerializedProperty& prop) const
+	bool PropertyDrawer::OnGUI(Serialization::SerializedProperty& prop) const
 	{
 		ImGui::Text(prop.m_Name.c_str());
 	}
 
-	void PropertyDrawer::DrawProperty(Serialization::SerializedProperty& prop)
+	bool PropertyDrawer::DrawProperty(Serialization::SerializedProperty& prop)
 	{
 		auto it = std::find_if(m_PropertyDrawers.begin(), m_PropertyDrawers.end(), [&](PropertyDrawer* propertyDrawer)
 			{
@@ -27,12 +27,12 @@ namespace Spartan::Editor
 
 		if (it == m_PropertyDrawers.end())
 		{
-			ImGui::Text(prop.m_Name.c_str());
+			//ImGui::Text(prop.m_Name.c_str());
 			return;
 		}
 
 		PropertyDrawer* drawer = *it;
-		drawer->OnGUI(prop);
+		return drawer->OnGUI(prop);
 	}
 
 	const std::type_info& PropertyDrawer::GetPropertyType() const

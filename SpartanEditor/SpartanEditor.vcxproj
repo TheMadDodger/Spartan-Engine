@@ -202,6 +202,7 @@
     <ClInclude Include="SceneGraphWindow.h" />
     <ClInclude Include="SceneViewCamera.h" />
     <ClInclude Include="SceneWindow.h" />
+    <ClInclude Include="ScriptableObjectEditor.h" />
     <ClInclude Include="Selection.h" />
     <ClInclude Include="SkeletonObject.h" />
     <ClInclude Include="imconfig.h" />
@@ -241,6 +242,7 @@
     <ClCompile Include="SceneGraphWindow.cpp" />
     <ClCompile Include="SceneViewCamera.cpp" />
     <ClCompile Include="SceneWindow.cpp" />
+    <ClCompile Include="ScriptableObjectEditor.cpp" />
     <ClCompile Include="Selection.cpp" />
     <ClCompile Include="SkeletonObject.cpp" />
     <ClCompile Include="LevelEditor.cpp" />

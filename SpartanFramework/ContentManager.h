@@ -47,6 +47,8 @@ namespace Spartan
 		}
 
 		Content* Load(const std::string& file);
+		bool Save(Content* pContent);
+		bool Save(Content* pContent, const std::string& path);
 
 		static bool FileExists(const std::string& file)
 		{

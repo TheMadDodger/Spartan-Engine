@@ -8,15 +8,9 @@ namespace Spartan::Serialization
 	class ScriptableObject : public BaseAsset
 	{
 	public:
-		ScriptableObject(const GUID& guid) : BaseAsset(guid) {}
+		ScriptableObject() : BaseAsset() {}
 		virtual ~ScriptableObject() {}
 
-		BASIC_OBJECT(ScriptableObject, T);
-
-	private:
-		virtual BaseAsset* Create(const GUID& guid) override
-		{
-			return new T(guid);
-		}
+		BASIC_OBJECT(T, BaseAsset);
 	};
 }

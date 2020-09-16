@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "SEObject.h"
+#include "AssetDatabase.h"
 
 namespace Spartan
 {
@@ -18,6 +19,8 @@ namespace Spartan
 		}
 
 		virtual Content* Load(const std::string& file) = 0;
+		virtual bool Save(Content* file) = 0;
+		virtual bool Save(Content* file, const std::string& path) = 0;
 
 	private:
 		BaseLoader(const BaseLoader& obj) = delete;
@@ -47,6 +50,16 @@ namespace Spartan
 			return (Content*)pContent;
 		}
 
+		virtual bool Save(Content* pContent) override
+		{
+			return StoreContent((T*)pContent);
+		}
+
+		virtual bool Save(Content* pContent, const std::string& path) override
+		{
+			return SaveContent((T*)pContent, path);
+		}
+
 		T* GetContent(const std::string& file)
 		{
 			// Remove properties at end
@@ -70,13 +83,23 @@ namespace Spartan
 			return pContent;
 		}
 
+		bool StoreContent(T* pContent)
+		{
+			std::string path = BaseGame::GetAssetRootPath() + AssetDatabase::GetAssetPath(pContent);
+			return SaveContent(pContent, path);
+		}
+
 	protected:
 		virtual T* LoadContent(const std::string& file) = 0;
+		virtual bool SaveContent(T*, const std::string&)
+		{
+			throw new std::exception("Saving of this type of content is not supported!");
+		}
 
 		std::string GetFileExtension(const std::string& file)
 		{
-			int dotIndex = file.rfind('.') + 1;
-			return file.substr(dotIndex);
+			std::filesystem::path filePath = std::filesystem::path(file);
+			return filePath.extension().string();
 		}
 
 	private:

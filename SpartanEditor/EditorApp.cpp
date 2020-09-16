@@ -22,7 +22,6 @@
 #include "PropertyDrawer.h"
 #include "StandardPropertyDrawers.h"
 #include "ContentBrowser.h"
-
 #include <LocalDatabase.h>
 #include <AssetDatabase.h>
 #include "Serializer.h"
@@ -30,6 +29,7 @@
 #include "TextureTumbnailGenerator.h"
 #include "FontTumbnailGenerator.h"
 #include "AudioTumbnailGenerator.h"
+#include "ScriptableObjectEditor.h"
 
 namespace Spartan
 {
@@ -43,6 +43,8 @@ namespace Spartan
 
 	EditorApp::~EditorApp()
 	{
+		Editor::Tumbnail::Destroy();
+
 		delete m_pGame;
 		m_pGame = nullptr;
 		delete m_pComponentWindow;
@@ -112,9 +114,8 @@ namespace Spartan
 
 		Serialization::Serializer::LoadSerializers();
 		m_pGame->RegisterPrefabs(m_pGame->m_pPrefabs);
-		m_pGame->RegisterCoreComponents();
-		m_pGame->RegisterComponents();
-		m_pGame->RegisterAssets();
+		m_pGame->RegisterCoreClasses();
+		m_pGame->RegisterUserClasses();
 
 		// Initialize PP
 		PostProcessingStack::GetInstance();
@@ -136,6 +137,7 @@ namespace Spartan
 
 		Editor::Editor::RegisterEditor<Spartan::Editor::GameObjectEditor>();
 		Editor::Editor::RegisterEditor<Spartan::Editor::ComponentEditor>();
+		Editor::Editor::RegisterEditor<Spartan::Editor::ScriptableObjectEditor>();
 
 		ImGui::GetStyle().WindowRounding = 4.389f;
 
@@ -233,8 +235,6 @@ namespace Spartan
 	void EditorApp::Run()
 	{
 		Initialize();
-
-		//AssetDatabase::DiscoverAssets();
 
 		std::ofstream fStream("testscene.scene");
 		Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);

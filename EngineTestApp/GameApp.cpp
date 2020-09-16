@@ -11,6 +11,9 @@
 #include <InputManager.h>
 #include "BufferTest.h"
 
+#include "TestAsset.h"
+#include "AssetManager.h"
+
 GameApp::GameApp(const Spartan::GameSettings &settings) : Spartan::BaseGame(settings)
 {
 }
@@ -38,6 +41,9 @@ void GameApp::Initialize(const Spartan::GameContext &gameContext)
 	//);
 
 	//gameContext.pInput->AddInputAction(InputAction("UseGLMToggle", InputType::Pressed, 'f'));
+
+	auto pAsset = Spartan::AssetManager::CreateInstance<TestAsset>();
+	Spartan::AssetDatabase::CreateAsset(pAsset, "test.sasset");
 }
 
 void GameApp::GameUpdate(const Spartan::GameContext &gameContext)
@@ -113,4 +119,9 @@ void GameApp::GamePaint(const Spartan::GameContext &gameContext)
 	//glDisableVertexAttribArray(0);
 
 	//Utilities::Debug::LogGLError(glGetError());
+}
+
+void GameApp::RegisterUserClasses()
+{
+	REGISTER_CLASS(TestAsset);
 }

@@ -10,7 +10,7 @@ namespace Spartan::Editor
 	public:
 		PropertyDrawer();
 		virtual ~PropertyDrawer();
-		virtual void OnGUI(Serialization::SerializedProperty& prop) const;
+		virtual bool OnGUI(Serialization::SerializedProperty& prop) const;
 
 		template<class T>
 		static void RegisterPropertyDrawer()
@@ -18,7 +18,7 @@ namespace Spartan::Editor
 			m_PropertyDrawers.push_back(new T());
 		}
 
-		static void DrawProperty(Serialization::SerializedProperty& prop);
+		static bool DrawProperty(Serialization::SerializedProperty& prop);
 
 	public:
 		virtual const std::type_info& GetPropertyType() const;

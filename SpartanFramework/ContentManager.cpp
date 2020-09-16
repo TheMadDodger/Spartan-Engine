@@ -8,6 +8,7 @@
 #include "ShaderLoader.h"
 #include "ModelLoader.h"
 #include "GradientLoader.h"
+#include "ScriptableObjectLoader.h"
 
 namespace Spartan
 {
@@ -41,7 +42,8 @@ namespace Spartan
 		AddLoader(new FontLoader());
 		AddLoader(new ShaderLoader());
 		AddLoader(new ModelLoader());
-		AddLoader(new GradientLoader());
+		AddLoader(new ScriptableObjectLoader());
+		//AddLoader(new GradientLoader());
 	}
 
 	Content* ContentManager::Load(const std::string& path)
@@ -60,6 +62,52 @@ namespace Spartan
 		}
 
 		return nullptr;
+	}
+
+	bool ContentManager::Save(Content* pContent)
+	{
+		const type_info& type = pContent->GetType();
+		for (BaseLoader* pLoader : m_pLoaders)
+		{
+			if (pLoader->GetType() == type)
+			{
+				return pLoader->Save(pContent);
+			}
+
+			const type_info& baseType = pContent->GetBaseType();
+			for (BaseLoader* pLoader : m_pLoaders)
+			{
+				if (pLoader->GetType() == baseType)
+				{
+					return pLoader->Save(pContent);
+				}
+			}
+		}
+
+		return false;
+	}
+
+	bool ContentManager::Save(Content* pContent, const std::string& path)
+	{
+		const type_info& type = pContent->GetType();
+		for (BaseLoader* pLoader : m_pLoaders)
+		{
+			if (pLoader->GetType() == type)
+			{
+				return pLoader->Save(pContent, path);
+			}
+		}
+
+		const type_info& baseType = pContent->GetBaseType();
+		for (BaseLoader* pLoader : m_pLoaders)
+		{
+			if (pLoader->GetType() == baseType)
+			{
+				return pLoader->Save(pContent, path);
+			}
+		}
+
+		return false;
 	}
 
 	ContentManager::ContentManager()
