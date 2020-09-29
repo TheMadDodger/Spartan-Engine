@@ -20,16 +20,6 @@ namespace Spartan::Serialization
 		DefineSerializedProperties(m_SerializedData);
 	}
 
-	void SerializedObject::SetDirty()
-	{
-		m_IsDirty = true;
-	}
-
-	bool SerializedObject::IsDirty()
-	{
-		return m_IsDirty;
-	}
-
 	void SerializedObject::Serialize(std::ofstream& os)
 	{
 		PrepareData();
@@ -68,22 +58,18 @@ namespace Spartan::Serialization
 		const std::type_info& type = GetType();
 		size_t hashCode = Spartan::SEObject::GetClassHash(type);
 		m_SerializedData.push_back(SerializedProperty(hashCode, NULL, "HASHCODE"));
-		m_SerializedData.push_back(SerializedProperty(hashCode, &m_GUID, "GUID"));
+		m_SerializedData.push_back(SerializedProperty(m_GUID, &m_GUID, "GUID"));
 		PrepareData(m_SerializedData);
 		DefineSerializedProperties(m_SerializedData);
 	}
 
 	void SerializedObject::Serialize(SerializedProperty& data, std::ofstream& fileStream)
 	{
-		BaseSerializer* serializer = Serializer::GetSerializer(data.m_Serialized.type());
-		if (serializer == nullptr) return;
-		serializer->Serialize(data.m_Serialized, fileStream);
+		Serializer::Serialize(data, fileStream);
 	}
 
 	void SerializedObject::Deserialize(SerializedProperty& data, std::ifstream& fileStream)
 	{
-		BaseSerializer* serializer = Serializer::GetSerializer(data.m_Serialized.type());
-		if (serializer == nullptr) return;
-		serializer->Deserialize(data.m_Serialized, data.m_MemberPointer, fileStream);
+		Serializer::Deserialize(data, fileStream);
 	}
 }

@@ -18,6 +18,7 @@ namespace Spartan
 			std::string path = AssetDatabase::GetInstance()->GetAssetPath(guid);
 			Content* pAsset = ContentManager::GetInstance()->Load(BaseGame::GetAssetRootPath() + path);
 			if (!pAsset) return nullptr;
+			pAsset->m_GUID = guid;
 			pInstance->m_Assets[guid] = pAsset;
 			return pAsset;
 		}

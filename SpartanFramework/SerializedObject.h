@@ -14,9 +14,6 @@ namespace Spartan::Serialization
 
 		void CollectProperties();
 
-		void SetDirty();
-		bool IsDirty();
-
 	public:
 		void Serialize(std::ofstream& os);
 		void Deserialize(std::ifstream& os, int skipCount = 1);

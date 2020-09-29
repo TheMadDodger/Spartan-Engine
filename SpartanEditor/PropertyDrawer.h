@@ -5,6 +5,8 @@
 
 namespace Spartan::Editor
 {
+	struct AssetReferencePropertyDrawer;
+
 	class PropertyDrawer
 	{
 	public:
@@ -29,6 +31,7 @@ namespace Spartan::Editor
 	private:
 		friend class EditorApp;
 		static vector<PropertyDrawer*> m_PropertyDrawers;
+		static AssetReferencePropertyDrawer* m_pAssetReferencePropDrawer;
 	};
 
 	template<typename PropertyType>

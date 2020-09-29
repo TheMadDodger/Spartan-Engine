@@ -426,6 +426,9 @@
     <ClInclude Include="ScriptableObjectLoader.h">
       <Filter>Content Management</Filter>
     </ClInclude>
+    <ClInclude Include="AssetReference.h">
+      <Filter>Serialization</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioFileLoader.cpp">
@@ -721,6 +724,9 @@
     </ClCompile>
     <ClCompile Include="ScriptableObjectLoader.cpp">
       <Filter>Content Management</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetReference.cpp">
+      <Filter>Serialization</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

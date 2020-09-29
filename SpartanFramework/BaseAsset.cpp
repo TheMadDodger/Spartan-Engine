@@ -12,6 +12,6 @@ namespace Spartan::Serialization
 
 	void BaseAsset::PrepareData(std::vector<SerializedProperty>& props)
 	{
-		props.push_back(SerializedProperty(m_GUID, NULL, "GUID"));
+		//props.push_back(SerializedProperty(m_GUID, NULL, "GUID"));
 	}
 }

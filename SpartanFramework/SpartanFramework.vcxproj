@@ -182,6 +182,7 @@
     <ClInclude Include="AspectConstraint.h" />
     <ClInclude Include="AssetDatabase.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AssetReference.h" />
     <ClInclude Include="AudioData.h" />
     <ClInclude Include="BaseAsset.h" />
     <ClInclude Include="BaseUIConstraint.h" />
@@ -307,6 +308,7 @@
     <ClCompile Include="AspectConstraint.cpp" />
     <ClCompile Include="AssetDatabase.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AssetReference.cpp" />
     <ClCompile Include="AStarPathFinding.cpp" />
     <ClCompile Include="AudioData.cpp" />
     <ClCompile Include="BaseAIBehaviour.cpp" />

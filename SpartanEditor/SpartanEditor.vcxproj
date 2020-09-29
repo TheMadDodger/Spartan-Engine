@@ -176,6 +176,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssetPickerPopup.h" />
+    <ClInclude Include="AssetReferencePropertyDrawer.h" />
     <ClInclude Include="AudioTumbnailGenerator.h" />
     <ClInclude Include="BehaviorTreeEditor.h" />
     <ClInclude Include="ComponentEditor.h" />
@@ -217,6 +219,8 @@
     <ClInclude Include="TumbnailGenerator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssetPickerPopup.cpp" />
+    <ClCompile Include="AssetReferencePropertyDrawer.cpp" />
     <ClCompile Include="AudioTumbnailGenerator.cpp" />
     <ClCompile Include="BehaviorTreeEditor.cpp" />
     <ClCompile Include="ComponentEditor.cpp" />

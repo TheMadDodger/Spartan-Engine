@@ -2,6 +2,7 @@
 #include <BaseGame.h>
 #include "EditorWindow.h"
 #include "ComponentPopup.h"
+#include "AssetPickerPopup.h"
 
 namespace Spartan
 {
@@ -46,6 +47,7 @@ namespace Spartan
 		BaseGame* m_pGame;
 		static EditorApp* m_pEditorApp;
 		Editor::ComponentPopup* m_pComponentWindow;
+		Editor::AssetPickerPopup* m_pAssetPickerWindow;
 		bool m_IsRunning;
 		bool m_PlayModeActive;
 		bool m_PlayModePaused;

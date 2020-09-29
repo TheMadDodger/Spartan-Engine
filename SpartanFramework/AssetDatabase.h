@@ -21,6 +21,10 @@ namespace Spartan
 
 		static void CreateAsset(Content* pAsset, const std::string& path);
 
+		static void SaveAssets();
+
+		static void GetAllAssetsOfType(const std::type_info& type, std::vector<Content*>& pAssets);
+
 	private:
 		//static Serialization::BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
 
@@ -41,9 +45,12 @@ namespace Spartan
 		std::string GetAssetPath_Internal(Content* pAsset);
 		void CreateAsset_Internal(Content* pAsset, const std::string& path);
 
+		void Save(Content* pAsset);
+
+		void GetAllAssetsOfType_Internal(const std::type_info& type, std::vector<Content*>& pAssets);
+
 	private:
 		friend class AssetManager;
-		//map<GUID, std::string, Serialization::GUIDComparer> m_AssetPaths;
 		LocalDatabase* m_pDatabaseInstance;
 	};
 }

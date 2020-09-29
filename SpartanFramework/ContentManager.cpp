@@ -56,6 +56,7 @@ namespace Spartan
 			if (pLoader->HasExtension(extension.string()))
 			{
 				Content* pContent = pLoader->Load(path);
+				pContent->m_Name = std::filesystem::path(path).filename().replace_extension().string();
 				m_pContent.push_back(pContent);
 				return pContent;
 			}
@@ -73,14 +74,14 @@ namespace Spartan
 			{
 				return pLoader->Save(pContent);
 			}
+		}
 
-			const type_info& baseType = pContent->GetBaseType();
-			for (BaseLoader* pLoader : m_pLoaders)
+		const type_info& baseType = pContent->GetBaseType();
+		for (BaseLoader* pLoader : m_pLoaders)
+		{
+			if (pLoader->GetType() == baseType)
 			{
-				if (pLoader->GetType() == baseType)
-				{
-					return pLoader->Save(pContent);
-				}
+				return pLoader->Save(pContent);
 			}
 		}
 

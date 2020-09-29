@@ -49,6 +49,8 @@ namespace Spartan
 		m_pGame = nullptr;
 		delete m_pComponentWindow;
 		m_pComponentWindow = nullptr;
+		delete m_pAssetPickerWindow;
+		m_pAssetPickerWindow = nullptr;
 	}
 
 	void EditorApp::Initialize()
@@ -131,6 +133,7 @@ namespace Spartan
 		CreateDefaultMainMenuBar();
 		RegisterPropDrawersInternal();
 		m_pComponentWindow = new Editor::ComponentPopup();
+		m_pAssetPickerWindow = new Editor::AssetPickerPopup();
 
 		Editor::EditorWindow::GetWindow<Editor::SceneWindow>();
 		Editor::EditorWindow::GetWindow<Editor::GameWindow>();
@@ -349,6 +352,7 @@ namespace Spartan
 		ImGui::NewFrame();
 
 		m_pComponentWindow->OnGUI();
+		m_pAssetPickerWindow->OnGUI();
 		Editor::MenuBar::OnGUI();
 		Editor::PopupManager::OnGUI();
 
@@ -466,6 +470,7 @@ namespace Spartan
 	{
 		Editor::MenuBar::AddMenuItem("File/New/Scene", NULL);
 		Editor::MenuBar::AddMenuItem("File/Preferences", []() {Editor::EditorWindow::GetWindow<Editor::EditorPreferencesWindow>();});
+		Editor::MenuBar::AddMenuItem("File/Save Project", []() {AssetDatabase::SaveAssets(); });
 		Editor::MenuBar::AddMenuItem("Play/Start", [&]() {this->EnterPlayMode();});
 		Editor::MenuBar::AddMenuItem("Play/Pauze", [&]() {m_PlayModePaused = !m_PlayModePaused;});
 		Editor::MenuBar::AddMenuItem("Play/Stop", [&]() {this->ExitPlayMode();});

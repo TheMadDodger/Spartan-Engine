@@ -37,6 +37,7 @@ namespace Spartan
 					T* pContent = static_cast<ContentLoader<T>*>(pLoader)->GetContent(file);
 					if (pContent != nullptr)
 					{
+						pContent->m_Name = std::filesystem::path(file).filename().replace_extension().string();
 						m_pContent.push_back(pContent);
 						return pContent;
 					}

@@ -141,6 +141,12 @@
     <ClInclude Include="ScriptableObjectEditor.h">
       <Filter>Editor</Filter>
     </ClInclude>
+    <ClInclude Include="AssetReferencePropertyDrawer.h">
+      <Filter>PropertyDrawing</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetPickerPopup.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -253,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="ScriptableObjectEditor.cpp">
       <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetReferencePropertyDrawer.cpp">
+      <Filter>PropertyDrawing</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetPickerPopup.cpp">
+      <Filter>CoreEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

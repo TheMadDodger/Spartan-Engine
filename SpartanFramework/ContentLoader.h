@@ -71,13 +71,13 @@ namespace Spartan
 			}
 
 			//Does File Exists?
-			struct _stat buff;
-			int result = -1;
-			result = _stat(noProp.c_str(), &buff);
-			if (result != 0)
-			{
-				std::cout << "ContentManager > File not found!\nPath: " << file << std::endl;
-			}
+			//struct _stat buff;
+			//int result = -1;
+			//result = _stat(noProp.c_str(), &buff);
+			//if (result != 0)
+			//{
+			//	std::cout << "ContentManager > File not found!\nPath: " << file << std::endl;
+			//}
 
 			T* pContent = LoadContent(file);
 			return pContent;
@@ -85,7 +85,7 @@ namespace Spartan
 
 		bool StoreContent(T* pContent)
 		{
-			std::string path = BaseGame::GetAssetRootPath() + AssetDatabase::GetAssetPath(pContent);
+			std::string path = AssetDatabase::GetAssetPath(pContent);
 			return SaveContent(pContent, path);
 		}
 

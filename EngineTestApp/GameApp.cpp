@@ -42,8 +42,8 @@ void GameApp::Initialize(const Spartan::GameContext &gameContext)
 
 	//gameContext.pInput->AddInputAction(InputAction("UseGLMToggle", InputType::Pressed, 'f'));
 
-	auto pAsset = Spartan::AssetManager::CreateInstance<TestAsset>();
-	Spartan::AssetDatabase::CreateAsset(pAsset, "test.sasset");
+	//auto pAsset = Spartan::AssetManager::CreateInstance<TestAsset>();
+	//Spartan::AssetDatabase::CreateAsset(pAsset, "test.sasset");
 }
 
 void GameApp::GameUpdate(const Spartan::GameContext &gameContext)

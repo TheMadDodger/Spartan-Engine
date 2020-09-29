@@ -1,5 +1,6 @@
 #pragma once
 #include <any>
+#include "AssetReference.h"
 
 namespace Spartan::Serialization
 {
@@ -52,7 +53,18 @@ namespace Spartan::Serialization
 	{
 	public:
 		static void LoadSerializers();
+		static void Destroy();
+
+		static void Serialize(SerializedProperty& data, std::ofstream& fileStream);
+		static void Deserialize(SerializedProperty& data, std::ifstream& fileStream);
+
 		static BaseSerializer* GetSerializer(const std::type_info& type);
+
+	private:
+		static void SerializeAssetReference(SerializedProperty& prop, std::ofstream& fileStream);
+		static void DeserializeAssetReference(SerializedProperty& prop, std::ifstream& fileStream);
+
+		static void SerializeContainer(SerializedProperty& data, std::ofstream& fileStream);
 
 	private:
 		static std::vector<BaseSerializer*> m_Serializers;
