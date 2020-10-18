@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "SceneWindow.h"
 #include "EditorApp.h"
-#include <SceneManager.h>
 #include <GameScene.h>
 #include "SceneViewCamera.h"
+#include "EditorSceneManager.h"
 
 namespace Spartan::Editor
 {
@@ -20,7 +20,7 @@ namespace Spartan::Editor
 	{
 		m_pRenderTexture->Use();
 		BaseGame::GetGame()->GetGameContext().pRenderer->ClearBackground();
-		GameScene* pCurrentScene = SceneManager::GetInstance()->GetCurrentScene();
+		GameScene* pCurrentScene = EditorSceneManager::GetActiveScene();
 		if (pCurrentScene == nullptr) return;
 
 		CameraComponent* pPreviousCamera = pCurrentScene->GetActiveCamera();

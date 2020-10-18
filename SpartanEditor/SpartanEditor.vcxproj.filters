@@ -147,6 +147,9 @@
     <ClInclude Include="AssetPickerPopup.h">
       <Filter>CoreEditor</Filter>
     </ClInclude>
+    <ClInclude Include="EditorSceneManager.h">
+      <Filter>CoreEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EditorWindow.cpp">
@@ -264,6 +267,9 @@
       <Filter>PropertyDrawing</Filter>
     </ClCompile>
     <ClCompile Include="AssetPickerPopup.cpp">
+      <Filter>CoreEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSceneManager.cpp">
       <Filter>CoreEditor</Filter>
     </ClCompile>
   </ItemGroup>

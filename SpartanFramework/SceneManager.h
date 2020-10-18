@@ -1,46 +1,63 @@
 #pragma once
-#include "Manager.h"
+#include "Singleton.h"
+#include "GameScene.h"
 
 namespace Spartan
 {
-	class GameScene;
-
-	enum LoadSceneFlags : int
+	struct Scene
 	{
-		NoFlags = 0,
-		UnloadLoadedScene = 0x01,
-		EnableNewSceneAfterLoad = 0x02,
+	public:
+		Scene(const std::string& path, const std::string& name, int buildIndex);
+
+		const std::string m_Path;
+		const std::string m_Name;
+		const int m_BuildIndex;
 	};
 
-	class SceneManager : Manager
+	enum LoadSceneMode
 	{
-	public: // Methods
-		GameScene* GetCurrentScene() const;
-		void AddScene(GameScene* pScene);
-		void LoadScene(int sceneIndex, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
-		void LoadScene(const std::string& sceneName, int flags = UnloadLoadedScene | EnableNewSceneAfterLoad);
-		void LoadSceneNextFrame(const std::string& sceneName);
+		Single,
+		Additive
+	};
 
-	public: // Singleton
-		static SceneManager* GetInstance();
-		static void Destroy();
+	struct LoadOperation
+	{
+	public:
+		LoadOperation(LoadSceneMode mode, size_t buildIndex, bool unload = false);
+
+		LoadSceneMode m_Mode;
+		size_t m_BuildIndex;
+		bool m_Unload;
+	};
+
+	class SceneManager : public Singleton<SceneManager>
+	{
+	public:
+		SceneManager();
+		virtual ~SceneManager();
+
+	public: // Methods
+		GameScene* GetActiveScene() const;
+		void LoadScene(size_t buildIndex, LoadSceneMode mode = LoadSceneMode::Single);
+		void LoadScene(const std::string& sceneName, LoadSceneMode mode = LoadSceneMode::Single);
 
 	private:
 		void Initialize(const GameContext& gameContext);
 		void Update(const GameContext& gameContext);
 		void Draw(const GameContext& gameContext);
+		void UnloadAll();
+		void HandleLoadOperation(const LoadOperation& operation);
+		void HandleUnLoadOperation(const LoadOperation& operation);
 
-		std::vector<GameScene*> m_pScenes;
-		std::vector<int> m_AdditiveScenes;
-		int m_CurrentScene = 0;
-		static SceneManager* m_pSceneManager;
-		bool m_SceneHasInitialized = false;
-		std::string m_ToLoadNextFrame = "";
+	private:
+		std::vector<GameScene*> m_pLoadedScenes;
+		GameScene* m_pActiveScene;
+		std::vector<Scene> m_BuildScenes;
+
+		std::queue<LoadOperation> m_LoadOperations;
 
 	private:
 		friend class BaseGame;
 		friend class EditorApp;
-		SceneManager();
-		~SceneManager();
 	};
 }

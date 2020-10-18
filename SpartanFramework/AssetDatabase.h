@@ -4,6 +4,7 @@
 #include "GUIDComparer.h"
 #include "LocalDatabase.h"
 #include "MetaData.h"
+#include "Event.h"
 
 namespace Spartan
 {
@@ -26,8 +27,6 @@ namespace Spartan
 		static void GetAllAssetsOfType(const std::type_info& type, std::vector<Content*>& pAssets);
 
 	private:
-		//static Serialization::BaseAsset* DeserializeToAsset(std::ifstream& fileStream);
-
 		void WriteDatabase();
 
 		static void ProcessDirectory(const std::string& path);

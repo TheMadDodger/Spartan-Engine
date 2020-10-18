@@ -30,6 +30,7 @@
 #include "FontTumbnailGenerator.h"
 #include "AudioTumbnailGenerator.h"
 #include "ScriptableObjectEditor.h"
+#include "EditorSceneManager.h"
 
 namespace Spartan
 {
@@ -125,7 +126,8 @@ namespace Spartan
 		m_pGame->Initialize(m_pGame->m_GameContext);
 
 		// Initialise Scenes
-		SceneManager::GetInstance()->Initialize(m_pGame->m_GameContext);
+		//SceneManager::GetInstance()->Initialize(m_pGame->m_GameContext); // The editor uses a different manager for scenes!
+		Editor::EditorSceneManager::Initialize();
 
 		m_IsRunning = true;
 		EditorApp::GetEditorApp()->InitializeGameObject(new Editor::SceneViewCamera());
@@ -210,11 +212,12 @@ namespace Spartan
 		}
 
 		// Update Scenes
-		if (m_PlayModeActive)
-		{
-			if (!m_PlayModePaused) SceneManager::GetInstance()->Update(m_pGame->m_GameContext);
-		}
-		else EditorUpdateScene();
+		Editor::EditorSceneManager::Update();
+
+		//if (m_PlayModeActive)
+		//{
+		//	if (!m_PlayModePaused) SceneManager::GetInstance()->Update(m_pGame->m_GameContext);
+		//}
 
 		// Update the timer
 		m_pGame->m_GameContext.pTime->Update();
@@ -229,6 +232,7 @@ namespace Spartan
 		Editor::SceneViewCamera::Destroy();
 		Editor::Editor::Cleanup();
 		Editor::PropertyDrawer::Cleanup();
+		Editor::EditorSceneManager::Cleanup();
 
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplSDL2_Shutdown();
@@ -239,9 +243,9 @@ namespace Spartan
 	{
 		Initialize();
 
-		std::ofstream fStream("testscene.scene");
-		Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);
-		fStream.close();
+		//std::ofstream fStream("testscene.scene");
+		//Spartan::SceneManager::GetInstance()->GetCurrentScene()->Serialize(fStream);
+		//fStream.close();
 
 		while (m_IsRunning)
 		{
@@ -268,7 +272,8 @@ namespace Spartan
 
 	void EditorApp::RenderScene()
 	{
-		Spartan::SceneManager::GetInstance()->Draw(m_pGame->m_GameContext);
+		//Spartan::SceneManager::GetInstance()->Draw(m_pGame->m_GameContext);
+		Editor::EditorSceneManager::Draw();
 	}
 
 	void EditorApp::EnterPlayMode()
@@ -290,9 +295,13 @@ namespace Spartan
 
 	}
 
-	void EditorApp::EditorUpdateScene()
+	void EditorApp::EditorDrawScene(GameScene* pScene)
 	{
-		GameScene* pScene = SceneManager::GetInstance()->GetCurrentScene();
+		pScene->RootDraw(m_pEditorApp->m_pGame->m_GameContext);
+	}
+
+	void EditorApp::EditorUpdateScene(GameScene* pScene)
+	{
 		for (size_t i = 0; i < pScene->GetChildCount(); i++)
 		{
 			GameObject* pRootChild = pScene->GetChild(i);
@@ -305,15 +314,15 @@ namespace Spartan
 		if (!pObject->m_bInitialized) // If we haven't initialised yet
 		{
 			// We initialize
-			pObject->RootInitialize(m_pGame->m_GameContext);
+			pObject->RootInitialize(m_pEditorApp->m_pGame->m_GameContext);
 		}
 
-		pObject->BeginUpdate(m_pGame->m_GameContext);
+		pObject->BeginUpdate(m_pEditorApp->m_pGame->m_GameContext);
 
 		for (size_t i = 0; i < pObject->m_pComponents.size(); ++i)
 		{
 			auto pComponent = pObject->m_pComponents[i];
-			if (pComponent->m_bEnabled && pComponent->m_CanTickInEditor) pComponent->RootUpdate(m_pGame->m_GameContext);
+			if (pComponent->m_bEnabled && pComponent->m_CanTickInEditor) pComponent->RootUpdate(m_pEditorApp->m_pGame->m_GameContext);
 		}
 
 		for (size_t i = 0; i < pObject->m_pChildren.size(); ++i)
@@ -323,7 +332,7 @@ namespace Spartan
 		}
 
 		// User defined Update()
-		pObject->Update(m_pGame->m_GameContext);
+		pObject->Update(m_pEditorApp->m_pGame->m_GameContext);
 	}
 
 	void EditorApp::RegisterPropDrawersInternal()

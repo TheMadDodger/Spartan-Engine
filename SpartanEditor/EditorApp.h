@@ -3,6 +3,7 @@
 #include "EditorWindow.h"
 #include "ComponentPopup.h"
 #include "AssetPickerPopup.h"
+#include <GameScene.h>
 
 namespace Spartan
 {
@@ -15,6 +16,9 @@ namespace Spartan
 		void Run();
 		void InitializeGameObject(GameObject* pObject);
 		void UpdateGameObject(GameObject* pObject);
+
+		static void EditorDrawScene(GameScene* pScene);
+		static void EditorUpdateScene(GameScene* pScene);
 
 		static EditorApp* GetEditorApp();
 
@@ -30,6 +34,8 @@ namespace Spartan
 		virtual void RegisterPropertyDrawers() {};
 
 	private:
+		static void EditorUpdateObject(GameObject* pObject);
+
 		void Initialize();
 		void Tick();
 		void Paint();
@@ -38,8 +44,6 @@ namespace Spartan
 		void HandleWindowEvent(SDL_Event* event);
 
 		void CreateDefaultMainMenuBar();
-		void EditorUpdateScene();
-		void EditorUpdateObject(GameObject* pObject);
 
 		void RegisterPropDrawersInternal();
 

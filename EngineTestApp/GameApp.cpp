@@ -25,7 +25,7 @@ GameApp::~GameApp()
 void GameApp::Initialize(const Spartan::GameContext &gameContext)
 {
 	UNREFERENCED_PARAMETER(gameContext);
-	Spartan::SceneManager::GetInstance()->AddScene(new BufferTest());
+	//Spartan::SceneManager::GetInstance()->AddScene(new BufferTest());
 
 	//m_ProgramID = LoadShaders("./Resources/Shaders/triangle.vs", "./Resources/Shaders/triangle.fs");
 

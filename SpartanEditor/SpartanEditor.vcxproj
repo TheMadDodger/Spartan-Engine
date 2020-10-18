@@ -185,6 +185,7 @@
     <ClInclude Include="ContentBrowser.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="EditorPreferencesWindow.h" />
+    <ClInclude Include="EditorSceneManager.h" />
     <ClInclude Include="EditorWindow.h" />
     <ClInclude Include="FontTumbnailGenerator.h" />
     <ClInclude Include="GameObjectEditor.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="ContentBrowser.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="EditorPreferencesWindow.cpp" />
+    <ClCompile Include="EditorSceneManager.cpp" />
     <ClCompile Include="EditorWindow.cpp" />
     <ClCompile Include="FontTumbnailGenerator.cpp" />
     <ClCompile Include="GameObjectEditor.cpp" />

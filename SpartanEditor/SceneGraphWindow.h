@@ -1,6 +1,7 @@
 #pragma once
 #include "EditorWindow.h"
 #include <GameObject.h>
+#include <GameScene.h>
 
 namespace Spartan::Editor
 {
@@ -13,6 +14,7 @@ namespace Spartan::Editor
 	private:
 		virtual void OnGUI() override;
 
+		void SceneDropdown(GameScene* pScene, bool isActive);
 		void ChildrenList(Spartan::GameObject* pChild);
 		void ObjectMenu();
 

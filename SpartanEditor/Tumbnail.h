@@ -12,6 +12,7 @@ namespace Spartan::Editor
 	public:
 		static TextureData* GetFolderTumbnail();
 		static TextureData* GetTumbnail(const Spartan::Serialization::MetaData& metaData);
+		static TextureData* GetTumbnail(const std::string extension);
 
 		template<class T>
 		static void AddGenerator()
@@ -24,6 +25,7 @@ namespace Spartan::Editor
 
 	private:
 		static BaseTumbnailGenerator* GetGenerator(size_t hashCode);
+		static BaseTumbnailGenerator* GetGenerator(const std::string& extension);
 		static void AddGenerator(BaseTumbnailGenerator* pGenerator);
 
 	private:

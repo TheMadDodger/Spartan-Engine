@@ -3,6 +3,7 @@
 #include <SceneManager.h>
 #include <GameScene.h>
 #include "Selection.h"
+#include "EditorSceneManager.h"
 
 namespace Spartan::Editor
 {
@@ -16,7 +17,7 @@ namespace Spartan::Editor
 
 	void SceneGraphWindow::OnGUI()
 	{
-		GameScene* pScene = SceneManager::GetInstance()->GetCurrentScene();
+		GameScene* pScene = SceneManager::GetInstance()->GetActiveScene();
 		
 		m_I = 0;
 		
@@ -32,9 +33,22 @@ namespace Spartan::Editor
 			ImGui::EndPopup();
 		}
 		
-		if (ImGui::TreeNode("Scene Objects"))
+		for (size_t i = 0; i < EditorSceneManager::OpenSceneCount(); i++)
 		{
-			ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3); // Increase spacing to differentiate leaves from expanded contents.
+			GameScene* pActive = EditorSceneManager::GetActiveScene();
+			GameScene* pScene = EditorSceneManager::GetOpenSceneAt(i);
+			bool isActive = pActive == pScene;
+			SceneDropdown(pScene, isActive);
+		}
+	}
+
+	void SceneGraphWindow::SceneDropdown(GameScene* pScene, bool isActive)
+	{
+		if (isActive) ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 1.0f, 0.0f, 1.0f));
+		if (ImGui::TreeNode(pScene->GetName().c_str()))
+		{
+			if (isActive) ImGui::PopStyleColor();
+			ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
 
 			for (size_t i = 0; i < pScene->GetChildCount(); i++)
 			{
@@ -43,6 +57,10 @@ namespace Spartan::Editor
 
 			ImGui::PopStyleVar();
 			ImGui::TreePop();
+		}
+		else
+		{
+			if (isActive) ImGui::PopStyleColor();
 		}
 	}
 

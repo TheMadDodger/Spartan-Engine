@@ -7,6 +7,10 @@
 
 namespace Spartan::Editor
 {
+    Event<const std::filesystem::path&> ContentBrowser::OnFileDoubleClick;
+
+    int ContentBrowser::m_IconSize = 64;
+
 	ContentBrowser::ContentBrowser() : EditorWindowTemplate("Content Browser", 1600.0f, 600.0f)
 	{
 		m_Resizeable = true;
@@ -150,8 +154,7 @@ namespace Spartan::Editor
             }
         });
 
-        static int iconSize = 64;
-        ImGui::SliderInt("Size", &iconSize, 32.0f, 256.0f);
+        ImGui::SliderInt("Size", &m_IconSize, 32.0f, 256.0f);
 
         ImGui::NewLine();
 
@@ -159,7 +162,7 @@ namespace Spartan::Editor
         float windowFactor = 0.7f;
         float width = m_WindowDimensions.x * windowFactor;
 
-        int columns = (int)(width / (iconSize + 22.0f)) - 1;
+        int columns = (int)(width / (m_IconSize + 22.0f)) - 1;
         if (columns <= 0) columns = 1;
 
         //ImGui::ImageButton(NULL, ImVec2(64.0f, 64.0f));
@@ -168,12 +171,12 @@ namespace Spartan::Editor
         int index = 1;
         for (const auto& entry : std::filesystem::directory_iterator(m_SelectedPath))
         {
-            ImGui::SetColumnWidth((index % columns) - 1, (float)iconSize + 22.0f);
+            ImGui::SetColumnWidth((index % columns) - 1, (float)m_IconSize + 22.0f);
 
             filesystem::path path = entry.path();
             if (entry.is_directory())
             {
-                ImGui::ImageButton((void*)Tumbnail::GetFolderTumbnail()->GetID(), ImVec2((float)iconSize, (float)iconSize));
+                ImGui::ImageButton((void*)Tumbnail::GetFolderTumbnail()->GetID(), ImVec2((float)m_IconSize, (float)m_IconSize));
                 if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
                 {
                     m_SelectedPath = path;
@@ -193,17 +196,26 @@ namespace Spartan::Editor
             
             auto ext = path.extension();
             std::filesystem::path metaExtension = std::filesystem::path(".meta");
-            if (ext.compare(metaExtension) != 0) continue;
+            if (ext.compare(metaExtension) != 0)
+            {
+                NonMetaFile(path);
+                continue;
+            }
 
             Spartan::Serialization::MetaData metaData = Spartan::Serialization::MetaData::Read(path.string());
             TextureData* pTexture = Tumbnail::GetTumbnail(metaData);
 
-            ImGui::ImageButton(pTexture ? (void*)pTexture->GetID() : NULL, ImVec2((float)iconSize, (float)iconSize));
+            ImGui::ImageButton(pTexture ? (void*)pTexture->GetID() : NULL, ImVec2((float)m_IconSize, (float)m_IconSize));
 
             if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0))
             {
                 Content* pAsset = AssetManager::GetAsset(metaData.m_GUID);
                 Selection::SetActiveObject(pAsset);
+            }
+
+            if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
+            {
+                OnFileDoubleClick(path);
             }
 
             ImGui::Text(path.filename().replace_extension().string().c_str());
@@ -216,5 +228,17 @@ namespace Spartan::Editor
         }
 
         ImGui::EndChild();
+    }
+
+    void ContentBrowser::NonMetaFile(std::filesystem::path& path)
+    {
+        TextureData* pTexture = Tumbnail::GetTumbnail(path.extension().string());
+
+        ImGui::ImageButton(pTexture ? (void*)pTexture->GetID() : NULL, ImVec2((float)m_IconSize, (float)m_IconSize));
+
+        if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(0))
+        {
+            OnFileDoubleClick(path);
+        }
     }
 }

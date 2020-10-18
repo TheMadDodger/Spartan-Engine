@@ -3,10 +3,12 @@
 #include "BasicCamera.h"
 #include "CameraComponent.h"
 #include "Layers.h"
+#include "BasicCamera.h"
+#include "CameraComponent.h"
 
 namespace Spartan
 {
-	GameScene::GameScene(const std::string& name) : m_SceneName(name)
+	GameScene::GameScene(const std::string& name) : m_SceneName(name), m_BuildIndex(-1)
 	{
 	}
 
@@ -149,6 +151,21 @@ namespace Spartan
 		}
 	}
 
+	size_t GameScene::GetBuildIndex()
+	{
+		return m_BuildIndex;
+	}
+
+	void GameScene::CreateDefaultObjects()
+	{
+		GameObject* pCamera = new GameObject("Main Camera");
+		CameraComponent* pCameraComponent = pCamera->CreateRuntimeComponent<CameraComponent>();
+		pCameraComponent->SetPerspective(60.0f, 0.1f, 999999999.0f);
+		pCamera->RootInitialize(BaseGame::GetGame()->GetGameContext());
+		AddChild(pCamera);
+		pCameraComponent->SetAsActive();
+	}
+
 	void GameScene::RootInitialize(const GameContext& gameContext)
 	{
 		for (size_t i = 0; i < LayerManager::GetInstance()->Size(); i++)
@@ -157,24 +174,20 @@ namespace Spartan
 		}
 
 		// User Pre-Initialize
-		PreInitialize(gameContext);
 
 		// Create default camera
-		m_pDefaultCamera = new BasicCamera();
-		m_pDefaultCamera->SetName("Main Camera");
-		m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f * M_PI / 180.0f, 0.1f, 99999.0f);
-		m_pDefaultCamera->RootInitialize(gameContext);
-		AddChild(m_pDefaultCamera);
-
-		m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f, 0.1f, 999999.0f);
-		m_pDefaultCamera->GetCameraComponent()->SetAsActive();
+		//m_pDefaultCamera = new BasicCamera();
+		//m_pDefaultCamera->SetName("Main Camera");
+		//m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f * M_PI / 180.0f, 0.1f, 99999.0f);
+		//m_pDefaultCamera->RootInitialize(gameContext);
+		//AddChild(m_pDefaultCamera);
+		//
+		//m_pDefaultCamera->GetCameraComponent()->SetPerspective(60.0f, 0.1f, 999999.0f);
+		//m_pDefaultCamera->GetCameraComponent()->SetAsActive();
 
 		// Create the physics world for this scene
 		m_Gravity = b2Vec2(0.0f, -9.81f);
 		m_pPhysicsWorld = new b2World(m_Gravity);
-
-		// User defined Initialize()
-		Initialize(gameContext);
 
 		for (auto pChild : m_pChildren)
 		{
@@ -185,17 +198,11 @@ namespace Spartan
 		{
 			pChild->RootPostInitialize(gameContext);
 		}
-
-		// User Post-Initialize
-		PostInitialize(gameContext);
 	}
 
 	void GameScene::RootUpdate(const GameContext& gameContext)
 	{
 		if (!m_bEnabled) return;
-
-		// User Pre-Update
-		PreUpdate(gameContext);
 
 		// Update physics world
 		float32 timeStep = 1.0f / FixedUpdateSpeed;
@@ -217,32 +224,18 @@ namespace Spartan
 
 		// Delete the allocated array cus yea memory leaks ya kno
 		delete[] pChildrenArray;
-
-		// User defined Update()
-		Update(gameContext);
-
-		// User Post-Update
-		PostUpdate(gameContext);
 	}
 
 	void GameScene::RootDraw(const GameContext& gameContext)
 	{
 		if (!m_bEnabled) return;
-
-		// User Pre-Draw
-		PreDraw(gameContext);
+		if (m_pActiveCamera == nullptr) return;
 
 		// Rendering layer by layer
 		for (size_t i = 0; i < m_pLayers.size(); i++)
 		{
 			RenderLayer(gameContext, m_pLayers[i]);
 		}
-
-		// User defined Draw()
-		Draw(gameContext);
-
-		// User Post-Draw
-		PostDraw(gameContext);
 	}
 
 	void GameScene::RenderLayer(const GameContext& gameContext, std::list<GameObject*> pObjectsOnLayer)
@@ -264,12 +257,12 @@ namespace Spartan
 
 	void GameScene::RootOnActive()
 	{
-		OnActive();
+		
 	}
 
 	void GameScene::RootOnDeActive()
 	{
-		OnDeActive();
+		
 	}
 
 	void GameScene::RootCleanup()

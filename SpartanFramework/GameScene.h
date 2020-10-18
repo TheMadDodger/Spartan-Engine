@@ -11,7 +11,7 @@ namespace Spartan
 	const int Box2DPositionIterations = 2; // How many position iterations should Box2D per game tick perform?
 	const int FixedUpdateSpeed = 60; // Used for Box2D ticks
 
-	class GameScene : public SEObject, ISerializable
+	class GameScene final : public SEObject, ISerializable
 	{
 	public:
 		GameScene(const std::string& name = "New Scene");
@@ -64,26 +64,13 @@ namespace Spartan
 		virtual void Serialize(std::ofstream& fileStream) override;
 		virtual void Deserialize(std::ifstream& fileStream) override;
 
+		size_t GetBuildIndex();
+
+		void CreateDefaultObjects();
+
 	protected:
 		friend class BaseGame;
 		friend class SceneManager;
-
-		virtual void PreInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void Initialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void PostInitialize(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-
-		virtual void GameStart(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-
-		virtual void PreUpdate(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void Update(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void PostUpdate(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-
-		virtual void PreDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void Draw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-		virtual void PostDraw(const GameContext& gameContext) { UNREFERENCED_PARAMETER(gameContext); };
-
-		virtual void OnActive() { };
-		virtual void OnDeActive() { };
 
 		virtual void Cleanup() {};
 
@@ -108,6 +95,7 @@ namespace Spartan
 	private:
 		friend class SceneManager;
 		friend class GameObject;
+		friend class EditorApp;
 
 		std::vector<GameObject*> m_pChildren;
 		std::vector<std::list<GameObject*>> m_pLayers;
@@ -118,5 +106,6 @@ namespace Spartan
 		b2World* m_pPhysicsWorld = nullptr;
 		b2Vec2 m_Gravity;
 		bool m_bEnabled = false;
+		size_t m_BuildIndex;
 	};
 }

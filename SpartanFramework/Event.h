@@ -22,7 +22,7 @@ namespace Spartan
 			});
 		}
 
-		void Subscribe(const string& name, std::function<void(Args...)>& f)
+		void Subscribe(const std::string& name, std::function<void(Args...)>& f)
 		{
 			auto it = m_SubscribedFunctions.find(name);
 			if (it != m_SubscribedFunctions.end()) return;
@@ -30,7 +30,7 @@ namespace Spartan
 			m_SubscriptionNames.push_back(name);
 		}
 
-		void Unsubscribe(const string& name)
+		void Unsubscribe(const std::string& name)
 		{
 			auto it = m_SubscribedFunctions.find(name);
 			if (it == m_SubscribedFunctions.end()) return;
@@ -44,8 +44,8 @@ namespace Spartan
 		}
 
 	private:
-		std::map<string, std::function<void(Args...)>> m_SubscribedFunctions;
-		std::list<string> m_SubscriptionNames;
+		std::map<std::string, std::function<void(Args...)>> m_SubscribedFunctions;
+		std::list<std::string> m_SubscriptionNames;
 
 	private:
 		Event(Event const& other) = delete;

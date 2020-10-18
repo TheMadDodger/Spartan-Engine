@@ -42,7 +42,10 @@ namespace Spartan::Serialization
 		virtual void LoadContainer() override
 		{
 			m_ArrayProperties.resize(m_pContainer->size());
-
+			for (int i = 0; i < m_pContainer->size(); i++)
+			{
+				
+			}
 		}
 
 		std::vector<T>* m_pContainer;

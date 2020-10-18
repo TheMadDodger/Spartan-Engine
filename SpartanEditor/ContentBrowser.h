@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorWindow.h"
+#include "Event.h"
 
 namespace Spartan::Editor
 {
@@ -8,6 +9,8 @@ namespace Spartan::Editor
 	public:
 		ContentBrowser();
 		virtual ~ContentBrowser();
+
+		static Event<const std::filesystem::path&> OnFileDoubleClick;
 
 	private:
 		virtual void OnGUI() override;
@@ -18,9 +21,11 @@ namespace Spartan::Editor
 
 		void DirectoryBrowser();
 		void FileBrowser();
+		void NonMetaFile(std::filesystem::path& path);
 
 	private:
 		int m_I;
+		static int m_IconSize;
 		std::hash<std::string> m_Hasher;
 		filesystem::path m_SelectedPath;
 		filesystem::path m_RootAssetPath;

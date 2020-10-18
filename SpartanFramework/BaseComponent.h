@@ -3,7 +3,7 @@
 #include "SerializedObject.h"
 #include "SerializedProperty.h"
 
-#define COMPONENT(comp) BASIC_OBJECT(comp, BaseComponent)
+#define COMPONENT(comp) BASIC_OBJECT(comp, Spartan::BaseComponent)
 
 namespace Spartan
 {

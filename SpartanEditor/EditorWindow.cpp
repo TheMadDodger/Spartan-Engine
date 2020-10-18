@@ -24,7 +24,7 @@ namespace Spartan::Editor
 	{
 		OnPaint();
 
-		ImGuiWindowFlags window_flags = m_Resizeable? ImGuiWindowFlags_::ImGuiWindowFlags_NoResize : 0;
+		ImGuiWindowFlags window_flags = m_Resizeable? 0 : ImGuiWindowFlags_::ImGuiWindowFlags_NoResize;
 		ImGui::SetNextWindowSize(m_WindowDimensions);
 
 		std::string windowString = m_WindowName + "##" + std::to_string(m_WindowID);

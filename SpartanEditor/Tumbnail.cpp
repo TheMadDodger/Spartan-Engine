@@ -28,6 +28,14 @@ namespace Spartan::Editor
 		return pTexture;
 	}
 
+	TextureData* Tumbnail::GetTumbnail(const std::string extension)
+	{
+		BaseTumbnailGenerator* pGenerator = GetGenerator(extension);
+		if (pGenerator == nullptr) return nullptr;
+		TextureData* pTexture = pGenerator->GetTumbnail();
+		return pTexture;
+	}
+
 	void Tumbnail::AddGenerator(BaseTumbnailGenerator* pGenerator)
 	{
 		m_pGenerators.push_back(pGenerator);
@@ -49,6 +57,18 @@ namespace Spartan::Editor
 			const std::type_info& type = m_pGenerators[i]->GetAssetType();
 			size_t hash = SEObject::GetClassHash(type);
 			if (hash != hashCode) continue;
+			return m_pGenerators[i];
+		}
+
+		return nullptr;
+	}
+
+	BaseTumbnailGenerator* Tumbnail::GetGenerator(const std::string& extension)
+	{
+		for (size_t i = 0; i < m_pGenerators.size(); i++)
+		{
+			const std::string& otherExt = m_pGenerators[i]->GetExtension();
+			if (otherExt != extension) continue;
 			return m_pGenerators[i];
 		}
 
